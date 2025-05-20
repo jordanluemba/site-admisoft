@@ -3,1087 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechNova | Solutions Technologiques Innovantes</title>
+    <title>TechShop | Boutique en ligne de technologie</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-        
-        :root {
-            --primary: #0a192f;
-            --secondary: #172a45;
-            --accent: #64ffda;
-            --light: #ccd6f6;
-            --highlight: #8892b0;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        /* Dark mode styles */
-        .dark {
-            --primary: #0a192f;
-            --secondary: #172a45;
-            --accent: #64ffda;
-            --light: #ccd6f6;
-            --highlight: #8892b0;
-        }
-        
-        .light {
-            --primary: #f8fafc;
-            --secondary: #e2e8f0;
-            --accent: #3b82f6;
-            --light: #1e293b;
-            --highlight: #475569;
-        }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-        }
-        
-        .btn-accent {
-            background-color: var(--accent);
-            color: var(--primary);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-accent:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(100, 255, 218, 0.3);
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .product-card:hover .product-overlay {
-            opacity: 1;
-        }
-        
-        .product-overlay {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .testimonial-card {
-            transition: all 0.3s ease;
-        }
-        
-        .testimonial-card:hover {
-            transform: scale(1.05);
-        }
-        
-        .input-focus:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 1px var(--accent);
-        }
-        
-        /* Scroll animation classes */
-        .scroll-hidden {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
-        
-        .scroll-show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Dark mode toggle */
-        .toggle-checkbox:checked {
-            right: 0;
-            border-color: #68D391;
-        }
-        .toggle-checkbox:checked + .toggle-label {
-            background-color: #68D391;
-        }
-    </style>
-</head>
-<body class="bg-gray-50 text-gray-800 light-mode">
-    <!-- Dark mode toggle -->
-    <div class="fixed top-4 right-4 z-50">
-        <div class="relative inline-block w-12 mr-2 align-middle select-none">
-            <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
-            <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-        </div>
-        <span class="text-gray-700 font-medium dark:text-white"><i class="fas fa-moon"></i></span>
-    </div>
-
-    <!-- Header -->
-    <header class="sticky top-0 z-40 bg-white shadow-md dark:bg-gray-800 dark:text-white">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center">
-                <a href="#" class="flex items-center">
-                    <div class="w-10 h-10 bg-blue-900 rounded-full flex items-center justify-center mr-2 dark:bg-blue-700">
-                        <span class="text-white font-bold text-xl">TN</span>
-                    </div>
-                    <span class="text-xl font-bold text-blue-900 dark:text-white">TechNova</span>
-                </a>
-            </div>
-            
-            <div class="hidden md:flex items-center space-x-8">
-                <nav>
-                    <ul class="flex space-x-6">
-                        <li><a href="#" class="nav-link text-blue-900 font-medium dark:text-white">Accueil</a></li>
-                        <li><a href="#about" class="nav-link text-gray-600 hover:text-blue-900 font-medium dark:text-gray-300 dark:hover:text-white">À propos</a></li>
-                        <li><a href="#services" class="nav-link text-gray-600 hover:text-blue-900 font-medium dark:text-gray-300 dark:hover:text-white">Services</a></li>
-                        <li><a href="#shop" class="nav-link text-gray-600 hover:text-blue-900 font-medium dark:text-gray-300 dark:hover:text-white">Boutique</a></li>
-                        <li><a href="#blog" class="nav-link text-gray-600 hover:text-blue-900 font-medium dark:text-gray-300 dark:hover:text-white">Blog</a></li>
-                        <li><a href="#contact" class="nav-link text-gray-600 hover:text-blue-900 font-medium dark:text-gray-300 dark:hover:text-white">Contact</a></li>
-                    </ul>
-                </nav>
-                
-                <div class="flex items-center space-x-4">
-                    <div class="relative">
-                        <input type="text" placeholder="Rechercher..." class="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-blue-500 w-40 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
-                    </div>
-                    
-                    <div class="flex space-x-3">
-                        <a href="#" class="text-gray-600 hover:text-blue-900 dark:text-gray-300 dark:hover:text-white"><i class="fas fa-shopping-cart"></i></a>
-                        <a href="#" class="text-gray-600 hover:text-blue-900 dark:text-gray-300 dark:hover:text-white"><i class="fas fa-globe"></i></a>
-                        <a href="#" class="text-gray-600 hover:text-blue-900 dark:text-gray-300 dark:hover:text-white"><i class="fas fa-user"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <button class="md:hidden text-blue-900 dark:text-white">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero-gradient text-white py-20">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-10 md:mb-0 scroll-hidden">
-                <h1 class="text-4xl md:text-5xl font-bold mb-6">Innovation Technologique au Service de Votre Entreprise</h1>
-                <p class="text-xl mb-8 text-gray-300">Nous transformons vos idées en solutions digitales performantes pour accélérer votre croissance.</p>
-                <div class="flex space-x-4">
-                    <a href="#contact" class="btn-accent px-8 py-3 rounded-full font-semibold">Demander un devis</a>
-                    <a href="#services" class="border-2 border-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-900 transition">Nos services</a>
-                </div>
-            </div>
-            <div class="md:w-1/2 flex justify-center scroll-hidden">
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Technologie innovante" class="rounded-lg shadow-2xl animate-float max-w-full h-auto">
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-16 bg-white dark:bg-gray-800">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16 scroll-hidden">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4 dark:text-white">Nos Services Professionnels</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300">Nous offrons une gamme complète de services technologiques pour répondre à tous vos besoins digitaux.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="service-card bg-white dark:bg-gray-700 rounded-lg shadow-md p-8 transition duration-300 scroll-hidden">
-                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-code text-blue-900 dark:text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900 dark:text-white">Développement Web & Mobile</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Création de sites web et applications mobiles sur mesure, performants et sécurisés.</p>
-                    <a href="#" class="text-blue-900 dark:text-blue-400 font-semibold flex items-center">
-                        En savoir plus <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-                
-                <!-- Service 2 -->
-                <div class="service-card bg-white dark:bg-gray-700 rounded-lg shadow-md p-8 transition duration-300 scroll-hidden">
-                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-cloud text-blue-900 dark:text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900 dark:text-white">Solutions Cloud</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Migration, gestion et optimisation de vos infrastructures cloud pour une meilleure flexibilité.</p>
-                    <a href="#" class="text-blue-900 dark:text-blue-400 font-semibold flex items-center">
-                        En savoir plus <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-                
-                <!-- Service 3 -->
-                <div class="service-card bg-white dark:bg-gray-700 rounded-lg shadow-md p-8 transition duration-300 scroll-hidden">
-                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-robot text-blue-900 dark:text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900 dark:text-white">Intelligence Artificielle</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Intégration d'IA et machine learning pour automatiser et optimiser vos processus métiers.</p>
-                    <a href="#" class="text-blue-900 dark:text-blue-400 font-semibold flex items-center">
-                        En savoir plus <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-                
-                <!-- Service 4 -->
-                <div class="service-card bg-white dark:bg-gray-700 rounded-lg shadow-md p-8 transition duration-300 scroll-hidden">
-                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-shield-alt text-blue-900 dark:text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900 dark:text-white">Cybersécurité</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Protection de vos données et systèmes contre les cybermenaces avec des solutions avancées.</p>
-                    <a href="#" class="text-blue-900 dark:text-blue-400 font-semibold flex items-center">
-                        En savoir plus <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-                
-                <!-- Service 5 -->
-                <div class="service-card bg-white dark:bg-gray-700 rounded-lg shadow-md p-8 transition duration-300 scroll-hidden">
-                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-chart-line text-blue-900 dark:text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900 dark:text-white">Analyse de Données</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Collecte, traitement et visualisation de données pour des insights actionnables.</p>
-                    <a href="#" class="text-blue-900 dark:text-blue-400 font-semibold flex items-center">
-                        En savoir plus <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-                
-                <!-- Service 6 -->
-                <div class="service-card bg-white dark:bg-gray-700 rounded-lg shadow-md p-8 transition duration-300 scroll-hidden">
-                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-graduation-cap text-blue-900 dark:text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900 dark:text-white">Formation Tech</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Programmes de formation sur mesure pour monter en compétences sur les technologies clés.</p>
-                    <a href="#" class="text-blue-900 dark:text-blue-400 font-semibold flex items-center">
-                        En savoir plus <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-16 bg-gray-50 dark:bg-gray-900">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col lg:flex-row items-center">
-                <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10 scroll-hidden">
-                    <h2 class="text-3xl font-bold text-blue-900 mb-6 dark:text-white">Qui sommes-nous ?</h2>
-                    <p class="text-gray-600 mb-6 dark:text-gray-300">Fondée en 2015, TechNova est une entreprise technologique innovante spécialisée dans le développement de solutions digitales avancées pour les entreprises de toutes tailles.</p>
-                    
-                    <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-blue-900 mb-3 dark:text-white">Notre Mission</h3>
-                        <p class="text-gray-600 dark:text-gray-300">Accompagner la transformation digitale des entreprises en proposant des solutions technologiques sur mesure, performantes et sécurisées.</p>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-blue-900 mb-3 dark:text-white">Nos Valeurs</h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="flex items-start">
-                                <i class="fas fa-lightbulb text-blue-900 mt-1 mr-3 dark:text-blue-400"></i>
-                                <span class="text-gray-700 dark:text-gray-300">Innovation</span>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="fas fa-handshake text-blue-900 mt-1 mr-3 dark:text-blue-400"></i>
-                                <span class="text-gray-700 dark:text-gray-300">Collaboration</span>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="fas fa-lock text-blue-900 mt-1 mr-3 dark:text-blue-400"></i>
-                                <span class="text-gray-700 dark:text-gray-300">Sécurité</span>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="fas fa-star text-blue-900 mt-1 mr-3 dark:text-blue-400"></i>
-                                <span class="text-gray-700 dark:text-gray-300">Excellence</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <a href="#" class="inline-block bg-blue-900 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-800 transition dark:bg-blue-700">En savoir plus sur nous</a>
-                </div>
-                
-                <div class="lg:w-1/2 scroll-hidden">
-                    <div class="bg-white dark:bg-gray-700 p-8 rounded-lg shadow-lg">
-                        <h3 class="text-2xl font-bold text-blue-900 mb-6 dark:text-white">Nos Réalisations</h3>
-                        
-                        <div class="grid grid-cols-2 gap-6 mb-8">
-                            <div class="text-center">
-                                <div class="text-4xl font-bold text-blue-900 mb-2 dark:text-white">150+</div>
-                                <div class="text-gray-600 dark:text-gray-300">Clients satisfaits</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-4xl font-bold text-blue-900 mb-2 dark:text-white">40+</div>
-                                <div class="text-gray-600 dark:text-gray-300">Employés experts</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-4xl font-bold text-blue-900 mb-2 dark:text-white">300+</div>
-                                <div class="text-gray-600 dark:text-gray-300">Projets réalisés</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-4xl font-bold text-blue-900 mb-2 dark:text-white">15</div>
-                                <div class="text-gray-600 dark:text-gray-300">Pays desservis</div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h4 class="text-lg font-semibold text-blue-900 mb-3 dark:text-white">Nos Partenaires Technologiques</h4>
-                            <div class="flex flex-wrap items-center gap-4">
-                                <img src="https://via.placeholder.com/80x40?text=Microsoft" alt="Microsoft" class="h-8 dark:filter dark:invert">
-                                <img src="https://via.placeholder.com/80x40?text=Google" alt="Google" class="h-8 dark:filter dark:invert">
-                                <img src="https://via.placeholder.com/80x40?text=Amazon" alt="Amazon" class="h-8 dark:filter dark:invert">
-                                <img src="https://via.placeholder.com/80x40?text=IBM" alt="IBM" class="h-8 dark:filter dark:invert">
-                                <img src="https://via.placeholder.com/80x40?text=Oracle" alt="Oracle" class="h-8 dark:filter dark:invert">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Shop Section -->
-    <section id="shop" class="py-16 bg-white dark:bg-gray-800">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16 scroll-hidden">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4 dark:text-white">Notre Boutique</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300">Découvrez nos produits technologiques et solutions logicielles pour booster votre entreprise.</p>
-            </div>
-            
-            <div class="flex justify-center mb-8 scroll-hidden">
-                <div class="flex space-x-2">
-                    <button class="px-4 py-2 bg-blue-900 text-white rounded-full dark:bg-blue-700">Tous</button>
-                    <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">Logiciels</button>
-                    <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">Formations</button>
-                    <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">Matériel</button>
-                    <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">Services</button>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Product 1 -->
-                <div class="product-card bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden relative scroll-hidden">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Logiciel CRM" class="w-full h-48 object-cover">
-                        <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                            <button class="bg-blue-900 text-white px-4 py-2 rounded-full font-semibold dark:bg-blue-700">Voir détails</button>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-bold text-lg dark:text-white">CRM Entreprise Pro</h3>
-                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full dark:bg-green-900 dark:text-green-200">Nouveau</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-3 dark:text-gray-300">Solution complète de gestion de la relation client</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-blue-900 dark:text-blue-400">299€</span>
-                            <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-800 dark:bg-blue-700">Ajouter</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 2 -->
-                <div class="product-card bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden relative scroll-hidden">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1517430816045-df4b7acf8a50?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=715&q=80" alt="Formation IA" class="w-full h-48 object-cover">
-                        <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                            <button class="bg-blue-900 text-white px-4 py-2 rounded-full font-semibold dark:bg-blue-700">Voir détails</button>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-bold text-lg dark:text-white">Formation IA Avancée</h3>
-                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full dark:bg-red-900 dark:text-red-200">Promo</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-3 dark:text-gray-300">Module complet sur l'intelligence artificielle</p>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <span class="font-bold text-blue-900 dark:text-blue-400">499€</span>
-                                <span class="text-gray-400 text-sm line-through ml-2">599€</span>
-                            </div>
-                            <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-800 dark:bg-blue-700">Ajouter</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 3 -->
-                <div class="product-card bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden relative scroll-hidden">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="Sécurité" class="w-full h-48 object-cover">
-                        <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                            <button class="bg-blue-900 text-white px-4 py-2 rounded-full font-semibold dark:bg-blue-700">Voir détails</button>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-bold text-lg dark:text-white">Pack Sécurité Premium</h3>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-3 dark:text-gray-300">Solution complète de cybersécurité</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-blue-900 dark:text-blue-400">899€/an</span>
-                            <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-800 dark:bg-blue-700">Ajouter</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 4 -->
-                <div class="product-card bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden relative scroll-hidden">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Cloud" class="w-full h-48 object-cover">
-                        <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                            <button class="bg-blue-900 text-white px-4 py-2 rounded-full font-semibold dark:bg-blue-700">Voir détails</button>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-bold text-lg dark:text-white">Solution Cloud Entreprise</h3>
-                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Best-seller</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-3 dark:text-gray-300">Infrastructure cloud sécurisée et scalable</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-blue-900 dark:text-blue-400">À partir de 199€/mois</span>
-                            <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-800 dark:bg-blue-700">Ajouter</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12 scroll-hidden">
-                <a href="#" class="inline-block border-2 border-blue-900 text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-blue-900 hover:text-white transition dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-blue-900">Voir tous les produits</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section id="blog" class="py-16 bg-gray-50 dark:bg-gray-900">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16 scroll-hidden">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4 dark:text-white">Notre Blog Tech</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300">Découvrez nos articles d'experts sur les dernières tendances technologiques et bonnes pratiques.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                <!-- Article 1 -->
-                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden scroll-hidden">
-                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80" alt="IA" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center text-sm text-gray-500 mb-3 dark:text-gray-400">
-                            <span>15 Juin 2023</span>
-                            <span class="mx-2">•</span>
-                            <span>Par Jean Dupont</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-blue-900 mb-3 dark:text-white">L'IA dans les entreprises : révolution ou simple évolution ?</h3>
-                        <p class="text-gray-600 mb-4 dark:text-gray-300">Analyse approfondie de l'impact réel de l'intelligence artificielle sur les différents secteurs d'activité.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">IA</span>
-                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Transformation</span>
-                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Entreprise</span>
-                        </div>
-                        <a href="#" class="text-blue-900 font-semibold flex items-center dark:text-blue-400">
-                            Lire l'article <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Article 2 -->
-                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden scroll-hidden">
-                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Sécurité" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center text-sm text-gray-500 mb-3 dark:text-gray-400">
-                            <span>2 Juin 2023</span>
-                            <span class="mx-2">•</span>
-                            <span>Par Marie Lambert</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-blue-900 mb-3 dark:text-white">Cybersécurité : les 5 erreurs à éviter absolument en 2023</h3>
-                        <p class="text-gray-600 mb-4 dark:text-gray-300">Découvrez les pièges les plus courants qui mettent en danger la sécurité de vos données.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Sécurité</span>
-                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Bonnes pratiques</span>
-                        </div>
-                        <a href="#" class="text-blue-900 font-semibold flex items-center dark:text-blue-400">
-                            Lire l'article <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Article 3 -->
-                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden scroll-hidden">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Cloud" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center text-sm text-gray-500 mb-3 dark:text-gray-400">
-                            <span>20 Mai 2023</span>
-                            <span class="mx-2">•</span>
-                            <span>Par Thomas Martin</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-blue-900 mb-3 dark:text-white">Migration vers le cloud : notre guide complet étape par étape</h3>
-                        <p class="text-gray-600 mb-4 dark:text-gray-300">Tout ce que vous devez savoir pour réussir votre transition vers le cloud en toute sérénité.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Cloud</span>
-                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Migration</span>
-                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Guide</span>
-                        </div>
-                        <a href="#" class="text-blue-900 font-semibold flex items-center dark:text-blue-400">
-                            Lire l'article <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center scroll-hidden">
-                <a href="#" class="inline-block border-2 border-blue-900 text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-blue-900 hover:text-white transition dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-blue-900">Voir tous les articles</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="py-16 bg-white dark:bg-gray-800">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16 scroll-hidden">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4 dark:text-white">Ils nous font confiance</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300">Découvrez ce que nos clients disent de notre collaboration.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card bg-gray-50 dark:bg-gray-700 rounded-lg shadow-md p-8 scroll-hidden">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold mr-4 dark:bg-blue-700">JD</div>
-                        <div>
-                            <h4 class="font-bold dark:text-white">Jean Dubois</h4>
-                            <p class="text-gray-600 text-sm dark:text-gray-300">CEO, Entreprise XYZ</p>
-                        </div>
-                    </div>
-                    <div class="text-gray-700 mb-4 dark:text-gray-300">
-                        <i class="fas fa-quote-left text-blue-900 opacity-30 mr-2 dark:text-blue-400"></i>
-                        TechNova a révolutionné notre façon de travailler. Leur solution CRM sur mesure a augmenté notre productivité de 40% en seulement 3 mois.
-                        <i class="fas fa-quote-right text-blue-900 opacity-30 ml-2 dark:text-blue-400"></i>
-                    </div>
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card bg-gray-50 dark:bg-gray-700 rounded-lg shadow-md p-8 scroll-hidden">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold mr-4 dark:bg-blue-700">SM</div>
-                        <div>
-                            <h4 class="font-bold dark:text-white">Sophie Martin</h4>
-                            <p class="text-gray-600 text-sm dark:text-gray-300">Directrice Tech, Groupe ABC</p>
-                        </div>
-                    </div>
-                    <div class="text-gray-700 mb-4 dark:text-gray-300">
-                        <i class="fas fa-quote-left text-blue-900 opacity-30 mr-2 dark:text-blue-400"></i>
-                        Leur expertise en cybersécurité nous a permis de sécuriser nos infrastructures critiques. Réactifs, professionnels et très compétents.
-                        <i class="fas fa-quote-right text-blue-900 opacity-30 ml-2 dark:text-blue-400"></i>
-                    </div>
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 3 -->
-                <div class="testimonial-card bg-gray-50 dark:bg-gray-700 rounded-lg shadow-md p-8 scroll-hidden">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold mr-4 dark:bg-blue-700">PL</div>
-                        <div>
-                            <h4 class="font-bold dark:text-white">Pierre Lambert</h4>
-                            <p class="text-gray-600 text-sm dark:text-gray-300">Directeur Digital, Startup DEF</p>
-                        </div>
-                    </div>
-                    <div class="text-gray-700 mb-4 dark:text-gray-300">
-                        <i class="fas fa-quote-left text-blue-900 opacity-30 mr-2 dark:text-blue-400"></i>
-                        Leur accompagnement dans notre migration cloud a été exemplaire. Des délais respectés, un budget maîtrisé et une équipe toujours disponible.
-                        <i class="fas fa-quote-right text-blue-900 opacity-30 ml-2 dark:text-blue-400"></i>
-                    </div>
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gray-50 dark:bg-gray-900">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16 scroll-hidden">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4 dark:text-white">Contactez-nous</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300">Une question, un projet ? Notre équipe est à votre écoute pour répondre à vos besoins.</p>
-            </div>
-            
-            <div class="flex flex-col lg:flex-row gap-12">
-                <div class="lg:w-1/2 scroll-hidden">
-                    <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8">
-                        <h3 class="text-2xl font-bold text-blue-900 mb-6 dark:text-white">Envoyez-nous un message</h3>
-                        
-                        <form>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                                <div>
-                                    <label for="firstname" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Prénom</label>
-                                    <input type="text" id="firstname" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white">
-                                </div>
-                                <div>
-                                    <label for="lastname" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Nom</label>
-                                    <input type="text" id="lastname" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white">
-                                </div>
-                            </div>
-                            
-                            <div class="mb-6">
-                                <label for="email" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Email</label>
-                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white">
-                            </div>
-                            
-                            <div class="mb-6">
-                                <label for="subject" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Sujet</label>
-                                <select id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white">
-                                    <option value="">Sélectionnez un sujet</option>
-                                    <option value="info">Demande d'information</option>
-                                    <option value="quote">Demande de devis</option>
-                                    <option value="support">Support technique</option>
-                                    <option value="other">Autre</option>
-                                </select>
-                            </div>
-                            
-                            <div class="mb-6">
-                                <label for="message" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Message</label>
-                                <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white"></textarea>
-                            </div>
-                            
-                            <button type="submit" class="w-full bg-blue-900 text-white py-3 rounded-lg font-semibold hover:bg-blue-800 transition dark:bg-blue-700">Envoyer le message</button>
-                        </form>
-                    </div>
-                </div>
-                
-                <div class="lg:w-1/2">
-                    <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8 mb-8 scroll-hidden">
-                        <h3 class="text-2xl font-bold text-blue-900 mb-6 dark:text-white">Demande de devis</h3>
-                        
-                        <form>
-                            <div class="mb-6">
-                                <label for="service" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Service concerné</label>
-                                <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white">
-                                    <option value="">Sélectionnez un service</option>
-                                    <option value="web">Développement Web</option>
-                                    <option value="mobile">Développement Mobile</option>
-                                    <option value="cloud">Solutions Cloud</option>
-                                    <option value="ai">Intelligence Artificielle</option>
-                                    <option value="security">Cybersécurité</option>
-                                    <option value="data">Analyse de Données</option>
-                                    <option value="training">Formation</option>
-                                </select>
-                            </div>
-                            
-                            <div class="mb-6">
-                                <label for="budget" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Budget estimé</label>
-                                <select id="budget" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white">
-                                    <option value="">Sélectionnez une fourchette</option>
-                                    <option value="1k">Moins de 1 000€</option>
-                                    <option value="1-5k">1 000€ - 5 000€</option>
-                                    <option value="5-10k">5 000€ - 10 000€</option>
-                                    <option value="10-20k">10 000€ - 20 000€</option>
-                                    <option value="20k+">Plus de 20 000€</option>
-                                </select>
-                            </div>
-                            
-                            <div class="mb-6">
-                                <label for="description" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Description du projet</label>
-                                <textarea id="description" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white" placeholder="Décrivez votre projet en détail..."></textarea>
-                            </div>
-                            
-                            <div class="mb-6">
-                                <label class="flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-900 dark:text-blue-400">
-                                    <span class="ml-2 text-gray-700 dark:text-gray-300">J'accepte les conditions générales</span>
-                                </label>
-                            </div>
-                            
-                            <button type="submit" class="w-full bg-blue-900 text-white py-3 rounded-lg font-semibold hover:bg-blue-800 transition dark:bg-blue-700">Demander un devis</button>
-                        </form>
-                    </div>
-                    
-                    <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8 scroll-hidden">
-                        <h3 class="text-2xl font-bold text-blue-900 mb-6 dark:text-white">Nos coordonnées</h3>
-                        
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <i class="fas fa-map-marker-alt text-blue-900 mt-1 mr-4 dark:text-blue-400"></i>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800 dark:text-white">Adresse</h4>
-                                    <p class="text-gray-600 dark:text-gray-300">123 Rue de la Technologie, 75000 Paris, France</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <i class="fas fa-phone-alt text-blue-900 mt-1 mr-4 dark:text-blue-400"></i>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800 dark:text-white">Téléphone</h4>
-                                    <p class="text-gray-600 dark:text-gray-300">+33 1 23 45 67 89</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <i class="fas fa-envelope text-blue-900 mt-1 mr-4 dark:text-blue-400"></i>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800 dark:text-white">Email</h4>
-                                    <p class="text-gray-600 dark:text-gray-300">contact@technova.com</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <i class="fas fa-clock text-blue-900 mt-1 mr-4 dark:text-blue-400"></i>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800 dark:text-white">Horaires</h4>
-                                    <p class="text-gray-600 dark:text-gray-300">Lundi - Vendredi : 9h - 18h</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-8">
-                            <h4 class="font-semibold text-gray-800 mb-4 dark:text-white">Retrouvez-nous sur</h4>
-                            <div class="flex space-x-4">
-                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-900 hover:bg-blue-200 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-900 hover:bg-blue-200 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-900 hover:bg-blue-200 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-900 hover:bg-blue-200 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="py-16 bg-blue-900 text-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-6 scroll-hidden">Restez informés</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto scroll-hidden">Abonnez-vous à notre newsletter pour recevoir nos dernières actualités, offres spéciales et conseils tech.</p>
-            
-            <div class="max-w-md mx-auto flex scroll-hidden">
-                <input type="email" placeholder="Votre email" class="flex-grow px-4 py-3 rounded-l-lg focus:outline-none text-gray-800">
-                <button class="bg-accent text-blue-900 px-6 py-3 rounded-r-lg font-semibold hover:bg-green-400 transition">S'abonner</button>
-            </div>
-            
-            <p class="text-sm mt-4 text-blue-200 scroll-hidden">Nous ne partagerons jamais votre email avec des tiers.</p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                <div class="scroll-hidden">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-blue-900 rounded-full flex items-center justify-center mr-2">
-                            <span class="text-white font-bold text-xl">TN</span>
-                        </div>
-                        <span class="text-xl font-bold">TechNova</span>
-                    </div>
-                    <p class="text-gray-400 mb-4">Solutions technologiques innovantes pour accélérer la croissance de votre entreprise.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                
-                <div class="scroll-hidden">
-                    <h4 class="text-lg font-semibold mb-4">Liens rapides</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Accueil</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white">À propos</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white">Services</a></li>
-                        <li><a href="#shop" class="text-gray-400 hover:text-white">Boutique</a></li>
-                        <li><a href="#blog" class="text-gray-400 hover:text-white">Blog</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="scroll-hidden">
-                    <h4 class="text-lg font-semibold mb-4">Services</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Développement Web</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Applications Mobiles</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Solutions Cloud</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Intelligence Artificielle</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Cybersécurité</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Formation Tech</a></li>
-                    </ul>
-                </div>
-                
-                <div class="scroll-hidden">
-                    <h4 class="text-lg font-semibold mb-4">Informations</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Mentions légales</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Conditions générales</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Politique de confidentialité</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">FAQ</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Carrières</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Presse</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="pt-8 border-t border-gray-800 text-center text-gray-400 scroll-hidden">
-                <p>&copy; 2023 TechNova. Tous droits réservés.</p>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        // Simple script for mobile menu toggle (would be expanded in a real implementation)
-        document.querySelector('button.md\\:hidden').addEventListener('click', function() {
-            const nav = document.querySelector('.md\\:flex.items-center.space-x-8');
-            nav.classList.toggle('hidden');
-            nav.classList.toggle('flex');
-            nav.classList.toggle('flex-col');
-            nav.classList.toggle('absolute');
-            nav.classList.toggle('top-16');
-            nav.classList.toggle('left-0');
-            nav.classList.toggle('right-0');
-            nav.classList.toggle('bg-white');
-            nav.classList.toggle('p-4');
-            nav.classList.toggle('shadow-lg');
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Dark mode toggle
-        const toggle = document.getElementById('toggle');
-        const body = document.body;
-
-        // Check for saved user preference, if any, on page load
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            body.classList.add('dark');
-            toggle.checked = true;
-        }
-
-        // Toggle dark mode
-        toggle.addEventListener('change', function() {
-            if (this.checked) {
-                body.classList.add('dark');
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                body.classList.remove('dark');
-                localStorage.setItem('darkMode', 'disabled');
-            }
-        });
-
-        // Scroll animations
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.scroll-hidden');
-            
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-                
-                if (elementPosition < screenPosition) {
-                    element.classList.add('scroll-show');
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#2563eb',
+                            dark: '#1e40af'
+                        },
+                        secondary: {
+                            light: '#1e40af',
+                            dark: '#1e3a8a'
+                        },
+                        accent: '#3b82f6'
+                    }
                 }
-            });
+            }
         }
-
-        // Initialize scroll animation
-        window.addEventListener('load', animateOnScroll);
-        window.addEventListener('scroll', animateOnScroll);
-
-        // More advanced animations with ScrollReveal
-        ScrollReveal().reveal('.scroll-hidden', {
-            delay: 200,
-            distance: '50px',
-            origin: 'bottom',
-            interval: 100,
-            reset: true
-        });
-
-        // Animate hero section differently
-        ScrollReveal().reveal('.hero-gradient .scroll-hidden:nth-child(1)', {
-            delay: 300,
-            distance: '50px',
-            origin: 'left'
-        });
-
-        ScrollReveal().reveal('.hero-gradient .scroll-hidden:nth-child(2)', {
-            delay: 500,
-            distance: '50px',
-            origin: 'right'
-        });
     </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechNova | Solutions Technologiques Innovantes</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://unpkg.com/scrollreveal"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-        
-        :root {
-            --primary: #0a192f;
-            --secondary: #172a45;
-            --accent: #64ffda;
-            --light: #ccd6f6;
-            --highlight: #8892b0;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
         body {
-            font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
         }
         
-        /* Dark mode styles */
-        .dark {
-            --primary: #0a192f;
-            --secondary: #172a45;
-            --accent: #64ffda;
-            --light: #ccd6f6;
-            --highlight: #8892b0;
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
-        .light {
-            --primary: #f8fafc;
-            --secondary: #e2e8f0;
-            --accent: #3b82f6;
-            --light: #1e293b;
-            --highlight: #475569;
+        .dark .product-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
         
-        .hero-gradient {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        .image-zoom {
+            transition: transform 0.3s;
         }
         
-        .btn-accent {
-            background-color: var(--accent);
-            color: var(--primary);
-            transition: all 0.3s ease;
+        .image-zoom:hover {
+            transform: scale(1.05);
         }
         
-        .btn-accent:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(100, 255, 218, 0.3);
+        .dropdown:hover .dropdown-menu {
+            display: block;
         }
         
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .product-card:hover .product-overlay {
-            opacity: 1;
-        }
-        
-        .product-overlay {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .animate-float {
+        .chat-bubble {
             animation: float 3s ease-in-out infinite;
         }
         
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         
-        .testimonial-card {
+        /* Slider animation */
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(0); }
+            30% { transform: translateX(-100%); }
+            55% { transform: translateX(-100%); }
+            60% { transform: translateX(-200%); }
+            85% { transform: translateX(-200%); }
+            90% { transform: translateX(-300%); }
+            100% { transform: translateX(-300%); }
+        }
+        
+        .slider {
+            animation: slide 12s infinite;
+        }
+        
+        .slider:hover {
+            animation-play-state: paused;
+        }
+
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        
+        /* Custom styles for TechNova */
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+        }
+        
+        .btn-accent {
+            background-color: #3b82f6;
             transition: all 0.3s ease;
         }
         
-        .testimonial-card:hover {
-            transform: scale(1.05);
+        .btn-accent:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
         }
         
-        .input-focus:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 1px var(--accent);
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
         }
         
-        /* Scroll animation classes */
         .scroll-hidden {
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.6s ease;
+            transition: all 0.6s ease-out;
         }
         
         .scroll-show {
@@ -1091,69 +118,105 @@
             transform: translateY(0);
         }
         
-        /* Dark mode toggle */
-        .toggle-checkbox:checked {
-            right: 0;
-            border-color: #68D391;
+        .product-overlay {
+            opacity: 0;
+            transition: all 0.3s ease;
         }
-        .toggle-checkbox:checked + .toggle-label {
-            background-color: #68D391;
+        
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+        
+        .input-focus:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 light-mode">
-    <!-- Dark mode toggle -->
-    <div class="fixed top-4 right-4 z-50">
-        <div class="relative inline-block w-12 mr-2 align-middle select-none">
-            <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
-            <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-        </div>
-        <span class="text-gray-700 font-medium dark:text-white"><i class="fas fa-moon"></i></span>
-    </div>
-
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
     <!-- Header -->
-    <header class="sticky top-0 z-40 bg-white shadow-md dark:bg-gray-800 dark:text-white">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center">
-                <a href="#" class="flex items-center">
-                    <div class="w-10 h-10 bg-blue-900 rounded-full flex items-center justify-center mr-2 dark:bg-blue-700">
-                        <span class="text-white font-bold text-xl">TN</span>
-                    </div>
-                    <span class="text-xl font-bold text-blue-900 dark:text-white">TechNova</span>
-                </a>
-            </div>
-            
-            <div class="hidden md:flex items-center space-x-8">
-                <nav>
-                    <ul class="flex space-x-6">
-                        <li><a href="#" class="nav-link text-blue-900 font-medium dark:text-white">Accueil</a></li>
-                        <li><a href="#about" class="nav-link text-gray-600 hover:text-blue-900 font-medium dark:text-gray-300 dark:hover:text-white">À propos</a></li>
-                        <li><a href="#services" class="nav-link text-gray-600 hover:text-blue-900 font-medium dark:text-gray-300 dark:hover:text-white">Services</a></li>
-                        <li><a href="#shop" class="nav-link text-gray-600 hover:text-blue-900 font-medium dark:text-gray-300 dark:hover:text-white">Boutique</a></li>
-                        <li><a href="#blog" class="nav-link text-gray-600 hover:text-blue-900 font-medium dark:text-gray-300 dark:hover:text-white">Blog</a></li>
-                        <li><a href="#contact" class="nav-link text-gray-600 hover:text-blue-900 font-medium dark:text-gray-300 dark:hover:text-white">Contact</a></li>
-                    </ul>
-                </nav>
+    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-8">
+                    <!-- Logo -->
+                    <a href="#" class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mr-2">
+                            <span class="text-white font-bold text-xl">TS</span>
+                        </div>
+                        <span class="text-xl font-bold dark:text-white">TechShop</span>
+                    </a>
+                    
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden lg:flex items-center space-x-1">
+                        <a href="../index.html" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Accueil</a>
+                        <a href="#about" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">À propos</a>
+                        <a href="#services" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Services</a>
+                        <a href="#shop" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Boutique</a>
+                        <a href="#blog" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Blog</a>
+                        <a href="#contact" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Contact</a>
+                    </nav>
+                </div>
                 
+                <!-- Search and Icons -->
                 <div class="flex items-center space-x-4">
-                    <div class="relative">
-                        <input type="text" placeholder="Rechercher..." class="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-blue-500 w-40 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <!-- Search Bar -->
+                    <div class="hidden md:block relative">
+                        <input type="text" placeholder="Rechercher..." class="pl-4 pr-10 py-2 rounded-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64">
                         <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
                     </div>
                     
-                    <div class="flex space-x-3">
-                        <a href="#" class="text-gray-600 hover:text-blue-900 dark:text-gray-300 dark:hover:text-white"><i class="fas fa-shopping-cart"></i></a>
-                        <a href="#" class="text-gray-600 hover:text-blue-900 dark:text-gray-300 dark:hover:text-white"><i class="fas fa-globe"></i></a>
-                        <a href="#" class="text-gray-600 hover:text-blue-900 dark:text-gray-300 dark:hover:text-white"><i class="fas fa-user"></i></a>
-                    </div>
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative" id="user-account-btn">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    
+                    <!-- Cart -->
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                    </a>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
-            
-            <button class="md:hidden text-blue-900 dark:text-white">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
         </div>
     </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden absolute top-16 right-0 left-0 bg-white dark:bg-gray-800 shadow-lg z-50">
+        <div class="container mx-auto px-4 py-3">
+            <nav class="flex flex-col space-y-3">
+                <a href="../index.html" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Accueil</a>
+                <a href="#about" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">À propos</a>
+                <a href="#services" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Services</a>
+                <a href="#shop" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Boutique</a>
+                <a href="#blog" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Blog</a>
+                <a href="#contact" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Contact</a>
+            </nav>
+            
+            <!-- Mobile Search -->
+            <div class="mt-4">
+                <div class="relative">
+                    <input type="text" placeholder="Rechercher..." class="pl-4 pr-10 py-2 rounded-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                    <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero-gradient text-white py-20">
@@ -1176,7 +239,7 @@
     <section id="services" class="py-16 bg-white dark:bg-gray-800">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16 scroll-hidden">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4 dark:text-white">Nos Services Professionnels</h2>
+                <h2 class="text-3xl font-bold text-blue-600 mb-4 dark:text-white">Nos Services Professionnels</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300">Nous offrons une gamme complète de services technologiques pour répondre à tous vos besoins digitaux.</p>
             </div>
             
@@ -1184,11 +247,11 @@
                 <!-- Service 1 -->
                 <div class="service-card bg-white dark:bg-gray-700 rounded-lg shadow-md p-8 transition duration-300 scroll-hidden">
                     <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-code text-blue-900 dark:text-white text-2xl"></i>
+                        <i class="fas fa-code text-blue-600 dark:text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900 dark:text-white">Développement Web & Mobile</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Création de sites web et applications mobiles sur mesure, performants et sécurisés.</p>
-                    <a href="#" class="text-blue-900 dark:text-blue-400 font-semibold flex items-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 dark:text-white">Développement Web & Mobile</h3>
+                    <p class="text-gray-600 mb-4 dark:text-gray-300">Création de sites web et applications mobiles sur mesure, performants et sécurisés.</p>
+                    <a href="#" class="text-blue-600 dark:text-blue-400 font-semibold flex items-center">
                         En savoir plus <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -1196,11 +259,11 @@
                 <!-- Service 2 -->
                 <div class="service-card bg-white dark:bg-gray-700 rounded-lg shadow-md p-8 transition duration-300 scroll-hidden">
                     <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-cloud text-blue-900 dark:text-white text-2xl"></i>
+                        <i class="fas fa-cloud text-blue-600 dark:text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900 dark:text-white">Solutions Cloud</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Migration, gestion et optimisation de vos infrastructures cloud pour une meilleure flexibilité.</p>
-                    <a href="#" class="text-blue-900 dark:text-blue-400 font-semibold flex items-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 dark:text-white">Solutions Cloud</h3>
+                    <p class="text-gray-600 mb-4 dark:text-gray-300">Migration, gestion et optimisation de vos infrastructures cloud pour une meilleure flexibilité.</p>
+                    <a href="#" class="text-blue-600 dark:text-blue-400 font-semibold flex items-center">
                         En savoir plus <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -1208,11 +271,11 @@
                 <!-- Service 3 -->
                 <div class="service-card bg-white dark:bg-gray-700 rounded-lg shadow-md p-8 transition duration-300 scroll-hidden">
                     <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-robot text-blue-900 dark:text-white text-2xl"></i>
+                        <i class="fas fa-robot text-blue-600 dark:text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900 dark:text-white">Intelligence Artificielle</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Intégration d'IA et machine learning pour automatiser et optimiser vos processus métiers.</p>
-                    <a href="#" class="text-blue-900 dark:text-blue-400 font-semibold flex items-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 dark:text-white">Intelligence Artificielle</h3>
+                    <p class="text-gray-600 mb-4 dark:text-gray-300">Intégration d'IA et machine learning pour automatiser et optimiser vos processus métiers.</p>
+                    <a href="#" class="text-blue-600 dark:text-blue-400 font-semibold flex items-center">
                         En savoir plus <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -1220,11 +283,11 @@
                 <!-- Service 4 -->
                 <div class="service-card bg-white dark:bg-gray-700 rounded-lg shadow-md p-8 transition duration-300 scroll-hidden">
                     <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-shield-alt text-blue-900 dark:text-white text-2xl"></i>
+                        <i class="fas fa-shield-alt text-blue-600 dark:text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900 dark:text-white">Cybersécurité</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Protection de vos données et systèmes contre les cybermenaces avec des solutions avancées.</p>
-                    <a href="#" class="text-blue-900 dark:text-blue-400 font-semibold flex items-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 dark:text-white">Cybersécurité</h3>
+                    <p class="text-gray-600 mb-4 dark:text-gray-300">Protection de vos données et systèmes contre les cybermenaces avec des solutions avancées.</p>
+                    <a href="#" class="text-blue-600 dark:text-blue-400 font-semibold flex items-center">
                         En savoir plus <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -1232,11 +295,11 @@
                 <!-- Service 5 -->
                 <div class="service-card bg-white dark:bg-gray-700 rounded-lg shadow-md p-8 transition duration-300 scroll-hidden">
                     <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-chart-line text-blue-900 dark:text-white text-2xl"></i>
+                        <i class="fas fa-chart-line text-blue-600 dark:text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900 dark:text-white">Analyse de Données</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Collecte, traitement et visualisation de données pour des insights actionnables.</p>
-                    <a href="#" class="text-blue-900 dark:text-blue-400 font-semibold flex items-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 dark:text-white">Analyse de Données</h3>
+                    <p class="text-gray-600 mb-4 dark:text-gray-300">Collecte, traitement et visualisation de données pour des insights actionnables.</p>
+                    <a href="#" class="text-blue-600 dark:text-blue-400 font-semibold flex items-center">
                         En savoir plus <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -1244,11 +307,11 @@
                 <!-- Service 6 -->
                 <div class="service-card bg-white dark:bg-gray-700 rounded-lg shadow-md p-8 transition duration-300 scroll-hidden">
                     <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-graduation-cap text-blue-900 dark:text-white text-2xl"></i>
+                        <i class="fas fa-graduation-cap text-blue-600 dark:text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900 dark:text-white">Formation Tech</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Programmes de formation sur mesure pour monter en compétences sur les technologies clés.</p>
-                    <a href="#" class="text-blue-900 dark:text-blue-400 font-semibold flex items-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 dark:text-white">Formation Tech</h3>
+                    <p class="text-gray-600 mb-4 dark:text-gray-300">Programmes de formation sur mesure pour monter en compétences sur les technologies clés.</p>
+                    <a href="#" class="text-blue-600 dark:text-blue-400 font-semibold flex items-center">
                         En savoir plus <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -1261,64 +324,64 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row items-center">
                 <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10 scroll-hidden">
-                    <h2 class="text-3xl font-bold text-blue-900 mb-6 dark:text-white">Qui sommes-nous ?</h2>
+                    <h2 class="text-3xl font-bold text-blue-600 mb-6 dark:text-white">Qui sommes-nous ?</h2>
                     <p class="text-gray-600 mb-6 dark:text-gray-300">Fondée en 2015, TechNova est une entreprise technologique innovante spécialisée dans le développement de solutions digitales avancées pour les entreprises de toutes tailles.</p>
                     
                     <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-blue-900 mb-3 dark:text-white">Notre Mission</h3>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-3 dark:text-white">Notre Mission</h3>
                         <p class="text-gray-600 dark:text-gray-300">Accompagner la transformation digitale des entreprises en proposant des solutions technologiques sur mesure, performantes et sécurisées.</p>
                     </div>
                     
                     <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-blue-900 mb-3 dark:text-white">Nos Valeurs</h3>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-3 dark:text-white">Nos Valeurs</h3>
                         <div class="grid grid-cols-2 gap-4">
                             <div class="flex items-start">
-                                <i class="fas fa-lightbulb text-blue-900 mt-1 mr-3 dark:text-blue-400"></i>
+                                <i class="fas fa-lightbulb text-blue-600 mt-1 mr-3 dark:text-blue-400"></i>
                                 <span class="text-gray-700 dark:text-gray-300">Innovation</span>
                             </div>
                             <div class="flex items-start">
-                                <i class="fas fa-handshake text-blue-900 mt-1 mr-3 dark:text-blue-400"></i>
+                                <i class="fas fa-handshake text-blue-600 mt-1 mr-3 dark:text-blue-400"></i>
                                 <span class="text-gray-700 dark:text-gray-300">Collaboration</span>
                             </div>
                             <div class="flex items-start">
-                                <i class="fas fa-lock text-blue-900 mt-1 mr-3 dark:text-blue-400"></i>
+                                <i class="fas fa-lock text-blue-600 mt-1 mr-3 dark:text-blue-400"></i>
                                 <span class="text-gray-700 dark:text-gray-300">Sécurité</span>
                             </div>
                             <div class="flex items-start">
-                                <i class="fas fa-star text-blue-900 mt-1 mr-3 dark:text-blue-400"></i>
+                                <i class="fas fa-star text-blue-600 mt-1 mr-3 dark:text-blue-400"></i>
                                 <span class="text-gray-700 dark:text-gray-300">Excellence</span>
                             </div>
                         </div>
                     </div>
                     
-                    <a href="#" class="inline-block bg-blue-900 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-800 transition dark:bg-blue-700">En savoir plus sur nous</a>
+                    <a href="#" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition dark:bg-blue-700">En savoir plus sur nous</a>
                 </div>
                 
                 <div class="lg:w-1/2 scroll-hidden">
                     <div class="bg-white dark:bg-gray-700 p-8 rounded-lg shadow-lg">
-                        <h3 class="text-2xl font-bold text-blue-900 mb-6 dark:text-white">Nos Réalisations</h3>
+                        <h3 class="text-2xl font-bold text-blue-600 mb-6 dark:text-white">Nos Réalisations</h3>
                         
                         <div class="grid grid-cols-2 gap-6 mb-8">
                             <div class="text-center">
-                                <div class="text-4xl font-bold text-blue-900 mb-2 dark:text-white">150+</div>
+                                <div class="text-4xl font-bold text-blue-600 mb-2 dark:text-white">150+</div>
                                 <div class="text-gray-600 dark:text-gray-300">Clients satisfaits</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-4xl font-bold text-blue-900 mb-2 dark:text-white">40+</div>
+                                <div class="text-4xl font-bold text-blue-600 mb-2 dark:text-white">40+</div>
                                 <div class="text-gray-600 dark:text-gray-300">Employés experts</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-4xl font-bold text-blue-900 mb-2 dark:text-white">300+</div>
+                                <div class="text-4xl font-bold text-blue-600 mb-2 dark:text-white">300+</div>
                                 <div class="text-gray-600 dark:text-gray-300">Projets réalisés</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-4xl font-bold text-blue-900 mb-2 dark:text-white">15</div>
+                                <div class="text-4xl font-bold text-blue-600 mb-2 dark:text-white">15</div>
                                 <div class="text-gray-600 dark:text-gray-300">Pays desservis</div>
                             </div>
                         </div>
                         
                         <div>
-                            <h4 class="text-lg font-semibold text-blue-900 mb-3 dark:text-white">Nos Partenaires Technologiques</h4>
+                            <h4 class="text-lg font-semibold text-blue-600 mb-3 dark:text-white">Nos Partenaires Technologiques</h4>
                             <div class="flex flex-wrap items-center gap-4">
                                 <img src="https://via.placeholder.com/80x40?text=Microsoft" alt="Microsoft" class="h-8 dark:filter dark:invert">
                                 <img src="https://via.placeholder.com/80x40?text=Google" alt="Google" class="h-8 dark:filter dark:invert">
@@ -1337,13 +400,13 @@
     <section id="shop" class="py-16 bg-white dark:bg-gray-800">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16 scroll-hidden">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4 dark:text-white">Notre Boutique</h2>
+                <h2 class="text-3xl font-bold text-blue-600 mb-4 dark:text-white">Notre Boutique</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300">Découvrez nos produits technologiques et solutions logicielles pour booster votre entreprise.</p>
             </div>
             
             <div class="flex justify-center mb-8 scroll-hidden">
                 <div class="flex space-x-2">
-                    <button class="px-4 py-2 bg-blue-900 text-white rounded-full dark:bg-blue-700">Tous</button>
+                    <button class="px-4 py-2 bg-blue-600 text-white rounded-full dark:bg-blue-700">Tous</button>
                     <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">Logiciels</button>
                     <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">Formations</button>
                     <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">Matériel</button>
@@ -1357,7 +420,7 @@
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Logiciel CRM" class="w-full h-48 object-cover">
                         <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                            <button class="bg-blue-900 text-white px-4 py-2 rounded-full font-semibold dark:bg-blue-700">Voir détails</button>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-full font-semibold dark:bg-blue-700">Voir détails</button>
                         </div>
                     </div>
                     <div class="p-4">
@@ -1367,8 +430,8 @@
                         </div>
                         <p class="text-gray-600 text-sm mb-3 dark:text-gray-300">Solution complète de gestion de la relation client</p>
                         <div class="flex justify-between items-center">
-                            <span class="font-bold text-blue-900 dark:text-blue-400">299€</span>
-                            <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-800 dark:bg-blue-700">Ajouter</button>
+                            <span class="font-bold text-blue-600 dark:text-blue-400">299€</span>
+                            <button class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-700 dark:bg-blue-700">Ajouter</button>
                         </div>
                     </div>
                 </div>
@@ -1378,7 +441,7 @@
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1517430816045-df4b7acf8a50?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=715&q=80" alt="Formation IA" class="w-full h-48 object-cover">
                         <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                            <button class="bg-blue-900 text-white px-4 py-2 rounded-full font-semibold dark:bg-blue-700">Voir détails</button>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-full font-semibold dark:bg-blue-700">Voir détails</button>
                         </div>
                     </div>
                     <div class="p-4">
@@ -1389,10 +452,10 @@
                         <p class="text-gray-600 text-sm mb-3 dark:text-gray-300">Module complet sur l'intelligence artificielle</p>
                         <div class="flex justify-between items-center">
                             <div>
-                                <span class="font-bold text-blue-900 dark:text-blue-400">499€</span>
+                                <span class="font-bold text-blue-600 dark:text-blue-400">499€</span>
                                 <span class="text-gray-400 text-sm line-through ml-2">599€</span>
                             </div>
-                            <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-800 dark:bg-blue-700">Ajouter</button>
+                            <button class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-700 dark:bg-blue-700">Ajouter</button>
                         </div>
                     </div>
                 </div>
@@ -1402,7 +465,7 @@
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="Sécurité" class="w-full h-48 object-cover">
                         <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                            <button class="bg-blue-900 text-white px-4 py-2 rounded-full font-semibold dark:bg-blue-700">Voir détails</button>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-full font-semibold dark:bg-blue-700">Voir détails</button>
                         </div>
                     </div>
                     <div class="p-4">
@@ -1411,8 +474,8 @@
                         </div>
                         <p class="text-gray-600 text-sm mb-3 dark:text-gray-300">Solution complète de cybersécurité</p>
                         <div class="flex justify-between items-center">
-                            <span class="font-bold text-blue-900 dark:text-blue-400">899€/an</span>
-                            <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-800 dark:bg-blue-700">Ajouter</button>
+                            <span class="font-bold text-blue-600 dark:text-blue-400">899€/an</span>
+                            <button class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-700 dark:bg-blue-700">Ajouter</button>
                         </div>
                     </div>
                 </div>
@@ -1422,7 +485,7 @@
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Cloud" class="w-full h-48 object-cover">
                         <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                            <button class="bg-blue-900 text-white px-4 py-2 rounded-full font-semibold dark:bg-blue-700">Voir détails</button>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-full font-semibold dark:bg-blue-700">Voir détails</button>
                         </div>
                     </div>
                     <div class="p-4">
@@ -1432,15 +495,15 @@
                         </div>
                         <p class="text-gray-600 text-sm mb-3 dark:text-gray-300">Infrastructure cloud sécurisée et scalable</p>
                         <div class="flex justify-between items-center">
-                            <span class="font-bold text-blue-900 dark:text-blue-400">À partir de 199€/mois</span>
-                            <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-800 dark:bg-blue-700">Ajouter</button>
+                            <span class="font-bold text-blue-600 dark:text-blue-400">À partir de 199€/mois</span>
+                            <button class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-700 dark:bg-blue-700">Ajouter</button>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="text-center mt-12 scroll-hidden">
-                <a href="#" class="inline-block border-2 border-blue-900 text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-blue-900 hover:text-white transition dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-blue-900">Voir tous les produits</a>
+                <a href="#" class="inline-block border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-blue-600">Voir tous les produits</a>
             </div>
         </div>
     </section>
@@ -1449,7 +512,7 @@
     <section id="blog" class="py-16 bg-gray-50 dark:bg-gray-900">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16 scroll-hidden">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4 dark:text-white">Notre Blog Tech</h2>
+                <h2 class="text-3xl font-bold text-blue-600 mb-4 dark:text-white">Notre Blog Tech</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300">Découvrez nos articles d'experts sur les dernières tendances technologiques et bonnes pratiques.</p>
             </div>
             
@@ -1463,14 +526,14 @@
                             <span class="mx-2">•</span>
                             <span>Par Jean Dupont</span>
                         </div>
-                        <h3 class="text-xl font-bold text-blue-900 mb-3 dark:text-white">L'IA dans les entreprises : révolution ou simple évolution ?</h3>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3 dark:text-white">L'IA dans les entreprises : révolution ou simple évolution ?</h3>
                         <p class="text-gray-600 mb-4 dark:text-gray-300">Analyse approfondie de l'impact réel de l'intelligence artificielle sur les différents secteurs d'activité.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">IA</span>
                             <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Transformation</span>
                             <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Entreprise</span>
                         </div>
-                        <a href="#" class="text-blue-900 font-semibold flex items-center dark:text-blue-400">
+                        <a href="#" class="text-blue-600 font-semibold flex items-center dark:text-blue-400">
                             Lire l'article <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
@@ -1485,13 +548,13 @@
                             <span class="mx-2">•</span>
                             <span>Par Marie Lambert</span>
                         </div>
-                        <h3 class="text-xl font-bold text-blue-900 mb-3 dark:text-white">Cybersécurité : les 5 erreurs à éviter absolument en 2023</h3>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3 dark:text-white">Cybersécurité : les 5 erreurs à éviter absolument en 2023</h3>
                         <p class="text-gray-600 mb-4 dark:text-gray-300">Découvrez les pièges les plus courants qui mettent en danger la sécurité de vos données.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Sécurité</span>
                             <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Bonnes pratiques</span>
                         </div>
-                        <a href="#" class="text-blue-900 font-semibold flex items-center dark:text-blue-400">
+                        <a href="#" class="text-blue-600 font-semibold flex items-center dark:text-blue-400">
                             Lire l'article <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
@@ -1506,14 +569,14 @@
                             <span class="mx-2">•</span>
                             <span>Par Thomas Martin</span>
                         </div>
-                        <h3 class="text-xl font-bold text-blue-900 mb-3 dark:text-white">Migration vers le cloud : notre guide complet étape par étape</h3>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3 dark:text-white">Migration vers le cloud : notre guide complet étape par étape</h3>
                         <p class="text-gray-600 mb-4 dark:text-gray-300">Tout ce que vous devez savoir pour réussir votre transition vers le cloud en toute sérénité.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Cloud</span>
                             <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Migration</span>
                             <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Guide</span>
                         </div>
-                        <a href="#" class="text-blue-900 font-semibold flex items-center dark:text-blue-400">
+                        <a href="#" class="text-blue-600 font-semibold flex items-center dark:text-blue-400">
                             Lire l'article <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
@@ -1521,7 +584,7 @@
             </div>
             
             <div class="text-center scroll-hidden">
-                <a href="#" class="inline-block border-2 border-blue-900 text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-blue-900 hover:text-white transition dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-blue-900">Voir tous les articles</a>
+                <a href="#" class="inline-block border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-blue-600">Voir tous les articles</a>
             </div>
         </div>
     </section>
@@ -1530,7 +593,7 @@
     <section class="py-16 bg-white dark:bg-gray-800">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16 scroll-hidden">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4 dark:text-white">Ils nous font confiance</h2>
+                <h2 class="text-3xl font-bold text-blue-600 mb-4 dark:text-white">Ils nous font confiance</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300">Découvrez ce que nos clients disent de notre collaboration.</p>
             </div>
             
@@ -1538,16 +601,16 @@
                 <!-- Testimonial 1 -->
                 <div class="testimonial-card bg-gray-50 dark:bg-gray-700 rounded-lg shadow-md p-8 scroll-hidden">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold mr-4 dark:bg-blue-700">JD</div>
+                        <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold mr-4 dark:bg-blue-700">JD</div>
                         <div>
                             <h4 class="font-bold dark:text-white">Jean Dubois</h4>
                             <p class="text-gray-600 text-sm dark:text-gray-300">CEO, Entreprise XYZ</p>
                         </div>
                     </div>
                     <div class="text-gray-700 mb-4 dark:text-gray-300">
-                        <i class="fas fa-quote-left text-blue-900 opacity-30 mr-2 dark:text-blue-400"></i>
+                        <i class="fas fa-quote-left text-blue-600 opacity-30 mr-2 dark:text-blue-400"></i>
                         TechNova a révolutionné notre façon de travailler. Leur solution CRM sur mesure a augmenté notre productivité de 40% en seulement 3 mois.
-                        <i class="fas fa-quote-right text-blue-900 opacity-30 ml-2 dark:text-blue-400"></i>
+                        <i class="fas fa-quote-right text-blue-600 opacity-30 ml-2 dark:text-blue-400"></i>
                     </div>
                     <div class="flex text-yellow-400">
                         <i class="fas fa-star"></i>
@@ -1561,16 +624,16 @@
                 <!-- Testimonial 2 -->
                 <div class="testimonial-card bg-gray-50 dark:bg-gray-700 rounded-lg shadow-md p-8 scroll-hidden">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold mr-4 dark:bg-blue-700">SM</div>
+                        <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold mr-4 dark:bg-blue-700">SM</div>
                         <div>
                             <h4 class="font-bold dark:text-white">Sophie Martin</h4>
                             <p class="text-gray-600 text-sm dark:text-gray-300">Directrice Tech, Groupe ABC</p>
                         </div>
                     </div>
                     <div class="text-gray-700 mb-4 dark:text-gray-300">
-                        <i class="fas fa-quote-left text-blue-900 opacity-30 mr-2 dark:text-blue-400"></i>
+                        <i class="fas fa-quote-left text-blue-600 opacity-30 mr-2 dark:text-blue-400"></i>
                         Leur expertise en cybersécurité nous a permis de sécuriser nos infrastructures critiques. Réactifs, professionnels et très compétents.
-                        <i class="fas fa-quote-right text-blue-900 opacity-30 ml-2 dark:text-blue-400"></i>
+                        <i class="fas fa-quote-right text-blue-600 opacity-30 ml-2 dark:text-blue-400"></i>
                     </div>
                     <div class="flex text-yellow-400">
                         <i class="fas fa-star"></i>
@@ -1584,16 +647,16 @@
                 <!-- Testimonial 3 -->
                 <div class="testimonial-card bg-gray-50 dark:bg-gray-700 rounded-lg shadow-md p-8 scroll-hidden">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold mr-4 dark:bg-blue-700">PL</div>
+                        <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold mr-4 dark:bg-blue-700">PL</div>
                         <div>
                             <h4 class="font-bold dark:text-white">Pierre Lambert</h4>
                             <p class="text-gray-600 text-sm dark:text-gray-300">Directeur Digital, Startup DEF</p>
                         </div>
                     </div>
                     <div class="text-gray-700 mb-4 dark:text-gray-300">
-                        <i class="fas fa-quote-left text-blue-900 opacity-30 mr-2 dark:text-blue-400"></i>
+                        <i class="fas fa-quote-left text-blue-600 opacity-30 mr-2 dark:text-blue-400"></i>
                         Leur accompagnement dans notre migration cloud a été exemplaire. Des délais respectés, un budget maîtrisé et une équipe toujours disponible.
-                        <i class="fas fa-quote-right text-blue-900 opacity-30 ml-2 dark:text-blue-400"></i>
+                        <i class="fas fa-quote-right text-blue-600 opacity-30 ml-2 dark:text-blue-400"></i>
                     </div>
                     <div class="flex text-yellow-400">
                         <i class="fas fa-star"></i>
@@ -1611,35 +674,35 @@
     <section id="contact" class="py-16 bg-gray-50 dark:bg-gray-900">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16 scroll-hidden">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4 dark:text-white">Contactez-nous</h2>
+                <h2 class="text-3xl font-bold text-blue-600 mb-4 dark:text-white">Contactez-nous</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300">Une question, un projet ? Notre équipe est à votre écoute pour répondre à vos besoins.</p>
             </div>
             
             <div class="flex flex-col lg:flex-row gap-12">
                 <div class="lg:w-1/2 scroll-hidden">
                     <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8">
-                        <h3 class="text-2xl font-bold text-blue-900 mb-6 dark:text-white">Envoyez-nous un message</h3>
+                        <h3 class="text-2xl font-bold text-blue-600 mb-6 dark:text-white">Envoyez-nous un message</h3>
                         
                         <form>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                 <div>
                                     <label for="firstname" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Prénom</label>
-                                    <input type="text" id="firstname" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white">
+                                    <input type="text" id="firstname" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white">
                                 </div>
                                 <div>
                                     <label for="lastname" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Nom</label>
-                                    <input type="text" id="lastname" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white">
+                                    <input type="text" id="lastname" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white">
                                 </div>
                             </div>
                             
                             <div class="mb-6">
                                 <label for="email" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Email</label>
-                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white">
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white">
                             </div>
                             
                             <div class="mb-6">
                                 <label for="subject" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Sujet</label>
-                                <select id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white">
+                                <select id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white">
                                     <option value="">Sélectionnez un sujet</option>
                                     <option value="info">Demande d'information</option>
                                     <option value="quote">Demande de devis</option>
@@ -1650,22 +713,22 @@
                             
                             <div class="mb-6">
                                 <label for="message" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Message</label>
-                                <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white"></textarea>
+                                <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white"></textarea>
                             </div>
                             
-                            <button type="submit" class="w-full bg-blue-900 text-white py-3 rounded-lg font-semibold hover:bg-blue-800 transition dark:bg-blue-700">Envoyer le message</button>
+                            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition dark:bg-blue-700">Envoyer le message</button>
                         </form>
                     </div>
                 </div>
                 
                 <div class="lg:w-1/2">
                     <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8 mb-8 scroll-hidden">
-                        <h3 class="text-2xl font-bold text-blue-900 mb-6 dark:text-white">Demande de devis</h3>
+                        <h3 class="text-2xl font-bold text-blue-600 mb-6 dark:text-white">Demande de devis</h3>
                         
                         <form>
                             <div class="mb-6">
                                 <label for="service" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Service concerné</label>
-                                <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white">
+                                <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white">
                                     <option value="">Sélectionnez un service</option>
                                     <option value="web">Développement Web</option>
                                     <option value="mobile">Développement Mobile</option>
@@ -1679,7 +742,7 @@
                             
                             <div class="mb-6">
                                 <label for="budget" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Budget estimé</label>
-                                <select id="budget" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white">
+                                <select id="budget" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white">
                                     <option value="">Sélectionnez une fourchette</option>
                                     <option value="1k">Moins de 1 000€</option>
                                     <option value="1-5k">1 000€ - 5 000€</option>
@@ -1691,26 +754,26 @@
                             
                             <div class="mb-6">
                                 <label for="description" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Description du projet</label>
-                                <textarea id="description" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none input-focus dark:bg-gray-600 dark:border-gray-500 dark:text-white" placeholder="Décrivez votre projet en détail..."></textarea>
+                                <textarea id="description" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white" placeholder="Décrivez votre projet en détail..."></textarea>
                             </div>
                             
                             <div class="mb-6">
                                 <label class="flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-900 dark:text-blue-400">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 dark:text-blue-400">
                                     <span class="ml-2 text-gray-700 dark:text-gray-300">J'accepte les conditions générales</span>
                                 </label>
                             </div>
                             
-                            <button type="submit" class="w-full bg-blue-900 text-white py-3 rounded-lg font-semibold hover:bg-blue-800 transition dark:bg-blue-700">Demander un devis</button>
+                            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition dark:bg-blue-700">Demander un devis</button>
                         </form>
                     </div>
                     
                     <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8 scroll-hidden">
-                        <h3 class="text-2xl font-bold text-blue-900 mb-6 dark:text-white">Nos coordonnées</h3>
+                        <h3 class="text-2xl font-bold text-blue-600 mb-6 dark:text-white">Nos coordonnées</h3>
                         
                         <div class="space-y-4">
                             <div class="flex items-start">
-                                <i class="fas fa-map-marker-alt text-blue-900 mt-1 mr-4 dark:text-blue-400"></i>
+                                <i class="fas fa-map-marker-alt text-blue-600 mt-1 mr-4 dark:text-blue-400"></i>
                                 <div>
                                     <h4 class="font-semibold text-gray-800 dark:text-white">Adresse</h4>
                                     <p class="text-gray-600 dark:text-gray-300">123 Rue de la Technologie, 75000 Paris, France</p>
@@ -1718,7 +781,7 @@
                             </div>
                             
                             <div class="flex items-start">
-                                <i class="fas fa-phone-alt text-blue-900 mt-1 mr-4 dark:text-blue-400"></i>
+                                <i class="fas fa-phone-alt text-blue-600 mt-1 mr-4 dark:text-blue-400"></i>
                                 <div>
                                     <h4 class="font-semibold text-gray-800 dark:text-white">Téléphone</h4>
                                     <p class="text-gray-600 dark:text-gray-300">+33 1 23 45 67 89</p>
@@ -1726,7 +789,7 @@
                             </div>
                             
                             <div class="flex items-start">
-                                <i class="fas fa-envelope text-blue-900 mt-1 mr-4 dark:text-blue-400"></i>
+                                <i class="fas fa-envelope text-blue-600 mt-1 mr-4 dark:text-blue-400"></i>
                                 <div>
                                     <h4 class="font-semibold text-gray-800 dark:text-white">Email</h4>
                                     <p class="text-gray-600 dark:text-gray-300">contact@technova.com</p>
@@ -1734,7 +797,7 @@
                             </div>
                             
                             <div class="flex items-start">
-                                <i class="fas fa-clock text-blue-900 mt-1 mr-4 dark:text-blue-400"></i>
+                                <i class="fas fa-clock text-blue-600 mt-1 mr-4 dark:text-blue-400"></i>
                                 <div>
                                     <h4 class="font-semibold text-gray-800 dark:text-white">Horaires</h4>
                                     <p class="text-gray-600 dark:text-gray-300">Lundi - Vendredi : 9h - 18h</p>
@@ -1745,16 +808,16 @@
                         <div class="mt-8">
                             <h4 class="font-semibold text-gray-800 mb-4 dark:text-white">Retrouvez-nous sur</h4>
                             <div class="flex space-x-4">
-                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-900 hover:bg-blue-200 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500">
+                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-200 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
-                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-900 hover:bg-blue-200 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500">
+                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-200 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500">
                                     <i class="fab fa-twitter"></i>
                                 </a>
-                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-900 hover:bg-blue-200 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500">
+                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-200 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
-                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-900 hover:bg-blue-200 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500">
+                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-200 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500">
                                     <i class="fab fa-instagram"></i>
                                 </a>
                             </div>
@@ -1766,14 +829,14 @@
     </section>
 
     <!-- Newsletter Section -->
-    <section class="py-16 bg-blue-900 text-white">
+    <section class="py-16 bg-blue-600 text-white">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-6 scroll-hidden">Restez informés</h2>
             <p class="text-xl mb-8 max-w-2xl mx-auto scroll-hidden">Abonnez-vous à notre newsletter pour recevoir nos dernières actualités, offres spéciales et conseils tech.</p>
             
             <div class="max-w-md mx-auto flex scroll-hidden">
                 <input type="email" placeholder="Votre email" class="flex-grow px-4 py-3 rounded-l-lg focus:outline-none text-gray-800">
-                <button class="bg-accent text-blue-900 px-6 py-3 rounded-r-lg font-semibold hover:bg-green-400 transition">S'abonner</button>
+                <button class="bg-blue-800 text-white px-6 py-3 rounded-r-lg font-semibold hover:bg-blue-900 transition">S'abonner</button>
             </div>
             
             <p class="text-sm mt-4 text-blue-200 scroll-hidden">Nous ne partagerons jamais votre email avec des tiers.</p>
@@ -1781,114 +844,120 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="bg-gray-800 text-gray-300 py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                <div class="scroll-hidden">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-blue-900 rounded-full flex items-center justify-center mr-2">
-                            <span class="text-white font-bold text-xl">TN</span>
-                        </div>
-                        <span class="text-xl font-bold">TechNova</span>
-                    </div>
-                    <p class="text-gray-400 mb-4">Solutions technologiques innovantes pour accélérer la croissance de votre entreprise.</p>
+                <!-- About -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">TechShop</h3>
+                    <p class="mb-4">Votre boutique en ligne de technologie depuis 2010. Produits de qualité, prix compétitifs et service client exceptionnel.</p>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-400"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-700"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-pink-600"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 
-                <div class="scroll-hidden">
-                    <h4 class="text-lg font-semibold mb-4">Liens rapides</h4>
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Liens rapides</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Accueil</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white">À propos</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white">Services</a></li>
-                        <li><a href="#shop" class="text-gray-400 hover:text-white">Boutique</a></li>
-                        <li><a href="#blog" class="text-gray-400 hover:text-white">Blog</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
+                        <li><a href="#" class="hover:text-white">Accueil</a></li>
+                        <li><a href="#" class="hover:text-white">Boutique</a></li>
+                        <li><a href="#" class="hover:text-white">Nouveautés</a></li>
+                        <li><a href="#" class="hover:text-white">Promotions</a></li>
+                        <li><a href="#" class="hover:text-white">À propos</a></li>
+                        <li><a href="#" class="hover:text-white">Contact</a></li>
                     </ul>
                 </div>
                 
-                <div class="scroll-hidden">
-                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                <!-- Customer Service -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Service client</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Développement Web</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Applications Mobiles</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Solutions Cloud</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Intelligence Artificielle</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Cybersécurité</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Formation Tech</a></li>
+                        <li><a href="#" class="hover:text-white">Mon compte</a></li>
+                        <li><a href="#" class="hover:text-white">Suivi de commande</a></li>
+                        <li><a href="#" class="hover:text-white">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white">Retours & échanges</a></li>
+                        <li><a href="#" class="hover:text-white">Modes de paiement</a></li>
+                        <li><a href="#" class="hover:text-white">Options de livraison</a></li>
                     </ul>
                 </div>
                 
-                <div class="scroll-hidden">
-                    <h4 class="text-lg font-semibold mb-4">Informations</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Mentions légales</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Conditions générales</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Politique de confidentialité</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">FAQ</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Carrières</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Presse</a></li>
-                    </ul>
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Contact</h3>
+                    <address class="not-italic">
+                        <p class="mb-2"><i class="fas fa-map-marker-alt mr-2"></i> 123 Rue de la Tech, 75000 Paris</p>
+                        <p class="mb-2"><i class="fas fa-phone-alt mr-2"></i> +33 1 23 45 67 89</p>
+                        <p class="mb-2"><i class="fas fa-envelope mr-2"></i> contact@techshop.com</p>
+                        <p><i class="fas fa-clock mr-2"></i> Lun-Ven: 9h-18h</p>
+                    </address>
+                    
+                    <div class="mt-6">
+                        <img src="https://via.placeholder.com/200x60?text=PAYMENT+OPTIONS" alt="Modes de paiement" class="w-full">
+                    </div>
                 </div>
             </div>
             
-            <div class="pt-8 border-t border-gray-800 text-center text-gray-400 scroll-hidden">
-                <p>&copy; 2023 TechNova. Tous droits réservés.</p>
+            <div class="pt-6 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; 2023 TechShop. Tous droits réservés.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">Mentions légales</a>
+                    <a href="#" class="hover:text-white">CGV</a>
+                    <a href="#" class="hover:text-white">Politique de confidentialité</a>
+                    <a href="#" class="hover:text-white">Cookies</a>
+                </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Simple script for mobile menu toggle (would be expanded in a real implementation)
-        document.querySelector('button.md\\:hidden').addEventListener('click', function() {
-            const nav = document.querySelector('.md\\:flex.items-center.space-x-8');
-            nav.classList.toggle('hidden');
-            nav.classList.toggle('flex');
-            nav.classList.toggle('flex-col');
-            nav.classList.toggle('absolute');
-            nav.classList.toggle('top-16');
-            nav.classList.toggle('left-0');
-            nav.classList.toggle('right-0');
-            nav.classList.toggle('bg-white');
-            nav.classList.toggle('p-4');
-            nav.classList.toggle('shadow-lg');
+        // Dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
+        
+        // Check for saved user preference or system preference
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
         });
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
             });
-        });
-
-        // Dark mode toggle
-        const toggle = document.getElementById('toggle');
-        const body = document.body;
-
-        // Check for saved user preference, if any, on page load
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            body.classList.add('dark');
-            toggle.checked = true;
-        }
-
-        // Toggle dark mode
-        toggle.addEventListener('change', function() {
-            if (this.checked) {
-                body.classList.add('dark');
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                body.classList.remove('dark');
-                localStorage.setItem('darkMode', 'disabled');
-            }
         });
 
         // Scroll animations
@@ -1908,28 +977,6 @@
         // Initialize scroll animation
         window.addEventListener('load', animateOnScroll);
         window.addEventListener('scroll', animateOnScroll);
-
-        // More advanced animations with ScrollReveal
-        ScrollReveal().reveal('.scroll-hidden', {
-            delay: 200,
-            distance: '50px',
-            origin: 'bottom',
-            interval: 100,
-            reset: true
-        });
-
-        // Animate hero section differently
-        ScrollReveal().reveal('.hero-gradient .scroll-hidden:nth-child(1)', {
-            delay: 300,
-            distance: '50px',
-            origin: 'left'
-        });
-
-        ScrollReveal().reveal('.hero-gradient .scroll-hidden:nth-child(2)', {
-            delay: 500,
-            distance: '50px',
-            origin: 'right'
-        });
     </script>
 </body>
 </html>
