@@ -1,0 +1,46 @@
+/* Animations */
+.modal-transition {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.modal-enter {
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+.modal-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .modal-container {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+/* Password strength indicator */
+.password-strength {
+    height: 4px;
+    margin-top: 4px;
+    background-color: #e2e8f0;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.password-strength-fill {
+    height: 100%;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+/* Loading state */
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

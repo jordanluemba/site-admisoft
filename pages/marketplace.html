@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechShop | Boutique en ligne de technologie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#2563eb',
+                            dark: '#1e40af'
+                        },
+                        secondary: {
+                            light: '#1e40af',
+                            dark: '#1e3a8a'
+                        },
+                        accent: '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .product-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .image-zoom {
+            transition: transform 0.3s;
+        }
+        
+        .image-zoom:hover {
+            transform: scale(1.05);
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .chat-bubble {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Slider animation */
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(0); }
+            30% { transform: translateX(-100%); }
+            55% { transform: translateX(-100%); }
+            60% { transform: translateX(-200%); }
+            85% { transform: translateX(-200%); }
+            90% { transform: translateX(-300%); }
+            100% { transform: translateX(-300%); }
+        }
+        
+        .slider {
+            animation: slide 12s infinite;
+        }
+        
+        .slider:hover {
+            animation-play-state: paused;
+        }
+
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-8">
+                    <!-- Logo -->
+                    <a href="#" class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mr-2">
+                            <span class="text-white font-bold text-xl">TS</span>
+                        </div>
+                        <span class="text-xl font-bold dark:text-white">TechShop</span>
+                    </a>
+                    
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden lg:flex items-center space-x-1">
+                        <a href="../index.html" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Accueil</a>
+                        
+                        
+                        
+                        <a href="blog.html" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Blog</a>
+                        <a href="marketplace.html" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Marketplace</a>
+                    </nav>
+                </div>
+                
+                <!-- Search and Icons -->
+                <div class="flex items-center space-x-4">
+                    <!-- Search Bar -->
+                    <div class="hidden md:block relative">
+                        <input type="text" placeholder="Rechercher..." class="pl-4 pr-10 py-2 rounded-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64">
+                        <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
+                    </div>
+                    
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative" id="user-account-btn">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    
+                    <!-- Cart -->
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                    </a>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden absolute top-16 right-0 left-0 bg-white dark:bg-gray-800 shadow-lg z-50">
+        <div class="container mx-auto px-4 py-3">
+            <nav class="flex flex-col space-y-3">
+                <a href="../index.html" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Accueil</a>
+                
+                
+                
+                <a href="blog.html" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Blog</a>
+                <a href="marketplace.html" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Marketplace</a>
+                
+                <!-- Bouton Connexion -->
+                <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <a href="login.html" class="block w-full bg-blue-600 text-white text-center py-2 px-4 rounded hover:bg-blue-700 font-medium">
+                        Se connecter
+                    </a>
+                </div>
+            </nav>
+            
+            <!-- Mobile Search -->
+            <div class="mt-4">
+                <div class="relative">
+                    <input type="text" placeholder="Rechercher..." class="pl-4 pr-10 py-2 rounded-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                    <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Categories -->
+    <section class="py-12 bg-white dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Nos Catégories</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <a href="#" class="category-card bg-gray-100 dark:bg-gray-700 rounded-lg p-6 text-center hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-laptop text-blue-600 dark:text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold">Ordinateurs</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">50+ produits</p>
+                </a>
+                
+                <a href="#" class="category-card bg-gray-100 dark:bg-gray-700 rounded-lg p-6 text-center hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-mobile-alt text-blue-600 dark:text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold">Smartphones</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">30+ produits</p>
+                </a>
+                
+                <a href="#" class="category-card bg-gray-100 dark:bg-gray-700 rounded-lg p-6 text-center hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-headphones text-blue-600 dark:text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold">Accessoires</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">120+ produits</p>
+                </a>
+                
+                <a href="#" class="category-card bg-gray-100 dark:bg-gray-700 rounded-lg p-6 text-center hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-download text-blue-600 dark:text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold">Logiciels</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">80+ produits</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="py-12 bg-gray-50 dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold">Produits en vedette</h2>
+                <a href="#" class="text-blue-600 dark:text-blue-400 font-medium">Voir tout <i class="fas fa-arrow-right ml-1"></i></a>
+            </div>
+            
+            <!-- Filters -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4 mb-8">
+                <div class="flex flex-wrap items-center gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Trier par</label>
+                        <select class="border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 text-sm">
+                            <option>Pertinence</option>
+                            <option>Prix croissant</option>
+                            <option>Prix décroissant</option>
+                            <option>Nouveautés</option>
+                            <option>Meilleures ventes</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Prix</label>
+                        <select class="border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 text-sm">
+                            <option>Tous les prix</option>
+                            <option>Moins de 100€</option>
+                            <option>100€ - 500€</option>
+                            <option>500€ - 1000€</option>
+                            <option>Plus de 1000€</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Marque</label>
+                        <select class="border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 text-sm">
+                            <option>Toutes les marques</option>
+                            <option>Apple</option>
+                            <option>Samsung</option>
+                            <option>Microsoft</option>
+                            <option>Dell</option>
+                            <option>HP</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Disponibilité</label>
+                        <select class="border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 text-sm">
+                            <option>Tous</option>
+                            <option>En stock</option>
+                            <option>Précommande</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro" class="w-full h-48 object-cover image-zoom">
+                        <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">-15%</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-semibold">MacBook Pro 14" M2</h3>
+                            <div class="flex items-center text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.8</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Apple</p>
+                        
+                        <div class="mt-3 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold">1 799€</span>
+                                <span class="text-gray-400 line-through text-sm ml-2">2 099€</span>
+                            </div>
+                            <button class="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1567&q=80" alt="iPhone 14 Pro" class="w-full h-48 object-cover image-zoom">
+                        <div class="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">Nouveau</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-semibold">iPhone 14 Pro 256GB</h3>
+                            <div class="flex items-center text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.9</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Apple</p>
+                        
+                        <div class="mt-3 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold">1 299€</span>
+                            </div>
+                            <button class="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Samsung Galaxy S23" class="w-full h-48 object-cover image-zoom">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-semibold">Galaxy S23 Ultra 512GB</h3>
+                            <div class="flex items-center text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.7</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Samsung</p>
+                        
+                        <div class="mt-3 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold">1 199€</span>
+                            </div>
+                            <button class="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1629131726692-1accd0bec53c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="AirPods Pro" class="w-full h-48 object-cover image-zoom">
+                        <div class="absolute top-2 left-2 bg-blue-500 text-white text-xs px-2 py-1 rounded">Best-seller</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-semibold">AirPods Pro (2ème génération)</h3>
+                            <div class="flex items-center text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.8</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Apple</p>
+                        
+                        <div class="mt-3 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold">279€</span>
+                            </div>
+                            <button class="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-12 bg-white dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Ce que disent nos clients</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold mr-4">JD</div>
+                        <div>
+                            <h4 class="font-semibold">Jean Dupont</h4>
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300">"Livraison ultra rapide et produit conforme à la description. Je recommande ce site pour tous les achats tech."</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold mr-4">ML</div>
+                        <div>
+                            <h4 class="font-semibold">Marie Lambert</h4>
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300">"Service client réactif et professionnel. J'ai eu un petit problème avec ma commande qui a été résolu en moins de 24h."</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold mr-4">TM</div>
+                        <div>
+                            <h4 class="font-semibold">Thomas Martin</h4>
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300">"Prix très compétitifs et large choix de produits. J'ai trouvé exactement ce que je cherchais avec en plus une réduction intéressante."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-12 bg-blue-600 dark:bg-blue-800 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Abonnez-vous à notre newsletter</h2>
+            <p class="text-xl mb-6 max-w-2xl mx-auto">Recevez nos offres exclusives, les dernières nouveautés et des conseils tech directement dans votre boîte mail.</p>
+            
+            <form class="max-w-md mx-auto flex">
+                <input type="email" placeholder="Votre email" class="flex-grow px-4 py-3 rounded-l-lg focus:outline-none text-gray-800">
+                <button type="submit" class="bg-blue-800 dark:bg-blue-900 px-6 py-3 rounded-r-lg font-semibold hover:bg-blue-900 dark:hover:bg-blue-950 transition">S'abonner</button>
+            </form>
+            
+            <p class="text-sm mt-4 text-blue-200">Nous ne partagerons jamais votre email avec des tiers. Désabonnez-vous à tout moment.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- About -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">TechShop</h3>
+                    <p class="mb-4">Votre boutique en ligne de technologie depuis 2010. Produits de qualité, prix compétitifs et service client exceptionnel.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-400"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-700"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-pink-600"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Accueil</a></li>
+                        <li><a href="#" class="hover:text-white">Boutique</a></li>
+                        <li><a href="#" class="hover:text-white">Nouveautés</a></li>
+                        <li><a href="#" class="hover:text-white">Promotions</a></li>
+                        <li><a href="#" class="hover:text-white">À propos</a></li>
+                        <li><a href="#" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Customer Service -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Service client</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Mon compte</a></li>
+                        <li><a href="#" class="hover:text-white">Suivi de commande</a></li>
+                        <li><a href="#" class="hover:text-white">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white">Retours & échanges</a></li>
+                        <li><a href="#" class="hover:text-white">Modes de paiement</a></li>
+                        <li><a href="#" class="hover:text-white">Options de livraison</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Contact</h3>
+                    <address class="not-italic">
+                        <p class="mb-2"><i class="fas fa-map-marker-alt mr-2"></i> 123 Rue de la Tech, 75000 Paris</p>
+                        <p class="mb-2"><i class="fas fa-phone-alt mr-2"></i> +33 1 23 45 67 89</p>
+                        <p class="mb-2"><i class="fas fa-envelope mr-2"></i> contact@techshop.com</p>
+                        <p><i class="fas fa-clock mr-2"></i> Lun-Ven: 9h-18h</p>
+                    </address>
+                    
+                    <div class="mt-6">
+                        <img src="https://via.placeholder.com/200x60?text=PAYMENT+OPTIONS" alt="Modes de paiement" class="w-full">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-6 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; 2023 TechShop. Tous droits réservés.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">Mentions légales</a>
+                    <a href="#" class="hover:text-white">CGV</a>
+                    <a href="#" class="hover:text-white">Politique de confidentialité</a>
+                    <a href="#" class="hover:text-white">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Page (hidden by default) -->
+    <div id="product-page" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 overflow-y-auto">
+        <div class="container mx-auto px-4 py-12">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden max-w-6xl mx-auto">
+                <div class="p-4 flex justify-end">
+                    <button id="close-product" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
+                    <!-- Product Images -->
+                    <div>
+                        <div class="mb-4 rounded-lg overflow-hidden">
+                            <img id="main-product-image" src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro" class="w-full h-auto rounded-lg cursor-zoom-in" onclick="zoomImage(this)">
+                        </div>
+                        
+                        <div class="grid grid-cols-4 gap-2">
+                            <div class="border-2 border-transparent hover:border-blue-500 rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            </div>
+                            <div class="border-2 border-transparent hover:border-blue-500 rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="MacBook Pro" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            </div>
+                            <div class="border-2 border-transparent hover:border-blue-500 rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1542393545-10f5cde2c810?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1065&q=80" alt="MacBook Pro" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            </div>
+                            <div class="border-2 border-transparent hover:border-blue-500 rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="MacBook Pro" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Details -->
+                    <div>
+                        <h1 class="text-3xl font-bold mb-2">MacBook Pro 14" M2 Pro 16GB 512GB</h1>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-600 dark:text-gray-400">4.8 (124 avis)</span>
+                            <span class="mx-2 text-gray-400">|</span>
+                            <span class="text-green-500"><i class="fas fa-check-circle mr-1"></i> En stock</span>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold">1 799€</span>
+                            <span class="text-gray-400 line-through ml-2">2 099€</span>
+                            <span class="bg-red-500 text-white text-sm px-2 py-1 rounded ml-2">-15%</span>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h3 class="font-semibold mb-2">Description</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Le MacBook Pro 14" avec puce M2 Pro redéfinit les performances des ordinateurs portables. Avec un écran Liquid Retina XDR, jusqu'à 20 heures d'autonomie et un design compact, c'est l'outil ultime pour les professionnels.</p>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h3 class="font-semibold mb-2">Caractéristiques</h3>
+                            <ul class="grid grid-cols-2 gap-2 text-gray-600 dark:text-gray-400">
+                                <li><i class="fas fa-microchip mr-2 text-blue-500"></i> M2 Pro 10 cœurs</li>
+                                <li><i class="fas fa-memory mr-2 text-blue-500"></i> 16GB mémoire unifiée</li>
+                                <li><i class="fas fa-hdd mr-2 text-blue-500"></i> SSD 512GB</li>
+                                <li><i class="fas fa-tv mr-2 text-blue-500"></i> Écran 14.2" Liquid Retina XDR</li>
+                                <li><i class="fas fa-battery-full mr-2 text-blue-500"></i> Jusqu'à 20h d'autonomie</li>
+                                <li><i class="fas fa-weight mr-2 text-blue-500"></i> 1.6 kg</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h3 class="font-semibold mb-2">Options</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block mb-1">Couleur</label>
+                                    <div class="flex space-x-2">
+                                        <button class="w-8 h-8 rounded-full bg-gray-800 border-2 border-gray-300 focus:border-blue-500"></button>
+                                        <button class="w-8 h-8 rounded-full bg-gray-400 border-2 border-gray-300 focus:border-blue-500"></button>
+                                        <button class="w-8 h-8 rounded-full bg-gray-200 border-2 border-gray-300 focus:border-blue-500"></button>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block mb-1">Mémoire</label>
+                                    <select class="border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 w-full">
+                                        <option>16GB unifiée</option>
+                                        <option>32GB unifiée (+400€)</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block mb-1">Stockage</label>
+                                    <select class="border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 w-full">
+                                        <option>512GB SSD</option>
+                                        <option>1TB SSD (+200€)</option>
+                                        <option>2TB SSD (+600€)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-4">
+                            <div class="flex border border-gray-300 dark:border-gray-600 rounded">
+                                <button class="px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">-</button>
+                                <input type="text" value="1" class="w-12 text-center border-x border-gray-300 dark:border-gray-600 dark:bg-gray-700">
+                                <button class="px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">+</button>
+                            </div>
+                            <button class="flex-grow bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+                                <i class="fas fa-shopping-cart mr-2"></i> Ajouter au panier
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Tabs -->
+                <div class="border-t border-gray-200 dark:border-gray-700">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700">
+                        <button class="tab-btn px-6 py-4 font-medium border-b-2 border-blue-600 text-blue-600 dark:text-blue-400">Description</button>
+                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">Spécifications</button>
+                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">Avis (124)</button>
+                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">FAQ</button>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="tab-content active">
+                            <h3 class="font-semibold text-lg mb-3">Description détaillée</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">Le MacBook Pro 14" repousse les limites de la performance mobile. Avec la puce M2 Pro, vous bénéficiez d'une puissance de traitement et graphique exceptionnelle, idéale pour les professionnels exigeants.</p>
+                            
+                            <h4 class="font-semibold mb-2">Écran Liquid Retina XDR</h4>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">Profitez d'un écran 14.2" Liquid Retina XDR avec une résolution de 3024x1964 pixels, un contraste époustouflant et des noirs profonds grâce à la technologie mini-LED.</p>
+                            
+                            <h4 class="font-semibold mb-2">Performances révolutionnaires</h4>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">La puce M2 Pro avec CPU 10 cœurs et GPU 16 cœurs offre jusqu'à 20% de performances en plus que la génération précédente, avec une efficacité énergétique inégalée.</p>
+                        </div>
+                        
+                        <div class="tab-content hidden">
+                            <!-- Spécifications content would go here -->
+                        </div>
+                        
+                        <div class="tab-content hidden">
+                            <!-- Avis content would go here -->
+                        </div>
+                        
+                        <div class="tab-content hidden">
+                            <!-- FAQ content would go here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Related Products -->
+                <div class="p-8 border-t border-gray-200 dark:border-gray-700">
+                    <h3 class="text-xl font-bold mb-6">Produits similaires</h3>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <!-- Related product cards would go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar (hidden by default) -->
+    <div id="cart-sidebar" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+        <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
+            <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                <h3 class="text-xl font-bold">Votre panier (3)</h3>
+                <button id="close-cart" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            
+            <div class="p-4 space-y-4">
+                <!-- Cart Item 1 -->
+                <div class="flex border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <div class="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro" class="w-full h-full object-contain">
+                    </div>
+                    <div class="ml-4 flex-grow">
+                        <h4 class="font-medium">MacBook Pro 14" M2</h4>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm">16GB/512GB</p>
+                        <div class="flex justify-between items-center mt-2">
+                            <div class="flex border border-gray-300 dark:border-gray-600 rounded">
+                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">-</button>
+                                <input type="text" value="1" class="w-8 text-center border-x border-gray-300 dark:border-gray-600 dark:bg-gray-700">
+                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">+</button>
+                            </div>
+                            <span class="font-bold">1 799€</span>
+                        </div>
+                    </div>
+                    <button class="text-gray-400 hover:text-red-500 ml-2">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                
+                <!-- Cart Item 2 -->
+                <div class="flex border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <div class="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1629131726692-1accd0bec53c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="AirPods Pro" class="w-full h-full object-contain">
+                    </div>
+                    <div class="ml-4 flex-grow">
+                        <h4 class="font-medium">AirPods Pro (2ème génération)</h4>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm">Blanc</p>
+                        <div class="flex justify-between items-center mt-2">
+                            <div class="flex border border-gray-300 dark:border-gray-600 rounded">
+                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">-</button>
+                                <input type="text" value="2" class="w-8 text-center border-x border-gray-300 dark:border-gray-600 dark:bg-gray-700">
+                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">+</button>
+                            </div>
+                            <span class="font-bold">558€</span>
+                        </div>
+                    </div>
+                    <button class="text-gray-400 hover:text-red-500 ml-2">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex justify-between mb-2">
+                    <span>Sous-total</span>
+                    <span>2 357€</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span>Livraison</span>
+                    <span class="text-green-500">Gratuite</span>
+                </div>
+                <div class="flex justify-between font-bold text-lg mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <span>Total</span>
+                    <span>2 357€</span>
+                </div>
+                
+                <div class="mt-6 space-y-3">
+                    <button id="confirm-order-btn" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-medium">
+    <i class="fas fa-credit-card mr-2"></i> Passer la commande
+</button>
+                    <a href="#" class="block border border-blue-600 text-blue-600 dark:text-blue-400 text-center py-3 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium">
+                        Voir le panier
+                    </a>
+                </div>
+                
+                <div class="mt-6">
+                    <img src="https://via.placeholder.com/300x40?text=PAYMENT+OPTIONS" alt="Modes de paiement" class="w-full">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Support -->
+    <div id="chat-support" class="fixed bottom-6 right-6 z-40">
+        <div class="hidden bg-white dark:bg-gray-800 rounded-lg shadow-xl w-80 h-96 flex flex-col">
+            <div class="p-3 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center bg-blue-600 text-white rounded-t-lg">
+                <h4 class="font-medium">Support en ligne</h4>
+                <button id="close-chat" class="text-white hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="flex-grow p-4 overflow-y-auto">
+                <div class="mb-4">
+                    <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 max-w-xs">
+                        <p>Bonjour ! Comment pouvons-nous vous aider aujourd'hui ?</p>
+                    </div>
+                </div>
+                
+                <div class="mb-4 flex justify-end">
+                    <div class="bg-blue-100 dark:bg-blue-900 rounded-lg p-3 max-w-xs">
+                        <p>J'ai une question sur la livraison</p>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 max-w-xs">
+                        <p>Nos délais de livraison sont de 2-3 jours ouvrés pour les produits en stock.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-3 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex">
+                    <input type="text" placeholder="Tapez votre message..." class="flex-grow border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-l-lg px-3 py-2 focus:outline-none">
+                    <button class="bg-blue-600 text-white px-3 py-2 rounded-r-lg hover:bg-blue-700">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <button id="open-chat" class="w-14 h-14 bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-blue-700 chat-bubble">
+            <i class="fas fa-comment-dots text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- User Account Sidebar (hidden by default) -->
+<div id="user-sidebar" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+            <h3 class="text-xl font-bold">Mon Profil</h3>
+            <button id="close-user" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        
+        <div class="p-6">
+            <!-- User Profile Section -->
+            <div class="flex flex-col items-center mb-6">
+                <div class="w-24 h-24 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 text-3xl font-bold mb-4">
+                    JD
+                </div>
+                <h4 class="text-xl font-semibold">Jean Dupont</h4>
+                <p class="text-gray-500 dark:text-gray-400">Membre depuis janvier 2023</p>
+            </div>
+            
+            <!-- Profile Details -->
+            <div class="space-y-4 mb-6">
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <h5 class="font-medium mb-2 flex items-center">
+                        <i class="fas fa-envelope mr-3 text-blue-500"></i> Informations personnelles
+                    </h5>
+                    <div class="space-y-2">
+                        <p><span class="font-medium">Email:</span> jean.dupont@example.com</p>
+                        <p><span class="font-medium">Téléphone:</span> +33 6 12 34 56 78</p>
+                        <p><span class="font-medium">Date de naissance:</span> 15/05/1990</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <h5 class="font-medium mb-2 flex items-center">
+                        <i class="fas fa-map-marker-alt mr-3 text-blue-500"></i> Adresse principale
+                    </h5>
+                    <address class="not-italic">
+                        <p>12 Rue de la République</p>
+                        <p>75001 Paris, France</p>
+                    </address>
+                </div>
+            </div>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-4 mb-6 text-center">
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                    <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">15</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">Commandes</div>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                    <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">8</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">Favoris</div>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                    <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">2</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">Coupons</div>
+                </div>
+            </div>
+            
+            <!-- Actions -->
+            <div class="space-y-3">
+                <button id="edit-profile-btn" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-medium flex items-center justify-center">
+    <i class="fas fa-edit mr-2"></i> Modifier le profil
+</button>
+                <button id="change-password-btn" class="w-full border border-blue-600 text-blue-600 dark:text-blue-400 py-2 px-4 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium flex items-center justify-center">
+    <i class="fas fa-lock mr-2"></i> Changer le mot de passe
+</button>
+                <button id="logout-btn" class="w-full text-red-500 py-2 px-4 rounded hover:bg-red-50 dark:hover:bg-gray-700 font-medium flex items-center justify-center">
+    <i class="fas fa-sign-out-alt mr-2"></i> Déconnexion
+</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Profile Sidebar -->
+<div id="edit-profile-sidebar" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+            <h3 class="text-xl font-bold">Modifier le profil</h3>
+            <button id="close-edit-profile" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        
+        <div class="p-6">
+            <form class="space-y-4">
+                <!-- Avatar Upload -->
+                <div class="flex flex-col items-center">
+                    <div class="w-24 h-24 rounded-full bg-gray-200 dark:bg-gray-700 mb-4 overflow-hidden">
+                        <img id="profile-avatar" src="https://via.placeholder.com/150" alt="Avatar" class="w-full h-full object-cover">
+                    </div>
+                    <label class="cursor-pointer text-blue-600 dark:text-blue-400 text-sm font-medium">
+                        <input type="file" class="hidden" accept="image/*">
+                        Changer la photo
+                    </label>
+                </div>
+                
+                <!-- Form Fields -->
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Nom complet</label>
+                        <input type="text" value="Jean Dupont" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Email</label>
+                        <input type="email" value="jean.dupont@example.com" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Téléphone</label>
+                        <input type="tel" value="+33 6 12 34 56 78" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Date de naissance</label>
+                        <input type="date" value="1990-05-15" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2">
+                    </div>
+                </div>
+                
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-medium">
+                        Enregistrer les modifications
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Logout Confirmation Sidebar -->
+<div id="logout-sidebar" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
+        <div class="p-6 flex flex-col items-center text-center">
+            <div class="w-16 h-16 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center text-red-500 dark:text-red-400 text-2xl mb-4">
+                <i class="fas fa-sign-out-alt"></i>
+            </div>
+            
+            <h3 class="text-xl font-bold mb-2">Se déconnecter</h3>
+            <p class="text-gray-500 dark:text-gray-400 mb-6">Êtes-vous sûr de vouloir vous déconnecter de votre compte ?</p>
+            
+            <div class="w-full space-y-3">
+                <button id="confirm-logout" class="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 font-medium">
+                    Oui, se déconnecter
+                </button>
+                <button id="cancel-logout" class="w-full border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 py-2 px-4 rounded hover:bg-gray-100 dark:hover:bg-gray-700 font-medium">
+                    Annuler
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Change Password Modal -->
+<div id="change-password-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+            <h3 class="text-xl font-bold">Changer le mot de passe</h3>
+            <button id="close-change-password" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        
+        <div class="p-6">
+            <form id="password-change-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Mot de passe actuel</label>
+                    <div class="relative">
+                        <input type="password" required class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 pr-10">
+                        <button type="button" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-1">Nouveau mot de passe</label>
+                    <div class="relative">
+                        <input type="password" required class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 pr-10">
+                        <button type="button" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Minimum 8 caractères, avec majuscule, minuscule et chiffre</p>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-1">Confirmer le nouveau mot de passe</label>
+                    <div class="relative">
+                        <input type="password" required class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 pr-10">
+                        <button type="button" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-medium">
+                        <i class="fas fa-save mr-2"></i> Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Order Confirmation Modal -->
+<div id="order-confirm-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+            <h3 class="text-xl font-bold">Confirmation de commande</h3>
+            <button id="close-order-confirm" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        
+        <div class="p-6">
+            <div class="flex flex-col items-center mb-6">
+                <div class="w-20 h-20 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center text-green-600 dark:text-green-400 text-3xl mb-4">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-center mb-2">Commande validée !</h4>
+                <p class="text-gray-500 dark:text-gray-400 text-center">Votre commande #TS2023-456 a bien été enregistrée.</p>
+            </div>
+            
+            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+                <h5 class="font-medium mb-3">Récapitulatif</h5>
+                <div class="space-y-2">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600 dark:text-gray-300">MacBook Pro 14" M2</span>
+                        <span class="font-medium">1 799€</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600 dark:text-gray-300">AirPods Pro (2x)</span>
+                        <span class="font-medium">558€</span>
+                    </div>
+                    <div class="flex justify-between border-t border-gray-200 dark:border-gray-600 pt-2 mt-2">
+                        <span class="font-medium">Total</span>
+                        <span class="font-bold text-lg">2 357€</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 dark:bg-blue-900 rounded-lg p-4 mb-6">
+                <h5 class="font-medium mb-2 flex items-center">
+                    <i class="fas fa-truck mr-2 text-blue-500"></i> Livraison
+                </h5>
+                <p class="text-sm">Livraison prévue le <span class="font-medium">vendredi 12 mai</span></p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">12 Rue de la République, 75001 Paris</p>
+            </div>
+            
+            <div class="space-y-3">
+                <a href="#" class="block bg-blue-600 text-white text-center py-2 px-4 rounded hover:bg-blue-700 font-medium">
+                    <i class="fas fa-file-invoice mr-2"></i> Voir le détail de la commande
+                </a>
+                <button class="w-full border border-blue-600 text-blue-600 dark:text-blue-400 py-2 px-4 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium">
+                    <i class="fas fa-home mr-2"></i> Retour à l'accueil
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
+        
+        // Check for saved user preference or system preference
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+        const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Dropdown menu in mobile
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                const dropdown = toggle.nextElementSibling;
+                const icon = toggle.querySelector('i');
+                
+                dropdown.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+                
+                // Close other dropdowns
+                dropdownToggles.forEach(otherToggle => {
+                    if (otherToggle !== toggle) {
+                        otherToggle.nextElementSibling.classList.add('hidden');
+                        otherToggle.querySelector('i').classList.remove('rotate-180');
+                    }
+                });
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                
+                // Also close all dropdowns
+                document.querySelectorAll('.dropdown-menu').forEach(dropdown => {
+                    dropdown.classList.add('hidden');
+                });
+                document.querySelectorAll('.dropdown-toggle i').forEach(icon => {
+                    icon.classList.remove('rotate-180');
+                });
+            }
+        });
+        
+        // Product page toggle
+        const productPage = document.getElementById('product-page');
+        const closeProduct = document.getElementById('close-product');
+        
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', () => {
+                productPage.classList.remove('hidden');
+            });
+        });
+        
+        closeProduct.addEventListener('click', () => {
+            productPage.classList.add('hidden');
+        });
+        
+        // Cart sidebar toggle - Version modifiée pour ne pas confliter avec le user sidebar
+const cartSidebar = document.getElementById('cart-sidebar');
+const closeCart = document.getElementById('close-cart');
+
+// Ne ciblez que l'icône du panier spécifiquement
+document.querySelectorAll('.fa-shopping-cart').forEach(icon => {
+    icon.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation(); // Empêche la propagation de l'événement
+        cartSidebar.classList.remove('hidden');
+    });
+});
+
+// Gardez aussi cette version pour les liens texte si nécessaire
+document.querySelectorAll('a[href="#"]').forEach(link => {
+    if (link.querySelector('.fa-shopping-cart')) {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            cartSidebar.classList.remove('hidden');
+        });
+    }
+});
+
+closeCart.addEventListener('click', () => {
+    cartSidebar.classList.add('hidden');
+});
+        
+        // Chat support toggle
+        const chatSupport = document.querySelector('#chat-support > div');
+        const openChat = document.getElementById('open-chat');
+        const closeChat = document.getElementById('close-chat');
+        
+        openChat.addEventListener('click', () => {
+            chatSupport.classList.toggle('hidden');
+        });
+        
+        closeChat.addEventListener('click', () => {
+            chatSupport.classList.add('hidden');
+        });
+        
+        // Product tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => {
+                    b.classList.remove('border-blue-600', 'text-blue-600', 'dark:text-blue-400');
+                    b.classList.add('text-gray-500', 'dark:text-gray-400');
+                });
+                
+                tabContents.forEach(content => content.classList.add('hidden'));
+                
+                btn.classList.add('border-blue-600', 'text-blue-600', 'dark:text-blue-400');
+                btn.classList.remove('text-gray-500', 'dark:text-gray-400');
+                tabContents[index].classList.remove('hidden');
+            });
+        });
+        
+        // Product image zoom
+        function zoomImage(img) {
+            if (img.style.transform === 'scale(2)') {
+                img.style.transform = 'scale(1)';
+                img.style.cursor = 'zoom-in';
+            } else {
+                img.style.transform = 'scale(2)';
+                img.style.cursor = 'zoom-out';
+            }
+        }
+        
+        // Change main product image
+        function changeMainImage(img) {
+            document.getElementById('main-product-image').src = img.src;
+        }
+        
+        // Gestion unifiée de tous les overlays
+window.addEventListener('click', (e) => {
+    // Product page
+    if (e.target === productPage) {
+        productPage.classList.add('hidden');
+    }
+    
+    // Cart sidebar
+    if (e.target === cartSidebar) {
+        cartSidebar.classList.add('hidden');
+    }
+    
+    // User profile sidebar
+    if (e.target === userSidebar) {
+        userSidebar.classList.add('hidden');
+    }
+    
+    // Edit profile sidebar
+    if (e.target === editProfileSidebar) {
+        editProfileSidebar.classList.add('hidden');
+    }
+    
+    // Chat support (si existant)
+    if (document.querySelector('#chat-support > div') && e.target === document.querySelector('#chat-support')) {
+        document.querySelector('#chat-support > div').classList.add('hidden');
+    }
+});
+
+        // User sidebar toggle
+const userSidebar = document.getElementById('user-sidebar');
+const closeUser = document.getElementById('close-user');
+const userAccountBtn = document.getElementById('user-account-btn');
+
+userAccountBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    userSidebar.classList.remove('hidden');
+});
+
+closeUser.addEventListener('click', () => {
+    userSidebar.classList.add('hidden');
+});
+
+// Fermer quand on clique à l'extérieur
+window.addEventListener('click', (e) => {
+    if (e.target === userSidebar) {
+        userSidebar.classList.add('hidden');
+    }
+});
+
+// Edit Profile Sidebar Toggle
+const editProfileSidebar = document.getElementById('edit-profile-sidebar');
+const editProfileBtn = document.getElementById('edit-profile-btn');
+const closeEditProfile = document.getElementById('close-edit-profile');
+
+editProfileBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    userSidebar.classList.add('hidden'); // Ferme le sidebar du profil
+    editProfileSidebar.classList.remove('hidden'); // Ouvre le sidebar d'édition
+});
+
+closeEditProfile.addEventListener('click', () => {
+    editProfileSidebar.classList.add('hidden');
+});
+
+// Fermer quand on clique à l'extérieur
+window.addEventListener('click', (e) => {
+    if (e.target === editProfileSidebar) {
+        editProfileSidebar.classList.add('hidden');
+    }
+});
+
+// Preview de l'image uploadée
+document.querySelector('#edit-profile-sidebar input[type="file"]').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            document.getElementById('profile-avatar').src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// Logout Sidebar Toggle
+const logoutSidebar = document.getElementById('logout-sidebar');
+const logoutBtn = document.getElementById('logout-btn');
+const cancelLogout = document.getElementById('cancel-logout');
+const confirmLogout = document.getElementById('confirm-logout');
+
+logoutBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    userSidebar.classList.add('hidden'); // Ferme le sidebar du profil
+    logoutSidebar.classList.remove('hidden'); // Ouvre le sidebar de confirmation
+});
+
+cancelLogout.addEventListener('click', () => {
+    logoutSidebar.classList.add('hidden');
+});
+
+confirmLogout.addEventListener('click', () => {
+    // Ici vous ajouterez la logique de déconnexion réelle
+    alert('Déconnexion effectuée'); // Remplacez par votre logique de déconnexion
+    logoutSidebar.classList.add('hidden');
+    // Redirection possible vers la page de login :
+    // window.location.href = '/login';
+});
+
+// Ajoutez aussi le logout-sidebar à la gestion des overlays
+window.addEventListener('click', (e) => {
+    if (e.target === logoutSidebar) {
+        logoutSidebar.classList.add('hidden');
+    }
+});
+
+// Change Password Modal
+const changePasswordModal = document.getElementById('change-password-modal');
+const changePasswordBtn = document.getElementById('change-password-btn');
+const closeChangePassword = document.getElementById('close-change-password');
+
+changePasswordBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    userSidebar.classList.add('hidden');
+    changePasswordModal.classList.remove('hidden');
+});
+
+closeChangePassword.addEventListener('click', () => {
+    changePasswordModal.classList.add('hidden');
+});
+
+// Toggle password visibility
+document.querySelectorAll('.toggle-password').forEach(button => {
+    button.addEventListener('click', function() {
+        const input = this.previousElementSibling;
+        const icon = this.querySelector('i');
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            input.type = "password";
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    });
+});
+
+// Form submission
+document.getElementById('password-change-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Ici vous ajouterez la logique de changement de mot de passe
+    alert('Mot de passe changé avec succès'); // Remplacer par votre logique réelle
+    changePasswordModal.classList.add('hidden');
+});
+
+// Order Confirmation Modal
+const orderConfirmModal = document.getElementById('order-confirm-modal');
+const confirmOrderBtn = document.getElementById('confirm-order-btn');
+const closeOrderConfirm = document.getElementById('close-order-confirm');
+
+confirmOrderBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    cartSidebar.classList.add('hidden');
+    orderConfirmModal.classList.remove('hidden');
+    
+    // Ici vous pourriez ajouter la logique de traitement de la commande
+    // processOrder().then(() => showConfirmation());
+});
+
+closeOrderConfirm.addEventListener('click', () => {
+    orderConfirmModal.classList.add('hidden');
+});
+
+// Mettez à jour la gestion des overlays
+window.addEventListener('click', (e) => {
+    if (e.target === orderConfirmModal) {
+        orderConfirmModal.classList.add('hidden');
+    }
+});
+    </script>
+</body>
+</html>

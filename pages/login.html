@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechShop | Connexion</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#2563eb',
+                            dark: '#1e40af'
+                        },
+                        secondary: {
+                            light: '#1e40af',
+                            dark: '#1e3a8a'
+                        },
+                        accent: '#3b82f6'
+                    },
+                    transitionProperty: {
+                        'height': 'height',
+                        'spacing': 'margin, padding',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Load Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Inline critical CSS -->
+    <style>
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 300 700;
+            font-display: swap;
+            src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Optimized transitions */
+        .transition-fast {
+            transition: all 0.15s ease;
+        }
+        
+        .transition-normal {
+            transition: all 0.3s ease;
+        }
+        
+        /* Forgot password modal */
+        .forgot-password-modal {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+        
+        .forgot-password-modal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .modal-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Performance optimizations */
+        .will-change-transform {
+            will-change: transform;
+        }
+        
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white dark:bg-gray-800 shadow-sm">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4 md:space-x-8">
+                    <!-- Logo -->
+                    <a href="#" class="flex items-center focus:outline-none">
+                        <div class="w-8 h-8 md:w-10 md:h-10 bg-blue-600 rounded-full flex items-center justify-center mr-2">
+                            <span class="text-white font-bold text-sm md:text-xl">TS</span>
+                        </div>
+                        <span class="text-lg md:text-xl font-bold dark:text-white">TechShop</span>
+                    </a>
+                    
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex items-center space-x-1">
+                        <a href="../index.html" class="px-3 py-1.5 md:px-4 md:py-2 text-sm md:text-base font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-fast">Accueil</a>
+                        <a href="blog.html" class="px-3 py-1.5 md:px-4 md:py-2 text-sm md:text-base font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-fast">Blog</a>
+                        <a href="marketplace.html" class="px-3 py-1.5 md:px-4 md:py-2 text-sm md:text-base font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-fast">Marketplace</a>
+                    </nav>
+                </div>
+                
+                <!-- Search and Icons -->
+                <div class="flex items-center space-x-3 md:space-x-4">
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-1.5 md:p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none transition-fast">
+                        <i class="fas fa-moon dark:hidden text-sm md:text-base"></i>
+                        <i class="fas fa-sun hidden dark:block text-sm md:text-base"></i>
+                    </button>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="md:hidden p-1.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none transition-fast">
+                        <svg id="menu-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg id="close-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden absolute top-14 right-0 left-0 bg-white dark:bg-gray-800 shadow-lg z-50 slide-up">
+        <div class="container mx-auto px-4 py-3">
+            <nav class="flex flex-col space-y-2">
+                <a href="../index.html" class="px-3 py-2 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-fast">Accueil</a>
+                <a href="blog.html" class="px-3 py-2 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-fast">Blog</a>
+                <a href="marketplace.html" class="px-3 py-2 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-fast">Marketplace</a>
+                
+                <!-- Bouton Connexion -->
+                <div class="pt-3 border-t border-gray-200 dark:border-gray-700">
+                    <a href="#" class="block w-full bg-blue-600 text-white text-center py-2 px-4 rounded hover:bg-blue-700 font-medium text-sm transition-fast">
+                        Se connecter
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="min-h-[calc(100vh-56px)] flex items-center justify-center py-8 px-4">
+        <div class="w-full max-w-md">
+            <!-- Connexion Card -->
+            <div id="login-card" class="auth-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 md:p-8 fade-in">
+                <div class="text-center mb-6">
+                    <h2 class="text-xl md:text-2xl font-bold">Connectez-vous</h2>
+                    <p class="text-gray-500 dark:text-gray-400 mt-1 text-sm md:text-base">Accédez à votre compte TechShop</p>
+                </div>
+                
+                <form class="space-y-4 md:space-y-6">
+                    <div>
+                        <label for="email" class="block text-sm font-medium mb-1">Adresse email</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-gray-400 text-sm"></i>
+                            </div>
+                            <input type="email" id="email" name="email" required
+                                    class="form-input pl-9 w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-fast">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="password" class="block text-sm font-medium mb-1">Mot de passe</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400 text-sm"></i>
+                            </div>
+                            <input type="password" id="password" name="password" required
+                                    class="form-input pl-9 w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-fast">
+                            <button type="button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 transition-fast">
+                                <i class="fas fa-eye-slash text-sm"></i>
+                            </button>
+                        </div>
+                        <a href="#" id="forgot-password-link" class="text-blue-600 dark:text-blue-400 text-xs md:text-sm hover:underline transition-fast block mt-1">
+                            Mot de passe oublié ?
+                        </a>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input id="remember-me" name="remember-me" type="checkbox"
+                                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 rounded dark:bg-gray-700 transition-fast">
+                        <label for="remember-me" class="ml-2 block text-xs md:text-sm text-gray-700 dark:text-gray-300">
+                            Se souvenir de moi
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base transition-fast">
+                        Se connecter
+                    </button>
+                    
+                    <div class="text-center text-xs md:text-sm text-gray-500 dark:text-gray-400">
+                        Vous n'avez pas de compte ?
+                        <a href="#" id="switch-to-register" class="auth-switch text-blue-600 dark:text-blue-400 font-medium hover:underline transition-fast">
+                            S'inscrire
+                        </a>
+                    </div>
+                </form>
+                
+                <div class="mt-4 md:mt-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
+                        </div>
+                        <div class="relative flex justify-center text-xs md:text-sm">
+                            <span class="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+                                Ou continuer avec
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 grid grid-cols-2 gap-2 md:gap-3">
+                        <a href="#" class="w-full inline-flex justify-center py-1.5 px-3 md:py-2 md:px-4 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-fast">
+                            <i class="fab fa-google text-blue-600 dark:text-blue-400 text-sm"></i>
+                            <span class="ml-2">Google</span>
+                        </a>
+                        
+                        <a href="#" class="w-full inline-flex justify-center py-1.5 px-3 md:py-2 md:px-4 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-fast">
+                            <i class="fab fa-apple text-sm"></i>
+                            <span class="ml-2">Apple</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Inscription Card (hidden by default) -->
+            <div id="register-card" class="auth-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 md:p-8 hidden fade-in">
+                <div class="text-center mb-6">
+                    <h2 class="text-xl md:text-2xl font-bold">Créez votre compte</h2>
+                    <p class="text-gray-500 dark:text-gray-400 mt-1 text-sm md:text-base">Rejoignez la communauté TechShop</p>
+                </div>
+                
+                <form class="space-y-4 md:space-y-6">
+                    <div>
+                        <label for="reg-name" class="block text-sm font-medium mb-1">Nom complet</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-user text-gray-400 text-sm"></i>
+                            </div>
+                            <input type="text" id="reg-name" name="name" required
+                                    class="form-input pl-9 w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-fast">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="reg-email" class="block text-sm font-medium mb-1">Adresse email</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-gray-400 text-sm"></i>
+                            </div>
+                            <input type="email" id="reg-email" name="email" required
+                                    class="form-input pl-9 w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-fast">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="reg-password" class="block text-sm font-medium mb-1">Mot de passe</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400 text-sm"></i>
+                            </div>
+                            <input type="password" id="reg-password" name="password" required
+                                    class="form-input pl-9 w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-fast">
+                            <button type="button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 transition-fast">
+                                <i class="fas fa-eye-slash text-sm"></i>
+                            </button>
+                        </div>
+                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                            Minimum 8 caractères avec au moins 1 chiffre et 1 lettre majuscule
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <label for="reg-confirm-password" class="block text-sm font-medium mb-1">Confirmer le mot de passe</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400 text-sm"></i>
+                            </div>
+                            <input type="password" id="reg-confirm-password" name="confirm-password" required
+                                    class="form-input pl-9 w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-fast">
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <input id="terms" name="terms" type="checkbox"
+                                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 rounded dark:bg-gray-700 mt-0.5 transition-fast">
+                        <label for="terms" class="ml-2 block text-xs md:text-sm text-gray-700 dark:text-gray-300">
+                            J'accepte les <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline transition-fast">conditions d'utilisation</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base transition-fast">
+                        S'inscrire
+                    </button>
+                    
+                    <div class="text-center text-xs md:text-sm text-gray-500 dark:text-gray-400">
+                        Vous avez déjà un compte ?
+                        <a href="#" id="switch-to-login" class="auth-switch text-blue-600 dark:text-blue-400 font-medium hover:underline transition-fast">
+                            Se connecter
+                        </a>
+                    </div>
+                </form>
+                
+                <div class="mt-4 md:mt-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
+                        </div>
+                        <div class="relative flex justify-center text-xs md:text-sm">
+                            <span class="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+                                Ou s'inscrire avec
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 grid grid-cols-2 gap-2 md:gap-3">
+                        <a href="#" class="w-full inline-flex justify-center py-1.5 px-3 md:py-2 md:px-4 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-fast">
+                            <i class="fab fa-google text-blue-600 dark:text-blue-400 text-sm"></i>
+                            <span class="ml-2">Google</span>
+                        </a>
+                        
+                        <a href="#" class="w-full inline-flex justify-center py-1.5 px-3 md:py-2 md:px-4 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-fast">
+                            <i class="fab fa-apple text-sm"></i>
+                            <span class="ml-2">Apple</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgot-password-overlay" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 z-50"></div>
+    
+    <div id="forgot-password-card" class="forgot-password-modal fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-sm bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg md:text-xl font-bold">Réinitialiser le mot de passe</h3>
+            <button id="close-forgot-password" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-fast focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <form id="forgot-password-form" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium mb-1">Email</label>
+                <input type="email" required 
+                       class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-fast">
+            </div>
+            
+            <button type="submit" 
+                    class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-medium text-sm md:text-base transition-fast">
+                Envoyer le lien de réinitialisation
+            </button>
+        </form>
+        
+        <div class="mt-4 text-center text-xs md:text-sm text-gray-600 dark:text-gray-400">
+            Un lien vous sera envoyé par email pour réinitialiser votre mot de passe.
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="forgot-password-success" class="forgot-password-modal fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-sm bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 text-center">
+        <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600 dark:text-green-400">
+            <i class="fas fa-check text-xl"></i>
+        </div>
+        <h3 class="text-lg md:text-xl font-bold mb-2">Email envoyé !</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Un lien de réinitialisation a été envoyé à votre adresse email.</p>
+        <button id="close-forgot-password-success" 
+                class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-medium text-sm md:text-base transition-fast">
+            Retour à la connexion
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                <!-- About -->
+                <div>
+                    <h3 class="text-white font-bold text-base md:text-lg mb-3">TechShop</h3>
+                    <p class="mb-3 text-xs md:text-sm">Votre boutique en ligne de technologie depuis 2010. Produits de qualité, prix compétitifs et service client exceptionnel.</p>
+                    <div class="flex space-x-2 md:space-x-3">
+                        <a href="#" class="w-8 h-8 md:w-9 md:h-9 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-fast">
+                            <i class="fab fa-facebook-f text-xs md:text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 md:w-9 md:h-9 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-400 transition-fast">
+                            <i class="fab fa-twitter text-xs md:text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 md:w-9 md:h-9 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-700 transition-fast">
+                            <i class="fab fa-linkedin-in text-xs md:text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 md:w-9 md:h-9 bg-gray-700 rounded-full flex items-center justify-center hover:bg-pink-600 transition-fast">
+                            <i class="fab fa-instagram text-xs md:text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-white font-bold text-base md:text-lg mb-3">Liens rapides</h3>
+                    <ul class="space-y-1.5">
+                        <li><a href="#" class="hover:text-white text-xs md:text-sm transition-fast">Accueil</a></li>
+                        <li><a href="#" class="hover:text-white text-xs md:text-sm transition-fast">Boutique</a></li>
+                        <li><a href="#" class="hover:text-white text-xs md:text-sm transition-fast">Nouveautés</a></li>
+                        <li><a href="#" class="hover:text-white text-xs md:text-sm transition-fast">Promotions</a></li>
+                        <li><a href="#" class="hover:text-white text-xs md:text-sm transition-fast">À propos</a></li>
+                        <li><a href="#" class="hover:text-white text-xs md:text-sm transition-fast">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Customer Service -->
+                <div>
+                    <h3 class="text-white font-bold text-base md:text-lg mb-3">Service client</h3>
+                    <ul class="space-y-1.5">
+                        <li><a href="#" class="hover:text-white text-xs md:text-sm transition-fast">Mon compte</a></li>
+                        <li><a href="#" class="hover:text-white text-xs md:text-sm transition-fast">Suivi de commande</a></li>
+                        <li><a href="#" class="hover:text-white text-xs md:text-sm transition-fast">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white text-xs md:text-sm transition-fast">Retours & échanges</a></li>
+                        <li><a href="#" class="hover:text-white text-xs md:text-sm transition-fast">Modes de paiement</a></li>
+                        <li><a href="#" class="hover:text-white text-xs md:text-sm transition-fast">Options de livraison</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-white font-bold text-base md:text-lg mb-3">Contact</h3>
+                    <address class="not-italic text-xs md:text-sm">
+                        <p class="mb-1.5"><i class="fas fa-map-marker-alt mr-1.5"></i> 123 Rue de la Tech, 75000 Paris</p>
+                        <p class="mb-1.5"><i class="fas fa-phone-alt mr-1.5"></i> +33 1 23 45 67 89</p>
+                        <p class="mb-1.5"><i class="fas fa-envelope mr-1.5"></i> contact@techshop.com</p>
+                        <p><i class="fas fa-clock mr-1.5"></i> Lun-Ven: 9h-18h</p>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="pt-4 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center text-xs md:text-sm">
+                <p class="mb-2 md:mb-0">&copy; 2023 TechShop. Tous droits réservés.</p>
+                <div class="flex space-x-3">
+                    <a href="#" class="hover:text-white transition-fast">Mentions légales</a>
+                    <a href="#" class="hover:text-white transition-fast">CGV</a>
+                    <a href="#" class="hover:text-white transition-fast">Politique de confidentialité</a>
+                    <a href="#" class="hover:text-white transition-fast">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optimized JavaScript -->
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dark mode toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+            
+            // Check for saved user preference or system preference
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                html.classList.add('dark');
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                html.classList.toggle('dark');
+                localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                }
+            });
+            
+            // Toggle between login and register forms
+            const loginCard = document.getElementById('login-card');
+            const registerCard = document.getElementById('register-card');
+            const switchToRegister = document.getElementById('switch-to-register');
+            const switchToLogin = document.getElementById('switch-to-login');
+            
+            switchToRegister.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginCard.classList.add('hidden');
+                registerCard.classList.remove('hidden');
+            });
+            
+            switchToLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                registerCard.classList.add('hidden');
+                loginCard.classList.remove('hidden');
+            });
+            
+            // Forgot Password Functionality
+            const forgotPasswordOverlay = document.getElementById('forgot-password-overlay');
+            const forgotPasswordCard = document.getElementById('forgot-password-card');
+            const forgotPasswordSuccess = document.getElementById('forgot-password-success');
+            const closeForgotPassword = document.getElementById('close-forgot-password');
+            const closeForgotPasswordSuccess = document.getElementById('close-forgot-password-success');
+            const forgotPasswordLink = document.getElementById('forgot-password-link');
+            const forgotPasswordForm = document.getElementById('forgot-password-form');
+            
+            // Show forgot password modal
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                forgotPasswordOverlay.classList.add('active');
+                forgotPasswordCard.classList.add('active');
+            });
+            
+            // Close forgot password modal
+            function closeForgotPasswordModal() {
+                forgotPasswordOverlay.classList.remove('active');
+                forgotPasswordCard.classList.remove('active');
+                forgotPasswordSuccess.classList.remove('active');
+            }
+            
+            closeForgotPassword.addEventListener('click', closeForgotPasswordModal);
+            closeForgotPasswordSuccess.addEventListener('click', closeForgotPasswordModal);
+            forgotPasswordOverlay.addEventListener('click', closeForgotPasswordModal);
+            
+            // Submit forgot password form
+            forgotPasswordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                forgotPasswordCard.classList.remove('active');
+                forgotPasswordSuccess.classList.add('active');
+                
+                // Here you would normally send the request to your backend
+                // For demo purposes, we're just showing the success message
+            });
+            
+            // Toggle password visibility
+            document.querySelectorAll('button[type="button"]').forEach(button => {
+                if (button.querySelector('.fa-eye-slash') || button.querySelector('.fa-eye')) {
+                    button.addEventListener('click', function() {
+                        const input = this.previousElementSibling;
+                        const icon = this.querySelector('i');
+                        
+                        if (input.type === "password") {
+                            input.type = "text";
+                            icon.classList.replace('fa-eye-slash', 'fa-eye');
+                        } else {
+                            input.type = "password";
+                            icon.classList.replace('fa-eye', 'fa-eye-slash');
+                        }
+                    });
+                }
+            });
+            
+            // Optimize animations with will-change
+            const authCards = document.querySelectorAll('.auth-card');
+            authCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.willChange = 'transform';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.willChange = 'auto';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
