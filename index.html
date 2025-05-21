@@ -266,13 +266,12 @@
       <!-- Bloc image créatif -->
       <div class="relative lg:w-1/2 flex justify-center mb-12 lg:mb-0">
         <div class="relative w-72 h-72 rounded-full bg-gradient-to-tr from-blue-500 via-purple-400 to-pink-400 dark:from-blue-800 dark:via-purple-900 dark:to-pink-900 shadow-2xl flex items-center justify-center overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=facearea&w=400&q=80" alt="AdmiSoft Team" class="w-64 h-64 object-cover rounded-full border-8 border-white dark:border-gray-900 shadow-xl">
-          <span class="absolute bottom-4 right-4 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-300 px-4 py-1 rounded-full text-sm font-bold shadow-lg">Depuis 2015</span>
+          <img src="img3.png" alt="AdmiSoft Team" class="w-64 h-64 object-cover rounded-full border-8 border-white dark:border-gray-900 shadow-xl">
         </div>
         <!-- Petits avatars flottants -->
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Team 1" class="absolute -top-6 left-10 w-16 h-16 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-bounce-slow">
-        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Team 2" class="absolute top-20 -left-8 w-12 h-12 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-bounce-slow" style="animation-delay:1s">
-        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Team 3" class="absolute bottom-8 -right-8 w-14 h-14 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-bounce-slow" style="animation-delay:2s">
+        <img src="img4.png" alt="Team 1" class="absolute -top-6 left-10 w-16 h-16 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-bounce-slow">
+        <img src="img4.png" alt="Team 2" class="absolute top-20 -left-8 w-12 h-12 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-bounce-slow" style="animation-delay:1s">
+        <img src="img4.png" alt="Team 3" class="absolute bottom-8 -right-8 w-14 h-14 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-bounce-slow" style="animation-delay:2s">
       </div>
       <!-- Bloc texte -->
       <div class="lg:w-1/2">
@@ -333,13 +332,6 @@
             <div class="text-2xl font-extrabold text-pink-700 dark:text-pink-300">15</div>
             <div class="text-xs text-gray-500 dark:text-gray-400">Pays</div>
           </div>
-        </div>
-        <div class="flex items-center gap-4 flex-wrap">
-          <span class="text-gray-500 dark:text-gray-400 text-sm">Partenaires :</span>
-          <img src="https://via.placeholder.com/60x28?text=Microsoft" alt="Microsoft" class="h-7 dark:filter dark:invert">
-          <img src="https://via.placeholder.com/60x28?text=Google" alt="Google" class="h-7 dark:filter dark:invert">
-          <img src="https://via.placeholder.com/60x28?text=Amazon" alt="Amazon" class="h-7 dark:filter dark:invert">
-          <img src="https://via.placeholder.com/60x28?text=IBM" alt="IBM" class="h-7 dark:filter dark:invert">
         </div>
       </div>
     </div>
@@ -1404,11 +1396,13 @@ mobileThemeToggle.addEventListener('click', () => {
     html.classList.toggle('dark');
     localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
 });
+// ...existing code...
 mobileUserToggle.addEventListener('click', () => {
-    alert('Ouverture du compte utilisateur (à personnaliser)');
+    document.getElementById('user-sidebar').classList.remove('hidden');
     mobileActionsBar.classList.add('opacity-0', 'pointer-events-none');
     mobileActionsBar.classList.remove('opacity-100');
-});
+} );
+// ...existing code...
 mobileCartToggle.addEventListener('click', () => {
     alert('Ouverture du panier (à personnaliser)');
     mobileActionsBar.classList.add('opacity-0', 'pointer-events-none');
