@@ -986,59 +986,45 @@
         </div>
     </div>
 
-    <!-- Nouveau design créatif pour le chat support -->
-<div id="chat-support" class="fixed bottom-6 right-6 z-40">
-  <div id="chat-box" class="hidden bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-96 h-[520px] flex flex-col border border-blue-100 dark:border-blue-900">
+    <div id="chat-support" class="fixed bottom-4 right-2 z-40">
+  <div id="chat-box" class="hidden bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-80 max-w-[95vw] h-[400px] sm:w-96 sm:h-[520px] flex flex-col border border-blue-100 dark:border-blue-900">
     <!-- Header -->
-    <div class="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-t-2xl">
+    <div class="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-t-2xl">
       <div class="flex items-center gap-3">
-        <span class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-          <i class="fas fa-robot text-2xl"></i>
+        <span class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
+          <i class="fas fa-robot text-xl"></i>
         </span>
         <div>
           <div class="font-bold">Support AdmiSoft</div>
           <div class="text-xs text-blue-100">En ligne</div>
         </div>
       </div>
-      <button id="close-chat" class="hover:text-blue-200 transition"><i class="fas fa-times text-lg"></i></button>
+      <button id="close-chat" class="hover:text-blue-200 transition"><i class="fas fa-times text-base"></i></button>
     </div>
     <!-- Messages -->
-    <div id="chat-messages" class="flex-1 px-4 py-3 overflow-y-auto space-y-4 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900">
-      <!-- Exemple de messages -->
-      <div class="flex items-end gap-2">
-        <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold">S</div>
-        <div class="bg-blue-100 dark:bg-blue-900 text-gray-800 dark:text-blue-100 rounded-2xl px-4 py-2 max-w-[70%]">
-          Bonjour ! Comment pouvons-nous vous aider aujourd'hui ?
-        </div>
-      </div>
-      <div class="flex items-end gap-2 justify-end">
-        <div class="bg-blue-600 text-white rounded-2xl px-4 py-2 max-w-[70%]">J'ai une question sur la livraison</div>
-        <div class="w-8 h-8 rounded-full bg-blue-200 flex items-center justify-center text-blue-700 text-sm font-bold">M</div>
-      </div>
-      <!-- Message image exemple -->
-      <div class="flex items-end gap-2">
-        <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold">S</div>
-        <div class="bg-blue-100 dark:bg-blue-900 rounded-2xl px-2 py-2 max-w-[70%]">
-          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=facearea&w=200&q=80" alt="img" class="rounded-lg max-w-[180px] mb-1">
-          <div class="text-xs text-gray-600 dark:text-gray-300">Voici un exemple de produit !</div>
-        </div>
-      </div>
+    <div id="chat-messages" class="flex-1 px-3 py-2 overflow-y-auto space-y-3 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 text-sm">
+      <!-- ...messages... -->
     </div>
     <!-- Input -->
-    <form id="chat-form" class="px-4 py-3 border-t border-blue-100 dark:border-blue-900 flex items-center gap-2 bg-white dark:bg-gray-900">
+    <form id="chat-form" class="px-3 py-2 border-t border-blue-100 dark:border-blue-900 flex items-center gap-2 bg-white dark:bg-gray-900">
       <button type="button" id="chat-attach" class="p-2 rounded-full hover:bg-blue-50 dark:hover:bg-gray-800 text-blue-600 dark:text-blue-400" title="Envoyer une image">
-        <i class="fas fa-image text-lg"></i>
+        <i class="fas fa-image text-base"></i>
         <input type="file" id="chat-image-input" accept="image/*" class="hidden">
       </button>
       <button type="button" id="chat-audio" class="p-2 rounded-full hover:bg-blue-50 dark:hover:bg-gray-800 text-blue-600 dark:text-blue-400" title="Envoyer un audio">
-        <i class="fas fa-microphone text-lg"></i>
+        <i class="fas fa-microphone text-base"></i>
       </button>
-      <input type="text" id="chat-input" autocomplete="off" placeholder="Écrivez un message..." class="flex-1 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 dark:text-white">
-      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-4 py-2 ml-1 transition flex items-center justify-center">
+      <input type="text" id="chat-input" autocomplete="off" placeholder="Écrivez un message..." class="flex-1 px-3 py-2 rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 dark:text-white">
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-3 py-2 ml-1 transition flex items-center justify-center">
         <i class="fas fa-paper-plane"></i>
       </button>
     </form>
   </div>
+  <!-- Bubble button -->
+  <button id="open-chat" class="w-12 h-12 bg-gradient-to-tr from-blue-600 to-purple-600 text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition chat-bubble">
+    <i class="fas fa-comment-dots text-xl"></i>
+  </button>
+</div>
   <!-- Bubble button -->
   <button id="open-chat" class="w-14 h-14 bg-gradient-to-tr from-blue-600 to-purple-600 text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition chat-bubble">
     <i class="fas fa-comment-dots text-2xl"></i>
