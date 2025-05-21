@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdmiSoft | Boutique en ligne de technologie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#2563eb',
+                            dark: '#1e40af'
+                        },
+                        secondary: {
+                            light: '#1e40af',
+                            dark: '#1e3a8a'
+                        },
+                        accent: '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .slider {
+            animation: slide 12s infinite;
+        }
+        .slider:hover {
+            animation-play-state: paused;
+        }
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        @keyframes spin-slow {
+          0% { transform: rotate(0deg);}
+          100% { transform: rotate(360deg);}
+        }
+        .animate-spin-slow {
+          animation: spin-slow 24s linear infinite;
+        }
+        @keyframes textGradient {
+          0%,100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        .animate-text-gradient {
+          background-size: 200% 200%;
+          animation: textGradient 6s ease-in-out infinite;
+        }
+        @keyframes bounce-slow {
+          0%,100% { transform: translateY(0);}
+          50% { transform: translateY(-18px);}
+        }
+        .animate-bounce-slow {
+          animation: bounce-slow 3s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+<!-- HEADER NAVBAR -->
+<header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
+    <div class="container mx-auto px-4 py-3">
+        <div class="flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="#" class="flex items-center">
+                    <button class="flex items-center px-5 py-2 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 shadow-lg hover:scale-105 transition-all duration-200 border-2 border-white dark:border-gray-900 focus:outline-none">
+                        <span class="text-white font-extrabold text-xl tracking-wide drop-shadow">AdmiSoft</span>
+                    </button>
+                </a>
+            </div>
+            <!-- Desktop Navigation Centered -->
+            <nav class="hidden lg:flex flex-1 justify-center items-center space-x-1">
+                <a href="../index.html" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Accueil</a>
+                <a href="blog.html" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Blog</a>
+                <a href="marketplace.html" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Marketplace</a>
+            </nav>
+            <!-- Right icons -->
+            <div class="flex items-center space-x-4">
+                <!-- Search Button (desktop & mobile) -->
+                <button id="search-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none lg:order-none order-2">
+                    <i class="fas fa-search text-gray-500"></i>
+                </button>
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hidden lg:inline-flex">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+                <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative hidden lg:inline-flex" id="user-account-btn">
+                    <i class="fas fa-user"></i>
+                </a>
+                <!-- Cart -->
+                <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative cart-icon hidden lg:inline-flex">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                </a>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none order-3">
+                    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile search bar fixed just below navbar -->
+    <div id="mobile-search-bar" class="fixed left-0 right-0 top-[64px] z-40 px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center space-x-2 transition-all duration-200 opacity-0 pointer-events-none lg:hidden">
+        <input type="text" id="mobile-search-input" placeholder="Rechercher..." class="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full px-4 py-2 outline-none text-gray-800 dark:text-white" />
+        <button id="mobile-search-close" class="ml-2 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+</header>
+<!-- MOBILE MENU OVERLAY -->
+<div id="mobile-menu" class="fixed inset-0 bg-white dark:bg-gray-800 z-50 hidden transition-all duration-300">
+    <div class="container mx-auto px-4 py-8 h-full flex flex-col">
+        <div class="flex justify-between items-center mb-8">
+            <span class="text-2xl font-extrabold text-blue-700 dark:text-white">Menu</span>
+            <button id="mobile-menu-close" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-6 text-lg flex-1 justify-center items-center">
+            <a href="../index.html" class="px-6 py-3 font-medium hover:text-blue-600 dark:hover:text-blue-400">Accueil</a>
+            <a href="blog.html" class="px-6 py-3 font-medium hover:text-blue-600 dark:hover:text-blue-400">Blog</a>
+            <a href="marketplace.html" class="px-6 py-3 font-medium hover:text-blue-600 dark:hover:text-blue-400">Marketplace</a>
+            <a href="login.html" class="block w-full bg-blue-600 text-white text-center py-3 px-6 rounded hover:bg-blue-700 font-medium mt-8 max-w-xs">Se connecter</a>
+        </nav>
+    </div>
+</div>
+<!-- ...le reste de votre page HTML (hero, sections, etc.)... -->
+<!-- Placez ici tout le reste de votre contenu HTML existant, inchangé -->
+<!-- ... -->
+<script>
+// Dark mode toggle
+const themeToggle = document.getElementById('theme-toggle');
+const html = document.documentElement;
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        html.classList.toggle('dark');
+        localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+    // Check for saved user preference or system preference
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        html.classList.add('dark');
+    }
+}
+
+// Mobile search bar logic (search icon triggers bar just below navbar)
+const searchToggle = document.getElementById('search-toggle');
+const mobileSearchBar = document.getElementById('mobile-search-bar');
+const mobileSearchInput = document.getElementById('mobile-search-input');
+const mobileSearchClose = document.getElementById('mobile-search-close');
+const isMobile = () => window.innerWidth < 1024;
+
+searchToggle.addEventListener('click', (e) => {
+    if (isMobile()) {
+        mobileSearchBar.classList.remove('opacity-0', 'pointer-events-none');
+        mobileSearchBar.classList.add('opacity-100');
+        setTimeout(() => mobileSearchInput.focus(), 100);
+    } else {
+        // Desktop search logic (à adapter selon votre code)
+        // const searchBar = document.getElementById('search-bar');
+        // const searchInput = document.getElementById('search-input');
+        // searchBar.classList.remove('opacity-0', 'pointer-events-none');
+        // searchBar.classList.add('opacity-100');
+        // setTimeout(() => searchInput.focus(), 100);
+    }
+});
+mobileSearchClose.addEventListener('click', () => {
+    mobileSearchBar.classList.add('opacity-0', 'pointer-events-none');
+    mobileSearchBar.classList.remove('opacity-100');
+});
+window.addEventListener('click', (e) => {
+    if (isMobile() && !mobileSearchBar.contains(e.target) && e.target !== searchToggle) {
+        mobileSearchBar.classList.add('opacity-0', 'pointer-events-none');
+        mobileSearchBar.classList.remove('opacity-100');
+    }
+});
+mobileSearchInput.addEventListener('click', (e) => e.stopPropagation());
+mobileSearchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        // Ajoutez ici la logique de recherche mobile
+        mobileSearchBar.classList.add('opacity-0', 'pointer-events-none');
+        mobileSearchBar.classList.remove('opacity-100');
+    }
+});
+
+// Mobile menu logic
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuClose = document.getElementById('mobile-menu-close');
+const menuIcon = document.getElementById('menu-icon');
+const closeIcon = document.getElementById('close-icon');
+
+mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.remove('hidden');
+    menuIcon.classList.add('hidden');
+    closeIcon.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+});
+mobileMenuClose.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    menuIcon.classList.remove('hidden');
+    closeIcon.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+});
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        mobileMenu.classList.add('hidden');
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    }
+});
+window.addEventListener('click', (e) => {
+    if (mobileMenu && !mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+        mobileMenu.classList.add('hidden');
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    }
+});
+</script>
+</body>
+</html>
