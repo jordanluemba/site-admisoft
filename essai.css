@@ -1,0 +1,203 @@
+/* Keyframes animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideRight {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Animation classes */
+.animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+.animate-slide-up { animation: slideUp 0.7s ease-out forwards; }
+.animate-slide-right { animation: slideRight 0.7s ease-out forwards; }
+.animate-scale-in { animation: scaleIn 0.6s ease-out forwards; }
+
+/* Slider animations */
+.slider {
+    animation: slide 12s infinite;
+}
+.slider:hover {
+    animation-play-state: paused;
+}
+
+.rotate-180 {
+    transform: rotate(180deg);
+}
+
+@keyframes spin-slow {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+.animate-spin-slow {
+    animation: spin-slow 24s linear infinite;
+}
+
+@keyframes textGradient {
+    0%,100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+.animate-text-gradient {
+    background-size: 200% 200%;
+    animation: textGradient 6s ease-in-out infinite;
+}
+
+@keyframes bounce-slow {
+    0%,100% { transform: translateY(0);}
+    50% { transform: translateY(-18px);}
+}
+.animate-bounce-slow {
+    animation: bounce-slow 3s infinite;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Scroll animations */
+[data-scroll] {
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[data-scroll="fade-in"] {
+    transform: translateY(20px);
+}
+
+[data-scroll="slide-left"] {
+    transform: translateX(20px);
+}
+
+[data-scroll="slide-right"] {
+    transform: translateX(-20px);
+}
+
+[data-scroll].is-visible {
+    opacity: 1;
+    transform: translate(0);
+}
+
+/* Image optimization */
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    font-style: italic;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Typography improvements */
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.75em;
+}
+
+/* Chat support styles */
+#chat-support {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 50;
+}
+
+/* ...existing code... */
+#chat-box {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    width: 90vw;
+    max-width: 24rem;
+    height: 80vh;
+    flex-direction: column;
+    border: 1px solid rgba(219, 234, 254, 1);
+}
+/* ...existing code... */
+
+.dark #chat-box {
+    background-color: #1f2937;
+    border-color: #1e40af;
+}
+
+/* Mobile menu transition */
+#mobile-menu {
+    transition: all 0.3s;
+}
+
+/* Product card hover effect */
+.product-card:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Article card hover effect */
+.article-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Image zoom effect */
+.image-zoom {
+    transition: transform 0.3s ease;
+}
+.image-zoom:hover {
+    transform: scale(1.05);
+}
+
+/* Testimonial hover effect */
+.testimonial-card:hover {
+    transform: scale(1.05);
+}
+
+/* Form focus styles */
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(2, 152, 228, 0.5);
+}
+
+/* Dark mode toggle transition */
+#theme-toggle i, #mobile-theme-toggle i {
+    transition: opacity 0.3s ease;
+}
+
+/* Mobile search bar transition */
+#mobile-search-bar, #mobile-actions-bar {
+    transition: all 0.2s;
+}
+
+/* Button transitions */
+button, a[class*="transition"] {
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+/* Pulse animation for recording */
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
