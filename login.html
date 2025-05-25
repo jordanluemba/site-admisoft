@@ -130,58 +130,98 @@
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
-    <!-- Header -->
-    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md" data-scroll>
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <a href="index.html" class="flex items-center" aria-label="TechShop - Retour à l'accueil">
-                        <button class="flex items-center px-5 py-2 rounded-full bg-gradient-to-tr from-[#051769] to-[#0298e4] shadow-lg hover:scale-105 transition-all duration-200 border-2 border-white dark:border-gray-900 focus:outline-none">
-                            <span class="text-white font-extrabold text-xl tracking-wide drop-shadow">TechShop</span>
-                        </button>
-                    </a>
-                </div>
-                
-                <!-- Right icons -->
-                <div class="flex items-center space-x-4">
-                    <!-- Theme Toggle -->
-                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" aria-label="Basculer mode sombre">
-                        <i class="fas fa-moon dark:hidden"></i>
-                        <i class="fas fa-sun hidden dark:block"></i>
+    <!-- HEADER NAVBAR -->
+<header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md" data-scroll>
+    <div class="container mx-auto px-4 py-3">
+        <div class="flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="#" class="flex items-center" aria-label="AdmiSoft - Retour à l'accueil">
+                    <button class="flex items-center px-5 py-2 rounded-full bg-gradient-to-tr from-[#051769] to-[#0298e4] shadow-lg hover:scale-105 transition-all duration-200 border-2 border-white dark:border-gray-900 focus:outline-none">
+                        <span class="text-white font-extrabold text-xl tracking-wide drop-shadow">AdmiSoft</span>
                     </button>
-                    
-                    <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Menu principal">
-                        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-                </div>
+                </a>
             </div>
-        </div>
-    </header>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 bg-white dark:bg-gray-800 z-50 hidden transition-all duration-300">
-        <div class="container mx-auto px-4 py-8 h-full flex flex-col">
-            <div class="flex justify-between items-center mb-8">
-                <span class="text-2xl font-extrabold text-[#051769] dark:text-white">Menu</span>
-                <button id="mobile-menu-close" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" aria-label="Fermer le menu">
-                    <i class="fas fa-times text-xl"></i>
+            <!-- Desktop Navigation Centered -->
+            <nav class="hidden lg:flex flex-1 justify-center items-center space-x-1">
+                <a href="index.html" class="px-4 py-2 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Accueil</a>
+                <a href="#services" class="px-4 py-2 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Blog</a>
+                <a href="#shop" class="px-4 py-2 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Marketplace</a>
+            </nav>
+            <!-- Right icons -->
+            <div class="flex items-center space-x-4">
+                <!-- Search Button (desktop & mobile) -->
+                <button id="search-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Rechercher">
+                    <i class="fas fa-search text-gray-500"></i>
+                </button>
+                <!-- Theme Toggle (desktop only) -->
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hidden lg:inline-flex" aria-label="Basculer mode sombre">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+                <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative hidden lg:inline-flex" id="user-account-btn" aria-label="Mon compte">
+                    <i class="fas fa-user"></i>
+                </a>
+                <!-- Cart -->
+                <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative cart-icon hidden lg:inline-flex" id="cart-btn" aria-label="Panier">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="absolute -top-1 -right-1 bg-[#0298e4] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                </a>
+                <!-- Mobile: bouton + pour afficher toutes les actions -->
+                <button id="mobile-actions-toggle" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Menu actions">
+                    <i class="fas fa-plus text-xl"></i>
+                </button>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Menu principal">
+                    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
                 </button>
             </div>
-            <nav class="flex flex-col space-y-6 text-lg flex-1 justify-center items-center">
-                <a href="index.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Accueil</a>
-                <a href="blog.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Blog</a>
-                <a href="marketplace.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Boutique</a>
-                <a href="login.html" class="block w-full bg-[#051769] hover:bg-[#0298e4] text-white text-center py-3 px-6 rounded font-medium mt-8 max-w-xs transition-colors">Se connecter</a>
-            </nav>
         </div>
     </div>
+    <!-- Mobile search bar fixed just below navbar -->
+    <div id="mobile-search-bar" class="fixed left-0 right-0 top-[64px] z-50 px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center space-x-2 transition-all duration-200 opacity-0 pointer-events-none">
+        <input type="text" id="mobile-search-input" placeholder="Rechercher..." class="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full px-4 py-2 outline-none text-gray-800 dark:text-white" aria-label="Rechercher" />
+        <button id="mobile-search-close" class="ml-2 text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400" aria-label="Fermer la recherche">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <!-- Mobile actions bar fixed just below navbar -->
+    <div id="mobile-actions-bar" class="fixed left-0 right-0 top-[64px] z-50 px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-around space-x-4 transition-all duration-200 opacity-0 pointer-events-none">
+        <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900" aria-label="Basculer mode sombre">
+            <i class="fas fa-moon dark:hidden text-xl"></i>
+            <i class="fas fa-sun hidden dark:block text-xl"></i>
+        </button>
+        <button id="mobile-user-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900" aria-label="Mon compte">
+            <i class="fas fa-user text-xl"></i>
+        </button>
+        <button id="mobile-cart-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 relative" aria-label="Panier">
+            <i class="fas fa-shopping-cart text-xl"></i>
+            <span class="absolute -top-1 -right-1 bg-[#0298e4] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+        </button>
+    </div>
+</header>
+<!-- MOBILE MENU OVERLAY -->
+<div id="mobile-menu" class="fixed inset-0 bg-white dark:bg-gray-800 z-50 hidden transition-all duration-300">
+    <div class="container mx-auto px-4 py-8 h-full flex flex-col">
+        <div class="flex justify-between items-center mb-8">
+            <span class="text-2xl font-extrabold text-[#051769] dark:text-white">Menu</span>
+            <button id="mobile-menu-close" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" aria-label="Fermer le menu">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-6 text-lg flex-1 justify-center items-center">
+            <a href="index.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Accueil</a>
+            <a href="#services" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Blog</a>
+            <a href="#shop" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Marketplace</a>
+            <a href="login.html" class="block w-full bg-[#051769] hover:bg-[#0298e4] text-white text-center py-3 px-6 rounded font-medium mt-8 max-w-xs transition-colors">Se connecter</a>
+        </nav>
+    </div>
+</div>
 
     <!-- Main Content -->
     <main class="min-h-[calc(100vh-160px)] flex items-center justify-center py-12 px-4">
@@ -502,28 +542,650 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gradient-to-tr from-[#051769] via-[#0298e4] to-[#3b82f6] text-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <span class="text-xl font-bold">TechShop</span>
-                    <p class="text-sm text-blue-100 mt-1">L'innovation digitale, simplement.</p>
+    <footer class="bg-gradient-to-tr from-[#051769] via-[#0298e4] to-[#3b82f6] text-white pt-12 pb-6 relative overflow-hidden" data-scroll>
+  <!-- Animation décorative SVG -->
+  <svg class="absolute top-0 left-0 w-64 h-64 opacity-20 -z-10" viewBox="0 0 400 400" fill="none">
+    <circle cx="200" cy="200" r="200" fill="url(#footerRadial)" />
+    <defs>
+      <radialGradient id="footerRadial" cx="0" cy="0" r="1" gradientTransform="translate(200 200) scale(200)" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#fff" stop-opacity="0.5"/>
+        <stop offset="1" stop-color="#3b82f6" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+  </svg>
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-8 mb-8" data-scroll="fade-in">
+      <!-- Logo & Slogan -->
+      <div>
+        <div class="flex items-center mb-2">
+          <span class="text-2xl font-extrabold tracking-tight">AdmiSoft</span>
+        </div>
+        <p class="text-blue-100 text-base">L'innovation digitale, simplement.</p>
+      </div>
+      <!-- Newsletter intégrée -->
+      <div class="w-full md:w-auto" data-scroll="fade-in" data-scroll-delay="100">
+        <h4 class="font-semibold mb-2 text-lg">Recevez nos actus</h4>
+        <form class="flex flex-col bg-white rounded-lg overflow-hidden shadow-lg max-w-md p-2">
+          <input type="email" placeholder="Votre email" class="flex-grow px-4 py-2 text-gray-800 focus:outline-none text-base rounded mb-2" required>
+          <button class="bg-[#051769] hover:bg-[#0298e4] text-white px-6 py-2 font-semibold transition text-base rounded">S'abonner</button>
+        </form>
+        <p class="text-sm text-blue-100 mt-2">Pas de spam, juste l'essentiel.</p>
+      </div>
+      <!-- Liens rapides minimalistes -->
+      <div class="flex flex-col space-y-2 text-base" data-scroll="fade-in" data-scroll-delay="200">
+        <a href="index.html" class="hover:underline">Accueil</a>
+        <a href="#shop" class="hover:underline">Blog</a>
+        <a href="#blog" class="hover:underline">Marketplace</a>
+        <a href="#contact" class="hover:underline">Contact</a>
+      </div>
+    </div>
+    <div class="border-t border-blue-300/30 pt-6 flex flex-col md:flex-row justify-between items-center text-blue-100 text-base gap-2" data-scroll="fade-in">
+      <span>&copy; 2023 AdmiSoft. Tous droits réservés.</span>
+      <div class="flex space-x-4 text-lg">
+        <a href="#" class="hover:text-white" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="hover:text-white" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-white" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="hover:text-white" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <!-- Product Page (hidden by default) -->
+    <div id="product-page" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 overflow-y-auto">
+        <div class="container mx-auto px-4 py-12">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden max-w-6xl mx-auto">
+                <div class="p-4 flex justify-end">
+                    <button id="close-product" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
                 </div>
                 
-                <div class="flex space-x-6">
-                    <a href="#" class="hover:text-blue-200 transition">Mentions légales</a>
-                    <a href="#" class="hover:text-blue-200 transition">CGV</a>
-                    <a href="#" class="hover:text-blue-200 transition">Confidentialité</a>
-                    <a href="#" class="hover:text-blue-200 transition">Aide</a>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
+                    <!-- Product Images -->
+                    <div>
+                        <div class="mb-4 rounded-lg overflow-hidden">
+                            <img id="main-product-image" src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro 14 pouces M2" class="w-full h-auto rounded-lg cursor-zoom-in" onclick="zoomImage(this)">
+                        </div>
+                        
+                        <div class="grid grid-cols-4 gap-2">
+                            <div class="border-2 border-transparent hover:border-[#0298e4] rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro vue de face" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            </div>
+                            <div class="border-2 border-transparent hover:border-[#0298e4] rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="MacBook Pro vue de côté" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            </div>
+                            <div class="border-2 border-transparent hover:border-[#0298e4] rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1542393545-10f5cde2c810?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1065&q=80" alt="MacBook Pro clavier" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            </div>
+                            <div class="border-2 border-transparent hover:border-[#0298e4] rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="MacBook Pro écran" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Details -->
+                    <div>
+                        <h1 class="text-3xl font-bold mb-2">MacBook Pro 14" M2 Pro 16GB 512GB</h1>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-600 dark:text-gray-400">4.8 (124 avis)</span>
+                            <span class="mx-2 text-gray-400">|</span>
+                            <span class="text-green-500"><i class="fas fa-check-circle mr-1"></i> En stock</span>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold">1 799€</span>
+                            <span class="text-gray-400 line-through ml-2">2 099€</span>
+                            <span class="bg-red-500 text-white text-sm px-2 py-1 rounded ml-2">-15%</span>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h3 class="font-semibold mb-2">Description</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Le MacBook Pro 14" avec puce M2 Pro redéfinit les performances des ordinateurs portables. Avec un écran Liquid Retina XDR, jusqu'à 20 heures d'autonomie et un design compact, c'est l'outil ultime pour les professionnels.</p>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h3 class="font-semibold mb-2">Caractéristiques</h3>
+                            <ul class="grid grid-cols-2 gap-2 text-gray-600 dark:text-gray-400">
+                                <li><i class="fas fa-microchip mr-2 text-[#0298e4]"></i> M2 Pro 10 cœurs</li>
+                                <li><i class="fas fa-memory mr-2 text-[#0298e4]"></i> 16GB mémoire unifiée</li>
+                                <li><i class="fas fa-hdd mr-2 text-[#0298e4]"></i> SSD 512GB</li>
+                                <li><i class="fas fa-tv mr-2 text-[#0298e4]"></i> Écran 14.2" Liquid Retina XDR</li>
+                                <li><i class="fas fa-battery-full mr-2 text-[#0298e4]"></i> Jusqu'à 20h d'autonomie</li>
+                                <li><i class="fas fa-weight mr-2 text-[#0298e4]"></i> 1.6 kg</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h3 class="font-semibold mb-2">Options</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block mb-1">Couleur</label>
+                                    <div class="flex space-x-2">
+                                        <button class="w-8 h-8 rounded-full bg-gray-800 border-2 border-gray-300 focus:border-[#0298e4]"></button>
+                                        <button class="w-8 h-8 rounded-full bg-gray-400 border-2 border-gray-300 focus:border-[#0298e4]"></button>
+                                        <button class="w-8 h-8 rounded-full bg-gray-200 border-2 border-gray-300 focus:border-[#0298e4]"></button>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block mb-1">Mémoire</label>
+                                    <select class="border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 w-full">
+                                        <option>16GB unifiée</option>
+                                        <option>32GB unifiée (+400€)</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block mb-1">Stockage</label>
+                                    <select class="border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 w-full">
+                                        <option>512GB SSD</option>
+                                        <option>1TB SSD (+200€)</option>
+                                        <option>2TB SSD (+600€)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-4">
+                            <div class="flex border border-gray-300 dark:border-gray-600 rounded">
+                                <button class="px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">-</button>
+                                <input type="text" value="1" class="w-12 text-center border-x border-gray-300 dark:border-gray-600 dark:bg-gray-700">
+                                <button class="px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">+</button>
+                            </div>
+                            <button class="flex-grow bg-[#051769] text-white py-2 px-4 rounded hover:bg-[#0298e4]">
+                                <i class="fas fa-shopping-cart mr-2"></i> Ajouter au panier
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Tabs -->
+                <div class="border-t border-gray-200 dark:border-gray-700">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700">
+                        <button class="tab-btn px-6 py-4 font-medium border-b-2 border-[#0298e4] text-[#051769] dark:text-[#0298e4]">Description</button>
+                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Spécifications</button>
+                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Avis (124)</button>
+                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">FAQ</button>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="tab-content active">
+                            <h3 class="font-semibold text-lg mb-3">Description détaillée</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">Le MacBook Pro 14" repousse les limites de la performance mobile. Avec la puce M2 Pro, vous bénéficiez d'une puissance de traitement et graphique exceptionnelle, idéale pour les professionnels exigeants.</p>
+                            
+                            <h4 class="font-semibold mb-2">Écran Liquid Retina XDR</h4>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">Profitez d'un écran 14.2" Liquid Retina XDR avec une résolution de 3024x1964 pixels, un contraste époustouflant et des noirs profonds grâce à la technologie mini-LED.</p>
+                            
+                            <h4 class="font-semibold mb-2">Performances révolutionnaires</h4>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">La puce M2 Pro avec CPU 10 cœurs et GPU 16 cœurs offre jusqu'à 20% de performances en plus que la génération précédente, avec une efficacité énergétique inégalée.</p>
+                        </div>
+                        
+                        <div class="tab-content hidden">
+                            <!-- Spécifications content would go here -->
+                        </div>
+                        
+                        <div class="tab-content hidden">
+                            <!-- Avis content would go here -->
+                        </div>
+                        
+                        <div class="tab-content hidden">
+                            <!-- FAQ content would go here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Related Products -->
+                <div class="p-8 border-t border-gray-200 dark:border-gray-700">
+                    <h3 class="text-xl font-bold mb-6">Produits similaires</h3>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <!-- Related product cards would go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar (hidden by default) -->
+    <div id="cart-sidebar" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+        <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
+            <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                <h3 class="text-xl font-bold">Votre panier (3)</h3>
+                <button id="close-cart" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer le panier">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            
+            <div class="p-4 space-y-4">
+                <!-- Cart Item 1 -->
+                <div class="flex border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <div class="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro 14 pouces M2" class="w-full h-full object-contain">
+                    </div>
+                    <div class="ml-4 flex-grow">
+                        <h4 class="font-medium">MacBook Pro 14" M2</h4>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm">16GB/512GB</p>
+                        <div class="flex justify-between items-center mt-2">
+                            <div class="flex border border-gray-300 dark:border-gray-600 rounded">
+                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">-</button>
+                                <input type="text" value="1" class="w-8 text-center border-x border-gray-300 dark:border-gray-600 dark:bg-gray-700">
+                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">+</button>
+                            </div>
+                            <span class="font-bold">1 799€</span>
+                        </div>
+                    </div>
+                    <button class="text-gray-400 hover:text-red-500 ml-2" aria-label="Supprimer l'article">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                
+                <!-- Cart Item 2 -->
+                <div class="flex border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <div class="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1629131726692-1accd0bec53c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="AirPods Pro 2ème génération" class="w-full h-full object-contain">
+                    </div>
+                    <div class="ml-4 flex-grow">
+                        <h4 class="font-medium">AirPods Pro (2ème génération)</h4>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm">Blanc</p>
+                        <div class="flex justify-between items-center mt-2">
+                            <div class="flex border border-gray-300 dark:border-gray-600 rounded">
+                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">-</button>
+                                <input type="text" value="2" class="w-8 text-center border-x border-gray-300 dark:border-gray-600 dark:bg-gray-700">
+                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">+</button>
+                            </div>
+                            <span class="font-bold">558€</span>
+                        </div>
+                    </div>
+                    <button class="text-gray-400 hover:text-red-500 ml-2" aria-label="Supprimer l'article">
+                        <i class="fas fa-trash"></i>
+                    </button>
                 </div>
             </div>
             
-            <div class="border-t border-blue-300/30 mt-6 pt-6 text-center text-sm text-blue-100">
-                &copy; 2023 TechShop. Tous droits réservés.
+            <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex justify-between mb-2">
+                    <span>Sous-total</span>
+                    <span>2 357€</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span>Livraison</span>
+                    <span class="text-green-500">Gratuite</span>
+                </div>
+                <div class="flex justify-between font-bold text-lg mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <span>Total</span>
+                    <span>2 357€</span>
+                </div>
+                
+                <div class="mt-6 space-y-3">
+                    <button id="confirm-order-btn" class="w-full bg-[#051769] text-white py-2 px-4 rounded hover:bg-[#0298e4] font-medium">
+                        <i class="fas fa-credit-card mr-2"></i> Passer la commande
+                    </button>
+                    <a href="#" class="block border border-[#051769] text-[#051769] dark:text-[#0298e4] text-center py-3 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium">
+                        Voir le panier
+                    </a>
+                </div>
+                
+                <div class="mt-6">
+                    <img src="https://via.placeholder.com/300x40?text=PAYMENT+OPTIONS" alt="Modes de paiement acceptés" class="w-full">
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
+
+    <!-- Chat support responsive et amélioré -->
+<div id="chat-support" class="fixed bottom-4 right-4 z-50">
+  <div id="chat-box" class="hidden bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-[90vw] max-w-sm h-[80vh] flex flex-col border border-blue-100 dark:border-blue-900">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-[#051769] to-[#0298e4] text-white rounded-t-2xl">
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
+          <i class="fas fa-robot text-xl"></i>
+        </span>
+        <div>
+          <div class="font-bold">Support AdmiSoft</div>
+          <div class="text-xs text-blue-100">En ligne</div>
+        </div>
+      </div>
+      <button id="close-chat" class="hover:text-blue-200 transition" aria-label="Fermer le chat"><i class="fas fa-times text-lg"></i></button>
+    </div>
+
+    <!-- Messages -->
+    <div id="chat-messages" class="flex-1 px-3 py-2 overflow-y-auto space-y-4 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 text-sm">
+      <!-- Messages exemples -->
+      <div class="flex items-end gap-2">
+        <div class="w-8 h-8 rounded-full bg-[#0298e4] text-white flex items-center justify-center text-sm font-bold">S</div>
+        <div class="bg-blue-100 dark:bg-blue-900 text-gray-800 dark:text-blue-100 rounded-2xl px-3 py-2 max-w-[75%]">
+          Bonjour ! Comment pouvons-nous vous aider aujourd'hui ?
+        </div>
+      </div>
+      <div class="flex items-end gap-2 justify-end">
+        <div class="bg-[#051769] text-white rounded-2xl px-3 py-2 max-w-[75%]">J'ai une question sur la livraison</div>
+        <div class="w-8 h-8 rounded-full bg-blue-200 text-blue-700 flex items-center justify-center text-sm font-bold">M</div>
+      </div>
+      <div class="flex items-end gap-2">
+        <div class="w-8 h-8 rounded-full bg-[#0298e4] text-white flex items-center justify-center text-sm font-bold">S</div>
+        <div class="bg-blue-100 dark:bg-blue-900 rounded-2xl px-2 py-2 max-w-[75%]">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=facearea&w=200&q=80" alt="Exemple de produit" class="rounded-lg max-w-[150px] mb-1">
+          <div class="text-xs text-gray-600 dark:text-gray-300">Voici un exemple de produit !</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <form id="chat-form" class="px-3 py-2 border-t border-blue-100 dark:border-blue-900 flex items-center gap-2 bg-white dark:bg-gray-900">
+      
+      <!-- Bouton "+" pour afficher les options -->
+      <div class="relative">
+        <button type="button" id="chat-more" class="p-2 rounded-full hover:bg-blue-50 dark:hover:bg-gray-800 text-[#0298e4] dark:text-blue-400" title="Plus d'options" aria-label="Options du chat">
+          <i class="fas fa-plus"></i>
+        </button>
+        <div id="chat-options" class="absolute bottom-12 left-0 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-2 space-y-2 hidden z-50">
+  <label class="cursor-pointer text-[#0298e4] hover:text-[#051769] flex items-center gap-2">
+    <i class="fas fa-image"></i>
+    <span>Image</span>
+    <input type="file" id="chat-image-input" accept="image/*" class="hidden">
+  </label>
+  <label class="cursor-pointer text-[#0298e4] hover:text-[#051769] flex items-center gap-2">
+    <i class="fas fa-video"></i>
+    <span>Vidéo</span>
+    <input type="file" id="chat-video-input" accept="video/*" class="hidden">
+  </label>
+  <button type="button" id="chat-audio" class="text-[#0298e4] hover:text-[#051769] flex items-center gap-2">
+    <i class="fas fa-microphone"></i> <span>Audio</span>
+  </button>
+</div>
+      </div>
+
+      <!-- Zone de texte -->
+      <input type="text" id="chat-input" autocomplete="off" placeholder="Message..." class="flex-1 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[#0298e4] text-gray-800 dark:text-white text-sm">
+
+      <!-- Envoyer -->
+      <button type="submit" class="bg-[#051769] hover:bg-[#0298e4] text-white rounded-full p-2 transition flex items-center justify-center" aria-label="Envoyer le message">
+        <i class="fas fa-paper-plane text-sm"></i>
+      </button>
+    </form>
+  </div>
+
+  <!-- Bubble bouton d'ouverture -->
+  <button id="open-chat" class="w-14 h-14 bg-gradient-to-tr from-[#051769] to-[#0298e4] text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition" aria-label="Ouvrir le chat">
+    <i class="fas fa-comment-dots text-2xl"></i>
+  </button>
+</div>
+
+
+    <!-- User Account Sidebar (hidden by default) -->
+<div id="user-sidebar" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+            <h3 class="text-xl font-bold">Mon Profil</h3>
+            <button id="close-user" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer le profil">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        
+        <div class="p-6">
+            <!-- User Profile Section -->
+            <div class="flex flex-col items-center mb-6">
+                <div class="w-24 h-24 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-[#051769] dark:text-blue-400 text-3xl font-bold mb-4">
+                    JD
+                </div>
+                <h4 class="text-xl font-semibold">Jean Dupont</h4>
+                <p class="text-gray-500 dark:text-gray-400">Membre depuis janvier 2023</p>
+            </div>
+            
+            <!-- Profile Details -->
+            <div class="space-y-4 mb-6">
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <h5 class="font-medium mb-2 flex items-center">
+                        <i class="fas fa-envelope mr-3 text-[#0298e4]"></i> Informations personnelles
+                    </h5>
+                    <div class="space-y-2">
+                        <p><span class="font-medium">Email:</span> jean.dupont@example.com</p>
+                        <p><span class="font-medium">Téléphone:</span> +33 6 12 34 56 78</p>
+                        <p><span class="font-medium">Date de naissance:</span> 15/05/1990</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <h5 class="font-medium mb-2 flex items-center">
+                        <i class="fas fa-map-marker-alt mr-3 text-[#0298e4]"></i> Adresse principale
+                    </h5>
+                    <address class="not-italic">
+                        <p>12 Rue de la République</p>
+                        <p>75001 Paris, France</p>
+                    </address>
+                </div>
+            </div>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-4 mb-6 text-center">
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                    <div class="text-2xl font-bold text-[#051769] dark:text-blue-400">15</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">Commandes</div>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                    <div class="text-2xl font-bold text-[#051769] dark:text-blue-400">8</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">Favoris</div>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                    <div class="text-2xl font-bold text-[#051769] dark:text-blue-400">2</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">Coupons</div>
+                </div>
+            </div>
+            
+            <!-- Actions -->
+            <div class="space-y-3">
+                <button id="edit-profile-btn" class="w-full bg-[#051769] text-white py-2 px-4 rounded hover:bg-[#0298e4] font-medium flex items-center justify-center">
+                    <i class="fas fa-edit mr-2"></i> Modifier le profil
+                </button>
+                <button id="change-password-btn" class="w-full border border-[#051769] text-[#051769] dark:text-[#0298e4] py-2 px-4 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium flex items-center justify-center">
+                    <i class="fas fa-lock mr-2"></i> Changer le mot de passe
+                </button>
+                <button id="logout-btn" class="w-full text-red-500 py-2 px-4 rounded hover:bg-red-50 dark:hover:bg-gray-700 font-medium flex items-center justify-center">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Déconnexion
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Profile Sidebar -->
+<div id="edit-profile-sidebar" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+            <h3 class="text-xl font-bold">Modifier le profil</h3>
+            <button id="close-edit-profile" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer l'édition du profil">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        
+        <div class="p-6">
+            <form class="space-y-4">
+                <!-- Avatar Upload -->
+                <div class="flex flex-col items-center">
+                    <div class="w-24 h-24 rounded-full bg-gray-200 dark:bg-gray-700 mb-4 overflow-hidden">
+                        <img id="profile-avatar" src="https://via.placeholder.com/150" alt="Photo de profil" class="w-full h-full object-cover">
+                    </div>
+                    <label class="cursor-pointer text-[#0298e4] dark:text-blue-400 text-sm font-medium">
+                        <input type="file" class="hidden" accept="image/*">
+                        Changer la photo
+                    </label>
+                </div>
+                
+                <!-- Form Fields -->
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Nom complet</label>
+                        <input type="text" value="Jean Dupont" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Email</label>
+                        <input type="email" value="jean.dupont@example.com" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Téléphone</label>
+                        <input type="tel" value="+33 6 12 34 56 78" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Date de naissance</label>
+                        <input type="date" value="1990-05-15" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2">
+                    </div>
+                </div>
+                
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-[#051769] text-white py-2 px-4 rounded hover:bg-[#0298e4] font-medium">
+                        Enregistrer les modifications
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Logout Confirmation Sidebar -->
+<div id="logout-sidebar" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
+        <div class="p-6 flex flex-col items-center text-center">
+            <div class="w-16 h-16 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center text-red-500 dark:text-red-400 text-2xl mb-4">
+                <i class="fas fa-sign-out-alt"></i>
+            </div>
+            
+            <h3 class="text-xl font-bold mb-2">Se déconnecter</h3>
+            <p class="text-gray-500 dark:text-gray-400 mb-6">Êtes-vous sûr de vouloir vous déconnecter de votre compte ?</p>
+            
+            <div class="w-full space-y-3">
+                <button id="confirm-logout" class="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 font-medium">
+                    Oui, se déconnecter
+                </button>
+                <button id="cancel-logout" class="w-full border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 py-2 px-4 rounded hover:bg-gray-100 dark:hover:bg-gray-700 font-medium">
+                    Annuler
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Change Password Modal -->
+<div id="change-password-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+            <h3 class="text-xl font-bold">Changer le mot de passe</h3>
+            <button id="close-change-password" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer le changement de mot de passe">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        
+        <div class="p-6">
+            <form id="password-change-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Mot de passe actuel</label>
+                    <div class="relative">
+                        <input type="password" required class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 pr-10">
+                        <button type="button" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password" aria-label="Afficher/masquer le mot de passe">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-1">Nouveau mot de passe</label>
+                    <div class="relative">
+                        <input type="password" required class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 pr-10">
+                        <button type="button" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password" aria-label="Afficher/masquer le mot de passe">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Minimum 8 caractères, avec majuscule, minuscule et chiffre</p>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-1">Confirmer le nouveau mot de passe</label>
+                    <div class="relative">
+                        <input type="password" required class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 pr-10">
+                        <button type="button" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password" aria-label="Afficher/masquer le mot de passe">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-[#051769] text-white py-2 px-4 rounded hover:bg-[#0298e4] font-medium">
+                        <i class="fas fa-save mr-2"></i> Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Order Confirmation Modal -->
+<div id="order-confirm-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+            <h3 class="text-xl font-bold">Confirmation de commande</h3>
+            <button id="close-order-confirm" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer la confirmation">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        
+        <div class="p-6">
+            <div class="flex flex-col items-center mb-6">
+                <div class="w-20 h-20 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center text-green-600 dark:text-green-400 text-3xl mb-4">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-center mb-2">Commande validée !</h4>
+                <p class="text-gray-500 dark:text-gray-400 text-center">Votre commande #TS2023-456 a bien été enregistrée.</p>
+            </div>
+            
+            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+                <h5 class="font-medium mb-3">Récapitulatif</h5>
+                <div class="space-y-2">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600 dark:text-gray-300">MacBook Pro 14" M2</span>
+                        <span class="font-medium">1 799€</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600 dark:text-gray-300">AirPods Pro (2x)</span>
+                        <span class="font-medium">558€</span>
+                    </div>
+                    <div class="flex justify-between border-t border-gray-200 dark:border-gray-600 pt-2 mt-2">
+                        <span class="font-medium">Total</span>
+                        <span class="font-bold text-lg">2 357€</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 dark:bg-blue-900 rounded-lg p-4 mb-6">
+                <h5 class="font-medium mb-2 flex items-center">
+                    <i class="fas fa-truck mr-2 text-[#0298e4]"></i> Livraison
+                </h5>
+                <p class="text-sm">Livraison prévue le <span class="font-medium">vendredi 12 mai</span></p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">12 Rue de la République, 75001 Paris</p>
+            </div>
+            
+            <div class="space-y-3">
+                <a href="#" class="block bg-[#051769] text-white text-center py-2 px-4 rounded hover:bg-[#0298e4] font-medium">
+                    <i class="fas fa-file-invoice mr-2"></i> Voir le détail de la commande
+                </a>
+                <button class="w-full border border-[#051769] text-[#051769] dark:text-[#0298e4] py-2 px-4 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium">
+                    <i class="fas fa-home mr-2"></i> Retour à l'accueil
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- Lien vers le fichier JavaScript externe -->
     <script src="script.js"></script>

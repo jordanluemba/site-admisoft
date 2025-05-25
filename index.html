@@ -3,107 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdmiSoft | Boutique en ligne de technologie</title>
+    <meta name="description" content="AdmiSoft - Boutique en ligne de technologie et solutions digitales innovantes. Découvrez nos produits high-tech et services professionnels.">
+    <meta name="keywords" content="technologie, boutique en ligne, solutions digitales, développement web, cloud, IA, cybersécurité">
+    <meta name="author" content="AdmiSoft">
+    <meta property="og:title" content="AdmiSoft | Boutique en ligne de technologie">
+    <meta property="og:description" content="Des solutions digitales innovantes pour transformer vos idées en succès.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.admisoft.com">
+    <meta property="og:image" content="https://www.admisoft.com/images/og-image.jpg">
+    <link rel="canonical" href="https://www.admisoft.com">
+    
+    <title>AdmiSoft | Boutique en ligne de technologie et solutions digitales</title>
+    
+    <!-- Preload des polices et ressources critiques -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    display: ['Inter', 'sans-serif'],
+                },
                 extend: {
                     colors: {
-                        primary: {
-                            light: '#2563eb',
-                            dark: '#1e40af'
-                        },
-                        secondary: {
-                            light: '#1e40af',
-                            dark: '#1e3a8a'
-                        },
+                        primary: '#051769',
+                        secondary: '#0298e4',
                         accent: '#3b82f6'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                        'slide-right': 'slideRight 0.6s ease-out forwards',
+                        'scale-in': 'scaleIn 0.5s ease-out forwards',
                     }
                 }
             }
         }
     </script>
-    <style>
-        .slider {
-            animation: slide 12s infinite;
-        }
-        .slider:hover {
-            animation-play-state: paused;
-        }
-        .rotate-180 {
-            transform: rotate(180deg);
-        }
-        @keyframes spin-slow {
-          0% { transform: rotate(0deg);}
-          100% { transform: rotate(360deg);}
-        }
-        .animate-spin-slow {
-          animation: spin-slow 24s linear infinite;
-        }
-        @keyframes textGradient {
-          0%,100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        .animate-text-gradient {
-          background-size: 200% 200%;
-          animation: textGradient 6s ease-in-out infinite;
-        }
-        @keyframes bounce-slow {
-          0%,100% { transform: translateY(0);}
-          50% { transform: translateY(-18px);}
-        }
-        .animate-bounce-slow {
-          animation: bounce-slow 3s infinite;
-        }
-    </style>
+    <!-- Lien vers le fichier CSS externe -->
+    <link rel="stylesheet" href="essai.css">
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "AdmiSoft",
+      "url": "https://www.admisoft.com",
+      "logo": "https://www.admisoft.com/images/logo.png",
+      "description": "Boutique en ligne de technologie et solutions digitales innovantes",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "12 Rue de la République",
+        "addressLocality": "Paris",
+        "postalCode": "75001",
+        "addressCountry": "FR"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+33 1 23 45 67 89",
+        "contactType": "customer service",
+        "email": "contact@admisoft.com",
+        "availableLanguage": "French"
+      }
+    }
+    </script>
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
     <!-- HEADER NAVBAR -->
-<header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
+    <!-- ... (le reste du code HTML reste inchangé) ... -->
+    
+    <!-- HEADER NAVBAR -->
+<header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md" data-scroll>
     <div class="container mx-auto px-4 py-3">
         <div class="flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center">
-                <a href="#" class="flex items-center">
-                    <button class="flex items-center px-5 py-2 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 shadow-lg hover:scale-105 transition-all duration-200 border-2 border-white dark:border-gray-900 focus:outline-none">
+                <a href="#" class="flex items-center" aria-label="AdmiSoft - Retour à l'accueil">
+                    <button class="flex items-center px-5 py-2 rounded-full bg-gradient-to-tr from-[#051769] to-[#0298e4] shadow-lg hover:scale-105 transition-all duration-200 border-2 border-white dark:border-gray-900 focus:outline-none">
                         <span class="text-white font-extrabold text-xl tracking-wide drop-shadow">AdmiSoft</span>
                     </button>
                 </a>
             </div>
             <!-- Desktop Navigation Centered -->
             <nav class="hidden lg:flex flex-1 justify-center items-center space-x-1">
-                <a href="index.html" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Accueil</a>
-                <a href="#" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Blog</a>
-                <a href="#" class="px-4 py-2 font-medium hover:text-blue-600 dark:hover:text-blue-400">Marketplace</a>
+                <a href="index.html" class="px-4 py-2 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Accueil</a>
+                <a href="#services" class="px-4 py-2 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Blog</a>
+                <a href="#shop" class="px-4 py-2 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Marketplace</a>
             </nav>
             <!-- Right icons -->
             <div class="flex items-center space-x-4">
                 <!-- Search Button (desktop & mobile) -->
-                <button id="search-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                <button id="search-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Rechercher">
                     <i class="fas fa-search text-gray-500"></i>
                 </button>
                 <!-- Theme Toggle (desktop only) -->
-                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hidden lg:inline-flex">
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hidden lg:inline-flex" aria-label="Basculer mode sombre">
                     <i class="fas fa-moon dark:hidden"></i>
                     <i class="fas fa-sun hidden dark:block"></i>
                 </button>
-                <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative hidden lg:inline-flex" id="user-account-btn">
+                <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative hidden lg:inline-flex" id="user-account-btn" aria-label="Mon compte">
                     <i class="fas fa-user"></i>
                 </a>
                 <!-- Cart -->
-                <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative cart-icon hidden lg:inline-flex">
+                <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative cart-icon hidden lg:inline-flex" id="cart-btn" aria-label="Panier">
                     <i class="fas fa-shopping-cart"></i>
-                    <span class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                    <span class="absolute -top-1 -right-1 bg-[#0298e4] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
                 </a>
                 <!-- Mobile: bouton + pour afficher toutes les actions -->
-                <button id="mobile-actions-toggle" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                <button id="mobile-actions-toggle" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Menu actions">
                     <i class="fas fa-plus text-xl"></i>
                 </button>
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                <button id="mobile-menu-button" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Menu principal">
                     <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -116,23 +132,23 @@
     </div>
     <!-- Mobile search bar fixed just below navbar -->
     <div id="mobile-search-bar" class="fixed left-0 right-0 top-[64px] z-50 px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center space-x-2 transition-all duration-200 opacity-0 pointer-events-none">
-        <input type="text" id="mobile-search-input" placeholder="Rechercher..." class="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full px-4 py-2 outline-none text-gray-800 dark:text-white" />
-        <button id="mobile-search-close" class="ml-2 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">
+        <input type="text" id="mobile-search-input" placeholder="Rechercher..." class="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full px-4 py-2 outline-none text-gray-800 dark:text-white" aria-label="Rechercher" />
+        <button id="mobile-search-close" class="ml-2 text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400" aria-label="Fermer la recherche">
             <i class="fas fa-times"></i>
         </button>
     </div>
     <!-- Mobile actions bar fixed just below navbar -->
     <div id="mobile-actions-bar" class="fixed left-0 right-0 top-[64px] z-50 px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-around space-x-4 transition-all duration-200 opacity-0 pointer-events-none">
-        <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900">
+        <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900" aria-label="Basculer mode sombre">
             <i class="fas fa-moon dark:hidden text-xl"></i>
             <i class="fas fa-sun hidden dark:block text-xl"></i>
         </button>
-        <button id="mobile-user-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900">
+        <button id="mobile-user-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900" aria-label="Mon compte">
             <i class="fas fa-user text-xl"></i>
         </button>
-        <button id="mobile-cart-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 relative">
+        <button id="mobile-cart-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 relative" aria-label="Panier">
             <i class="fas fa-shopping-cart text-xl"></i>
-            <span class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+            <span class="absolute -top-1 -right-1 bg-[#0298e4] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
         </button>
     </div>
 </header>
@@ -140,23 +156,23 @@
 <div id="mobile-menu" class="fixed inset-0 bg-white dark:bg-gray-800 z-50 hidden transition-all duration-300">
     <div class="container mx-auto px-4 py-8 h-full flex flex-col">
         <div class="flex justify-between items-center mb-8">
-            <span class="text-2xl font-extrabold text-blue-700 dark:text-white">Menu</span>
-            <button id="mobile-menu-close" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+            <span class="text-2xl font-extrabold text-[#051769] dark:text-white">Menu</span>
+            <button id="mobile-menu-close" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" aria-label="Fermer le menu">
                 <i class="fas fa-times text-xl"></i>
             </button>
         </div>
         <nav class="flex flex-col space-y-6 text-lg flex-1 justify-center items-center">
-            <a href="index.html" class="px-6 py-3 font-medium hover:text-blue-600 dark:hover:text-blue-400">Accueil</a>
-            <a href="#" class="px-6 py-3 font-medium hover:text-blue-600 dark:hover:text-blue-400">Blog</a>
-            <a href="#" class="px-6 py-3 font-medium hover:text-blue-600 dark:hover:text-blue-400">Marketplace</a>
-            <a href="#" class="block w-full bg-blue-600 text-white text-center py-3 px-6 rounded hover:bg-blue-700 font-medium mt-8 max-w-xs">Se connecter</a>
+            <a href="index.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Accueil</a>
+            <a href="#services" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Blog</a>
+            <a href="#shop" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Marketplace</a>
+            <a href="login.html" class="block w-full bg-[#051769] hover:bg-[#0298e4] text-white text-center py-3 px-6 rounded font-medium mt-8 max-w-xs transition-colors">Se connecter</a>
         </nav>
     </div>
 </div>
 
     
    <!-- Hero Section innovante sans photo -->
-<section class="relative overflow-hidden py-28 md:py-40 bg-gradient-to-tr from-blue-800 via-blue-500 to-purple-600">
+<section class="relative overflow-hidden py-28 md:py-40 bg-gradient-to-tr from-[#051769] via-[#0298e4] to-[#3b82f6]" data-scroll="fade-in">
   <!-- SVG animée décorative -->
   <svg class="absolute left-1/2 top-0 -translate-x-1/2 z-0 opacity-30 animate-spin-slow" width="700" height="700" viewBox="0 0 700 700" fill="none">
     <circle cx="350" cy="350" r="320" stroke="url(#radial1)" stroke-width="40"/>
@@ -170,87 +186,84 @@
   <!-- Halo lumineux -->
   <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-white opacity-10 blur-3xl z-0"></div>
   <div class="relative z-10 container mx-auto px-4 flex flex-col items-center text-center">
-    <!-- ...existing code... -->
-<h1 class="text-5xl md:text-7xl font-extrabold mb-6 text-white drop-shadow-lg tracking-tight">
-  <span class="block text-white">AdmiSoft</span>
-  <span class="block mt-2 text-white">L'innovation commence ici</span>
-</h1>
-<!-- ...existing code... -->
-    <p class="text-2xl md:text-3xl mb-10 text-blue-100 font-medium max-w-2xl mx-auto">Des solutions digitales, créées pour transformer vos idées en succès. Découvrez la nouvelle génération de services tech.</p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="#contact" class="px-10 py-4 rounded-full font-semibold bg-white text-blue-700 shadow-xl hover:bg-blue-100 transition text-lg">Demander un devis</a>
-      <a href="#services" class="px-10 py-4 rounded-full font-semibold border-2 border-white hover:bg-white hover:text-blue-700 transition text-lg">Nos services</a>
+    <h1 class="text-5xl md:text-7xl font-extrabold mb-6 text-white drop-shadow-lg tracking-tight" data-scroll="slide-up">
+      <span class="block text-white">AdmiSoft</span>
+      <span class="block mt-2 text-white">L'innovation commence ici</span>
+    </h1>
+    <p class="text-2xl md:text-3xl mb-10 text-blue-100 font-medium max-w-2xl mx-auto" data-scroll="slide-up" data-scroll-delay="100">Des solutions digitales, créées pour transformer vos idées en succès. Découvrez la nouvelle génération de services tech.</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center" data-scroll="slide-up" data-scroll-delay="200">
+      <a href="#contact" class="px-10 py-4 rounded-full font-semibold bg-white text-[#051769] shadow-xl hover:bg-blue-100 transition text-lg">Demander un devis</a>
+      <a href="#services" class="px-10 py-4 rounded-full font-semibold border-2 border-white hover:bg-white hover:text-[#051769] transition text-lg">Nos services</a>
     </div>
-    
   </div>
 </section>
 
-    <section id="services" class="py-20 bg-gradient-to-br from-blue-100 via-white to-blue-200 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900">
+    <section id="services" class="py-20 bg-gradient-to-br from-blue-100 via-white to-blue-200 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900" data-scroll>
   <div class="container mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-4xl font-extrabold text-blue-700 dark:text-white mb-4 tracking-tight">Nos Services</h2>
-      <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Des solutions innovantes, pensées pour accélérer votre transformation digitale.</p>
+      <h2 class="text-4xl font-extrabold text-[#051769] dark:text-white mb-4 tracking-tight" data-scroll="fade-in">Nos Services</h2>
+      <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto" data-scroll="fade-in" data-scroll-delay="100">Des solutions innovantes, pensées pour accélérer votre transformation digitale.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
       <!-- Service Card 1 -->
-      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-blue-500 hover:-translate-y-2 transition">
-        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-blue-600 to-purple-500 dark:from-blue-400 dark:to-purple-700 shadow-lg mb-6 border-4 border-white dark:border-gray-900">
+      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-[#0298e4] hover:-translate-y-2 transition" data-scroll="fade-in">
+        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-[#051769] to-[#0298e4] shadow-lg mb-6 border-4 border-white dark:border-gray-900">
           <i class="fas fa-code text-white text-3xl drop-shadow-lg"></i>
         </div>
-        <h3 class="text-xl font-bold text-blue-700 dark:text-white mb-3">Développement Web & Mobile</h3>
+        <h3 class="text-xl font-bold text-[#051769] dark:text-white mb-3">Développement Web & Mobile</h3>
         <p class="text-gray-600 dark:text-gray-300 mb-4">Sites et apps sur mesure, performants et sécurisés.</p>
-        <a href="#" class="inline-block mt-2 text-blue-600 dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
+        <a href="#" class="inline-block mt-2 text-[#0298e4] dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
       </div>
       <!-- Service Card 2 -->
-      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-cyan-500 hover:-translate-y-2 transition">
-        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-cyan-600 to-blue-500 dark:from-cyan-400 dark:to-blue-700 shadow-lg mb-6 border-4 border-white dark:border-gray-900">
+      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-cyan-500 hover:-translate-y-2 transition" data-scroll="fade-in" data-scroll-delay="100">
+        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-[#0298e4] to-[#3b82f6] shadow-lg mb-6 border-4 border-white dark:border-gray-900">
           <i class="fas fa-cloud text-white text-3xl drop-shadow-lg"></i>
         </div>
-        <h3 class="text-xl font-bold text-blue-700 dark:text-white mb-3">Solutions Cloud</h3>
+        <h3 class="text-xl font-bold text-[#051769] dark:text-white mb-3">Solutions Cloud</h3>
         <p class="text-gray-600 dark:text-gray-300 mb-4">Migration, gestion et optimisation de vos infrastructures cloud.</p>
-        <a href="#" class="inline-block mt-2 text-blue-600 dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
+        <a href="#" class="inline-block mt-2 text-[#0298e4] dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
       </div>
       <!-- Service Card 3 -->
-      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-purple-500 hover:-translate-y-2 transition">
-        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 dark:from-purple-400 dark:to-pink-700 shadow-lg mb-6 border-4 border-white dark:border-gray-900">
+      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-purple-500 hover:-translate-y-2 transition" data-scroll="fade-in" data-scroll-delay="200">
+        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-[#3b82f6] to-[#8b5cf6] shadow-lg mb-6 border-4 border-white dark:border-gray-900">
           <i class="fas fa-robot text-white text-3xl drop-shadow-lg"></i>
         </div>
-        <h3 class="text-xl font-bold text-blue-700 dark:text-white mb-3">Intelligence Artificielle</h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">Automatisez et optimisez vos processus métiers grâce à l’IA.</p>
-        <a href="#" class="inline-block mt-2 text-blue-600 dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
+        <h3 class="text-xl font-bold text-[#051769] dark:text-white mb-3">Intelligence Artificielle</h3>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">Automatisez et optimisez vos processus métiers grâce à l'IA.</p>
+        <a href="#" class="inline-block mt-2 text-[#0298e4] dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
       </div>
       <!-- Service Card 4 -->
-      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-green-500 hover:-translate-y-2 transition">
-        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-green-600 to-blue-500 dark:from-green-400 dark:to-blue-700 shadow-lg mb-6 border-4 border-white dark:border-gray-900">
+      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-green-500 hover:-translate-y-2 transition" data-scroll="fade-in" data-scroll-delay="100">
+        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-[#10b981] to-[#0298e4] shadow-lg mb-6 border-4 border-white dark:border-gray-900">
           <i class="fas fa-shield-alt text-white text-3xl drop-shadow-lg"></i>
         </div>
-        <h3 class="text-xl font-bold text-blue-700 dark:text-white mb-3">Cybersécurité</h3>
+        <h3 class="text-xl font-bold text-[#051769] dark:text-white mb-3">Cybersécurité</h3>
         <p class="text-gray-600 dark:text-gray-300 mb-4">Protection avancée de vos données et systèmes contre les menaces.</p>
-        <a href="#" class="inline-block mt-2 text-blue-600 dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
+        <a href="#" class="inline-block mt-2 text-[#0298e4] dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
       </div>
       <!-- Service Card 5 -->
-      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-yellow-400 hover:-translate-y-2 transition">
-        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-yellow-400 to-orange-500 dark:from-yellow-300 dark:to-orange-700 shadow-lg mb-6 border-4 border-white dark:border-gray-900">
+      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-yellow-400 hover:-translate-y-2 transition" data-scroll="fade-in" data-scroll-delay="200">
+        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-[#f59e0b] to-[#ef4444] shadow-lg mb-6 border-4 border-white dark:border-gray-900">
           <i class="fas fa-chart-line text-white text-3xl drop-shadow-lg"></i>
         </div>
-        <h3 class="text-xl font-bold text-blue-700 dark:text-white mb-3">Analyse de Données</h3>
+        <h3 class="text-xl font-bold text-[#051769] dark:text-white mb-3">Analyse de Données</h3>
         <p class="text-gray-600 dark:text-gray-300 mb-4">Collecte, traitement et visualisation pour des décisions éclairées.</p>
-        <a href="#" class="inline-block mt-2 text-blue-600 dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
+        <a href="#" class="inline-block mt-2 text-[#0298e4] dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
       </div>
       <!-- Service Card 6 -->
-      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-pink-400 hover:-translate-y-2 transition">
-        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-pink-500 to-purple-500 dark:from-pink-400 dark:to-purple-700 shadow-lg mb-6 border-4 border-white dark:border-gray-900">
+      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-pink-400 hover:-translate-y-2 transition" data-scroll="fade-in" data-scroll-delay="300">
+        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-[#ec4899] to-[#8b5cf6] shadow-lg mb-6 border-4 border-white dark:border-gray-900">
           <i class="fas fa-graduation-cap text-white text-3xl drop-shadow-lg"></i>
         </div>
-        <h3 class="text-xl font-bold text-blue-700 dark:text-white mb-3">Formation Tech</h3>
+        <h3 class="text-xl font-bold text-[#051769] dark:text-white mb-3">Formation Tech</h3>
         <p class="text-gray-600 dark:text-gray-300 mb-4">Formations sur mesure pour monter en compétences sur les technologies clés.</p>
-        <a href="#" class="inline-block mt-2 text-blue-600 dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
+        <a href="#" class="inline-block mt-2 text-[#0298e4] dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
       </div>
     </div>
   </div>
 </section>
 
-<section id="about" class="relative py-24 bg-gradient-to-br from-blue-50 via-white to-purple-100 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900 overflow-hidden">
+<section id="about" class="relative py-24 bg-gradient-to-br from-blue-50 via-white to-purple-100 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900 overflow-hidden" data-scroll>
   <!-- Décor SVG créatif -->
   <svg class="absolute left-0 top-0 w-96 h-96 opacity-20 -z-10 animate-spin-slow" viewBox="0 0 400 400" fill="none">
     <circle cx="200" cy="200" r="200" fill="url(#aboutRadial)" />
@@ -264,72 +277,72 @@
   <div class="container mx-auto px-4">
     <div class="flex flex-col lg:flex-row items-center gap-16">
       <!-- Bloc image créatif -->
-      <div class="relative lg:w-1/2 flex justify-center mb-12 lg:mb-0">
-        <div class="relative w-72 h-72 rounded-full bg-gradient-to-tr from-blue-500 via-purple-400 to-pink-400 dark:from-blue-800 dark:via-purple-900 dark:to-pink-900 shadow-2xl flex items-center justify-center overflow-hidden">
-          <img src="img3.png" alt="AdmiSoft Team" class="w-64 h-64 object-cover rounded-full border-8 border-white dark:border-gray-900 shadow-xl">
+      <div class="relative lg:w-1/2 flex justify-center mb-12 lg:mb-0" data-scroll="slide-right">
+        <div class="relative w-72 h-72 rounded-full bg-gradient-to-tr from-[#0298e4] via-purple-400 to-pink-400 dark:from-blue-800 dark:via-purple-900 dark:to-pink-900 shadow-2xl flex items-center justify-center overflow-hidden">
+          <img src="img3.png" alt="Équipe AdmiSoft" class="w-64 h-64 object-cover rounded-full border-8 border-white dark:border-gray-900 shadow-xl">
         </div>
         <!-- Petits avatars flottants -->
-        <img src="img4.png" alt="Team 1" class="absolute -top-6 left-10 w-16 h-16 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-bounce-slow">
-        <img src="img4.png" alt="Team 2" class="absolute top-20 -left-8 w-12 h-12 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-bounce-slow" style="animation-delay:1s">
-        <img src="img4.png" alt="Team 3" class="absolute bottom-8 -right-8 w-14 h-14 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-bounce-slow" style="animation-delay:2s">
+        <img src="img4.png" alt="Membre de l'équipe AdmiSoft" class="absolute -top-6 left-10 w-16 h-16 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-bounce-slow">
+        <img src="img4.png" alt="Membre de l'équipe AdmiSoft" class="absolute top-20 -left-8 w-12 h-12 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-bounce-slow" style="animation-delay:1s">
+        <img src="img4.png" alt="Membre de l'équipe AdmiSoft" class="absolute bottom-8 -right-8 w-14 h-14 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-bounce-slow" style="animation-delay:2s">
       </div>
       <!-- Bloc texte -->
-      <div class="lg:w-1/2">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-tr from-blue-700 via-purple-600 to-pink-500 dark:from-blue-300 dark:via-purple-300 dark:to-pink-300 animate-text-gradient mb-6 tracking-tight">Qui sommes-nous ?</h2>
-        <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">AdmiSoft, c’est une équipe passionnée qui accompagne la transformation digitale des entreprises avec des solutions innovantes, performantes et sécurisées.</p>
+      <div class="lg:w-1/2" data-scroll="slide-left">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-tr from-[#051769] via-[#0298e4] to-[#3b82f6] dark:from-blue-300 dark:via-purple-300 dark:to-pink-300 animate-text-gradient mb-6 tracking-tight">Qui sommes-nous ?</h2>
+        <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">AdmiSoft, c'est une équipe passionnée qui accompagne la transformation digitale des entreprises avec des solutions innovantes, performantes et sécurisées.</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
           <div class="flex items-start gap-4">
             <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900 shadow">
-              <i class="fas fa-lightbulb text-blue-600 dark:text-blue-400 text-2xl"></i>
+              <i class="fas fa-lightbulb text-[#0298e4] dark:text-blue-400 text-2xl"></i>
             </span>
             <div>
-              <div class="font-bold text-blue-700 dark:text-blue-400">Innovation</div>
+              <div class="font-bold text-[#051769] dark:text-blue-400">Innovation</div>
               <div class="text-gray-600 dark:text-gray-300 text-sm">Toujours à la pointe des technologies.</div>
             </div>
           </div>
           <div class="flex items-start gap-4">
             <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900 shadow">
-              <i class="fas fa-handshake text-purple-600 dark:text-purple-400 text-2xl"></i>
+              <i class="fas fa-handshake text-[#8b5cf6] dark:text-purple-400 text-2xl"></i>
             </span>
             <div>
-              <div class="font-bold text-purple-700 dark:text-purple-400">Collaboration</div>
+              <div class="font-bold text-[#6d28d9] dark:text-purple-400">Collaboration</div>
               <div class="text-gray-600 dark:text-gray-300 text-sm">Proximité et écoute client.</div>
             </div>
           </div>
           <div class="flex items-start gap-4">
             <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-green-100 dark:bg-green-900 shadow">
-              <i class="fas fa-lock text-green-600 dark:text-green-400 text-2xl"></i>
+              <i class="fas fa-lock text-[#10b981] dark:text-green-400 text-2xl"></i>
             </span>
             <div>
-              <div class="font-bold text-green-700 dark:text-green-400">Sécurité</div>
+              <div class="font-bold text-[#047857] dark:text-green-400">Sécurité</div>
               <div class="text-gray-600 dark:text-gray-300 text-sm">Vos données, notre priorité.</div>
             </div>
           </div>
           <div class="flex items-start gap-4">
             <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-pink-100 dark:bg-pink-900 shadow">
-              <i class="fas fa-star text-pink-600 dark:text-pink-400 text-2xl"></i>
+              <i class="fas fa-star text-[#ec4899] dark:text-pink-400 text-2xl"></i>
             </span>
             <div>
-              <div class="font-bold text-pink-700 dark:text-pink-400">Excellence</div>
-              <div class="text-gray-600 dark:text-gray-300 text-sm">Un haut niveau d’exigence sur chaque projet.</div>
+              <div class="font-bold text-[#be185d] dark:text-pink-400">Excellence</div>
+              <div class="text-gray-600 dark:text-gray-300 text-sm">Un haut niveau d'exigence sur chaque projet.</div>
             </div>
           </div>
         </div>
         <div class="flex flex-wrap gap-6 mb-8">
           <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-4 flex flex-col items-center w-32">
-            <div class="text-2xl font-extrabold text-blue-700 dark:text-blue-300">150+</div>
+            <div class="text-2xl font-extrabold text-[#051769] dark:text-blue-300">150+</div>
             <div class="text-xs text-gray-500 dark:text-gray-400">Clients</div>
           </div>
           <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-4 flex flex-col items-center w-32">
-            <div class="text-2xl font-extrabold text-purple-700 dark:text-purple-300">40+</div>
+            <div class="text-2xl font-extrabold text-[#6d28d9] dark:text-purple-300">40+</div>
             <div class="text-xs text-gray-500 dark:text-gray-400">Experts</div>
           </div>
           <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-4 flex flex-col items-center w-32">
-            <div class="text-2xl font-extrabold text-green-700 dark:text-green-300">300+</div>
+            <div class="text-2xl font-extrabold text-[#047857] dark:text-green-300">300+</div>
             <div class="text-xs text-gray-500 dark:text-gray-400">Projets</div>
           </div>
           <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-4 flex flex-col items-center w-32">
-            <div class="text-2xl font-extrabold text-pink-700 dark:text-pink-300">15</div>
+            <div class="text-2xl font-extrabold text-[#be185d] dark:text-pink-300">15</div>
             <div class="text-xs text-gray-500 dark:text-gray-400">Pays</div>
           </div>
         </div>
@@ -339,195 +352,193 @@
 </section>
 
     <!-- Marketplace Section harmonisée -->
-<section id="shop" class="py-16 bg-white dark:bg-gray-800">
+<section id="shop" class="py-16 bg-white dark:bg-gray-800" data-scroll>
   <div class="container mx-auto px-4">
-    <div class="text-center mb-16 scroll-hidden">
-      <h2 class="text-3xl font-bold text-blue-600 mb-4 dark:text-white">Notre Boutique</h2>
-      <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300">Découvrez nos produits technologiques et solutions logicielles pour booster votre entreprise.</p>
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold text-[#051769] mb-4 dark:text-white" data-scroll="fade-in">Notre Boutique</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300" data-scroll="fade-in" data-scroll-delay="100">Découvrez nos produits technologiques et solutions logicielles pour booster votre entreprise.</p>
     </div>
     <!-- Products Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Product 1 -->
-                <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro" class="w-full h-48 object-cover image-zoom">
-                        <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">-15%</div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-semibold">MacBook Pro 14" M2</h3>
-                            <div class="flex items-center text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.8</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Apple</p>
-                        
-                        <div class="mt-3 flex items-center justify-between">
-                            <div>
-                                <span class="text-lg font-bold">1 799€</span>
-                                <span class="text-gray-400 line-through text-sm ml-2">2 099€</span>
-                            </div>
-                            <button class="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
-                                <i class="fas fa-shopping-cart"></i>
-                            </button>
-                        </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" data-scroll>
+        <!-- Product 1 -->
+        <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl" data-scroll="fade-in">
+            <div class="relative">
+                <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro 14 pouces M2" class="w-full h-48 object-cover image-zoom">
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">-15%</div>
+            </div>
+            <div class="p-4">
+                <div class="flex justify-between items-start">
+                    <h3 class="font-semibold">MacBook Pro 14" M2</h3>
+                    <div class="flex items-center text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.8</span>
                     </div>
                 </div>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Apple</p>
                 
-                <!-- Product 2 -->
-                <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1567&q=80" alt="iPhone 14 Pro" class="w-full h-48 object-cover image-zoom">
-                        <div class="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">Nouveau</div>
+                <div class="mt-3 flex items-center justify-between">
+                    <div>
+                        <span class="text-lg font-bold">1 799€</span>
+                        <span class="text-gray-400 line-through text-sm ml-2">2 099€</span>
                     </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-semibold">iPhone 14 Pro 256GB</h3>
-                            <div class="flex items-center text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.9</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Apple</p>
-                        
-                        <div class="mt-3 flex items-center justify-between">
-                            <div>
-                                <span class="text-lg font-bold">1 299€</span>
-                            </div>
-                            <button class="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
-                                <i class="fas fa-shopping-cart"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 3 -->
-                <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Samsung Galaxy S23" class="w-full h-48 object-cover image-zoom">
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-semibold">Galaxy S23 Ultra 512GB</h3>
-                            <div class="flex items-center text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.7</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Samsung</p>
-                        
-                        <div class="mt-3 flex items-center justify-between">
-                            <div>
-                                <span class="text-lg font-bold">1 199€</span>
-                            </div>
-                            <button class="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
-                                <i class="fas fa-shopping-cart"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 4 -->
-                <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1629131726692-1accd0bec53c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="AirPods Pro" class="w-full h-48 object-cover image-zoom">
-                        <div class="absolute top-2 left-2 bg-blue-500 text-white text-xs px-2 py-1 rounded">Best-seller</div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-semibold">AirPods Pro (2ème génération)</h3>
-                            <div class="flex items-center text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.8</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Apple</p>
-                        
-                        <div class="mt-3 flex items-center justify-between">
-                            <div>
-                                <span class="text-lg font-bold">279€</span>
-                            </div>
-                            <button class="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
-                                <i class="fas fa-shopping-cart"></i>
-                            </button>
-                        </div>
-                    </div>
+                    <button class="bg-[#051769] text-white p-2 rounded-full hover:bg-[#0298e4]">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
                 </div>
             </div>
-    <div class="text-center mt-12 scroll-hidden">
-      <a href="#" class="inline-block border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-blue-600">Voir tous les produits</a>
+        </div>
+        
+        <!-- Product 2 -->
+        <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl" data-scroll="fade-in" data-scroll-delay="100">
+            <div class="relative">
+                <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1567&q=80" alt="iPhone 14 Pro 256GB" class="w-full h-48 object-cover image-zoom">
+                <div class="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">Nouveau</div>
+            </div>
+            <div class="p-4">
+                <div class="flex justify-between items-start">
+                    <h3 class="font-semibold">iPhone 14 Pro 256GB</h3>
+                    <div class="flex items-center text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.9</span>
+                    </div>
+                </div>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Apple</p>
+                
+                <div class="mt-3 flex items-center justify-between">
+                    <div>
+                        <span class="text-lg font-bold">1 299€</span>
+                    </div>
+                    <button class="bg-[#051769] text-white p-2 rounded-full hover:bg-[#0298e4]">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Product 3 -->
+        <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl" data-scroll="fade-in" data-scroll-delay="200">
+            <div class="relative">
+                <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Samsung Galaxy S23 Ultra 512GB" class="w-full h-48 object-cover image-zoom">
+            </div>
+            <div class="p-4">
+                <div class="flex justify-between items-start">
+                    <h3 class="font-semibold">Galaxy S23 Ultra 512GB</h3>
+                    <div class="flex items-center text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.7</span>
+                    </div>
+                </div>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Samsung</p>
+                
+                <div class="mt-3 flex items-center justify-between">
+                    <div>
+                        <span class="text-lg font-bold">1 199€</span>
+                    </div>
+                    <button class="bg-[#051769] text-white p-2 rounded-full hover:bg-[#0298e4]">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Product 4 -->
+        <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl" data-scroll="fade-in" data-scroll-delay="300">
+            <div class="relative">
+                <img src="https://images.unsplash.com/photo-1629131726692-1accd0bec53c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="AirPods Pro 2ème génération" class="w-full h-48 object-cover image-zoom">
+                <div class="absolute top-2 left-2 bg-blue-500 text-white text-xs px-2 py-1 rounded">Best-seller</div>
+            </div>
+            <div class="p-4">
+                <div class="flex justify-between items-start">
+                    <h3 class="font-semibold">AirPods Pro (2ème génération)</h3>
+                    <div class="flex items-center text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.8</span>
+                    </div>
+                </div>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Apple</p>
+                
+                <div class="mt-3 flex items-center justify-between">
+                    <div>
+                        <span class="text-lg font-bold">279€</span>
+                    </div>
+                    <button class="bg-[#051769] text-white p-2 rounded-full hover:bg-[#0298e4]">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-12" data-scroll="fade-in">
+      <a href="#" class="inline-block border-2 border-[#051769] text-[#051769] px-8 py-3 rounded-full font-semibold hover:bg-[#051769] hover:text-white transition dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-[#051769]">Voir tous les produits</a>
     </div>
   </div>
 </section>
 
     <!-- Blog Section harmonisée -->
-<section id="blog" class="py-16 bg-gray-50 dark:bg-gray-900">
+<section id="blog" class="py-16 bg-gray-50 dark:bg-gray-900" data-scroll>
   <div class="container mx-auto px-4">
-    <div class="text-center mb-16 scroll-hidden">
-      <h2 class="text-3xl font-bold text-blue-600 mb-4 dark:text-white">Notre Blog Tech</h2>
-      <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300">Découvrez nos articles d'experts sur les dernières tendances technologiques et bonnes pratiques.</p>
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold text-[#051769] mb-4 dark:text-white" data-scroll="fade-in">Notre Blog Tech</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300" data-scroll="fade-in" data-scroll-delay="100">Découvrez nos articles d'experts sur les dernières tendances technologiques et bonnes pratiques.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" id="articles-container">
-                    <!-- Article 1 -->
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden article-card transition duration-300">
-                        <a href="#">
-                            <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1567&q=80" alt="Test iPhone 15 Pro" class="w-full h-48 object-cover">
-                        </a>
-                        <div class="p-5">
-                            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
-                                <span>Par <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">Marie Lambert</a></span>
-                                <span class="mx-2">•</span>
-                                <span>12 mai 2023</span>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">
-                                <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400">Test complet de l'iPhone 15 Pro : faut-il craquer ?</a>
-                            </h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-3">Nous avons passé deux semaines avec le nouveau fleuron d'Apple. Découvrez notre analyse détaillée des performances, de l'appareil photo et de la nouvelle interface...</p>
-                            <div class="flex justify-between items-center">
-                                <a href="#" class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">Lire la suite</a>
-                                <div class="flex items-center text-yellow-400 text-sm">
-                                    <i class="fas fa-star"></i>
-                                    <span class="text-gray-600 dark:text-gray-300 ml-1">4.7</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Article 2 -->
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden article-card transition duration-300">
-                        <a href="#">
-                            <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Samsung Galaxy S23" class="w-full h-48 object-cover">
-                        </a>
-                        <div class="p-5">
-                            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
-                                <span>Par <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">Thomas Martin</a></span>
-                                <span class="mx-2">•</span>
-                                <span>10 mai 2023</span>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">
-                                <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400">Galaxy S23 vs S22 : les 5 différences majeures</a>
-                            </h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-3">Samsung a-t-il fait assez d'efforts pour justifier le passage à sa nouvelle génération ? Nous comparons en détail les deux modèles sur tous les aspects techniques...</p>
-                            <div class="flex justify-between items-center">
-                                <a href="#" class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">Lire la suite</a>
-                                <div class="flex items-center text-yellow-400 text-sm">
-                                    <i class="fas fa-star"></i>
-                                    <span class="text-gray-600 dark:text-gray-300 ml-1">4.5</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
+        <!-- Article 1 -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden article-card transition duration-300 hover:shadow-xl" data-scroll="fade-in">
+            <a href="#">
+                <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1567&q=80" alt="Test iPhone 15 Pro" class="w-full h-48 object-cover">
+            </a>
+            <div class="p-5">
+                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+                    <span>Par <a href="#" class="text-[#0298e4] dark:text-blue-400 hover:underline">Marie Lambert</a></span>
+                    <span class="mx-2">•</span>
+                    <span>12 mai 2023</span>
                 </div>
-    <div class="text-center scroll-hidden">
-      <a href="#" class="inline-block border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-blue-600">Voir tous les articles</a>
+                <h3 class="text-xl font-bold mb-2">
+                    <a href="#" class="hover:text-[#0298e4] dark:hover:text-blue-400">Test complet de l'iPhone 15 Pro : faut-il craquer ?</a>
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-3">Nous avons passé deux semaines avec le nouveau fleuron d'Apple. Découvrez notre analyse détaillée des performances, de l'appareil photo et de la nouvelle interface...</p>
+                <div class="flex justify-between items-center">
+                    <a href="#" class="text-[#0298e4] dark:text-blue-400 text-sm font-medium hover:underline">Lire la suite</a>
+                    <div class="flex items-center text-yellow-400 text-sm">
+                        <i class="fas fa-star"></i>
+                        <span class="text-gray-600 dark:text-gray-300 ml-1">4.7</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Article 2 -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden article-card transition duration-300 hover:shadow-xl" data-scroll="fade-in" data-scroll-delay="100">
+            <a href="#">
+                <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Comparaison Galaxy S23 vs S22" class="w-full h-48 object-cover">
+            </a>
+            <div class="p-5">
+                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+                    <span>Par <a href="#" class="text-[#0298e4] dark:text-blue-400 hover:underline">Thomas Martin</a></span>
+                    <span class="mx-2">•</span>
+                    <span>10 mai 2023</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">
+                    <a href="#" class="hover:text-[#0298e4] dark:hover:text-blue-400">Galaxy S23 vs S22 : les 5 différences majeures</a>
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-3">Samsung a-t-il fait assez d'efforts pour justifier le passage à sa nouvelle génération ? Nous comparons en détail les deux modèles sur tous les aspects techniques...</p>
+                <div class="flex justify-between items-center">
+                    <a href="#" class="text-[#0298e4] dark:text-blue-400 text-sm font-medium hover:underline">Lire la suite</a>
+                    <div class="flex items-center text-yellow-400 text-sm">
+                        <i class="fas fa-star"></i>
+                        <span class="text-gray-600 dark:text-gray-300 ml-1">4.5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center" data-scroll="fade-in">
+      <a href="#" class="inline-block border-2 border-[#051769] text-[#051769] px-8 py-3 rounded-full font-semibold hover:bg-[#051769] hover:text-white transition dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-[#051769]">Voir tous les articles</a>
     </div>
   </div>
 </section>
 
-    <section class="py-20 bg-gradient-to-br from-blue-50 via-white to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 relative overflow-hidden">
+    <section class="py-20 bg-gradient-to-br from-blue-50 via-white to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 relative overflow-hidden" data-scroll>
   <!-- Décor SVG animé -->
   <svg class="absolute right-0 top-0 w-80 h-80 opacity-10 -z-10 animate-spin-slow" viewBox="0 0 400 400" fill="none">
     <circle cx="200" cy="200" r="200" fill="url(#testimonialRadial)" />
@@ -540,22 +551,22 @@
   </svg>
   <div class="container mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-blue-600 dark:text-white mb-4">Ils nous font confiance</h2>
-      <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300">Découvrez ce que nos clients disent de notre collaboration.</p>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-[#051769] dark:text-white mb-4" data-scroll="fade-in">Ils nous font confiance</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300" data-scroll="fade-in" data-scroll-delay="100">Découvrez ce que nos clients disent de notre collaboration.</p>
     </div>
     <!-- Carousel style testimonials -->
     <div class="relative max-w-4xl mx-auto">
       <div class="flex flex-col md:flex-row items-center gap-8">
         <!-- Testimonial 1 -->
-        <div class="flex-1 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-8 border-blue-600 dark:border-blue-500 transform hover:scale-105 transition duration-300">
+        <div class="flex-1 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-8 border-[#0298e4] dark:border-blue-500 transform hover:scale-105 transition duration-300" data-scroll="fade-in">
           <div class="flex items-center mb-4">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Jean Dubois" class="w-16 h-16 rounded-full border-4 border-blue-100 dark:border-blue-900 shadow-lg mr-4">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Jean Dubois, CEO Entreprise XYZ" class="w-16 h-16 rounded-full border-4 border-blue-100 dark:border-blue-900 shadow-lg mr-4">
             <div>
               <h4 class="font-bold text-lg dark:text-white">Jean Dubois</h4>
               <p class="text-gray-500 text-sm dark:text-gray-400">CEO, Entreprise XYZ</p>
             </div>
           </div>
-          <p class="italic text-gray-700 dark:text-gray-300 mb-4">“AdmiSoft a révolutionné notre façon de travailler. Leur solution CRM sur mesure a augmenté notre productivité de 40% en seulement 3 mois.”</p>
+          <p class="italic text-gray-700 dark:text-gray-300 mb-4">"AdmiSoft a révolutionné notre façon de travailler. Leur solution CRM sur mesure a augmenté notre productivité de 40% en seulement 3 mois."</p>
           <div class="flex items-center">
             <div class="flex text-yellow-400 mr-2">
               <i class="fas fa-star"></i>
@@ -568,15 +579,15 @@
           </div>
         </div>
         <!-- Testimonial 2 -->
-        <div class="flex-1 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-8 border-purple-600 dark:border-purple-500 transform hover:scale-105 transition duration-300">
+        <div class="flex-1 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-8 border-purple-600 dark:border-purple-500 transform hover:scale-105 transition duration-300" data-scroll="fade-in" data-scroll-delay="100">
           <div class="flex items-center mb-4">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sophie Martin" class="w-16 h-16 rounded-full border-4 border-purple-100 dark:border-purple-900 shadow-lg mr-4">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sophie Martin, Directrice Tech Groupe ABC" class="w-16 h-16 rounded-full border-4 border-purple-100 dark:border-purple-900 shadow-lg mr-4">
             <div>
               <h4 class="font-bold text-lg dark:text-white">Sophie Martin</h4>
               <p class="text-gray-500 text-sm dark:text-gray-400">Directrice Tech, Groupe ABC</p>
             </div>
           </div>
-          <p class="italic text-gray-700 dark:text-gray-300 mb-4">“Leur expertise en cybersécurité nous a permis de sécuriser nos infrastructures critiques. Réactifs, professionnels et très compétents.”</p>
+          <p class="italic text-gray-700 dark:text-gray-300 mb-4">"Leur expertise en cybersécurité nous a permis de sécuriser nos infrastructures critiques. Réactifs, professionnels et très compétents."</p>
           <div class="flex items-center">
             <div class="flex text-yellow-400 mr-2">
               <i class="fas fa-star"></i>
@@ -589,15 +600,15 @@
           </div>
         </div>
         <!-- Testimonial 3 -->
-        <div class="flex-1 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-8 border-green-600 dark:border-green-500 transform hover:scale-105 transition duration-300">
+        <div class="flex-1 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-8 border-green-600 dark:border-green-500 transform hover:scale-105 transition duration-300" data-scroll="fade-in" data-scroll-delay="200">
           <div class="flex items-center mb-4">
-            <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Pierre Lambert" class="w-16 h-16 rounded-full border-4 border-green-100 dark:border-green-900 shadow-lg mr-4">
+            <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Pierre Lambert, Directeur Digital Startup DEF" class="w-16 h-16 rounded-full border-4 border-green-100 dark:border-green-900 shadow-lg mr-4">
             <div>
               <h4 class="font-bold text-lg dark:text-white">Pierre Lambert</h4>
               <p class="text-gray-500 text-sm dark:text-gray-400">Directeur Digital, Startup DEF</p>
             </div>
           </div>
-          <p class="italic text-gray-700 dark:text-gray-300 mb-4">“Leur accompagnement dans notre migration cloud a été exemplaire. Des délais respectés, un budget maîtrisé et une équipe toujours disponible.”</p>
+          <p class="italic text-gray-700 dark:text-gray-300 mb-4">"Leur accompagnement dans notre migration cloud a été exemplaire. Des délais respectés, un budget maîtrisé et une équipe toujours disponible."</p>
           <div class="flex items-center">
             <div class="flex text-yellow-400 mr-2">
               <i class="fas fa-star"></i>
@@ -612,7 +623,7 @@
       </div>
       <!-- Decorative dots for carousel effect (static for now) -->
       <div class="flex justify-center mt-8 gap-2">
-        <span class="w-3 h-3 rounded-full bg-blue-600"></span>
+        <span class="w-3 h-3 rounded-full bg-[#0298e4]"></span>
         <span class="w-3 h-3 rounded-full bg-blue-200 dark:bg-gray-700"></span>
         <span class="w-3 h-3 rounded-full bg-blue-200 dark:bg-gray-700"></span>
       </div>
@@ -621,7 +632,7 @@
 </section>
 
     <!-- ...avant -->
-<section id="contact" class="py-20 bg-gradient-to-tr from-blue-50 via-white to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 relative overflow-hidden">
+<section id="contact" class="py-20 bg-gradient-to-tr from-blue-50 via-white to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 relative overflow-hidden" data-scroll>
   <!-- Décor SVG -->
   <svg class="absolute left-0 top-0 w-64 h-64 opacity-10 -z-10" viewBox="0 0 400 400" fill="none">
     <circle cx="200" cy="200" r="200" fill="url(#contactRadial)" />
@@ -633,54 +644,53 @@
     </defs>
   </svg>
   <div class="container mx-auto px-4 relative z-10">
-    <div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-10 md:p-14 flex flex-col items-center">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-blue-600 dark:text-white mb-2 text-center">Contactez-nous</h2>
+    <div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-10 md:p-14 flex flex-col items-center" data-scroll="fade-in">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-[#051769] dark:text-white mb-2 text-center">Contactez-nous</h2>
       <p class="text-gray-600 dark:text-gray-300 mb-8 text-center max-w-xl">Une question, un projet ou juste envie d'échanger ? Notre équipe vous répond sous 24h ouvrées.</p>
       <form class="w-full space-y-6">
         <div class="flex flex-col md:flex-row gap-6">
-          <div class="flex-1">
+          <div class="flex-1" data-scroll="fade-in">
             <label for="contact-name" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Nom complet</label>
-            <input type="text" id="contact-name" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" placeholder="Votre nom" required>
+            <input type="text" id="contact-name" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] dark:bg-gray-700 dark:text-white" placeholder="Votre nom" required>
           </div>
-          <div class="flex-1">
+          <div class="flex-1" data-scroll="fade-in" data-scroll-delay="100">
             <label for="contact-email" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Email</label>
-            <input type="email" id="contact-email" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" placeholder="Votre email" required>
+            <input type="email" id="contact-email" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] dark:bg-gray-700 dark:text-white" placeholder="Votre email" required>
           </div>
         </div>
-        <div>
+        <div data-scroll="fade-in" data-scroll-delay="200">
           <label for="contact-message" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Message</label>
-          <textarea id="contact-message" rows="5" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" placeholder="Décrivez votre besoin ou posez-nous votre question..." required></textarea>
+          <textarea id="contact-message" rows="5" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] dark:bg-gray-700 dark:text-white" placeholder="Décrivez votre besoin ou posez-nous votre question..." required></textarea>
         </div>
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4" data-scroll="fade-in" data-scroll-delay="300">
           <div class="flex items-center">
-            <input type="checkbox" id="contact-consent" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 dark:text-blue-400">
-            <label for="contact-consent" class="ml-2 text-gray-600 dark:text-gray-300 text-sm">J'accepte la <a href="#" class="underline hover:text-blue-600 dark:hover:text-blue-400">politique de confidentialité</a></label>
+            <input type="checkbox" id="contact-consent" class="form-checkbox h-5 w-5 text-[#0298e4] rounded focus:ring-[#0298e4] dark:text-blue-400">
+            <label for="contact-consent" class="ml-2 text-gray-600 dark:text-gray-300 text-sm">J'accepte la <a href="#" class="underline hover:text-[#0298e4] dark:hover:text-blue-400">politique de confidentialité</a></label>
           </div>
-          <button type="submit" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition text-lg shadow-lg">Envoyer le message</button>
+          <button type="submit" class="w-full md:w-auto bg-[#051769] hover:bg-[#0298e4] text-white px-8 py-3 rounded-lg font-semibold transition text-lg shadow-lg">Envoyer le message</button>
         </div>
       </form>
-      <div class="mt-10 flex flex-col md:flex-row items-center justify-center gap-8 w-full">
+      <div class="mt-10 flex flex-col md:flex-row items-center justify-center gap-8 w-full" data-scroll="fade-in">
         <div class="flex items-center gap-3">
-          <i class="fas fa-envelope text-blue-600 dark:text-blue-400 text-xl"></i>
+          <i class="fas fa-envelope text-[#0298e4] dark:text-blue-400 text-xl"></i>
           <span class="text-gray-700 dark:text-gray-200 text-base">contact@AdmiSoft.com</span>
         </div>
         <div class="flex items-center gap-3">
-          <i class="fas fa-phone-alt text-blue-600 dark:text-blue-400 text-xl"></i>
+          <i class="fas fa-phone-alt text-[#0298e4] dark:text-blue-400 text-xl"></i>
           <span class="text-gray-700 dark:text-gray-200 text-base">+33 1 23 45 67 89</span>
         </div>
         <div class="flex items-center gap-3">
-          <i class="fas fa-map-marker-alt text-blue-600 dark:text-blue-400 text-xl"></i>
+          <i class="fas fa-map-marker-alt text-[#0298e4] dark:text-blue-400 text-xl"></i>
           <span class="text-gray-700 dark:text-gray-200 text-base">Paris, France</span>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- ...après -->
 
     
 
-    <footer class="bg-gradient-to-tr from-blue-800 via-blue-500 to-purple-600 text-white pt-12 pb-6 relative overflow-hidden">
+    <footer class="bg-gradient-to-tr from-[#051769] via-[#0298e4] to-[#3b82f6] text-white pt-12 pb-6 relative overflow-hidden" data-scroll>
   <!-- Animation décorative SVG -->
   <svg class="absolute top-0 left-0 w-64 h-64 opacity-20 -z-10" viewBox="0 0 400 400" fill="none">
     <circle cx="200" cy="200" r="200" fill="url(#footerRadial)" />
@@ -692,7 +702,7 @@
     </defs>
   </svg>
   <div class="container mx-auto px-4">
-    <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-8 mb-8">
+    <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-8 mb-8" data-scroll="fade-in">
       <!-- Logo & Slogan -->
       <div>
         <div class="flex items-center mb-2">
@@ -701,29 +711,29 @@
         <p class="text-blue-100 text-base">L'innovation digitale, simplement.</p>
       </div>
       <!-- Newsletter intégrée -->
-      <div class="w-full md:w-auto">
+      <div class="w-full md:w-auto" data-scroll="fade-in" data-scroll-delay="100">
         <h4 class="font-semibold mb-2 text-lg">Recevez nos actus</h4>
         <form class="flex flex-col bg-white rounded-lg overflow-hidden shadow-lg max-w-md p-2">
           <input type="email" placeholder="Votre email" class="flex-grow px-4 py-2 text-gray-800 focus:outline-none text-base rounded mb-2" required>
-          <button class="bg-blue-700 hover:bg-blue-900 text-white px-6 py-2 font-semibold transition text-base rounded">S'abonner</button>
+          <button class="bg-[#051769] hover:bg-[#0298e4] text-white px-6 py-2 font-semibold transition text-base rounded">S'abonner</button>
         </form>
         <p class="text-sm text-blue-100 mt-2">Pas de spam, juste l'essentiel.</p>
       </div>
       <!-- Liens rapides minimalistes -->
-      <div class="flex flex-col space-y-2 text-base">
+      <div class="flex flex-col space-y-2 text-base" data-scroll="fade-in" data-scroll-delay="200">
         <a href="index.html" class="hover:underline">Accueil</a>
-        <a href="#" class="hover:underline">Boutique</a>
-        <a href="#" class="hover:underline">Blog</a>
+        <a href="#shop" class="hover:underline">Blog</a>
+        <a href="#blog" class="hover:underline">Marketplace</a>
         <a href="#contact" class="hover:underline">Contact</a>
       </div>
     </div>
-    <div class="border-t border-blue-300/30 pt-6 flex flex-col md:flex-row justify-between items-center text-blue-100 text-base gap-2">
-      <span>&copy; 2023 AdmiSoft</span>
+    <div class="border-t border-blue-300/30 pt-6 flex flex-col md:flex-row justify-between items-center text-blue-100 text-base gap-2" data-scroll="fade-in">
+      <span>&copy; 2023 AdmiSoft. Tous droits réservés.</span>
       <div class="flex space-x-4 text-lg">
-        <a href="#" class="hover:text-white"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="hover:text-white"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="hover:text-white"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-white" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="hover:text-white" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-white" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="hover:text-white" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
       </div>
     </div>
   </div>
@@ -734,7 +744,7 @@
         <div class="container mx-auto px-4 py-12">
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden max-w-6xl mx-auto">
                 <div class="p-4 flex justify-end">
-                    <button id="close-product" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                    <button id="close-product" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer">
                         <i class="fas fa-times text-2xl"></i>
                     </button>
                 </div>
@@ -743,21 +753,21 @@
                     <!-- Product Images -->
                     <div>
                         <div class="mb-4 rounded-lg overflow-hidden">
-                            <img id="main-product-image" src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro" class="w-full h-auto rounded-lg cursor-zoom-in" onclick="zoomImage(this)">
+                            <img id="main-product-image" src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro 14 pouces M2" class="w-full h-auto rounded-lg cursor-zoom-in" onclick="zoomImage(this)">
                         </div>
                         
                         <div class="grid grid-cols-4 gap-2">
-                            <div class="border-2 border-transparent hover:border-blue-500 rounded cursor-pointer">
-                                <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            <div class="border-2 border-transparent hover:border-[#0298e4] rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro vue de face" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
                             </div>
-                            <div class="border-2 border-transparent hover:border-blue-500 rounded cursor-pointer">
-                                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="MacBook Pro" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            <div class="border-2 border-transparent hover:border-[#0298e4] rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="MacBook Pro vue de côté" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
                             </div>
-                            <div class="border-2 border-transparent hover:border-blue-500 rounded cursor-pointer">
-                                <img src="https://images.unsplash.com/photo-1542393545-10f5cde2c810?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1065&q=80" alt="MacBook Pro" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            <div class="border-2 border-transparent hover:border-[#0298e4] rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1542393545-10f5cde2c810?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1065&q=80" alt="MacBook Pro clavier" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
                             </div>
-                            <div class="border-2 border-transparent hover:border-blue-500 rounded cursor-pointer">
-                                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="MacBook Pro" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            <div class="border-2 border-transparent hover:border-[#0298e4] rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="MacBook Pro écran" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
                             </div>
                         </div>
                     </div>
@@ -792,12 +802,12 @@
                         <div class="mb-6">
                             <h3 class="font-semibold mb-2">Caractéristiques</h3>
                             <ul class="grid grid-cols-2 gap-2 text-gray-600 dark:text-gray-400">
-                                <li><i class="fas fa-microchip mr-2 text-blue-500"></i> M2 Pro 10 cœurs</li>
-                                <li><i class="fas fa-memory mr-2 text-blue-500"></i> 16GB mémoire unifiée</li>
-                                <li><i class="fas fa-hdd mr-2 text-blue-500"></i> SSD 512GB</li>
-                                <li><i class="fas fa-tv mr-2 text-blue-500"></i> Écran 14.2" Liquid Retina XDR</li>
-                                <li><i class="fas fa-battery-full mr-2 text-blue-500"></i> Jusqu'à 20h d'autonomie</li>
-                                <li><i class="fas fa-weight mr-2 text-blue-500"></i> 1.6 kg</li>
+                                <li><i class="fas fa-microchip mr-2 text-[#0298e4]"></i> M2 Pro 10 cœurs</li>
+                                <li><i class="fas fa-memory mr-2 text-[#0298e4]"></i> 16GB mémoire unifiée</li>
+                                <li><i class="fas fa-hdd mr-2 text-[#0298e4]"></i> SSD 512GB</li>
+                                <li><i class="fas fa-tv mr-2 text-[#0298e4]"></i> Écran 14.2" Liquid Retina XDR</li>
+                                <li><i class="fas fa-battery-full mr-2 text-[#0298e4]"></i> Jusqu'à 20h d'autonomie</li>
+                                <li><i class="fas fa-weight mr-2 text-[#0298e4]"></i> 1.6 kg</li>
                             </ul>
                         </div>
                         
@@ -807,9 +817,9 @@
                                 <div>
                                     <label class="block mb-1">Couleur</label>
                                     <div class="flex space-x-2">
-                                        <button class="w-8 h-8 rounded-full bg-gray-800 border-2 border-gray-300 focus:border-blue-500"></button>
-                                        <button class="w-8 h-8 rounded-full bg-gray-400 border-2 border-gray-300 focus:border-blue-500"></button>
-                                        <button class="w-8 h-8 rounded-full bg-gray-200 border-2 border-gray-300 focus:border-blue-500"></button>
+                                        <button class="w-8 h-8 rounded-full bg-gray-800 border-2 border-gray-300 focus:border-[#0298e4]"></button>
+                                        <button class="w-8 h-8 rounded-full bg-gray-400 border-2 border-gray-300 focus:border-[#0298e4]"></button>
+                                        <button class="w-8 h-8 rounded-full bg-gray-200 border-2 border-gray-300 focus:border-[#0298e4]"></button>
                                     </div>
                                 </div>
                                 
@@ -838,7 +848,7 @@
                                 <input type="text" value="1" class="w-12 text-center border-x border-gray-300 dark:border-gray-600 dark:bg-gray-700">
                                 <button class="px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">+</button>
                             </div>
-                            <button class="flex-grow bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+                            <button class="flex-grow bg-[#051769] text-white py-2 px-4 rounded hover:bg-[#0298e4]">
                                 <i class="fas fa-shopping-cart mr-2"></i> Ajouter au panier
                             </button>
                         </div>
@@ -848,10 +858,10 @@
                 <!-- Product Tabs -->
                 <div class="border-t border-gray-200 dark:border-gray-700">
                     <div class="flex border-b border-gray-200 dark:border-gray-700">
-                        <button class="tab-btn px-6 py-4 font-medium border-b-2 border-blue-600 text-blue-600 dark:text-blue-400">Description</button>
-                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">Spécifications</button>
-                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">Avis (124)</button>
-                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">FAQ</button>
+                        <button class="tab-btn px-6 py-4 font-medium border-b-2 border-[#0298e4] text-[#051769] dark:text-[#0298e4]">Description</button>
+                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Spécifications</button>
+                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Avis (124)</button>
+                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">FAQ</button>
                     </div>
                     
                     <div class="p-6">
@@ -897,7 +907,7 @@
         <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
             <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
                 <h3 class="text-xl font-bold">Votre panier (3)</h3>
-                <button id="close-cart" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                <button id="close-cart" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer le panier">
                     <i class="fas fa-times text-2xl"></i>
                 </button>
             </div>
@@ -906,7 +916,7 @@
                 <!-- Cart Item 1 -->
                 <div class="flex border-b border-gray-200 dark:border-gray-700 pb-4">
                     <div class="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro" class="w-full h-full object-contain">
+                        <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro 14 pouces M2" class="w-full h-full object-contain">
                     </div>
                     <div class="ml-4 flex-grow">
                         <h4 class="font-medium">MacBook Pro 14" M2</h4>
@@ -920,7 +930,7 @@
                             <span class="font-bold">1 799€</span>
                         </div>
                     </div>
-                    <button class="text-gray-400 hover:text-red-500 ml-2">
+                    <button class="text-gray-400 hover:text-red-500 ml-2" aria-label="Supprimer l'article">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
@@ -928,7 +938,7 @@
                 <!-- Cart Item 2 -->
                 <div class="flex border-b border-gray-200 dark:border-gray-700 pb-4">
                     <div class="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1629131726692-1accd0bec53c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="AirPods Pro" class="w-full h-full object-contain">
+                        <img src="https://images.unsplash.com/photo-1629131726692-1accd0bec53c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="AirPods Pro 2ème génération" class="w-full h-full object-contain">
                     </div>
                     <div class="ml-4 flex-grow">
                         <h4 class="font-medium">AirPods Pro (2ème génération)</h4>
@@ -942,7 +952,7 @@
                             <span class="font-bold">558€</span>
                         </div>
                     </div>
-                    <button class="text-gray-400 hover:text-red-500 ml-2">
+                    <button class="text-gray-400 hover:text-red-500 ml-2" aria-label="Supprimer l'article">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
@@ -963,16 +973,16 @@
                 </div>
                 
                 <div class="mt-6 space-y-3">
-                    <button id="confirm-order-btn" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-medium">
-    <i class="fas fa-credit-card mr-2"></i> Passer la commande
-</button>
-                    <a href="#" class="block border border-blue-600 text-blue-600 dark:text-blue-400 text-center py-3 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium">
+                    <button id="confirm-order-btn" class="w-full bg-[#051769] text-white py-2 px-4 rounded hover:bg-[#0298e4] font-medium">
+                        <i class="fas fa-credit-card mr-2"></i> Passer la commande
+                    </button>
+                    <a href="#" class="block border border-[#051769] text-[#051769] dark:text-[#0298e4] text-center py-3 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium">
                         Voir le panier
                     </a>
                 </div>
                 
                 <div class="mt-6">
-                    <img src="https://via.placeholder.com/300x40?text=PAYMENT+OPTIONS" alt="Modes de paiement" class="w-full">
+                    <img src="https://via.placeholder.com/300x40?text=PAYMENT+OPTIONS" alt="Modes de paiement acceptés" class="w-full">
                 </div>
             </div>
         </div>
@@ -983,7 +993,7 @@
   <div id="chat-box" class="hidden bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-[90vw] max-w-sm h-[80vh] flex flex-col border border-blue-100 dark:border-blue-900">
 
     <!-- Header -->
-    <div class="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-t-2xl">
+    <div class="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-[#051769] to-[#0298e4] text-white rounded-t-2xl">
       <div class="flex items-center gap-3">
         <span class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
           <i class="fas fa-robot text-xl"></i>
@@ -993,26 +1003,26 @@
           <div class="text-xs text-blue-100">En ligne</div>
         </div>
       </div>
-      <button id="close-chat" class="hover:text-blue-200 transition"><i class="fas fa-times text-lg"></i></button>
+      <button id="close-chat" class="hover:text-blue-200 transition" aria-label="Fermer le chat"><i class="fas fa-times text-lg"></i></button>
     </div>
 
     <!-- Messages -->
     <div id="chat-messages" class="flex-1 px-3 py-2 overflow-y-auto space-y-4 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 text-sm">
       <!-- Messages exemples -->
       <div class="flex items-end gap-2">
-        <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-bold">S</div>
+        <div class="w-8 h-8 rounded-full bg-[#0298e4] text-white flex items-center justify-center text-sm font-bold">S</div>
         <div class="bg-blue-100 dark:bg-blue-900 text-gray-800 dark:text-blue-100 rounded-2xl px-3 py-2 max-w-[75%]">
           Bonjour ! Comment pouvons-nous vous aider aujourd'hui ?
         </div>
       </div>
       <div class="flex items-end gap-2 justify-end">
-        <div class="bg-blue-600 text-white rounded-2xl px-3 py-2 max-w-[75%]">J'ai une question sur la livraison</div>
+        <div class="bg-[#051769] text-white rounded-2xl px-3 py-2 max-w-[75%]">J'ai une question sur la livraison</div>
         <div class="w-8 h-8 rounded-full bg-blue-200 text-blue-700 flex items-center justify-center text-sm font-bold">M</div>
       </div>
       <div class="flex items-end gap-2">
-        <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-bold">S</div>
+        <div class="w-8 h-8 rounded-full bg-[#0298e4] text-white flex items-center justify-center text-sm font-bold">S</div>
         <div class="bg-blue-100 dark:bg-blue-900 rounded-2xl px-2 py-2 max-w-[75%]">
-          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=facearea&w=200&q=80" alt="img" class="rounded-lg max-w-[150px] mb-1">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=facearea&w=200&q=80" alt="Exemple de produit" class="rounded-lg max-w-[150px] mb-1">
           <div class="text-xs text-gray-600 dark:text-gray-300">Voici un exemple de produit !</div>
         </div>
       </div>
@@ -1023,33 +1033,38 @@
       
       <!-- Bouton "+" pour afficher les options -->
       <div class="relative">
-        <button type="button" id="chat-more" class="p-2 rounded-full hover:bg-blue-50 dark:hover:bg-gray-800 text-blue-600 dark:text-blue-400" title="Plus d'options">
+        <button type="button" id="chat-more" class="p-2 rounded-full hover:bg-blue-50 dark:hover:bg-gray-800 text-[#0298e4] dark:text-blue-400" title="Plus d'options" aria-label="Options du chat">
           <i class="fas fa-plus"></i>
         </button>
         <div id="chat-options" class="absolute bottom-12 left-0 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-2 space-y-2 hidden z-50">
-          <label class="cursor-pointer text-blue-600 hover:text-blue-800 flex items-center gap-2">
-            <i class="fas fa-image"></i>
-            <span>Image</span>
-            <input type="file" id="chat-image-input" accept="image/*" class="hidden">
-          </label>
-          <button type="button" id="chat-audio" class="text-blue-600 hover:text-blue-800 flex items-center gap-2">
-            <i class="fas fa-microphone"></i> <span>Audio</span>
-          </button>
-        </div>
+  <label class="cursor-pointer text-[#0298e4] hover:text-[#051769] flex items-center gap-2">
+    <i class="fas fa-image"></i>
+    <span>Image</span>
+    <input type="file" id="chat-image-input" accept="image/*" class="hidden">
+  </label>
+  <label class="cursor-pointer text-[#0298e4] hover:text-[#051769] flex items-center gap-2">
+    <i class="fas fa-video"></i>
+    <span>Vidéo</span>
+    <input type="file" id="chat-video-input" accept="video/*" class="hidden">
+  </label>
+  <button type="button" id="chat-audio" class="text-[#0298e4] hover:text-[#051769] flex items-center gap-2">
+    <i class="fas fa-microphone"></i> <span>Audio</span>
+  </button>
+</div>
       </div>
 
       <!-- Zone de texte -->
-      <input type="text" id="chat-input" autocomplete="off" placeholder="Message..." class="flex-1 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 dark:text-white text-sm">
+      <input type="text" id="chat-input" autocomplete="off" placeholder="Message..." class="flex-1 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[#0298e4] text-gray-800 dark:text-white text-sm">
 
       <!-- Envoyer -->
-      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-2 transition flex items-center justify-center">
+      <button type="submit" class="bg-[#051769] hover:bg-[#0298e4] text-white rounded-full p-2 transition flex items-center justify-center" aria-label="Envoyer le message">
         <i class="fas fa-paper-plane text-sm"></i>
       </button>
     </form>
   </div>
 
   <!-- Bubble bouton d'ouverture -->
-  <button id="open-chat" class="w-14 h-14 bg-gradient-to-tr from-blue-600 to-purple-600 text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition">
+  <button id="open-chat" class="w-14 h-14 bg-gradient-to-tr from-[#051769] to-[#0298e4] text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition" aria-label="Ouvrir le chat">
     <i class="fas fa-comment-dots text-2xl"></i>
   </button>
 </div>
@@ -1060,7 +1075,7 @@
     <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
         <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
             <h3 class="text-xl font-bold">Mon Profil</h3>
-            <button id="close-user" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+            <button id="close-user" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer le profil">
                 <i class="fas fa-times text-2xl"></i>
             </button>
         </div>
@@ -1068,7 +1083,7 @@
         <div class="p-6">
             <!-- User Profile Section -->
             <div class="flex flex-col items-center mb-6">
-                <div class="w-24 h-24 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 text-3xl font-bold mb-4">
+                <div class="w-24 h-24 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-[#051769] dark:text-blue-400 text-3xl font-bold mb-4">
                     JD
                 </div>
                 <h4 class="text-xl font-semibold">Jean Dupont</h4>
@@ -1079,7 +1094,7 @@
             <div class="space-y-4 mb-6">
                 <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
                     <h5 class="font-medium mb-2 flex items-center">
-                        <i class="fas fa-envelope mr-3 text-blue-500"></i> Informations personnelles
+                        <i class="fas fa-envelope mr-3 text-[#0298e4]"></i> Informations personnelles
                     </h5>
                     <div class="space-y-2">
                         <p><span class="font-medium">Email:</span> jean.dupont@example.com</p>
@@ -1090,7 +1105,7 @@
                 
                 <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
                     <h5 class="font-medium mb-2 flex items-center">
-                        <i class="fas fa-map-marker-alt mr-3 text-blue-500"></i> Adresse principale
+                        <i class="fas fa-map-marker-alt mr-3 text-[#0298e4]"></i> Adresse principale
                     </h5>
                     <address class="not-italic">
                         <p>12 Rue de la République</p>
@@ -1102,30 +1117,30 @@
             <!-- Stats -->
             <div class="grid grid-cols-3 gap-4 mb-6 text-center">
                 <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
-                    <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">15</div>
+                    <div class="text-2xl font-bold text-[#051769] dark:text-blue-400">15</div>
                     <div class="text-sm text-gray-500 dark:text-gray-400">Commandes</div>
                 </div>
                 <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
-                    <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">8</div>
+                    <div class="text-2xl font-bold text-[#051769] dark:text-blue-400">8</div>
                     <div class="text-sm text-gray-500 dark:text-gray-400">Favoris</div>
                 </div>
                 <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
-                    <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">2</div>
+                    <div class="text-2xl font-bold text-[#051769] dark:text-blue-400">2</div>
                     <div class="text-sm text-gray-500 dark:text-gray-400">Coupons</div>
                 </div>
             </div>
             
             <!-- Actions -->
             <div class="space-y-3">
-                <button id="edit-profile-btn" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-medium flex items-center justify-center">
-    <i class="fas fa-edit mr-2"></i> Modifier le profil
-</button>
-                <button id="change-password-btn" class="w-full border border-blue-600 text-blue-600 dark:text-blue-400 py-2 px-4 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium flex items-center justify-center">
-    <i class="fas fa-lock mr-2"></i> Changer le mot de passe
-</button>
+                <button id="edit-profile-btn" class="w-full bg-[#051769] text-white py-2 px-4 rounded hover:bg-[#0298e4] font-medium flex items-center justify-center">
+                    <i class="fas fa-edit mr-2"></i> Modifier le profil
+                </button>
+                <button id="change-password-btn" class="w-full border border-[#051769] text-[#051769] dark:text-[#0298e4] py-2 px-4 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium flex items-center justify-center">
+                    <i class="fas fa-lock mr-2"></i> Changer le mot de passe
+                </button>
                 <button id="logout-btn" class="w-full text-red-500 py-2 px-4 rounded hover:bg-red-50 dark:hover:bg-gray-700 font-medium flex items-center justify-center">
-    <i class="fas fa-sign-out-alt mr-2"></i> Déconnexion
-</button>
+                    <i class="fas fa-sign-out-alt mr-2"></i> Déconnexion
+                </button>
             </div>
         </div>
     </div>
@@ -1136,7 +1151,7 @@
     <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
         <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
             <h3 class="text-xl font-bold">Modifier le profil</h3>
-            <button id="close-edit-profile" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+            <button id="close-edit-profile" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer l'édition du profil">
                 <i class="fas fa-times text-2xl"></i>
             </button>
         </div>
@@ -1146,9 +1161,9 @@
                 <!-- Avatar Upload -->
                 <div class="flex flex-col items-center">
                     <div class="w-24 h-24 rounded-full bg-gray-200 dark:bg-gray-700 mb-4 overflow-hidden">
-                        <img id="profile-avatar" src="https://via.placeholder.com/150" alt="Avatar" class="w-full h-full object-cover">
+                        <img id="profile-avatar" src="https://via.placeholder.com/150" alt="Photo de profil" class="w-full h-full object-cover">
                     </div>
-                    <label class="cursor-pointer text-blue-600 dark:text-blue-400 text-sm font-medium">
+                    <label class="cursor-pointer text-[#0298e4] dark:text-blue-400 text-sm font-medium">
                         <input type="file" class="hidden" accept="image/*">
                         Changer la photo
                     </label>
@@ -1178,7 +1193,7 @@
                 </div>
                 
                 <div class="pt-4">
-                    <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-medium">
+                    <button type="submit" class="w-full bg-[#051769] text-white py-2 px-4 rounded hover:bg-[#0298e4] font-medium">
                         Enregistrer les modifications
                     </button>
                 </div>
@@ -1215,7 +1230,7 @@
     <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
         <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
             <h3 class="text-xl font-bold">Changer le mot de passe</h3>
-            <button id="close-change-password" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+            <button id="close-change-password" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer le changement de mot de passe">
                 <i class="fas fa-times text-2xl"></i>
             </button>
         </div>
@@ -1226,7 +1241,7 @@
                     <label class="block text-sm font-medium mb-1">Mot de passe actuel</label>
                     <div class="relative">
                         <input type="password" required class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 pr-10">
-                        <button type="button" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password">
+                        <button type="button" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password" aria-label="Afficher/masquer le mot de passe">
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
@@ -1236,7 +1251,7 @@
                     <label class="block text-sm font-medium mb-1">Nouveau mot de passe</label>
                     <div class="relative">
                         <input type="password" required class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 pr-10">
-                        <button type="button" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password">
+                        <button type="button" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password" aria-label="Afficher/masquer le mot de passe">
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
@@ -1247,14 +1262,14 @@
                     <label class="block text-sm font-medium mb-1">Confirmer le nouveau mot de passe</label>
                     <div class="relative">
                         <input type="password" required class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 pr-10">
-                        <button type="button" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password">
+                        <button type="button" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password" aria-label="Afficher/masquer le mot de passe">
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
                 </div>
                 
                 <div class="pt-4">
-                    <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-medium">
+                    <button type="submit" class="w-full bg-[#051769] text-white py-2 px-4 rounded hover:bg-[#0298e4] font-medium">
                         <i class="fas fa-save mr-2"></i> Enregistrer
                     </button>
                 </div>
@@ -1268,7 +1283,7 @@
     <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
         <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
             <h3 class="text-xl font-bold">Confirmation de commande</h3>
-            <button id="close-order-confirm" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+            <button id="close-order-confirm" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer la confirmation">
                 <i class="fas fa-times text-2xl"></i>
             </button>
         </div>
@@ -1302,17 +1317,17 @@
             
             <div class="bg-blue-50 dark:bg-blue-900 rounded-lg p-4 mb-6">
                 <h5 class="font-medium mb-2 flex items-center">
-                    <i class="fas fa-truck mr-2 text-blue-500"></i> Livraison
+                    <i class="fas fa-truck mr-2 text-[#0298e4]"></i> Livraison
                 </h5>
                 <p class="text-sm">Livraison prévue le <span class="font-medium">vendredi 12 mai</span></p>
                 <p class="text-sm text-gray-500 dark:text-gray-400">12 Rue de la République, 75001 Paris</p>
             </div>
             
             <div class="space-y-3">
-                <a href="#" class="block bg-blue-600 text-white text-center py-2 px-4 rounded hover:bg-blue-700 font-medium">
+                <a href="#" class="block bg-[#051769] text-white text-center py-2 px-4 rounded hover:bg-[#0298e4] font-medium">
                     <i class="fas fa-file-invoice mr-2"></i> Voir le détail de la commande
                 </a>
-                <button class="w-full border border-blue-600 text-blue-600 dark:text-blue-400 py-2 px-4 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium">
+                <button class="w-full border border-[#051769] text-[#051769] dark:text-[#0298e4] py-2 px-4 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium">
                     <i class="fas fa-home mr-2"></i> Retour à l'accueil
                 </button>
             </div>
@@ -1320,492 +1335,7 @@
     </div>
 </div>
 
-    <script>
-        
-        
-       
-        // Dark mode toggle (desktop)
-const themeToggle = document.getElementById('theme-toggle');
-const html = document.documentElement;
-if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-        html.classList.toggle('dark');
-        localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-    });
-    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        html.classList.add('dark');
-    }
-}
-
-// Mobile search bar logic (search icon triggers bar just below navbar, desktop aussi)
-const searchToggle = document.getElementById('search-toggle');
-const mobileSearchBar = document.getElementById('mobile-search-bar');
-const mobileSearchInput = document.getElementById('mobile-search-input');
-const mobileSearchClose = document.getElementById('mobile-search-close');
-const isMobile = () => window.innerWidth < 1024;
-
-searchToggle.addEventListener('click', (e) => {
-    mobileSearchBar.classList.remove('opacity-0', 'pointer-events-none');
-    mobileSearchBar.classList.add('opacity-100');
-    setTimeout(() => mobileSearchInput.focus(), 100);
-});
-mobileSearchClose.addEventListener('click', () => {
-    mobileSearchBar.classList.add('opacity-0', 'pointer-events-none');
-    mobileSearchBar.classList.remove('opacity-100');
-});
-window.addEventListener('click', (e) => {
-    if (!mobileSearchBar.contains(e.target) && e.target !== searchToggle) {
-        mobileSearchBar.classList.add('opacity-0', 'pointer-events-none');
-        mobileSearchBar.classList.remove('opacity-100');
-    }
-});
-mobileSearchInput.addEventListener('click', (e) => e.stopPropagation());
-mobileSearchInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        // Ajoutez ici la logique de recherche
-        mobileSearchBar.classList.add('opacity-0', 'pointer-events-none');
-        mobileSearchBar.classList.remove('opacity-100');
-    }
-});
-
-// Mobile actions bar logic
-const mobileActionsToggle = document.getElementById('mobile-actions-toggle');
-const mobileActionsBar = document.getElementById('mobile-actions-bar');
-const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
-const mobileUserToggle = document.getElementById('mobile-user-toggle');
-const mobileCartToggle = document.getElementById('mobile-cart-toggle');
-
-mobileActionsToggle.addEventListener('click', () => {
-    if (mobileActionsBar.classList.contains('opacity-0')) {
-        mobileActionsBar.classList.remove('opacity-0', 'pointer-events-none');
-        mobileActionsBar.classList.add('opacity-100');
-    } else {
-        mobileActionsBar.classList.add('opacity-0', 'pointer-events-none');
-        mobileActionsBar.classList.remove('opacity-100');
-    }
-});
-window.addEventListener('click', (e) => {
-    if (!mobileActionsBar.contains(e.target) && e.target !== mobileActionsToggle) {
-        mobileActionsBar.classList.add('opacity-0', 'pointer-events-none');
-        mobileActionsBar.classList.remove('opacity-100');
-    }
-});
-mobileActionsBar.addEventListener('click', e => e.stopPropagation());
-mobileThemeToggle.addEventListener('click', () => {
-    html.classList.toggle('dark');
-    localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-});
-// ...existing code...
-mobileUserToggle.addEventListener('click', () => {
-    document.getElementById('user-sidebar').classList.remove('hidden');
-    mobileActionsBar.classList.add('opacity-0', 'pointer-events-none');
-    mobileActionsBar.classList.remove('opacity-100');
-} );
-// ...existing code...
-mobileCartToggle.addEventListener('click', () => {
-    alert('Ouverture du panier (à personnaliser)');
-    mobileActionsBar.classList.add('opacity-0', 'pointer-events-none');
-    mobileActionsBar.classList.remove('opacity-100');
-});
-
-// Mobile menu logic
-const mobileMenuButton = document.getElementById('mobile-menu-button');
-const mobileMenu = document.getElementById('mobile-menu');
-const mobileMenuClose = document.getElementById('mobile-menu-close');
-const menuIcon = document.getElementById('menu-icon');
-const closeIcon = document.getElementById('close-icon');
-
-mobileMenuButton.addEventListener('click', () => {
-    mobileMenu.classList.remove('hidden');
-    menuIcon.classList.add('hidden');
-    closeIcon.classList.remove('hidden');
-    document.body.classList.add('overflow-hidden');
-});
-mobileMenuClose.addEventListener('click', () => {
-    mobileMenu.classList.add('hidden');
-    menuIcon.classList.remove('hidden');
-    closeIcon.classList.add('hidden');
-    document.body.classList.remove('overflow-hidden');
-});
-window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        mobileMenu.classList.add('hidden');
-        menuIcon.classList.remove('hidden');
-        closeIcon.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-    }
-});
-window.addEventListener('click', (e) => {
-    if (mobileMenu && !mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
-        mobileMenu.classList.add('hidden');
-        menuIcon.classList.remove('hidden');
-        closeIcon.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-    }
-});
-
-
-        
-        // Product page toggle
-        const productPage = document.getElementById('product-page');
-        const closeProduct = document.getElementById('close-product');
-        
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('click', () => {
-                productPage.classList.remove('hidden');
-            });
-        });
-        
-        closeProduct.addEventListener('click', () => {
-            productPage.classList.add('hidden');
-        });
-        
-        // Cart sidebar toggle - Version modifiée pour ne pas confliter avec le user sidebar
-const cartSidebar = document.getElementById('cart-sidebar');
-const closeCart = document.getElementById('close-cart');
-
-// Ne ciblez que l'icône du panier spécifiquement
-document.querySelectorAll('.fa-shopping-cart').forEach(icon => {
-    icon.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation(); // Empêche la propagation de l'événement
-        cartSidebar.classList.remove('hidden');
-    });
-});
-
-// Gardez aussi cette version pour les liens texte si nécessaire
-document.querySelectorAll('a[href="#"]').forEach(link => {
-    if (link.querySelector('.fa-shopping-cart')) {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            cartSidebar.classList.remove('hidden');
-        });
-    }
-});
-
-closeCart.addEventListener('click', () => {
-    cartSidebar.classList.add('hidden');
-});
-        
-        // Chat support toggle
-        const chatSupport = document.querySelector('#chat-support > div');
-        const openChat = document.getElementById('open-chat');
-        const closeChat = document.getElementById('close-chat');
-        
-        openChat.addEventListener('click', () => {
-            chatSupport.classList.toggle('hidden');
-        });
-        
-        closeChat.addEventListener('click', () => {
-            chatSupport.classList.add('hidden');
-        });
-        
-        // Product tabs
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabBtns.forEach((btn, index) => {
-            btn.addEventListener('click', () => {
-                tabBtns.forEach(b => {
-                    b.classList.remove('border-blue-600', 'text-blue-600', 'dark:text-blue-400');
-                    b.classList.add('text-gray-500', 'dark:text-gray-400');
-                });
-                
-                tabContents.forEach(content => content.classList.add('hidden'));
-                
-                btn.classList.add('border-blue-600', 'text-blue-600', 'dark:text-blue-400');
-                btn.classList.remove('text-gray-500', 'dark:text-gray-400');
-                tabContents[index].classList.remove('hidden');
-            });
-        });
-        
-        // Product image zoom
-        function zoomImage(img) {
-            if (img.style.transform === 'scale(2)') {
-                img.style.transform = 'scale(1)';
-                img.style.cursor = 'zoom-in';
-            } else {
-                img.style.transform = 'scale(2)';
-                img.style.cursor = 'zoom-out';
-            }
-        }
-        
-        // Change main product image
-        function changeMainImage(img) {
-            document.getElementById('main-product-image').src = img.src;
-        }
-        
-        // Gestion unifiée de tous les overlays
-window.addEventListener('click', (e) => {
-    // Product page
-    if (e.target === productPage) {
-        productPage.classList.add('hidden');
-    }
-    
-    // Cart sidebar
-    if (e.target === cartSidebar) {
-        cartSidebar.classList.add('hidden');
-    }
-    
-    // User profile sidebar
-    if (e.target === userSidebar) {
-        userSidebar.classList.add('hidden');
-    }
-    
-    // Edit profile sidebar
-    if (e.target === editProfileSidebar) {
-        editProfileSidebar.classList.add('hidden');
-    }
-    
-    // Chat support (si existant)
-    if (document.querySelector('#chat-support > div') && e.target === document.querySelector('#chat-support')) {
-        document.querySelector('#chat-support > div').classList.add('hidden');
-    }
-});
-
-        // User sidebar toggle
-const userSidebar = document.getElementById('user-sidebar');
-const closeUser = document.getElementById('close-user');
-const userAccountBtn = document.getElementById('user-account-btn');
-
-userAccountBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    userSidebar.classList.remove('hidden');
-});
-
-closeUser.addEventListener('click', () => {
-    userSidebar.classList.add('hidden');
-});
-
-// Fermer quand on clique à l'extérieur
-window.addEventListener('click', (e) => {
-    if (e.target === userSidebar) {
-        userSidebar.classList.add('hidden');
-    }
-});
-
-// Edit Profile Sidebar Toggle
-const editProfileSidebar = document.getElementById('edit-profile-sidebar');
-const editProfileBtn = document.getElementById('edit-profile-btn');
-const closeEditProfile = document.getElementById('close-edit-profile');
-
-editProfileBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    userSidebar.classList.add('hidden'); // Ferme le sidebar du profil
-    editProfileSidebar.classList.remove('hidden'); // Ouvre le sidebar d'édition
-});
-
-closeEditProfile.addEventListener('click', () => {
-    editProfileSidebar.classList.add('hidden');
-});
-
-// Fermer quand on clique à l'extérieur
-window.addEventListener('click', (e) => {
-    if (e.target === editProfileSidebar) {
-        editProfileSidebar.classList.add('hidden');
-    }
-});
-
-// Preview de l'image uploadée
-document.querySelector('#edit-profile-sidebar input[type="file"]').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            document.getElementById('profile-avatar').src = event.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
-});
-
-// Logout Sidebar Toggle
-const logoutSidebar = document.getElementById('logout-sidebar');
-const logoutBtn = document.getElementById('logout-btn');
-const cancelLogout = document.getElementById('cancel-logout');
-const confirmLogout = document.getElementById('confirm-logout');
-
-logoutBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    userSidebar.classList.add('hidden'); // Ferme le sidebar du profil
-    logoutSidebar.classList.remove('hidden'); // Ouvre le sidebar de confirmation
-});
-
-cancelLogout.addEventListener('click', () => {
-    logoutSidebar.classList.add('hidden');
-});
-
-confirmLogout.addEventListener('click', () => {
-    // Ici vous ajouterez la logique de déconnexion réelle
-    alert('Déconnexion effectuée'); // Remplacez par votre logique de déconnexion
-    logoutSidebar.classList.add('hidden');
-    // Redirection possible vers la page de login :
-    // window.location.href = '/login';
-});
-
-// Ajoutez aussi le logout-sidebar à la gestion des overlays
-window.addEventListener('click', (e) => {
-    if (e.target === logoutSidebar) {
-        logoutSidebar.classList.add('hidden');
-    }
-});
-
-// Change Password Modal
-const changePasswordModal = document.getElementById('change-password-modal');
-const changePasswordBtn = document.getElementById('change-password-btn');
-const closeChangePassword = document.getElementById('close-change-password');
-
-changePasswordBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    userSidebar.classList.add('hidden');
-    changePasswordModal.classList.remove('hidden');
-});
-
-closeChangePassword.addEventListener('click', () => {
-    changePasswordModal.classList.add('hidden');
-});
-
-// Toggle password visibility
-document.querySelectorAll('.toggle-password').forEach(button => {
-    button.addEventListener('click', function() {
-        const input = this.previousElementSibling;
-        const icon = this.querySelector('i');
-        if (input.type === "password") {
-            input.type = "text";
-            icon.classList.replace('fa-eye', 'fa-eye-slash');
-        } else {
-            input.type = "password";
-            icon.classList.replace('fa-eye-slash', 'fa-eye');
-        }
-    });
-});
-
-// Form submission
-document.getElementById('password-change-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    // Ici vous ajouterez la logique de changement de mot de passe
-    alert('Mot de passe changé avec succès'); // Remplacer par votre logique réelle
-    changePasswordModal.classList.add('hidden');
-});
-
-// Order Confirmation Modal
-const orderConfirmModal = document.getElementById('order-confirm-modal');
-const confirmOrderBtn = document.getElementById('confirm-order-btn');
-const closeOrderConfirm = document.getElementById('close-order-confirm');
-
-confirmOrderBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    cartSidebar.classList.add('hidden');
-    orderConfirmModal.classList.remove('hidden');
-    
-    // Ici vous pourriez ajouter la logique de traitement de la commande
-    // processOrder().then(() => showConfirmation());
-});
-
-closeOrderConfirm.addEventListener('click', () => {
-    orderConfirmModal.classList.add('hidden');
-});
-
-// Mettez à jour la gestion des overlays
-window.addEventListener('click', (e) => {
-    if (e.target === orderConfirmModal) {
-        orderConfirmModal.classList.add('hidden');
-    }
-});
-
-// Chat open/close
-document.getElementById('open-chat').onclick = () => {
-  document.getElementById('chat-box').classList.remove('hidden');
-};
-document.getElementById('close-chat').onclick = () => {
-  document.getElementById('chat-box').classList.add('hidden');
-};
-// Send text message
-document.getElementById('chat-form').onsubmit = function(e) {
-  e.preventDefault();
-  const input = document.getElementById('chat-input');
-  const msg = input.value.trim();
-  if (msg) {
-    addChatMessage(msg, 'user');
-    input.value = '';
-    setTimeout(() => addChatMessage("Merci pour votre message, un conseiller va vous répondre.", 'support'), 800);
-  }
-};
-// Add message to chat
-function addChatMessage(text, sender) {
-  const chat = document.getElementById('chat-messages');
-  const div = document.createElement('div');
-  div.className = 'flex items-end gap-2 ' + (sender === 'user' ? 'justify-end' : '');
-  div.innerHTML = sender === 'user'
-    ? `<div class="bg-blue-600 text-white rounded-2xl px-4 py-2 max-w-[70%]">${text}</div>
-       <div class="w-8 h-8 rounded-full bg-blue-200 flex items-center justify-center text-blue-700 text-sm font-bold">M</div>`
-    : `<div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold">S</div>
-       <div class="bg-blue-100 dark:bg-blue-900 text-gray-800 dark:text-blue-100 rounded-2xl px-4 py-2 max-w-[70%]">${text}</div>`;
-  chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
-}
-// Image upload
-document.getElementById('chat-attach').onclick = function() {
-  document.getElementById('chat-image-input').click();
-};
-document.getElementById('chat-image-input').onchange = function(e) {
-  const file = e.target.files[0];
-  if (file && file.type.startsWith('image/')) {
-    const reader = new FileReader();
-    reader.onload = function(ev) {
-      addImageMessage(ev.target.result, 'user');
-    };
-    reader.readAsDataURL(file);
-  }
-};
-// Add image message
-function addImageMessage(src, sender) {
-  const chat = document.getElementById('chat-messages');
-  const div = document.createElement('div');
-  div.className = 'flex items-end gap-2 ' + (sender === 'user' ? 'justify-end' : '');
-  div.innerHTML = sender === 'user'
-    ? `<div class="bg-blue-600 text-white rounded-2xl px-2 py-2 max-w-[70%]"><img src="${src}" class="rounded-lg max-w-[180px]"></div>
-       <div class="w-8 h-8 rounded-full bg-blue-200 flex items-center justify-center text-blue-700 text-sm font-bold">M</div>`
-    : `<div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold">S</div>
-       <div class="bg-blue-100 dark:bg-blue-900 rounded-2xl px-2 py-2 max-w-[70%]"><img src="${src}" class="rounded-lg max-w-[180px]"></div>`;
-  chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
-}
-// Audio recording (simple UX, not real upload)
-let mediaRecorder, audioChunks = [];
-document.getElementById('chat-audio').onclick = async function() {
-  if (!mediaRecorder || mediaRecorder.state === 'inactive') {
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorder = new MediaRecorder(stream);
-      audioChunks = [];
-      mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
-      mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-        const url = URL.createObjectURL(audioBlob);
-        addAudioMessage(url, 'user');
-      };
-      mediaRecorder.start();
-      document.getElementById('chat-audio').classList.add('animate-pulse');
-      setTimeout(() => {
-        mediaRecorder.stop();
-        document.getElementById('chat-audio').classList.remove('animate-pulse');
-      }, 4000); // 4s max
-    }
-  }
-};
-function addAudioMessage(src, sender) {
-  const chat = document.getElementById('chat-messages');
-  const div = document.createElement('div');
-  div.className = 'flex items-end gap-2 ' + (sender === 'user' ? 'justify-end' : '');
-  div.innerHTML = sender === 'user'
-    ? `<div class="bg-blue-600 text-white rounded-2xl px-2 py-2 max-w-[70%]"><audio controls src="${src}" class="w-40"></audio></div>
-       <div class="w-8 h-8 rounded-full bg-blue-200 flex items-center justify-center text-blue-700 text-sm font-bold">M</div>`
-    : `<div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold">S</div>
-       <div class="bg-blue-100 dark:bg-blue-900 rounded-2xl px-2 py-2 max-w-[70%]"><audio controls src="${src}" class="w-40"></audio></div>`;
-  chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
-}
-    </script>
+    <!-- Lien vers le fichier JavaScript externe -->
+    <script src="essai.js"></script>
 </body>
 </html>
