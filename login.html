@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion | TechShop</title>
+    
+    <!-- Preload des polices et ressources critiques -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    display: ['Inter', 'sans-serif'],
+                },
+                extend: {
+                    colors: {
+                        primary: '#051769',
+                        secondary: '#0298e4',
+                        accent: '#3b82f6'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                        'slide-right': 'slideRight 0.6s ease-out forwards',
+                        'scale-in': 'scaleIn 0.5s ease-out forwards',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lien vers le fichier CSS externe -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Styles spécifiques à la page de login -->
+    <style>
+        .auth-card {
+            transition: all 0.3s ease;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .auth-card.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .password-toggle {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .password-toggle:hover {
+            color: #3b82f6;
+        }
+        
+        .social-login-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .social-login-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .divider {
+            position: relative;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .divider::after {
+            content: "Ou";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 0 1rem;
+            color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .dark .divider {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .dark .divider::after {
+            background-color: #1f2937;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animation pour les inputs de code de vérification */
+        .verification-code {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+        
+        .verification-code input {
+            width: 3rem;
+            height: 3.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .verification-code input {
+            border-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+        
+        .verification-code input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+        
+        /* Style pour le compte à rebours */
+        .countdown {
+            font-weight: bold;
+            color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md" data-scroll>
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center" aria-label="TechShop - Retour à l'accueil">
+                        <button class="flex items-center px-5 py-2 rounded-full bg-gradient-to-tr from-[#051769] to-[#0298e4] shadow-lg hover:scale-105 transition-all duration-200 border-2 border-white dark:border-gray-900 focus:outline-none">
+                            <span class="text-white font-extrabold text-xl tracking-wide drop-shadow">TechShop</span>
+                        </button>
+                    </a>
+                </div>
+                
+                <!-- Right icons -->
+                <div class="flex items-center space-x-4">
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" aria-label="Basculer mode sombre">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Menu principal">
+                        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white dark:bg-gray-800 z-50 hidden transition-all duration-300">
+        <div class="container mx-auto px-4 py-8 h-full flex flex-col">
+            <div class="flex justify-between items-center mb-8">
+                <span class="text-2xl font-extrabold text-[#051769] dark:text-white">Menu</span>
+                <button id="mobile-menu-close" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" aria-label="Fermer le menu">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-6 text-lg flex-1 justify-center items-center">
+                <a href="index.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Accueil</a>
+                <a href="blog.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Blog</a>
+                <a href="marketplace.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Boutique</a>
+                <a href="login.html" class="block w-full bg-[#051769] hover:bg-[#0298e4] text-white text-center py-3 px-6 rounded font-medium mt-8 max-w-xs transition-colors">Se connecter</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="min-h-[calc(100vh-160px)] flex items-center justify-center py-12 px-4">
+        <div class="w-full max-w-md">
+            <!-- Connexion Card -->
+            <div id="login-card" class="auth-card bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-4 border-[#0298e4] active" data-scroll="fade-in">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-extrabold text-[#051769] dark:text-white mb-2">Connectez-vous</h2>
+                    <p class="text-gray-600 dark:text-gray-400">Accédez à votre compte TechShop</p>
+                </div>
+                
+                <form id="login-form" class="space-y-6">
+                    <div>
+                        <label for="email" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Adresse email</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-gray-400"></i>
+                            </div>
+                            <input type="email" id="email" name="email" required 
+                                   class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                                   placeholder="votre@email.com">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="password" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Mot de passe</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <input type="password" id="password" name="password" required 
+                                   class="w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                                   placeholder="••••••••">
+                            <button type="button" class="password-toggle absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
+                                <i class="fas fa-eye-slash"></i>
+                            </button>
+                        </div>
+                        <div class="flex justify-between items-center mt-2">
+                            <div class="flex items-center">
+                                <input id="remember-me" name="remember-me" type="checkbox" 
+                                       class="h-4 w-4 text-[#0298e4] focus:ring-[#0298e4] border-gray-300 dark:border-gray-600 rounded dark:bg-gray-700">
+                                <label for="remember-me" class="ml-2 text-sm text-gray-600 dark:text-gray-400">
+                                    Se souvenir de moi
+                                </label>
+                            </div>
+                            <a href="#" id="forgot-password-link" class="text-sm text-[#0298e4] dark:text-blue-400 hover:underline">Mot de passe oublié ?</a>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-gradient-to-r from-[#051769] to-[#0298e4] text-white py-3 px-4 rounded-lg font-semibold hover:from-[#0298e4] hover:to-[#3b82f6] focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:ring-offset-2 transition-all shadow-lg">
+                        Se connecter
+                    </button>
+                    
+                    <div class="text-center text-sm text-gray-600 dark:text-gray-400">
+                        Vous n'avez pas de compte ? 
+                        <a href="#" id="switch-to-register" class="text-[#0298e4] dark:text-blue-400 font-medium hover:underline transition-colors">
+                            S'inscrire
+                        </a>
+                    </div>
+                </form>
+                
+                <div class="mt-8">
+                    <div class="divider my-6"></div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <a href="#" class="social-login-btn flex items-center justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <i class="fab fa-google text-[#DB4437] mr-2"></i>
+                            <span>Google</span>
+                        </a>
+                        
+                        <a href="#" class="social-login-btn flex items-center justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <i class="fab fa-apple text-gray-900 dark:text-gray-100 mr-2"></i>
+                            <span>Apple</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Inscription Card (hidden by default) -->
+            <div id="register-card" class="auth-card bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-4 border-[#3b82f6] hidden" data-scroll="fade-in">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-extrabold text-[#051769] dark:text-white mb-2">Créez votre compte</h2>
+                    <p class="text-gray-600 dark:text-gray-400">Rejoignez la communauté TechShop</p>
+                </div>
+                
+                <form id="register-form" class="space-y-6">
+                    <div>
+                        <label for="reg-name" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Nom complet</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-user text-gray-400"></i>
+                            </div>
+                            <input type="text" id="reg-name" name="name" required 
+                                   class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                                   placeholder="Jean Dupont">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="reg-email" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Adresse email</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-gray-400"></i>
+                            </div>
+                            <input type="email" id="reg-email" name="email" required 
+                                   class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                                   placeholder="votre@email.com">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="reg-password" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Mot de passe</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <input type="password" id="reg-password" name="password" required 
+                                   class="w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                                   placeholder="••••••••">
+                            <button type="button" class="password-toggle absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
+                                <i class="fas fa-eye-slash"></i>
+                            </button>
+                        </div>
+                        <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                            Minimum 8 caractères avec au moins 1 chiffre et 1 majuscule
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <label for="reg-confirm-password" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Confirmer le mot de passe</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <input type="password" id="reg-confirm-password" name="confirm-password" required 
+                                   class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                                   placeholder="••••••••">
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex items-center h-5">
+                            <input id="terms" name="terms" type="checkbox" 
+                                   class="h-4 w-4 text-[#0298e4] focus:ring-[#0298e4] border-gray-300 dark:border-gray-600 rounded dark:bg-gray-700">
+                        </div>
+                        <label for="terms" class="ml-2 block text-sm text-gray-600 dark:text-gray-400">
+                            J'accepte les <a href="#" class="text-[#0298e4] dark:text-blue-400 hover:underline">conditions d'utilisation</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-gradient-to-r from-[#051769] to-[#0298e4] text-white py-3 px-4 rounded-lg font-semibold hover:from-[#0298e4] hover:to-[#3b82f6] focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:ring-offset-2 transition-all shadow-lg">
+                        S'inscrire
+                    </button>
+                    
+                    <div class="text-center text-sm text-gray-600 dark:text-gray-400">
+                        Vous avez déjà un compte ? 
+                        <a href="#" id="switch-to-login" class="text-[#0298e4] dark:text-blue-400 font-medium hover:underline transition-colors">
+                            Se connecter
+                        </a>
+                    </div>
+                </form>
+                
+                <div class="mt-8">
+                    <div class="divider my-6"></div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <a href="#" class="social-login-btn flex items-center justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <i class="fab fa-google text-[#DB4437] mr-2"></i>
+                            <span>Google</span>
+                        </a>
+                        
+                        <a href="#" class="social-login-btn flex items-center justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <i class="fab fa-apple text-gray-900 dark:text-gray-100 mr-2"></i>
+                            <span>Apple</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forgot Password Card (hidden by default) -->
+            <div id="forgot-password-card" class="auth-card bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-4 border-[#3b82f6] hidden" data-scroll="fade-in">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-extrabold text-[#051769] dark:text-white mb-2">Mot de passe oublié</h2>
+                    <p class="text-gray-600 dark:text-gray-400">Entrez votre email pour réinitialiser votre mot de passe</p>
+                </div>
+                
+                <form id="forgot-password-form" class="space-y-6">
+                    <div>
+                        <label for="forgot-email" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Adresse email</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-gray-400"></i>
+                            </div>
+                            <input type="email" id="forgot-email" name="email" required 
+                                   class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                                   placeholder="votre@email.com">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-gradient-to-r from-[#051769] to-[#0298e4] text-white py-3 px-4 rounded-lg font-semibold hover:from-[#0298e4] hover:to-[#3b82f6] focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:ring-offset-2 transition-all shadow-lg">
+                        Envoyer le code de réinitialisation
+                    </button>
+                    
+                    <div class="text-center text-sm text-gray-600 dark:text-gray-400">
+                        <a href="#" id="back-to-login-from-forgot" class="text-[#0298e4] dark:text-blue-400 font-medium hover:underline transition-colors">
+                            Retour à la connexion
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Verification Code Card (hidden by default) -->
+            <div id="verification-code-card" class="auth-card bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-4 border-[#3b82f6] hidden" data-scroll="fade-in">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-extrabold text-[#051769] dark:text-white mb-2">Vérification</h2>
+                    <p class="text-gray-600 dark:text-gray-400">Entrez le code à 6 chiffres envoyé à <span id="verification-email" class="font-medium"></span></p>
+                </div>
+                
+                <form id="verification-code-form" class="space-y-6">
+                    <div class="verification-code">
+                        <input type="text" maxlength="1" pattern="[0-9]" required class="verification-digit" data-index="0">
+                        <input type="text" maxlength="1" pattern="[0-9]" required class="verification-digit" data-index="1">
+                        <input type="text" maxlength="1" pattern="[0-9]" required class="verification-digit" data-index="2">
+                        <input type="text" maxlength="1" pattern="[0-9]" required class="verification-digit" data-index="3">
+                        <input type="text" maxlength="1" pattern="[0-9]" required class="verification-digit" data-index="4">
+                        <input type="text" maxlength="1" pattern="[0-9]" required class="verification-digit" data-index="5">
+                    </div>
+                    
+                    <div class="text-center text-sm">
+                        <span id="countdown-text">Code valide pendant </span>
+                        <span id="countdown" class="countdown">05:00</span>
+                    </div>
+                    
+                    <div class="text-center text-sm">
+                        <a href="#" id="resend-code" class="text-[#0298e4] dark:text-blue-400 font-medium hover:underline transition-colors">
+                            Renvoyer le code
+                        </a>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-gradient-to-r from-[#051769] to-[#0298e4] text-white py-3 px-4 rounded-lg font-semibold hover:from-[#0298e4] hover:to-[#3b82f6] focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:ring-offset-2 transition-all shadow-lg">
+                        Vérifier le code
+                    </button>
+                    
+                    <div class="text-center text-sm text-gray-600 dark:text-gray-400">
+                        <a href="#" id="back-to-forgot-from-verification" class="text-[#0298e4] dark:text-blue-400 font-medium hover:underline transition-colors">
+                            Changer d'adresse email
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- New Password Card (hidden by default) -->
+            <div id="new-password-card" class="auth-card bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-4 border-[#3b82f6] hidden" data-scroll="fade-in">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-extrabold text-[#051769] dark:text-white mb-2">Nouveau mot de passe</h2>
+                    <p class="text-gray-600 dark:text-gray-400">Créez un nouveau mot de passe sécurisé</p>
+                </div>
+                
+                <form id="new-password-form" class="space-y-6">
+                    <div>
+                        <label for="new-password" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Nouveau mot de passe</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <input type="password" id="new-password" name="new-password" required 
+                                   class="w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                                   placeholder="••••••••">
+                            <button type="button" class="password-toggle absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
+                                <i class="fas fa-eye-slash"></i>
+                            </button>
+                        </div>
+                        <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                            Minimum 8 caractères avec au moins 1 chiffre et 1 majuscule
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <label for="confirm-new-password" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Confirmer le nouveau mot de passe</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <input type="password" id="confirm-new-password" name="confirm-new-password" required 
+                                   class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                                   placeholder="••••••••">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-gradient-to-r from-[#051769] to-[#0298e4] text-white py-3 px-4 rounded-lg font-semibold hover:from-[#0298e4] hover:to-[#3b82f6] focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:ring-offset-2 transition-all shadow-lg">
+                        Réinitialiser le mot de passe
+                    </button>
+                    
+                    <div class="text-center text-sm text-gray-600 dark:text-gray-400">
+                        <a href="#" id="back-to-login-from-new-password" class="text-[#0298e4] dark:text-blue-400 font-medium hover:underline transition-colors">
+                            Retour à la connexion
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Success Message Card (hidden by default) -->
+            <div id="success-card" class="auth-card bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-4 border-green-500 hidden" data-scroll="fade-in">
+                <div class="text-center mb-8">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 dark:bg-green-900 mb-4">
+                        <svg class="h-6 w-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-[#051769] dark:text-white mb-2">Mot de passe réinitialisé !</h2>
+                    <p class="text-gray-600 dark:text-gray-400">Votre mot de passe a été changé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.</p>
+                </div>
+                
+                <a href="#" id="back-to-login-from-success" class="block w-full bg-gradient-to-r from-[#051769] to-[#0298e4] text-white py-3 px-4 rounded-lg font-semibold hover:from-[#0298e4] hover:to-[#3b82f6] focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:ring-offset-2 transition-all shadow-lg text-center">
+                    Se connecter
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-tr from-[#051769] via-[#0298e4] to-[#3b82f6] text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-xl font-bold">TechShop</span>
+                    <p class="text-sm text-blue-100 mt-1">L'innovation digitale, simplement.</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-blue-200 transition">Mentions légales</a>
+                    <a href="#" class="hover:text-blue-200 transition">CGV</a>
+                    <a href="#" class="hover:text-blue-200 transition">Confidentialité</a>
+                    <a href="#" class="hover:text-blue-200 transition">Aide</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-300/30 mt-6 pt-6 text-center text-sm text-blue-100">
+                &copy; 2023 TechShop. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lien vers le fichier JavaScript externe -->
+    <script src="script.js"></script>
+    
+    <!-- Script spécifique à la page de login -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle between login and register forms
+            const loginCard = document.getElementById('login-card');
+            const registerCard = document.getElementById('register-card');
+            const forgotPasswordCard = document.getElementById('forgot-password-card');
+            const verificationCodeCard = document.getElementById('verification-code-card');
+            const newPasswordCard = document.getElementById('new-password-card');
+            const successCard = document.getElementById('success-card');
+            
+            const switchToRegister = document.getElementById('switch-to-register');
+            const switchToLogin = document.getElementById('switch-to-login');
+            const forgotPasswordLink = document.getElementById('forgot-password-link');
+            const backToLoginFromForgot = document.getElementById('back-to-login-from-forgot');
+            const backToForgotFromVerification = document.getElementById('back-to-forgot-from-verification');
+            const backToLoginFromNewPassword = document.getElementById('back-to-login-from-new-password');
+            const backToLoginFromSuccess = document.getElementById('back-to-login-from-success');
+            const resendCode = document.getElementById('resend-code');
+            
+            // Fonction pour basculer entre les cartes
+            function switchCard(fromCard, toCard) {
+                fromCard.classList.remove('active');
+                setTimeout(() => {
+                    fromCard.classList.add('hidden');
+                    toCard.classList.remove('hidden');
+                    setTimeout(() => toCard.classList.add('active'), 10);
+                }, 300);
+            }
+            
+            // Événements de basculement
+            switchToRegister.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchCard(loginCard, registerCard);
+            });
+            
+            switchToLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchCard(registerCard, loginCard);
+            });
+            
+            forgotPasswordLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchCard(loginCard, forgotPasswordCard);
+            });
+            
+            backToLoginFromForgot.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchCard(forgotPasswordCard, loginCard);
+            });
+            
+            backToForgotFromVerification.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchCard(verificationCodeCard, forgotPasswordCard);
+            });
+            
+            backToLoginFromNewPassword.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchCard(newPasswordCard, loginCard);
+            });
+            
+            backToLoginFromSuccess.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchCard(successCard, loginCard);
+            });
+            
+            // Toggle password visibility
+            document.querySelectorAll('.password-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const input = this.parentElement.querySelector('input');
+                    const icon = this.querySelector('i');
+                    
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.classList.replace('fa-eye-slash', 'fa-eye');
+                    } else {
+                        input.type = 'password';
+                        icon.classList.replace('fa-eye', 'fa-eye-slash');
+                    }
+                });
+            });
+            
+            // Form validation and submission
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Add login logic here
+                console.log('Login form submitted');
+                // window.location.href = 'dashboard.html';
+            });
+            
+            document.getElementById('register-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const password = document.getElementById('reg-password').value;
+                const confirmPassword = document.getElementById('reg-confirm-password').value;
+                
+                if (password !== confirmPassword) {
+                    alert('Les mots de passe ne correspondent pas');
+                    return;
+                }
+                
+                if (!document.getElementById('terms').checked) {
+                    alert('Veuillez accepter les conditions d\'utilisation');
+                    return;
+                }
+                
+                // Add registration logic here
+                console.log('Register form submitted');
+                // window.location.href = 'dashboard.html';
+            });
+            
+            // Forgot password form submission
+            document.getElementById('forgot-password-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('forgot-email').value;
+                
+                // Simuler l'envoi d'un email (en production, vous feriez une requête AJAX ici)
+                console.log(`Code de réinitialisation envoyé à ${email}`);
+                
+                // Afficher l'email dans la carte de vérification
+                document.getElementById('verification-email').textContent = email;
+                
+                // Démarrer le compte à rebours
+                startCountdown();
+                
+                // Passer à la carte de vérification
+                switchCard(forgotPasswordCard, verificationCodeCard);
+            });
+            
+            // Verification code input handling
+            const verificationDigits = document.querySelectorAll('.verification-digit');
+            
+            verificationDigits.forEach((digit, index) => {
+                digit.addEventListener('input', function() {
+                    if (this.value.length === 1) {
+                        if (index < verificationDigits.length - 1) {
+                            verificationDigits[index + 1].focus();
+                        } else {
+                            this.blur();
+                        }
+                    }
+                });
+                
+                digit.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && this.value.length === 0 && index > 0) {
+                        verificationDigits[index - 1].focus();
+                    }
+                });
+            });
+            
+            // Verification code form submission
+            document.getElementById('verification-code-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                let code = '';
+                verificationDigits.forEach(digit => {
+                    code += digit.value;
+                });
+                
+                // Vérifier le code (en production, vous feriez une vérification côté serveur)
+                if (code.length === 6) {
+                    console.log(`Code de vérification saisi : ${code}`);
+                    switchCard(verificationCodeCard, newPasswordCard);
+                } else {
+                    alert('Veuillez entrer un code à 6 chiffres');
+                }
+            });
+            
+            // New password form submission
+            document.getElementById('new-password-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const newPassword = document.getElementById('new-password').value;
+                const confirmNewPassword = document.getElementById('confirm-new-password').value;
+                
+                if (newPassword !== confirmNewPassword) {
+                    alert('Les mots de passe ne correspondent pas');
+                    return;
+                }
+                
+                // Simuler la réinitialisation du mot de passe (en production, vous feriez une requête AJAX ici)
+                console.log('Mot de passe réinitialisé avec succès');
+                
+                // Afficher la carte de succès
+                switchCard(newPasswordCard, successCard);
+            });
+            
+            // Renvoyer le code
+            resendCode.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Simuler le renvoi du code (en production, vous feriez une requête AJAX ici)
+                console.log('Code renvoyé');
+                
+                // Réinitialiser et redémarrer le compte à rebours
+                startCountdown();
+                
+                // Afficher un message temporaire
+                const originalText = resendCode.textContent;
+                resendCode.textContent = 'Code renvoyé !';
+                setTimeout(() => {
+                    resendCode.textContent = originalText;
+                }, 2000);
+            });
+            
+            // Fonction pour le compte à rebours
+            function startCountdown() {
+                let minutes = 5;
+                let seconds = 0;
+                const countdownElement = document.getElementById('countdown');
+                
+                // Réinitialiser les champs de code
+                verificationDigits.forEach(digit => {
+                    digit.value = '';
+                });
+                
+                const countdownInterval = setInterval(() => {
+                    if (seconds === 0) {
+                        if (minutes === 0) {
+                            clearInterval(countdownInterval);
+                            countdownElement.textContent = 'Expiré';
+                            countdownElement.style.color = '#ef4444';
+                            return;
+                        }
+                        minutes--;
+                        seconds = 59;
+                    } else {
+                        seconds--;
+                    }
+                    
+                    const displayMinutes = minutes < 10 ? `0${minutes}` : minutes;
+                    const displaySeconds = seconds < 10 ? `0${seconds}` : seconds;
+                    countdownElement.textContent = `${displayMinutes}:${displaySeconds}`;
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -566,7 +566,242 @@ function addVideoMessage(src, sender) {
 
 };
 
-// Initialize all functionality when DOM is loaded
+
+
+/**********
+ * 
+    * Main initialization
+ */
+
+// Login Page Specific Functions
+const setupLoginPage = () => {
+    // Toggle between login and register forms
+    const loginCard = document.getElementById('login-card');
+    const registerCard = document.getElementById('register-card');
+    const switchToRegister = document.getElementById('switch-to-register');
+    const switchToLogin = document.getElementById('switch-to-login');
+    
+    if (switchToRegister && switchToLogin) {
+        switchToRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginCard.classList.remove('active');
+            setTimeout(() => {
+                loginCard.classList.add('hidden');
+                registerCard.classList.remove('hidden');
+                setTimeout(() => registerCard.classList.add('active'), 10);
+            }, 300);
+        });
+        
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerCard.classList.remove('active');
+            setTimeout(() => {
+                registerCard.classList.add('hidden');
+                loginCard.classList.remove('hidden');
+                setTimeout(() => loginCard.classList.add('active'), 10);
+            }, 300);
+        });
+    }
+    
+    // Toggle password visibility
+    document.querySelectorAll('.password-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            const input = this.parentElement.querySelector('input');
+            const icon = this.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            }
+        });
+    });
+    
+    // Form validation and submission
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add login logic here
+            console.log('Login form submitted');
+            // window.location.href = 'dashboard.html';
+        });
+    }
+    
+    if (registerForm) {
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('reg-password')?.value;
+            const confirmPassword = document.getElementById('reg-confirm-password')?.value;
+            
+            if (password && confirmPassword && password !== confirmPassword) {
+                alert('Les mots de passe ne correspondent pas');
+                return;
+            }
+            
+            if (!document.getElementById('terms')?.checked) {
+                alert('Veuillez accepter les conditions d\'utilisation');
+                return;
+            }
+            
+            // Add registration logic here
+            console.log('Register form submitted');
+            // window.location.href = 'dashboard.html';
+        });
+    }
+};
+
+// Password Reset Functionality
+const setupPasswordReset = () => {
+    // Elements
+    const forgotPasswordLink = document.querySelector('a[href="#"]');
+    const forgotPasswordModal = document.getElementById('forgot-password-modal');
+    const resetCodeModal = document.getElementById('reset-code-modal');
+    const closeForgotPassword = document.getElementById('close-forgot-password');
+    const closeResetCode = document.getElementById('close-reset-code');
+    const cancelReset = document.getElementById('cancel-reset');
+    const cancelResetCode = document.getElementById('cancel-reset-code');
+    const forgotPasswordForm = document.getElementById('forgot-password-form');
+    const resetPasswordForm = document.getElementById('reset-password-form');
+    const resetInstructions = document.getElementById('reset-instructions');
+    const sentEmail = document.getElementById('sent-email');
+    const resendLink = document.getElementById('resend-link');
+    
+    // Open forgot password modal
+    if (forgotPasswordLink) {
+        forgotPasswordLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            forgotPasswordModal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        });
+    }
+    
+    // Close modals
+    const closeModals = () => {
+        forgotPasswordModal.classList.add('hidden');
+        resetCodeModal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    };
+    
+    if (closeForgotPassword) closeForgotPassword.addEventListener('click', closeModals);
+    if (closeResetCode) closeResetCode.addEventListener('click', closeModals);
+    if (cancelReset) cancelReset.addEventListener('click', closeModals);
+    if (cancelResetCode) cancelResetCode.addEventListener('click', closeModals);
+    
+    // Handle forgot password form submission
+    if (forgotPasswordForm) {
+        forgotPasswordForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('reset-email').value;
+            
+            // Simulate API call
+            try {
+                // In a real app, you would make an API call here
+                console.log('Sending reset email to:', email);
+                
+                // Show success message
+                resetInstructions.classList.remove('hidden');
+                sentEmail.textContent = email;
+                document.getElementById('reset-submit').disabled = true;
+                
+                // In a real app, you would wait for the API response
+                setTimeout(() => {
+                    forgotPasswordModal.classList.add('hidden');
+                    resetCodeModal.classList.remove('hidden');
+                    document.getElementById('reset-email-code').value = email;
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Une erreur est survenue. Veuillez réessayer.');
+            }
+        });
+    }
+    
+    // Handle resend link
+    if (resendLink) {
+        resendLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('reset-email').value;
+            console.log('Resending email to:', email);
+            alert('Un nouvel email a été envoyé à ' + email);
+        });
+    }
+    
+    // Handle password reset form submission
+    if (resetPasswordForm) {
+        resetPasswordForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const code = document.getElementById('reset-code').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-new-password').value;
+            
+            // Validate passwords match
+            if (newPassword !== confirmPassword) {
+                alert('Les mots de passe ne correspondent pas');
+                return;
+            }
+            
+            // Validate password strength (add your own rules)
+            if (newPassword.length < 8) {
+                alert('Le mot de passe doit contenir au moins 8 caractères');
+                return;
+            }
+            
+            // Simulate API call
+            try {
+                console.log('Resetting password with code:', code);
+                
+                // In a real app, you would make an API call here
+                // await resetPassword(code, newPassword);
+                
+                // Show success message
+                alert('Votre mot de passe a été réinitialisé avec succès !');
+                resetCodeModal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+                
+                // Clear forms
+                resetPasswordForm.reset();
+                forgotPasswordForm.reset();
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Une erreur est survenue. Veuillez vérifier le code et réessayer.');
+            }
+        });
+    }
+    
+    // Password strength indicator
+    const newPasswordInput = document.getElementById('new-password');
+    if (newPasswordInput) {
+        newPasswordInput.addEventListener('input', function() {
+            const password = this.value;
+            const strengthIndicator = this.parentElement.nextElementSibling;
+            
+            if (password.length === 0) {
+                strengthIndicator.className = 'password-strength';
+                return;
+            }
+            
+            // Simple strength calculation (replace with your own logic)
+            let strength = 0;
+            if (password.length >= 8) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/\d/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            
+            const strengthClasses = ['password-strength-weak', 'password-strength-medium', 'password-strength-strong'];
+            strengthIndicator.className = 'password-strength ' + (strengthClasses[Math.min(strength, 2)] || '');
+        });
+    }
+};
+
+// Update the initialization function
 document.addEventListener('DOMContentLoaded', () => {
     animateOnScroll();
     setupDarkMode();
@@ -577,4 +812,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupCartSidebar();
     setupUserAccount();
     setupChatSupport();
+    setupLoginPage();
+    setupPasswordReset(); // Add this line
 });

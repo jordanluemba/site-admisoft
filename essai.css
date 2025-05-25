@@ -201,3 +201,140 @@ button, a[class*="transition"] {
         opacity: 0.5;
     }
 }
+
+
+
+/**********
+
+
+
+
+
+
+***********/
+
+/* Login Page Specific Styles */
+.auth-card {
+    transition: all 0.3s ease;
+    transform: translateY(20px);
+    opacity: 0;
+}
+
+.auth-card.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.password-toggle {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.password-toggle:hover {
+    color: #3b82f6;
+}
+
+.social-login-btn {
+    transition: all 0.3s ease;
+}
+
+.social-login-btn:hover {
+    transform: translateY(-2px);
+}
+
+.divider {
+    position: relative;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.divider::after {
+    content: "Ou";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 0 1rem;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.875rem;
+}
+
+.dark .divider {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .divider::after {
+    background-color: #1f2937;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Form inputs */
+.form-input {
+    transition: all 0.3s ease;
+}
+
+.form-input:focus {
+    box-shadow: 0 0 0 3px rgba(2, 152, 228, 0.2);
+}
+
+/* Gradient button */
+.gradient-btn {
+    background-size: 200% auto;
+    transition: all 0.5s ease;
+}
+
+.gradient-btn:hover {
+    background-position: right center;
+}
+
+/* Footer gradient */
+.footer-gradient {
+    background: linear-gradient(135deg, #051769 0%, #0298e4 50%, #3b82f6 100%);
+}
+
+
+
+/* Password Reset Styles */
+#forgot-password-modal,
+#reset-code-modal {
+    transition: opacity 0.3s ease;
+}
+
+#forgot-password-modal .hidden,
+#reset-code-modal .hidden {
+    display: none;
+}
+
+#reset-instructions {
+    transition: all 0.3s ease;
+}
+
+.password-strength {
+    height: 4px;
+    margin-top: 4px;
+    background-color: #e5e7eb;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.password-strength-fill {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.password-strength-weak .password-strength-fill {
+    width: 33%;
+    background-color: #ef4444;
+}
+
+.password-strength-medium .password-strength-fill {
+    width: 66%;
+    background-color: #f59e0b;
+}
+
+.password-strength-strong .password-strength-fill {
+    width: 100%;
+    background-color: #10b981;
+}
