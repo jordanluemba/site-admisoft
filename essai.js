@@ -84,10 +84,9 @@ const setupMobileSearch = () => {
     });
 };
 
-// Mobile actions bar
 const setupMobileActions = () => {
-    const mobileActionsToggle = document.getElementById('mobile-actions-toggle');
     const mobileActionsBar = document.getElementById('mobile-actions-bar');
+    const mobileActionsToggle = document.getElementById('mobile-actions-toggle');
     const mobileUserToggle = document.getElementById('mobile-user-toggle');
     const mobileCartToggle = document.getElementById('mobile-cart-toggle');
 
@@ -101,11 +100,14 @@ const setupMobileActions = () => {
         }
     };
 
-    mobileActionsToggle.addEventListener('click', toggleActionsBar);
+    // ATTACHER L'ÉVÉNEMENT
+    if (mobileActionsToggle && mobileActionsBar) {
+        mobileActionsToggle.addEventListener('click', toggleActionsBar);
+    }
 
     // Close when clicking outside
     window.addEventListener('click', (e) => {
-        if (!mobileActionsBar.contains(e.target)) {
+        if (!mobileActionsBar.contains(e.target) && e.target !== mobileActionsToggle) {
             mobileActionsBar.classList.add('opacity-0', 'pointer-events-none');
             mobileActionsBar.classList.remove('opacity-100');
         }
@@ -120,7 +122,7 @@ const setupMobileActions = () => {
         mobileActionsBar.classList.add('opacity-0', 'pointer-events-none');
         mobileActionsBar.classList.remove('opacity-100');
     });
-    
+
     // Cart toggle
     mobileCartToggle.addEventListener('click', () => {
         document.getElementById('cart-sidebar').classList.remove('hidden');
@@ -128,6 +130,7 @@ const setupMobileActions = () => {
         mobileActionsBar.classList.remove('opacity-100');
     });
 };
+
 
 // Mobile menu
 const setupMobileMenu = () => {
