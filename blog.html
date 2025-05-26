@@ -3,42 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AdmiSoft - Boutique en ligne de technologie et solutions digitales innovantes. Découvrez nos produits high-tech et services professionnels.">
-    <meta name="keywords" content="technologie, boutique en ligne, solutions digitales, développement web, cloud, IA, cybersécurité">
-    <meta name="author" content="AdmiSoft">
-    <meta property="og:title" content="AdmiSoft | Boutique en ligne de technologie">
-    <meta property="og:description" content="Des solutions digitales innovantes pour transformer vos idées en succès.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.admisoft.com">
-    <meta property="og:image" content="https://www.admisoft.com/images/og-image.jpg">
-    <link rel="canonical" href="https://www.admisoft.com">
-    
-    <title>AdmiSoft | Boutique en ligne de technologie et solutions digitales</title>
-    
-    <!-- Preload des polices et ressources critiques -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    
+    <title>AdmiSoft | Actualités et conseils technologiques</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
-                fontFamily: {
-                    sans: ['Inter', 'sans-serif'],
-                    display: ['Inter', 'sans-serif'],
-                },
                 extend: {
                     colors: {
-                        primary: '#051769',
-                        secondary: '#0298e4',
+                        primary: {
+                            light: '#2563eb',
+                            dark: '#1e40af'
+                        },
+                        secondary: {
+                            light: '#1e40af',
+                            dark: '#1e3a8a'
+                        },
                         accent: '#3b82f6'
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.5s ease-out forwards',
-                        'slide-up': 'slideUp 0.6s ease-out forwards',
-                        'slide-right': 'slideRight 0.6s ease-out forwards',
-                        'scale-in': 'scaleIn 0.5s ease-out forwards',
                     }
                 }
             }
@@ -46,37 +28,120 @@
     </script>
     <!-- Lien vers le fichier CSS externe -->
     <link rel="stylesheet" href="essai.css">
-    
-    <!-- Schema.org markup for Google -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "AdmiSoft",
-      "url": "https://www.admisoft.com",
-      "logo": "https://www.admisoft.com/images/logo.png",
-      "description": "Boutique en ligne de technologie et solutions digitales innovantes",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "12 Rue de la République",
-        "addressLocality": "Paris",
-        "postalCode": "75001",
-        "addressCountry": "FR"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+33 1 23 45 67 89",
-        "contactType": "customer service",
-        "email": "contact@admisoft.com",
-        "availableLanguage": "French"
-      }
-    }
-    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .article-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .image-zoom {
+            transition: transform 0.3s;
+        }
+        
+        .image-zoom:hover {
+            transform: scale(1.05);
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .chat-bubble {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Article content styling */
+        .article-content h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 1.5rem 0 1rem;
+            color: inherit;
+        }
+        
+        .article-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 1.25rem 0 0.75rem;
+            color: inherit;
+        }
+        
+        .article-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .article-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #6b7280;
+        }
+        
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .article-content ul {
+            list-style-type: disc;
+        }
+        
+        .article-content ol {
+            list-style-type: decimal;
+        }
+        
+        .article-content a {
+            color: #3b82f6;
+            text-decoration: underline;
+        }
+        
+        /* Infinite scroll loader */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
-    <!-- HEADER NAVBAR -->
-    <!-- ... (le reste du code HTML reste inchangé) ... -->
-    
+      
     <!-- HEADER NAVBAR -->
 <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md" data-scroll>
     <div class="container mx-auto px-4 py-3">
@@ -170,525 +235,261 @@
     </div>
 </div>
 
-    
-   <!-- Hero Section innovante sans photo -->
-<section class="relative overflow-hidden py-28 md:py-40 bg-gradient-to-tr from-[#051769] via-[#0298e4] to-[#3b82f6]" data-scroll="fade-in">
-  <!-- SVG animée décorative -->
-  <svg class="absolute left-1/2 top-0 -translate-x-1/2 z-0 opacity-30 animate-spin-slow" width="700" height="700" viewBox="0 0 700 700" fill="none">
-    <circle cx="350" cy="350" r="320" stroke="url(#radial1)" stroke-width="40"/>
-    <defs>
-      <linearGradient id="radial1" x1="0" y1="0" x2="700" y2="700" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#fff" stop-opacity="0.5"/>
-        <stop offset="1" stop-color="#3b82f6" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-  </svg>
-  <!-- Halo lumineux -->
-  <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-white opacity-10 blur-3xl z-0"></div>
-  <div class="relative z-10 container mx-auto px-4 flex flex-col items-center text-center">
-    <h1 class="text-5xl md:text-7xl font-extrabold mb-6 text-white drop-shadow-lg tracking-tight" data-scroll="slide-up">
-      <span class="block text-white">AdmiSoft</span>
-      <span class="block mt-2 text-white">L'innovation commence ici</span>
-    </h1>
-    <p class="text-2xl md:text-3xl mb-10 text-blue-100 font-medium max-w-2xl mx-auto" data-scroll="slide-up" data-scroll-delay="100">Des solutions digitales, créées pour transformer vos idées en succès. Découvrez la nouvelle génération de services tech.</p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center" data-scroll="slide-up" data-scroll-delay="200">
-      <a href="#contact" class="px-10 py-4 rounded-full font-semibold bg-white text-[#051769] shadow-xl hover:bg-blue-100 transition text-lg">Demander un devis</a>
-      <a href="#services" class="px-10 py-4 rounded-full font-semibold border-2 border-white hover:bg-white hover:text-[#051769] transition text-lg">Nos services</a>
-    </div>
-  </div>
-</section>
 
-    <section id="services" class="py-20 bg-gradient-to-br from-blue-100 via-white to-blue-200 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900" data-scroll>
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-extrabold text-[#051769] dark:text-white mb-4 tracking-tight" data-scroll="fade-in">Nos Services</h2>
-      <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto" data-scroll="fade-in" data-scroll-delay="100">Des solutions innovantes, pensées pour accélérer votre transformation digitale.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-      <!-- Service Card 1 -->
-      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-[#0298e4] hover:-translate-y-2 transition" data-scroll="fade-in">
-        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-[#051769] to-[#0298e4] shadow-lg mb-6 border-4 border-white dark:border-gray-900">
-          <i class="fas fa-code text-white text-3xl drop-shadow-lg"></i>
-        </div>
-        <h3 class="text-xl font-bold text-[#051769] dark:text-white mb-3">Développement Web & Mobile</h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">Sites et apps sur mesure, performants et sécurisés.</p>
-        <a href="#" class="inline-block mt-2 text-[#0298e4] dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
-      </div>
-      <!-- Service Card 2 -->
-      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-cyan-500 hover:-translate-y-2 transition" data-scroll="fade-in" data-scroll-delay="100">
-        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-[#0298e4] to-[#3b82f6] shadow-lg mb-6 border-4 border-white dark:border-gray-900">
-          <i class="fas fa-cloud text-white text-3xl drop-shadow-lg"></i>
-        </div>
-        <h3 class="text-xl font-bold text-[#051769] dark:text-white mb-3">Solutions Cloud</h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">Migration, gestion et optimisation de vos infrastructures cloud.</p>
-        <a href="#" class="inline-block mt-2 text-[#0298e4] dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
-      </div>
-      <!-- Service Card 3 -->
-      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-purple-500 hover:-translate-y-2 transition" data-scroll="fade-in" data-scroll-delay="200">
-        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-[#3b82f6] to-[#8b5cf6] shadow-lg mb-6 border-4 border-white dark:border-gray-900">
-          <i class="fas fa-robot text-white text-3xl drop-shadow-lg"></i>
-        </div>
-        <h3 class="text-xl font-bold text-[#051769] dark:text-white mb-3">Intelligence Artificielle</h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">Automatisez et optimisez vos processus métiers grâce à l'IA.</p>
-        <a href="#" class="inline-block mt-2 text-[#0298e4] dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
-      </div>
-      <!-- Service Card 4 -->
-      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-green-500 hover:-translate-y-2 transition" data-scroll="fade-in" data-scroll-delay="100">
-        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-[#10b981] to-[#0298e4] shadow-lg mb-6 border-4 border-white dark:border-gray-900">
-          <i class="fas fa-shield-alt text-white text-3xl drop-shadow-lg"></i>
-        </div>
-        <h3 class="text-xl font-bold text-[#051769] dark:text-white mb-3">Cybersécurité</h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">Protection avancée de vos données et systèmes contre les menaces.</p>
-        <a href="#" class="inline-block mt-2 text-[#0298e4] dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
-      </div>
-      <!-- Service Card 5 -->
-      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-yellow-400 hover:-translate-y-2 transition" data-scroll="fade-in" data-scroll-delay="200">
-        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-[#f59e0b] to-[#ef4444] shadow-lg mb-6 border-4 border-white dark:border-gray-900">
-          <i class="fas fa-chart-line text-white text-3xl drop-shadow-lg"></i>
-        </div>
-        <h3 class="text-xl font-bold text-[#051769] dark:text-white mb-3">Analyse de Données</h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">Collecte, traitement et visualisation pour des décisions éclairées.</p>
-        <a href="#" class="inline-block mt-2 text-[#0298e4] dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
-      </div>
-      <!-- Service Card 6 -->
-      <div class="relative group bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center text-center border-t-4 border-pink-400 hover:-translate-y-2 transition" data-scroll="fade-in" data-scroll-delay="300">
-        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-[#ec4899] to-[#8b5cf6] shadow-lg mb-6 border-4 border-white dark:border-gray-900">
-          <i class="fas fa-graduation-cap text-white text-3xl drop-shadow-lg"></i>
-        </div>
-        <h3 class="text-xl font-bold text-[#051769] dark:text-white mb-3">Formation Tech</h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">Formations sur mesure pour monter en compétences sur les technologies clés.</p>
-        <a href="#" class="inline-block mt-2 text-[#0298e4] dark:text-blue-400 font-semibold hover:underline transition">En savoir plus</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="about" class="relative py-24 bg-gradient-to-br from-blue-50 via-white to-purple-100 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900 overflow-hidden" data-scroll>
-  <!-- Décor SVG créatif -->
-  <svg class="absolute left-0 top-0 w-96 h-96 opacity-20 -z-10 animate-spin-slow" viewBox="0 0 400 400" fill="none">
-    <circle cx="200" cy="200" r="200" fill="url(#aboutRadial)" />
-    <defs>
-      <radialGradient id="aboutRadial" cx="0" cy="0" r="1" gradientTransform="translate(200 200) scale(200)" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#a78bfa" stop-opacity="0.3"/>
-        <stop offset="1" stop-color="#fff" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-  </svg>
-  <div class="container mx-auto px-4">
-    <div class="flex flex-col lg:flex-row items-center gap-16">
-      <!-- Bloc image créatif -->
-      <div class="relative lg:w-1/2 flex justify-center mb-12 lg:mb-0" data-scroll="slide-right">
-        <div class="relative w-72 h-72 rounded-full bg-gradient-to-tr from-[#0298e4] via-purple-400 to-pink-400 dark:from-blue-800 dark:via-purple-900 dark:to-pink-900 shadow-2xl flex items-center justify-center overflow-hidden">
-          <img src="img3.png" alt="Équipe AdmiSoft" class="w-64 h-64 object-cover rounded-full border-8 border-white dark:border-gray-900 shadow-xl">
-        </div>
-        <!-- Petits avatars flottants -->
-        <img src="img4.png" alt="Membre de l'équipe AdmiSoft" class="absolute -top-6 left-10 w-16 h-16 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-bounce-slow">
-        <img src="img4.png" alt="Membre de l'équipe AdmiSoft" class="absolute top-20 -left-8 w-12 h-12 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-bounce-slow" style="animation-delay:1s">
-        <img src="img4.png" alt="Membre de l'équipe AdmiSoft" class="absolute bottom-8 -right-8 w-14 h-14 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-bounce-slow" style="animation-delay:2s">
-      </div>
-      <!-- Bloc texte -->
-      <div class="lg:w-1/2" data-scroll="slide-left">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-tr from-[#051769] via-[#0298e4] to-[#3b82f6] dark:from-blue-300 dark:via-purple-300 dark:to-pink-300 animate-text-gradient mb-6 tracking-tight">Qui sommes-nous ?</h2>
-        <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">AdmiSoft, c'est une équipe passionnée qui accompagne la transformation digitale des entreprises avec des solutions innovantes, performantes et sécurisées.</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-          <div class="flex items-start gap-4">
-            <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900 shadow">
-              <i class="fas fa-lightbulb text-[#0298e4] dark:text-blue-400 text-2xl"></i>
-            </span>
-            <div>
-              <div class="font-bold text-[#051769] dark:text-blue-400">Innovation</div>
-              <div class="text-gray-600 dark:text-gray-300 text-sm">Toujours à la pointe des technologies.</div>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900 shadow">
-              <i class="fas fa-handshake text-[#8b5cf6] dark:text-purple-400 text-2xl"></i>
-            </span>
-            <div>
-              <div class="font-bold text-[#6d28d9] dark:text-purple-400">Collaboration</div>
-              <div class="text-gray-600 dark:text-gray-300 text-sm">Proximité et écoute client.</div>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-green-100 dark:bg-green-900 shadow">
-              <i class="fas fa-lock text-[#10b981] dark:text-green-400 text-2xl"></i>
-            </span>
-            <div>
-              <div class="font-bold text-[#047857] dark:text-green-400">Sécurité</div>
-              <div class="text-gray-600 dark:text-gray-300 text-sm">Vos données, notre priorité.</div>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-pink-100 dark:bg-pink-900 shadow">
-              <i class="fas fa-star text-[#ec4899] dark:text-pink-400 text-2xl"></i>
-            </span>
-            <div>
-              <div class="font-bold text-[#be185d] dark:text-pink-400">Excellence</div>
-              <div class="text-gray-600 dark:text-gray-300 text-sm">Un haut niveau d'exigence sur chaque projet.</div>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-wrap gap-6 mb-8">
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-4 flex flex-col items-center w-32">
-            <div class="text-2xl font-extrabold text-[#051769] dark:text-blue-300">150+</div>
-            <div class="text-xs text-gray-500 dark:text-gray-400">Clients</div>
-          </div>
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-4 flex flex-col items-center w-32">
-            <div class="text-2xl font-extrabold text-[#6d28d9] dark:text-purple-300">40+</div>
-            <div class="text-xs text-gray-500 dark:text-gray-400">Experts</div>
-          </div>
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-4 flex flex-col items-center w-32">
-            <div class="text-2xl font-extrabold text-[#047857] dark:text-green-300">300+</div>
-            <div class="text-xs text-gray-500 dark:text-gray-400">Projets</div>
-          </div>
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-4 flex flex-col items-center w-32">
-            <div class="text-2xl font-extrabold text-[#be185d] dark:text-pink-300">15</div>
-            <div class="text-xs text-gray-500 dark:text-gray-400">Pays</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-    <!-- Marketplace Section harmonisée -->
-<section id="shop" class="py-16 bg-white dark:bg-gray-800" data-scroll>
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl font-bold text-[#051769] mb-4 dark:text-white" data-scroll="fade-in">Notre Boutique</h2>
-      <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300" data-scroll="fade-in" data-scroll-delay="100">Découvrez nos produits technologiques et solutions logicielles pour booster votre entreprise.</p>
-    </div>
-    <!-- Products Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" data-scroll>
-        <!-- Product 1 -->
-        <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl" data-scroll="fade-in">
-            <div class="relative">
-                <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro 14 pouces M2" class="w-full h-48 object-cover image-zoom">
-                <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">-15%</div>
-            </div>
-            <div class="p-4">
-                <div class="flex justify-between items-start">
-                    <h3 class="font-semibold">MacBook Pro 14" M2</h3>
-                    <div class="flex items-center text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.8</span>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Articles Section -->
+            <div class="lg:w-2/3">
+                <!-- Featured Article -->
+                <div class="mb-12 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden article-card transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="Article vedette" class="w-full h-64 md:h-80 object-cover image-zoom">
+                        <div class="absolute bottom-0 left-0 bg-blue-600 text-white px-4 py-2 rounded-tr-lg">Article vedette</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+                            <span>Par <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">Jean Dupont</a></span>
+                            <span class="mx-2">•</span>
+                            <span>15 mai 2023</span>
+                            <span class="mx-2">•</span>
+                            <span>8 min de lecture</span>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-bold mb-3">L'avenir de l'IA dans les smartphones : ce qui nous attend en 2024</h2>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <a href="#" class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 text-xs px-3 py-1 rounded-full">#IA</a>
+                            <a href="#" class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 text-xs px-3 py-1 rounded-full">#Smartphones</a>
+                            <a href="#" class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 text-xs px-3 py-1 rounded-full">#Innovation</a>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">L'intelligence artificielle révolutionne nos smartphones. Découvrez comment les puces dédiées et les algorithmes avancés transformeront notre expérience mobile dans les prochains mois...</p>
+                        <a href="#" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:underline">
+                            Lire la suite <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
                     </div>
                 </div>
-                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Apple</p>
                 
-                <div class="mt-3 flex items-center justify-between">
-                    <div>
-                        <span class="text-lg font-bold">1 799€</span>
-                        <span class="text-gray-400 line-through text-sm ml-2">2 099€</span>
-                    </div>
-                    <button class="bg-[#051769] text-white p-2 rounded-full hover:bg-[#0298e4]">
-                        <i class="fas fa-shopping-cart"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Product 2 -->
-        <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl" data-scroll="fade-in" data-scroll-delay="100">
-            <div class="relative">
-                <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1567&q=80" alt="iPhone 14 Pro 256GB" class="w-full h-48 object-cover image-zoom">
-                <div class="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">Nouveau</div>
-            </div>
-            <div class="p-4">
-                <div class="flex justify-between items-start">
-                    <h3 class="font-semibold">iPhone 14 Pro 256GB</h3>
-                    <div class="flex items-center text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.9</span>
-                    </div>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Apple</p>
+                <!-- Recent Articles -->
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-clock mr-2 text-blue-600 dark:text-blue-400"></i> Articles récents
+                </h2>
                 
-                <div class="mt-3 flex items-center justify-between">
-                    <div>
-                        <span class="text-lg font-bold">1 299€</span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" id="articles-container">
+                    <!-- Article 1 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden article-card transition duration-300">
+                        <a href="#">
+                            <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1567&q=80" alt="Test iPhone 15 Pro" class="w-full h-48 object-cover">
+                        </a>
+                        <div class="p-5">
+                            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+                                <span>Par <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">Marie Lambert</a></span>
+                                <span class="mx-2">•</span>
+                                <span>12 mai 2023</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">
+                                <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400">Test complet de l'iPhone 15 Pro : faut-il craquer ?</a>
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-3">Nous avons passé deux semaines avec le nouveau fleuron d'Apple. Découvrez notre analyse détaillée des performances, de l'appareil photo et de la nouvelle interface...</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">Lire la suite</a>
+                                <div class="flex items-center text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <span class="text-gray-600 dark:text-gray-300 ml-1">4.7</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <button class="bg-[#051769] text-white p-2 rounded-full hover:bg-[#0298e4]">
-                        <i class="fas fa-shopping-cart"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Product 3 -->
-        <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl" data-scroll="fade-in" data-scroll-delay="200">
-            <div class="relative">
-                <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Samsung Galaxy S23 Ultra 512GB" class="w-full h-48 object-cover image-zoom">
-            </div>
-            <div class="p-4">
-                <div class="flex justify-between items-start">
-                    <h3 class="font-semibold">Galaxy S23 Ultra 512GB</h3>
-                    <div class="flex items-center text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.7</span>
+                    
+                    <!-- Article 2 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden article-card transition duration-300">
+                        <a href="#">
+                            <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Samsung Galaxy S23" class="w-full h-48 object-cover">
+                        </a>
+                        <div class="p-5">
+                            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+                                <span>Par <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">Thomas Martin</a></span>
+                                <span class="mx-2">•</span>
+                                <span>10 mai 2023</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">
+                                <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400">Galaxy S23 vs S22 : les 5 différences majeures</a>
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-3">Samsung a-t-il fait assez d'efforts pour justifier le passage à sa nouvelle génération ? Nous comparons en détail les deux modèles sur tous les aspects techniques...</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">Lire la suite</a>
+                                <div class="flex items-center text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <span class="text-gray-600 dark:text-gray-300 ml-1">4.5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Article 3 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden article-card transition duration-300">
+                        <a href="#">
+                            <img src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Accessoires tech" class="w-full h-48 object-cover">
+                        </a>
+                        <div class="p-5">
+                            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+                                <span>Par <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">Sophie Leroy</a></span>
+                                <span class="mx-2">•</span>
+                                <span>8 mai 2023</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">
+                                <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400">Les 10 accessoires tech indispensables en 2023</a>
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-3">De la station d'accueil universelle aux écouteurs à réduction de bruit, découvrez notre sélection des accessoires qui vont vraiment améliorer votre quotidien numérique...</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">Lire la suite</a>
+                                <div class="flex items-center text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <span class="text-gray-600 dark:text-gray-300 ml-1">4.9</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Article 4 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden article-card transition duration-300">
+                        <a href="#">
+                            <img src="https://images.unsplash.com/photo-1629131726692-1accd0bec53c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Windows 12" class="w-full h-48 object-cover">
+                        </a>
+                        <div class="p-5">
+                            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+                                <span>Par <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">Pierre Garnier</a></span>
+                                <span class="mx-2">•</span>
+                                <span>5 mai 2023</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">
+                                <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400">Windows 12 : toutes les fuites et rumeurs analysées</a>
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-3">Microsoft préparerait une refonte majeure de son système d'exploitation. Nous avons compilé et analysé toutes les fuites pour vous donner une idée de ce qui vous attend...</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">Lire la suite</a>
+                                <div class="flex items-center text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <span class="text-gray-600 dark:text-gray-300 ml-1">4.3</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Samsung</p>
                 
-                <div class="mt-3 flex items-center justify-between">
-                    <div>
-                        <span class="text-lg font-bold">1 199€</span>
-                    </div>
-                    <button class="bg-[#051769] text-white p-2 rounded-full hover:bg-[#0298e4]">
-                        <i class="fas fa-shopping-cart"></i>
+                <!-- Load More Button -->
+                <div class="text-center mt-8">
+                    <button id="load-more" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">
+                        Charger plus d'articles <i class="fas fa-arrow-down ml-1"></i>
                     </button>
+                    <div id="loader" class="loader hidden"></div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Product 4 -->
-        <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl" data-scroll="fade-in" data-scroll-delay="300">
-            <div class="relative">
-                <img src="https://images.unsplash.com/photo-1629131726692-1accd0bec53c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="AirPods Pro 2ème génération" class="w-full h-48 object-cover image-zoom">
-                <div class="absolute top-2 left-2 bg-blue-500 text-white text-xs px-2 py-1 rounded">Best-seller</div>
-            </div>
-            <div class="p-4">
-                <div class="flex justify-between items-start">
-                    <h3 class="font-semibold">AirPods Pro (2ème génération)</h3>
-                    <div class="flex items-center text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.8</span>
-                    </div>
+            
+            <!-- Sidebar -->
+            <div class="lg:w-1/3">
+                <!-- About Widget -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-info-circle mr-2 text-blue-600 dark:text-blue-400"></i> À propos
+                    </h3>
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Équipe TechBlog" class="w-full h-32 object-cover rounded-lg mb-4">
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">AdmiSoft est votre source d'information sur les dernières innovations technologiques. Notre équipe de passionnés vous propose des tests, analyses et tutoriels pour vous aider à mieux comprendre le monde tech.</p>
+                    <a href="#" class="text-blue-600 dark:text-blue-400 font-medium hover:underline">En savoir plus sur nous</a>
                 </div>
-                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Apple</p>
                 
-                <div class="mt-3 flex items-center justify-between">
-                    <div>
-                        <span class="text-lg font-bold">279€</span>
+                <!-- Categories Widget -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-folder mr-2 text-blue-600 dark:text-blue-400"></i> Catégories
+                    </h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="flex justify-between items-center py-2 px-3 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span>Actualités</span>
+                                <span class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-2 py-1 rounded-full">24</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex justify-between items-center py-2 px-3 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span>Tests</span>
+                                <span class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-2 py-1 rounded-full">18</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex justify-between items-center py-2 px-3 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span>Tutoriels</span>
+                                <span class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-2 py-1 rounded-full">15</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex justify-between items-center py-2 px-3 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span>Astuces</span>
+                                <span class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-2 py-1 rounded-full">12</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex justify-between items-center py-2 px-3 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span>Dossiers</span>
+                                <span class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-2 py-1 rounded-full">8</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Popular Articles Widget -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-fire mr-2 text-blue-600 dark:text-blue-400"></i> Articles populaires
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex gap-3">
+                            <div class="flex-shrink-0">
+                                <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="Article populaire" class="w-16 h-16 object-cover rounded">
+                            </div>
+                            <div>
+                                <a href="#" class="font-medium hover:text-blue-600 dark:hover:text-blue-400 line-clamp-2">Comment booster la durée de vie de votre batterie de smartphone</a>
+                                <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">1.2K vues</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="flex-shrink-0">
+                                <img src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Article populaire" class="w-16 h-16 object-cover rounded">
+                            </div>
+                            <div>
+                                <a href="#" class="font-medium hover:text-blue-600 dark:hover:text-blue-400 line-clamp-2">Les meilleurs VPN 2023 : notre comparatif complet</a>
+                                <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">980 vues</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="flex-shrink-0">
+                                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="Article populaire" class="w-16 h-16 object-cover rounded">
+                            </div>
+                            <div>
+                                <a href="#" class="font-medium hover:text-blue-600 dark:hover:text-blue-400 line-clamp-2">MacBook Air M2 vs M1 : lequel choisir en 2023 ?</a>
+                                <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">850 vues</div>
+                            </div>
+                        </div>
                     </div>
-                    <button class="bg-[#051769] text-white p-2 rounded-full hover:bg-[#0298e4]">
-                        <i class="fas fa-shopping-cart"></i>
-                    </button>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="text-center mt-12" data-scroll="fade-in">
-      <a href="#" class="inline-block border-2 border-[#051769] text-[#051769] px-8 py-3 rounded-full font-semibold hover:bg-[#051769] hover:text-white transition dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-[#051769]">Voir tous les produits</a>
-    </div>
-  </div>
-</section>
-
-    <!-- Blog Section harmonisée -->
-<section id="blog" class="py-16 bg-gray-50 dark:bg-gray-900" data-scroll>
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl font-bold text-[#051769] mb-4 dark:text-white" data-scroll="fade-in">Notre Blog Tech</h2>
-      <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300" data-scroll="fade-in" data-scroll-delay="100">Découvrez nos articles d'experts sur les dernières tendances technologiques et bonnes pratiques.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" id="articles-container">
-        <!-- Article 1 -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden article-card transition duration-300 hover:shadow-xl" data-scroll="fade-in">
-            <a href="#">
-                <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1567&q=80" alt="Test iPhone 15 Pro" class="w-full h-48 object-cover">
-            </a>
-            <div class="p-5">
-                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
-                    <span>Par <a href="#" class="text-[#0298e4] dark:text-blue-400 hover:underline">Marie Lambert</a></span>
-                    <span class="mx-2">•</span>
-                    <span>12 mai 2023</span>
-                </div>
-                <h3 class="text-xl font-bold mb-2">
-                    <a href="#" class="hover:text-[#0298e4] dark:hover:text-blue-400">Test complet de l'iPhone 15 Pro : faut-il craquer ?</a>
-                </h3>
-                <p class="text-gray-600 dark:text-gray-400 mb-3">Nous avons passé deux semaines avec le nouveau fleuron d'Apple. Découvrez notre analyse détaillée des performances, de l'appareil photo et de la nouvelle interface...</p>
-                <div class="flex justify-between items-center">
-                    <a href="#" class="text-[#0298e4] dark:text-blue-400 text-sm font-medium hover:underline">Lire la suite</a>
-                    <div class="flex items-center text-yellow-400 text-sm">
-                        <i class="fas fa-star"></i>
-                        <span class="text-gray-600 dark:text-gray-300 ml-1">4.7</span>
+                
+                <!-- Tags Widget -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-tags mr-2 text-blue-600 dark:text-blue-400"></i> Tags populaires
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="#" class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400">#Apple</a>
+                        <a href="#" class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400">#Android</a>
+                        <a href="#" class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400">#Windows</a>
+                        <a href="#" class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400">#IA</a>
+                        <a href="#" class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400">#Smartphone</a>
+                        <a href="#" class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400">#PC</a>
+                        <a href="#" class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400">#Jeux</a>
+                        <a href="#" class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400">#Sécurité</a>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Article 2 -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden article-card transition duration-300 hover:shadow-xl" data-scroll="fade-in" data-scroll-delay="100">
-            <a href="#">
-                <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Comparaison Galaxy S23 vs S22" class="w-full h-48 object-cover">
-            </a>
-            <div class="p-5">
-                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
-                    <span>Par <a href="#" class="text-[#0298e4] dark:text-blue-400 hover:underline">Thomas Martin</a></span>
-                    <span class="mx-2">•</span>
-                    <span>10 mai 2023</span>
-                </div>
-                <h3 class="text-xl font-bold mb-2">
-                    <a href="#" class="hover:text-[#0298e4] dark:hover:text-blue-400">Galaxy S23 vs S22 : les 5 différences majeures</a>
-                </h3>
-                <p class="text-gray-600 dark:text-gray-400 mb-3">Samsung a-t-il fait assez d'efforts pour justifier le passage à sa nouvelle génération ? Nous comparons en détail les deux modèles sur tous les aspects techniques...</p>
-                <div class="flex justify-between items-center">
-                    <a href="#" class="text-[#0298e4] dark:text-blue-400 text-sm font-medium hover:underline">Lire la suite</a>
-                    <div class="flex items-center text-yellow-400 text-sm">
-                        <i class="fas fa-star"></i>
-                        <span class="text-gray-600 dark:text-gray-300 ml-1">4.5</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="text-center" data-scroll="fade-in">
-      <a href="#" class="inline-block border-2 border-[#051769] text-[#051769] px-8 py-3 rounded-full font-semibold hover:bg-[#051769] hover:text-white transition dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-[#051769]">Voir tous les articles</a>
-    </div>
-  </div>
-</section>
-
-    <section class="py-20 bg-gradient-to-br from-blue-50 via-white to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 relative overflow-hidden" data-scroll>
-  <!-- Décor SVG animé -->
-  <svg class="absolute right-0 top-0 w-80 h-80 opacity-10 -z-10 animate-spin-slow" viewBox="0 0 400 400" fill="none">
-    <circle cx="200" cy="200" r="200" fill="url(#testimonialRadial)" />
-    <defs>
-      <radialGradient id="testimonialRadial" cx="0" cy="0" r="1" gradientTransform="translate(200 200) scale(200)" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#3b82f6" stop-opacity="0.3"/>
-        <stop offset="1" stop-color="#fff" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-  </svg>
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-[#051769] dark:text-white mb-4" data-scroll="fade-in">Ils nous font confiance</h2>
-      <p class="text-gray-600 max-w-2xl mx-auto dark:text-gray-300" data-scroll="fade-in" data-scroll-delay="100">Découvrez ce que nos clients disent de notre collaboration.</p>
-    </div>
-    <!-- Carousel style testimonials -->
-    <div class="relative max-w-4xl mx-auto">
-      <div class="flex flex-col md:flex-row items-center gap-8">
-        <!-- Testimonial 1 -->
-        <div class="flex-1 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-8 border-[#0298e4] dark:border-blue-500 transform hover:scale-105 transition duration-300" data-scroll="fade-in">
-          <div class="flex items-center mb-4">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Jean Dubois, CEO Entreprise XYZ" class="w-16 h-16 rounded-full border-4 border-blue-100 dark:border-blue-900 shadow-lg mr-4">
-            <div>
-              <h4 class="font-bold text-lg dark:text-white">Jean Dubois</h4>
-              <p class="text-gray-500 text-sm dark:text-gray-400">CEO, Entreprise XYZ</p>
-            </div>
-          </div>
-          <p class="italic text-gray-700 dark:text-gray-300 mb-4">"AdmiSoft a révolutionné notre façon de travailler. Leur solution CRM sur mesure a augmenté notre productivité de 40% en seulement 3 mois."</p>
-          <div class="flex items-center">
-            <div class="flex text-yellow-400 mr-2">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-            <span class="text-gray-400 text-sm">5.0</span>
-          </div>
-        </div>
-        <!-- Testimonial 2 -->
-        <div class="flex-1 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-8 border-purple-600 dark:border-purple-500 transform hover:scale-105 transition duration-300" data-scroll="fade-in" data-scroll-delay="100">
-          <div class="flex items-center mb-4">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sophie Martin, Directrice Tech Groupe ABC" class="w-16 h-16 rounded-full border-4 border-purple-100 dark:border-purple-900 shadow-lg mr-4">
-            <div>
-              <h4 class="font-bold text-lg dark:text-white">Sophie Martin</h4>
-              <p class="text-gray-500 text-sm dark:text-gray-400">Directrice Tech, Groupe ABC</p>
-            </div>
-          </div>
-          <p class="italic text-gray-700 dark:text-gray-300 mb-4">"Leur expertise en cybersécurité nous a permis de sécuriser nos infrastructures critiques. Réactifs, professionnels et très compétents."</p>
-          <div class="flex items-center">
-            <div class="flex text-yellow-400 mr-2">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-            <span class="text-gray-400 text-sm">5.0</span>
-          </div>
-        </div>
-        <!-- Testimonial 3 -->
-        <div class="flex-1 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-8 border-green-600 dark:border-green-500 transform hover:scale-105 transition duration-300" data-scroll="fade-in" data-scroll-delay="200">
-          <div class="flex items-center mb-4">
-            <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Pierre Lambert, Directeur Digital Startup DEF" class="w-16 h-16 rounded-full border-4 border-green-100 dark:border-green-900 shadow-lg mr-4">
-            <div>
-              <h4 class="font-bold text-lg dark:text-white">Pierre Lambert</h4>
-              <p class="text-gray-500 text-sm dark:text-gray-400">Directeur Digital, Startup DEF</p>
-            </div>
-          </div>
-          <p class="italic text-gray-700 dark:text-gray-300 mb-4">"Leur accompagnement dans notre migration cloud a été exemplaire. Des délais respectés, un budget maîtrisé et une équipe toujours disponible."</p>
-          <div class="flex items-center">
-            <div class="flex text-yellow-400 mr-2">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-            </div>
-            <span class="text-gray-400 text-sm">4.5</span>
-          </div>
-        </div>
-      </div>
-      <!-- Decorative dots for carousel effect (static for now) -->
-      <div class="flex justify-center mt-8 gap-2">
-        <span class="w-3 h-3 rounded-full bg-[#0298e4]"></span>
-        <span class="w-3 h-3 rounded-full bg-blue-200 dark:bg-gray-700"></span>
-        <span class="w-3 h-3 rounded-full bg-blue-200 dark:bg-gray-700"></span>
-      </div>
-    </div>
-  </div>
-</section>
-
-    <!-- ...avant -->
-<section id="contact" class="py-20 bg-gradient-to-tr from-blue-50 via-white to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 relative overflow-hidden" data-scroll>
-  <!-- Décor SVG -->
-  <svg class="absolute left-0 top-0 w-64 h-64 opacity-10 -z-10" viewBox="0 0 400 400" fill="none">
-    <circle cx="200" cy="200" r="200" fill="url(#contactRadial)" />
-    <defs>
-      <radialGradient id="contactRadial" cx="0" cy="0" r="1" gradientTransform="translate(200 200) scale(200)" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#3b82f6" stop-opacity="0.3"/>
-        <stop offset="1" stop-color="#fff" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-  </svg>
-  <div class="container mx-auto px-4 relative z-10">
-    <div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-10 md:p-14 flex flex-col items-center" data-scroll="fade-in">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-[#051769] dark:text-white mb-2 text-center">Contactez-nous</h2>
-      <p class="text-gray-600 dark:text-gray-300 mb-8 text-center max-w-xl">Une question, un projet ou juste envie d'échanger ? Notre équipe vous répond sous 24h ouvrées.</p>
-      <form class="w-full space-y-6">
-        <div class="flex flex-col md:flex-row gap-6">
-          <div class="flex-1" data-scroll="fade-in">
-            <label for="contact-name" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Nom complet</label>
-            <input type="text" id="contact-name" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] dark:bg-gray-700 dark:text-white" placeholder="Votre nom" required>
-          </div>
-          <div class="flex-1" data-scroll="fade-in" data-scroll-delay="100">
-            <label for="contact-email" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Email</label>
-            <input type="email" id="contact-email" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] dark:bg-gray-700 dark:text-white" placeholder="Votre email" required>
-          </div>
-        </div>
-        <div data-scroll="fade-in" data-scroll-delay="200">
-          <label for="contact-message" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Message</label>
-          <textarea id="contact-message" rows="5" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] dark:bg-gray-700 dark:text-white" placeholder="Décrivez votre besoin ou posez-nous votre question..." required></textarea>
-        </div>
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4" data-scroll="fade-in" data-scroll-delay="300">
-          <div class="flex items-center">
-            <input type="checkbox" id="contact-consent" class="form-checkbox h-5 w-5 text-[#0298e4] rounded focus:ring-[#0298e4] dark:text-blue-400">
-            <label for="contact-consent" class="ml-2 text-gray-600 dark:text-gray-300 text-sm">J'accepte la <a href="#" class="underline hover:text-[#0298e4] dark:hover:text-blue-400">politique de confidentialité</a></label>
-          </div>
-          <button type="submit" class="w-full md:w-auto bg-[#051769] hover:bg-[#0298e4] text-white px-8 py-3 rounded-lg font-semibold transition text-lg shadow-lg">Envoyer le message</button>
-        </div>
-      </form>
-      <div class="mt-10 flex flex-col md:flex-row items-center justify-center gap-8 w-full" data-scroll="fade-in">
-        <div class="flex items-center gap-3">
-          <i class="fas fa-envelope text-[#0298e4] dark:text-blue-400 text-xl"></i>
-          <span class="text-gray-700 dark:text-gray-200 text-base">contact@AdmiSoft.com</span>
-        </div>
-        <div class="flex items-center gap-3">
-          <i class="fas fa-phone-alt text-[#0298e4] dark:text-blue-400 text-xl"></i>
-          <span class="text-gray-700 dark:text-gray-200 text-base">+33 1 23 45 67 89</span>
-        </div>
-        <div class="flex items-center gap-3">
-          <i class="fas fa-map-marker-alt text-[#0298e4] dark:text-blue-400 text-xl"></i>
-          <span class="text-gray-700 dark:text-gray-200 text-base">Paris, France</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-    
+    </main>
 
     <footer class="bg-gradient-to-tr from-[#051769] via-[#0298e4] to-[#3b82f6] text-white pt-12 pb-6 relative overflow-hidden" data-scroll>
   <!-- Animation décorative SVG -->
@@ -1335,7 +1136,7 @@
     </div>
 </div>
 
-<!-- Article Page (hidden by default) -->
+    <!-- Article Page (hidden by default) -->
     <div id="article-page" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 overflow-y-auto">
         <div class="container mx-auto px-4 py-12">
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden max-w-4xl mx-auto">
@@ -1594,7 +1395,178 @@
         </div>
     </div>
 
+
     <!-- Lien vers le fichier JavaScript externe -->
     <script src="essai.js"></script>
+
+    <script>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
+        
+        // Check for saved user preference or system preference
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
+        
+        // Article page toggle
+        const articlePage = document.getElementById('article-page');
+        const closeArticle = document.getElementById('close-article');
+        
+        document.querySelectorAll('.article-card, [href="#"]').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                articlePage.classList.remove('hidden');
+            });
+        });
+        
+        closeArticle.addEventListener('click', () => {
+            articlePage.classList.add('hidden');
+        });
+        
+        // Chat support toggle
+        const chatSupport = document.querySelector('#chat-support > div');
+        const openChat = document.getElementById('open-chat');
+        const closeChat = document.getElementById('close-chat');
+        
+        openChat.addEventListener('click', () => {
+            chatSupport.classList.toggle('hidden');
+        });
+        
+        closeChat.addEventListener('click', () => {
+            chatSupport.classList.add('hidden');
+        });
+        
+        // Infinite scroll / Load more
+        const loadMoreBtn = document.getElementById('load-more');
+        const loader = document.getElementById('loader');
+        const articlesContainer = document.getElementById('articles-container');
+        
+        loadMoreBtn.addEventListener('click', () => {
+            loadMoreBtn.classList.add('hidden');
+            loader.classList.remove('hidden');
+            
+            // Simulate loading new articles
+            setTimeout(() => {
+                const newArticles = `
+                    <!-- Article 5 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden article-card transition duration-300">
+                        <a href="#">
+                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Réalité augmentée" class="w-full h-48 object-cover">
+                        </a>
+                        <div class="p-5">
+                            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+                                <span>Par <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">Lucie Bernard</a></span>
+                                <span class="mx-2">•</span>
+                                <span>3 mai 2023</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">
+                                <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400">La réalité augmentée dans les smartphones : état des lieux</a>
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-3">Apple, Google et Samsung investissent massivement dans la RA. Découvrez où en est cette technologie et ce qu'elle promet pour les années à venir...</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">Lire la suite</a>
+                                <div class="flex items-center text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <span class="text-gray-600 dark:text-gray-300 ml-1">4.2</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Article 6 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden article-card transition duration-300">
+                        <a href="#">
+                            <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Écrans pliables" class="w-full h-48 object-cover">
+                        </a>
+                        <div class="p-5">
+                            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+                                <span>Par <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">Antoine Petit</a></span>
+                                <span class="mx-2">•</span>
+                                <span>1 mai 2023</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">
+                                <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400">Les écrans pliables en 2023 : gadget ou révolution ?</a>
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-3">Après plusieurs années d'expérimentation, les smartphones pliables commencent à trouver leur public. Analyse des derniers modèles et de leur utilité réelle...</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">Lire la suite</a>
+                                <div class="flex items-center text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <span class="text-gray-600 dark:text-gray-300 ml-1">4.0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                articlesContainer.insertAdjacentHTML('beforeend', newArticles);
+                loader.classList.add('hidden');
+                loadMoreBtn.classList.remove('hidden');
+            }, 1500);
+        });
+        
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === articlePage) {
+                articlePage.classList.add('hidden');
+            }
+        });
+
+        // Mobile menu toggle
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+const menuIcon = document.getElementById('menu-icon');
+const closeIcon = document.getElementById('close-icon');
+const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+
+mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    menuIcon.classList.toggle('hidden');
+    closeIcon.classList.toggle('hidden');
+});
+
+// Dropdown menu in mobile
+dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const dropdown = toggle.nextElementSibling;
+        const icon = toggle.querySelector('i');
+        
+        dropdown.classList.toggle('hidden');
+        icon.classList.toggle('rotate-180');
+        
+        // Close other dropdowns
+        dropdownToggles.forEach(otherToggle => {
+            if (otherToggle !== toggle) {
+                otherToggle.nextElementSibling.classList.add('hidden');
+                otherToggle.querySelector('i').classList.remove('rotate-180');
+            }
+        });
+    });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+        mobileMenu.classList.add('hidden');
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        
+        // Also close all dropdowns
+        document.querySelectorAll('.dropdown-menu').forEach(dropdown => {
+            dropdown.classList.add('hidden');
+        });
+        document.querySelectorAll('.dropdown-toggle i').forEach(icon => {
+            icon.classList.remove('rotate-180');
+        });
+    }
+});
+    </script>
 </body>
 </html>
