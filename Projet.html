@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdmiSoft Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .product-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .image-zoom {
+            transition: transform 0.3s;
+        }
+        
+        .image-zoom:hover {
+            transform: scale(1.05);
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .category-slant {
+            transform: skewX(-15deg);
+        }
+        
+        .category-content {
+            transform: skewX(15deg);
+        }
+        
+        .chat-bubble {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        
+        /* Animation for notifications */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+        
+        /* Slanted tabs */
+        .slanted-tab {
+            position: relative;
+            margin-right: 15px;
+        }
+        
+        .slanted-tab:after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 0 40px 15px;
+            border-color: transparent transparent #f3f4f6 transparent;
+        }
+        
+        .dark .slanted-tab:after {
+            border-color: transparent transparent #1f2937 transparent;
+        }
+        
+        .slanted-tab.active:after {
+            border-color: transparent transparent #3b82f6 transparent;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#2563eb',
+                            dark: '#1e40af'
+                        },
+                        secondary: {
+                            light: '#1e40af',
+                            dark: '#1e3a8a'
+                        },
+                        accent: '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+    <!-- HEADER NAVBAR -->
+    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center" aria-label="AdmiSoft - Retour à l'accueil">
+                        <button class="flex items-center px-5 py-2 rounded-full bg-gradient-to-tr from-[#051769] to-[#0298e4] shadow-lg hover:scale-105 transition-all duration-200 border-2 border-white dark:border-gray-900 focus:outline-none">
+                            <span class="text-white font-extrabold text-xl tracking-wide drop-shadow">AdmiSoft</span>
+                        </button>
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation Centered -->
+                <nav class="hidden lg:flex flex-1 justify-center items-center space-x-1">
+                    <a href="index.html" class="px-4 py-2 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Accueil</a>
+                    <a href="blog.html" class="px-4 py-2 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Blog</a>
+                    <a href="marketplace.html" class="px-4 py-2 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Marketplace</a>
+                </nav>
+                
+                <!-- Right icons -->
+                <div class="flex items-center space-x-4">
+                    <!-- Search Button (desktop & mobile) -->
+                    <button id="search-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Rechercher">
+                        <i class="fas fa-search text-gray-500"></i>
+                    </button>
+                    
+                    <!-- Theme Toggle (desktop only) -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hidden lg:inline-flex" aria-label="Basculer mode sombre">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    
+                    <!-- Messages -->
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative hidden lg:inline-flex" id="messages-btn" aria-label="Messages">
+                        <i class="fas fa-envelope"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center pulse">3</span>
+                    </a>
+                    
+                    <!-- Notifications -->
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative hidden lg:inline-flex" id="notifications-btn" aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">5</span>
+                    </a>
+                    
+                    <!-- User Account -->
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative hidden lg:inline-flex" id="user-account-btn" aria-label="Mon compte">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-8 h-8 rounded-full">
+                    </a>
+                    
+                    <!-- Mobile: bouton + pour afficher toutes les actions -->
+                    <button id="mobile-actions-toggle" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Menu actions">
+                        <i class="fas fa-plus text-xl"></i>
+                    </button>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Menu principal">
+                        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile search bar fixed just below navbar -->
+        <div id="mobile-search-bar" class="fixed left-0 right-0 top-[64px] z-50 px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center space-x-2 transition-all duration-200 opacity-0 pointer-events-none">
+            <input type="text" id="mobile-search-input" placeholder="Rechercher..." class="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full px-4 py-2 outline-none text-gray-800 dark:text-white" aria-label="Rechercher" />
+            <button id="mobile-search-close" class="ml-2 text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400" aria-label="Fermer la recherche">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile actions bar fixed just below navbar -->
+        <div id="mobile-actions-bar" class="fixed left-0 right-0 top-[64px] z-50 px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-around space-x-4 transition-all duration-200 opacity-0 pointer-events-none">
+            <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900" aria-label="Basculer mode sombre">
+                <i class="fas fa-moon dark:hidden text-xl"></i>
+                <i class="fas fa-sun hidden dark:block text-xl"></i>
+            </button>
+            <button id="mobile-messages-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 relative" aria-label="Messages">
+                <i class="fas fa-envelope text-xl"></i>
+                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center pulse">3</span>
+            </button>
+            <button id="mobile-notifications-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 relative" aria-label="Notifications">
+                <i class="fas fa-bell text-xl"></i>
+                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">5</span>
+            </button>
+            <button id="mobile-user-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900" aria-label="Mon compte">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-8 h-8 rounded-full">
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white dark:bg-gray-800 z-50 hidden transition-all duration-300">
+        <div class="container mx-auto px-4 py-8 h-full flex flex-col">
+            <div class="flex justify-between items-center mb-8">
+                <span class="text-2xl font-extrabold text-[#051769] dark:text-white">Menu</span>
+                <button id="mobile-menu-close" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" aria-label="Fermer le menu">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-6 text-lg flex-1 justify-center items-center">
+                <a href="index.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Accueil</a>
+                <a href="blog.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Blog</a>
+                <a href="marketplace.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Marketplace</a>
+                <a href="login.html" class="block w-full bg-[#051769] hover:bg-[#0298e4] text-white text-center py-3 px-6 rounded font-medium mt-8 max-w-xs transition-colors">Se connecter</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Marketplace Tabs -->
+        <div class="flex overflow-x-auto mb-6 border-b border-gray-200 dark:border-gray-700">
+            <div class="flex space-x-1">
+                <a href="#" class="slanted-tab active px-6 py-3 bg-gray-100 dark:bg-gray-700 text-[#051769] dark:text-white font-medium">
+                    <div class="category-content">Articles</div>
+                </a>
+                <a href="#" class="slanted-tab px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium">
+                    <div class="category-content">Messages</div>
+                </a>
+                <a href="#" class="slanted-tab px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium">
+                    <div class="category-content">Commandes</div>
+                </a>
+                <a href="#" class="slanted-tab px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium">
+                    <div class="category-content">Ventes</div>
+                </a>
+                <a href="#" class="slanted-tab px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium">
+                    <div class="category-content">Favoris</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Add Product Button -->
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold">Marketplace</h1>
+            <button id="add-product-btn" class="bg-[#051769] hover:bg-[#0298e4] text-white px-4 py-2 rounded-lg font-medium flex items-center">
+                <i class="fas fa-plus mr-2"></i> Ajouter un article
+            </button>
+        </div>
+
+        <!-- Categories Slanted -->
+        <section class="py-6 mb-8">
+            <div class="flex overflow-x-auto pb-4">
+                <div class="flex space-x-4">
+                    <div class="category-slant bg-blue-600 text-white px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-blue-700 transition">
+                        <div class="category-content font-medium">Tous les articles</div>
+                    </div>
+                    <div class="category-slant bg-gray-200 dark:bg-gray-700 px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                        <div class="category-content font-medium">Électronique</div>
+                    </div>
+                    <div class="category-slant bg-gray-200 dark:bg-gray-700 px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                        <div class="category-content font-medium">Mode</div>
+                    </div>
+                    <div class="category-slant bg-gray-200 dark:bg-gray-700 px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                        <div class="category-content font-medium">Maison</div>
+                    </div>
+                    <div class="category-slant bg-gray-200 dark:bg-gray-700 px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                        <div class="category-content font-medium">Véhicules</div>
+                    </div>
+                    <div class="category-slant bg-gray-200 dark:bg-gray-700 px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                        <div class="category-content font-medium">Sports</div>
+                    </div>
+                    <div class="category-slant bg-gray-200 dark:bg-gray-700 px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                        <div class="category-content font-medium">Loisirs</div>
+                    </div>
+                    <div class="category-slant bg-gray-200 dark:bg-gray-700 px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                        <div class="category-content font-medium">Services</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Product 1 -->
+            <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro" class="w-full h-48 object-cover image-zoom">
+                    <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">-15%</div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-semibold">MacBook Pro 14" M2</h3>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.8</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Paris, 75015 • Aujourd'hui</p>
+                    
+                    <div class="mt-3 flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-bold">1 799€</span>
+                            <span class="text-gray-400 line-through text-sm ml-2">2 099€</span>
+                        </div>
+                        <button class="text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1567&q=80" alt="iPhone 14 Pro" class="w-full h-48 object-cover image-zoom">
+                    <div class="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">Nouveau</div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-semibold">iPhone 14 Pro 256GB</h3>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.9</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Lyon, 69002 • Hier</p>
+                    
+                    <div class="mt-3 flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-bold">1 299€</span>
+                        </div>
+                        <button class="text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Samsung Galaxy S23" class="w-full h-48 object-cover image-zoom">
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-semibold">Galaxy S23 Ultra 512GB</h3>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.7</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Marseille, 13001 • Il y a 2 jours</p>
+                    
+                    <div class="mt-3 flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-bold">1 199€</span>
+                        </div>
+                        <button class="text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1629131726692-1accd0bec53c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="AirPods Pro" class="w-full h-48 object-cover image-zoom">
+                    <div class="absolute top-2 left-2 bg-blue-500 text-white text-xs px-2 py-1 rounded">Best-seller</div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-semibold">AirPods Pro (2ème génération)</h3>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.8</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Toulouse, 31000 • Il y a 3 jours</p>
+                    
+                    <div class="mt-3 flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-bold">279€</span>
+                        </div>
+                        <button class="text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="MacBook Air" class="w-full h-48 object-cover image-zoom">
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-semibold">MacBook Air M1 13"</h3>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.6</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Nice, 06000 • Il y a 4 jours</p>
+                    
+                    <div class="mt-3 flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-bold">999€</span>
+                        </div>
+                        <button class="text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="iPad Pro" class="w-full h-48 object-cover image-zoom">
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-semibold">iPad Pro 12.9" M2</h3>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.7</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Bordeaux, 33000 • Il y a 5 jours</p>
+                    
+                    <div class="mt-3 flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-bold">1 299€</span>
+                        </div>
+                        <button class="text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 7 -->
+            <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1592155931584-901ac15763e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Apple Watch" class="w-full h-48 object-cover image-zoom">
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-semibold">Apple Watch Series 8</h3>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.5</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Lille, 59000 • Il y a 1 semaine</p>
+                    
+                    <div class="mt-3 flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-bold">499€</span>
+                        </div>
+                        <button class="text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 8 -->
+            <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="iMac" class="w-full h-48 object-cover image-zoom">
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-semibold">iMac 24" M1</h3>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.8</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Strasbourg, 67000 • Il y a 2 semaines</p>
+                    
+                    <div class="mt-3 flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-bold">1 499€</span>
+                        </div>
+                        <button class="text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="flex justify-center mt-8">
+            <nav class="flex items-center space-x-2">
+                <a href="#" class="px-3 py-1 rounded border border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">&laquo;</a>
+                <a href="#" class="px-3 py-1 rounded bg-[#051769] text-white">1</a>
+                <a href="#" class="px-3 py-1 rounded border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">2</a>
+                <a href="#" class="px-3 py-1 rounded border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">3</a>
+                <span class="px-2 text-gray-500">...</span>
+                <a href="#" class="px-3 py-1 rounded border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">10</a>
+                <a href="#" class="px-3 py-1 rounded border border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">&raquo;</a>
+            </nav>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gradient-to-tr from-[#051769] via-[#0298e4] to-[#3b82f6] text-white pt-12 pb-6 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-8 mb-8">
+                <!-- Logo & Slogan -->
+                <div>
+                    <div class="flex items-center mb-2">
+                        <span class="text-2xl font-extrabold tracking-tight">AdmiSoft</span>
+                    </div>
+                    <p class="text-blue-100 text-base">L'innovation digitale, simplement.</p>
+                </div>
+                
+                <!-- Newsletter -->
+                <div class="w-full md:w-auto">
+                    <h4 class="font-semibold mb-2 text-lg">Recevez nos actus</h4>
+                    <form class="flex flex-col bg-white rounded-lg overflow-hidden shadow-lg max-w-md p-2">
+                        <input type="email" placeholder="Votre email" class="flex-grow px-4 py-2 text-gray-800 focus:outline-none text-base rounded mb-2" required>
+                        <button class="bg-[#051769] hover:bg-[#0298e4] text-white px-6 py-2 font-semibold transition text-base rounded">S'abonner</button>
+                    </form>
+                    <p class="text-sm text-blue-100 mt-2">Pas de spam, juste l'essentiel.</p>
+                </div>
+                
+                <!-- Liens rapides -->
+                <div class="flex flex-col space-y-2 text-base">
+                    <a href="index.html" class="hover:underline">Accueil</a>
+                    <a href="blog.html" class="hover:underline">Blog</a>
+                    <a href="marketplace.html" class="hover:underline">Marketplace</a>
+                    <a href="index.html#contact" class="hover:underline">Contact</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-300/30 pt-6 flex flex-col md:flex-row justify-between items-center text-blue-100 text-base gap-2">
+                <span>&copy; 2023 AdmiSoft. Tous droits réservés.</span>
+                <div class="flex space-x-4 text-lg">
+                    <a href="#" class="hover:text-white" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-white" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-white" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="hover:text-white" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ADD PRODUCT MODAL -->
+    <div id="add-product-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 overflow-y-auto">
+        <div class="container mx-auto px-4 py-12">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden max-w-3xl mx-auto">
+                <div class="p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
+                    <h3 class="text-xl font-bold">Ajouter un article</h3>
+                    <button id="close-add-product" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <div class="p-6">
+                    <form id="product-form">
+                        <!-- Photos -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Photos de l'article</label>
+                            <div class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 text-center">
+                                <div class="grid grid-cols-3 gap-4 mb-4" id="product-images-preview">
+                                    <!-- Les prévisualisations d'images seront ajoutées ici -->
+                                </div>
+                                <label class="cursor-pointer inline-block bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 px-4 py-2 rounded-lg">
+                                    <i class="fas fa-camera mr-2"></i> Ajouter des photos
+                                    <input type="file" id="product-images" class="hidden" accept="image/*" multiple>
+                                </label>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Ajoutez jusqu'à 10 photos. La première photo sera la photo principale.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Titre -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Titre de l'article</label>
+                            <input type="text" id="product-title" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: MacBook Pro 14\" M2 en excellent état" required>
+                        </div>
+                        
+                        <!-- Catégorie -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Catégorie</label>
+                            <select id="product-category" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Sélectionnez une catégorie</option>
+                                <option value="electronics">Électronique</option>
+                                <option value="fashion">Mode</option>
+                                <option value="home">Maison</option>
+                                <option value="vehicles">Véhicules</option>
+                                <option value="sports">Sports</option>
+                                <option value="hobbies">Loisirs</option>
+                                <option value="services">Services</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Description -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Description</label>
+                            <textarea id="product-description" rows="4" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Décrivez votre article en détail..." required></textarea>
+                        </div>
+                        
+                        <!-- Prix -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Prix (€)</label>
+                            <input type="number" id="product-price" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: 799" required>
+                        </div>
+                        
+                        <!-- Localisation -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Localisation</label>
+                            <input type="text" id="product-location" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: Paris, 75015" required>
+                        </div>
+                        
+                        <!-- Options -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Options</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="product-negotiable" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                                    <span class="ml-2">Prix négociable</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="product-swap" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                                    <span class="ml-2">Ouvert aux échanges</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Boutons -->
+                        <div class="flex justify-end space-x-4 pt-4">
+                            <button type="button" id="cancel-add-product" class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
+                                Annuler
+                            </button>
+                            <button type="submit" class="px-4 py-2 bg-[#051769] text-white rounded hover:bg-[#0298e4]">
+                                Publier l'article
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MESSAGES MODAL -->
+    <div id="messages-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 overflow-y-auto">
+        <div class="container mx-auto px-4 py-12">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden max-w-4xl mx-auto">
+                <div class="p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
+                    <h3 class="text-xl font-bold">Messages</h3>
+                    <button id="close-messages" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <div class="flex">
+                    <!-- Conversations list -->
+                    <div class="w-1/3 border-r border-gray-200 dark:border-gray-700">
+                        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                            <input type="text" placeholder="Rechercher des messages" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <div class="overflow-y-auto" style="max-height: 500px;">
+                            <!-- Conversation 1 -->
+                            <div class="p-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sophie Martin" class="w-10 h-10 rounded-full">
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <h4 class="font-semibold">Sophie Martin</h4>
+                                            <span class="text-xs text-gray-500 dark:text-gray-400">12:30</span>
+                                        </div>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 truncate">Bonjour, le MacBook Pro est-il toujours disponible ?</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Conversation 2 -->
+                            <div class="p-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Thomas Leroy" class="w-10 h-10 rounded-full">
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <h4 class="font-semibold">Thomas Leroy</h4>
+                                            <span class="text-xs text-gray-500 dark:text-gray-400">Hier</span>
+                                        </div>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 truncate">Je suis intéressé par l'iPhone, pouvez-vous faire 1100€ ?</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Conversation 3 -->
+                            <div class="p-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma Dubois" class="w-10 h-10 rounded-full">
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <h4 class="font-semibold">Emma Dubois</h4>
+                                            <span class="text-xs text-gray-500 dark:text-gray-400">Lundi</span>
+                                        </div>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 truncate">Merci pour les AirPods, je les ai reçus aujourd'hui !</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat area -->
+                    <div class="w-2/3 flex flex-col" style="height: 500px;">
+                        <!-- Chat header -->
+                        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sophie Martin" class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <h4 class="font-semibold">Sophie Martin</h4>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">En ligne</p>
+                            </div>
+                            <div class="ml-auto flex space-x-2">
+                                <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <i class="fas fa-phone"></i>
+                                </button>
+                                <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <i class="fas fa-video"></i>
+                                </button>
+                                <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Messages -->
+                        <div class="flex-1 p-4 overflow-y-auto">
+                            <!-- Message from other -->
+                            <div class="flex mb-4">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sophie Martin" class="w-8 h-8 rounded-full mr-3">
+                                <div>
+                                    <div class="bg-gray-100 dark:bg-gray-700 rounded-lg px-4 py-2 max-w-xs">
+                                        <p>Bonjour, le MacBook Pro est-il toujours disponible ?</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">12:30</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Your message -->
+                            <div class="flex mb-4 justify-end">
+                                <div class="mr-3 text-right">
+                                    <div class="bg-blue-100 dark:bg-blue-900 rounded-lg px-4 py-2 max-w-xs">
+                                        <p>Bonjour Sophie, oui il est toujours disponible !</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">12:32</p>
+                                </div>
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Vous" class="w-8 h-8 rounded-full">
+                            </div>
+                            
+                            <!-- Message from other -->
+                            <div class="flex mb-4">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sophie Martin" class="w-8 h-8 rounded-full mr-3">
+                                <div>
+                                    <div class="bg-gray-100 dark:bg-gray-700 rounded-lg px-4 py-2 max-w-xs">
+                                        <p>Super ! Pourriez-vous me donner plus de détails sur son état ?</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">12:33</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Your message -->
+                            <div class="flex mb-4 justify-end">
+                                <div class="mr-3 text-right">
+                                    <div class="bg-blue-100 dark:bg-blue-900 rounded-lg px-4 py-2 max-w-xs">
+                                        <p>Bien sûr, il a été acheté il y a 6 mois et est en parfait état. Je peux vous envoyer plus de photos si vous voulez.</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">12:35</p>
+                                </div>
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Vous" class="w-8 h-8 rounded-full">
+                            </div>
+                            
+                            <!-- Message with image -->
+                            <div class="flex mb-4 justify-end">
+                                <div class="mr-3 text-right">
+                                    <div class="bg-blue-100 dark:bg-blue-900 rounded-lg px-2 py-2 max-w-xs">
+                                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="MacBook Pro" class="rounded-lg mb-1">
+                                        <p class="text-xs text-gray-600 dark:text-gray-300">Voici quelques photos supplémentaires</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">12:36</p>
+                                </div>
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Vous" class="w-8 h-8 rounded-full">
+                            </div>
+                        </div>
+                        
+                        <!-- Message input -->
+                        <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                            <form class="flex items-center space-x-2">
+                                <button type="button" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                                <input type="text" placeholder="Écrire un message..." class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <button type="submit" class="p-2 rounded-full bg-[#051769] text-white hover:bg-[#0298e4]">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ORDERS MODAL -->
+    <div id="orders-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 overflow-y-auto">
+        <div class="container mx-auto px-4 py-12">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden max-w-4xl mx-auto">
+                <div class="p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
+                    <h3 class="text-xl font-bold">Mes commandes</h3>
+                    <button id="close-orders" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <div class="p-6">
+                    <!-- Order Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 mb-6">
+                        <button class="px-4 py-2 font-medium border-b-2 border-[#0298e4] text-[#051769] dark:text-[#0298e4]">Toutes</button>
+                        <button class="px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">En attente</button>
+                        <button class="px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Expédiées</button>
+                        <button class="px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Livrées</button>
+                        <button class="px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Annulées</button>
+                    </div>
+                    
+                    <!-- Order List -->
+                    <div class="space-y-6">
+                        <!-- Order 1 -->
+                        <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                            <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 flex justify-between items-center">
+                                <div>
+                                    <span class="font-medium">Commande #CMD-2023-456</span>
+                                    <span class="text-sm text-gray-500 dark:text-gray-400 ml-2">Passée le 15/05/2023</span>
+                                </div>
+                                <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-2 py-1 rounded">Livrée</span>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex items-center mb-4">
+                                    <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro" class="w-16 h-16 object-cover rounded mr-4">
+                                    <div>
+                                        <h4 class="font-medium">MacBook Pro 14" M2</h4>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">Vendu par: Jean Dupont</p>
+                                    </div>
+                                    <div class="ml-auto text-right">
+                                        <p class="font-medium">1 799€</p>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">Quantité: 1</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-700">
+                                    <div>
+                                        <p class="text-sm">Livraison: <span class="font-medium">Colissimo</span></p>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">Livré le 18/05/2023</p>
+                                    </div>
+                                    <div class="space-x-2">
+                                        <button class="px-3 py-1 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-sm">
+                                            Suivi
+                                        </button>
+                                        <button class="px-3 py-1 bg-[#051769] text-white rounded hover:bg-[#0298e4] text-sm">
+                                            Contacter le vendeur
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Order 2 -->
+                        <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                            <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 flex justify-between items-center">
+                                <div>
+                                    <span class="font-medium">Commande #CMD-2023-457</span>
+                                    <span class="text-sm text-gray-500 dark:text-gray-400 ml-2">Passée le 10/05/2023</span>
+                                </div>
+                                <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded">Expédiée</span>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex items-center mb-4">
+                                    <img src="https://images.unsplash.com/photo-1629131726692-1accd0bec53c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="AirPods Pro" class="w-16 h-16 object-cover rounded mr-4">
+                                    <div>
+                                        <h4 class="font-medium">AirPods Pro (2ème génération)</h4>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">Vendu par: Emma Dubois</p>
+                                    </div>
+                                    <div class="ml-auto text-right">
+                                        <p class="font-medium">279€</p>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">Quantité: 1</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-700">
+                                    <div>
+                                        <p class="text-sm">Livraison: <span class="font-medium">Chronopost</span></p>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">Expédié le 12/05/2023</p>
+                                    </div>
+                                    <div class="space-x-2">
+                                        <button class="px-3 py-1 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-sm">
+                                            Suivi
+                                        </button>
+                                        <button class="px-3 py-1 bg-[#051769] text-white rounded hover:bg-[#0298e4] text-sm">
+                                            Contacter le vendeur
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATIONS MODAL -->
+    <div id="notifications-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 overflow-y-auto">
+        <div class="container mx-auto px-4 py-12">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden max-w-md mx-auto">
+                <div class="p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
+                    <h3 class="text-xl font-bold">Notifications</h3>
+                    <button id="close-notifications" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <div class="p-4">
+                    <div class="space-y-4">
+                        <!-- Notification 1 -->
+                        <div class="flex items-start p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <div class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 p-2 rounded-full mr-3">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-medium">Nouvelle commande reçue</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Thomas a commandé votre MacBook Pro pour 1 799€</p>
+                                <p class="text-xs text-gray-400 mt-1">Il y a 2 heures</p>
+                            </div>
+                            <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Notification 2 -->
+                        <div class="flex items-start p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <div class="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400 p-2 rounded-full mr-3">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-medium">Paiement confirmé</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Votre paiement de 279€ pour les AirPods Pro a été confirmé</p>
+                                <p class="text-xs text-gray-400 mt-1">Hier, 14:30</p>
+                            </div>
+                            <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Notification 3 -->
+                        <div class="flex items-start p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <div class="bg-yellow-100 dark:bg-yellow-900 text-yellow-600 dark:text-yellow-400 p-2 rounded-full mr-3">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-medium">Nouvel avis</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Sophie a donné 5 étoiles à votre article "iPhone 14 Pro"</p>
+                                <p class="text-xs text-gray-400 mt-1">Hier, 10:15</p>
+                            </div>
+                            <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Notification 4 -->
+                        <div class="flex items-start p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <div class="bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-400 p-2 rounded-full mr-3">
+                                <i class="fas fa-comment"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-medium">Nouveau message</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Thomas: "Bonjour, seriez-vous prêt à faire 1 700€ pour le MacBook ?"</p>
+                                <p class="text-xs text-gray-400 mt-1">Lundi, 18:45</p>
+                            </div>
+                            <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-6">
+                        <button class="text-blue-600 dark:text-blue-400 hover:underline">Voir toutes les notifications</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="product-detail-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 overflow-y-auto">
+        <div class="container mx-auto px-4 py-12">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden max-w-6xl mx-auto">
+                <div class="p-4 flex justify-end">
+                    <button id="close-product-detail" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
+                    <!-- Product Images -->
+                    <div>
+                        <div class="mb-4 rounded-lg overflow-hidden">
+                            <img id="main-product-image" src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro 14 pouces M2" class="w-full h-auto rounded-lg cursor-zoom-in" onclick="zoomImage(this)">
+                        </div>
+                        
+                        <div class="grid grid-cols-4 gap-2">
+                            <div class="border-2 border-transparent hover:border-[#0298e4] rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro vue de face" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            </div>
+                            <div class="border-2 border-transparent hover:border-[#0298e4] rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="MacBook Pro vue de côté" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            </div>
+                            <div class="border-2 border-transparent hover:border-[#0298e4] rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1542393545-10f5cde2c810?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1065&q=80" alt="MacBook Pro clavier" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            </div>
+                            <div class="border-2 border-transparent hover:border-[#0298e4] rounded cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="MacBook Pro écran" class="w-full h-20 object-cover rounded" onclick="changeMainImage(this)">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Details -->
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h1 class="text-3xl font-bold mb-2">MacBook Pro 14" M2 Pro 16GB 512GB</h1>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-gray-600 dark:text-gray-400">4.8 (124 avis)</span>
+                                    <span class="mx-2 text-gray-400">|</span>
+                                    <span class="text-green-500"><i class="fas fa-check-circle mr-1"></i> En stock</span>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-red-500">
+                                <i class="far fa-heart text-2xl"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold">1 799€</span>
+                            <span class="text-gray-400 line-through ml-2">2 099€</span>
+                            <span class="bg-red-500 text-white text-sm px-2 py-1 rounded ml-2">-15%</span>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <div class="flex items-center text-gray-500 dark:text-gray-400 mb-2">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                <span>Paris, 75015 • Publié il y a 2 jours</span>
+                            </div>
+                            <div class="flex items-center text-gray-500 dark:text-gray-400">
+                                <i class="fas fa-user mr-2"></i>
+                                <span>Vendu par <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">Jean Dupont</a></span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h3 class="font-semibold mb-2">Description</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Le MacBook Pro 14" avec puce M2 Pro redéfinit les performances des ordinateurs portables. Avec un écran Liquid Retina XDR, jusqu'à 20 heures d'autonomie et un design compact, c'est l'outil ultime pour les professionnels.</p>
+                            <p class="text-gray-600 dark:text-gray-400 mt-2">Acheté il y a 6 mois, en parfait état, avec facture et garantie Apple jusqu'en décembre 2024. Vendu avec boîte d'origine et chargeur.</p>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h3 class="font-semibold mb-2">Options d'achat</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block mb-1">Livraison</label>
+                                    <select class="border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 w-full">
+                                        <option>Retrait en main propre (Paris 75015)</option>
+                                        <option>Livraison Colissimo (+9,99€)</option>
+                                        <option>Livraison Chronopost Express (+19,99€)</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block mb-1">Quantité</label>
+                                    <div class="flex border border-gray-300 dark:border-gray-600 rounded w-32">
+                                        <button class="px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">-</button>
+                                        <input type="text" value="1" class="w-12 text-center border-x border-gray-300 dark:border-gray-600 dark:bg-gray-700">
+                                        <button class="px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-4">
+                            <button class="flex-grow border border-[#051769] text-[#051769] dark:text-[#0298e4] py-3 px-4 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium">
+                                <i class="fas fa-comment-dots mr-2"></i> Contacter
+                            </button>
+                            <button class="flex-grow bg-[#051769] text-white py-3 px-4 rounded hover:bg-[#0298e4] font-medium">
+                                <i class="fas fa-shopping-cart mr-2"></i> Acheter maintenant
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Tabs -->
+                <div class="border-t border-gray-200 dark:border-gray-700">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700">
+                        <button class="tab-btn px-6 py-4 font-medium border-b-2 border-[#0298e4] text-[#051769] dark:text-[#0298e4]">Description</button>
+                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Spécifications</button>
+                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Avis (124)</button>
+                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">FAQ</button>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="tab-content active">
+                            <h3 class="font-semibold text-lg mb-3">Description détaillée</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">Le MacBook Pro 14" repousse les limites de la performance mobile. Avec la puce M2 Pro, vous bénéficiez d'une puissance de traitement et graphique exceptionnelle, idéale pour les professionnels exigeants.</p>
+                            
+                            <h4 class="font-semibold mb-2">État du produit</h4>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">Comme neuf - utilisé pendant 6 mois seulement. Aucun défaut esthétique ou fonctionnel. Protégé par une coque depuis le premier jour.</p>
+                            
+                            <h4 class="font-semibold mb-2">Écran Liquid Retina XDR</h4>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">Profitez d'un écran 14.2" Liquid Retina XDR avec une résolution de 3024x1964 pixels, un contraste époustouflant et des noirs profonds grâce à la technologie mini-LED.</p>
+                            
+                            <h4 class="font-semibold mb-2">Performances révolutionnaires</h4>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">La puce M2 Pro avec CPU 10 cœurs et GPU 16 cœurs offre jusqu'à 20% de performances en plus que la génération précédente, avec une efficacité énergétique inégalée.</p>
+                            
+                            <h4 class="font-semibold mb-2">Contenu de la vente</h4>
+                            <ul class="list-disc pl-5 text-gray-600 dark:text-gray-400">
+                                <li>MacBook Pro 14" M2 Pro 16GB/512GB</li>
+                                <li>Chargeur MagSafe 67W</li>
+                                <li>Câble USB-C vers MagSafe 3 (2m)</li>
+                                <li>Boîte d'origine</li>
+                                <li>Facture d'achat</li>
+                                <li>Garantie Apple jusqu'au 15/12/2024</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content hidden">
+                            <!-- Spécifications content would go here -->
+                        </div>
+                        
+                        <div class="tab-content hidden">
+                            <!-- Avis content would go here -->
+                        </div>
+                        
+                        <div class="tab-content hidden">
+                            <!-- FAQ content would go here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Related Products -->
+                <div class="p-8 border-t border-gray-200 dark:border-gray-700">
+                    <h3 class="text-xl font-bold mb-6">Articles similaires</h3>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <!-- Related product cards would go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
+        
+        // Check for saved user preference or system preference
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        });
+        
+        // Product detail modal toggle
+        const productDetailModal = document.getElementById('product-detail-modal');
+        const closeProductDetail = document.getElementById('close-product-detail');
+        
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', () => {
+                productDetailModal.classList.remove('hidden');
+            });
+        });
+        
+        closeProductDetail.addEventListener('click', () => {
+            productDetailModal.classList.add('hidden');
+        });
+        
+        // Add product modal toggle
+        const addProductModal = document.getElementById('add-product-modal');
+        const addProductBtn = document.getElementById('add-product-btn');
+        const closeAddProduct = document.getElementById('close-add-product');
+        const cancelAddProduct = document.getElementById('cancel-add-product');
+        
+        addProductBtn.addEventListener('click', () => {
+            addProductModal.classList.remove('hidden');
+        });
+        
+        closeAddProduct.addEventListener('click', () => {
+            addProductModal.classList.add('hidden');
+        });
+        
+        cancelAddProduct.addEventListener('click', () => {
+            addProductModal.classList.add('hidden');
+        });
+        
+        // Messages modal toggle
+        const messagesModal = document.getElementById('messages-modal');
+        const messagesBtn = document.getElementById('messages-btn');
+        const mobileMessagesBtn = document.getElementById('mobile-messages-toggle');
+        const closeMessages = document.getElementById('close-messages');
+        
+        messagesBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            messagesModal.classList.remove('hidden');
+        });
+        
+        mobileMessagesBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            messagesModal.classList.remove('hidden');
+        });
+        
+        closeMessages.addEventListener('click', () => {
+            messagesModal.classList.add('hidden');
+        });
+        
+        // Orders modal toggle
+        const ordersModal = document.getElementById('orders-modal');
+        const ordersTab = document.querySelector('.slanted-tab:nth-child(3)');
+        const closeOrders = document.getElementById('close-orders');
+        
+        ordersTab.addEventListener('click', (e) => {
+            e.preventDefault();
+            ordersModal.classList.remove('hidden');
+        });
+        
+        closeOrders.addEventListener('click', () => {
+            ordersModal.classList.add('hidden');
+        });
+        
+        // Notifications modal toggle
+        const notificationsModal = document.getElementById('notifications-modal');
+        const notificationsBtn = document.getElementById('notifications-btn');
+        const mobileNotificationsBtn = document.getElementById('mobile-notifications-toggle');
+        const closeNotifications = document.getElementById('close-notifications');
+        
+        notificationsBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            notificationsModal.classList.remove('hidden');
+        });
+        
+        mobileNotificationsBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            notificationsModal.classList.remove('hidden');
+        });
+        
+        closeNotifications.addEventListener('click', () => {
+            notificationsModal.classList.add('hidden');
+        });
+        
+        // Product tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => {
+                    b.classList.remove('border-blue-600', 'text-blue-600', 'dark:text-blue-400');
+                    b.classList.add('text-gray-500', 'dark:text-gray-400');
+                });
+                
+                tabContents.forEach(content => content.classList.add('hidden'));
+                
+                btn.classList.add('border-blue-600', 'text-blue-600', 'dark:text-blue-400');
+                btn.classList.remove('text-gray-500', 'dark:text-gray-400');
+                tabContents[index].classList.remove('hidden');
+            });
+        });
+        
+        // Product image zoom
+        function zoomImage(img) {
+            if (img.style.transform === 'scale(2)') {
+                img.style.transform = 'scale(1)';
+                img.style.cursor = 'zoom-in';
+            } else {
+                img.style.transform = 'scale(2)';
+                img.style.cursor = 'zoom-out';
+            }
+        }
+        
+        // Change main product image
+        function changeMainImage(img) {
+            document.getElementById('main-product-image').src = img.src;
+        }
+        
+        // Image preview for product upload
+        const productImagesInput = document.getElementById('product-images');
+        const productImagesPreview = document.getElementById('product-images-preview');
+        
+        productImagesInput.addEventListener('change', function() {
+            productImagesPreview.innerHTML = '';
+            
+            if (this.files && this.files.length > 0) {
+                for (let i = 0; i < Math.min(this.files.length, 10); i++) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const div = document.createElement('div');
+                        div.className = 'relative';
+                        
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.className = 'w-full h-32 object-cover rounded';
+                        
+                        const removeBtn = document.createElement('button');
+                        removeBtn.className = 'absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs';
+                        removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                        removeBtn.onclick = function() {
+                            div.remove();
+                        };
+                        
+                        div.appendChild(img);
+                        div.appendChild(removeBtn);
+                        productImagesPreview.appendChild(div);
+                    }
+                    
+                    reader.readAsDataURL(this.files[i]);
+                }
+            }
+        });
+        
+        // Mobile search toggle
+        const searchToggle = document.getElementById('search-toggle');
+        const mobileSearchBar = document.getElementById('mobile-search-bar');
+        const mobileSearchClose = document.getElementById('mobile-search-close');
+        
+        searchToggle.addEventListener('click', () => {
+            mobileSearchBar.classList.toggle('opacity-0');
+            mobileSearchBar.classList.toggle('pointer-events-none');
+        });
+        
+        mobileSearchClose.addEventListener('click', () => {
+            mobileSearchBar.classList.add('opacity-0');
+            mobileSearchBar.classList.add('pointer-events-none');
+        });
+        
+        // Mobile actions toggle
+        const mobileActionsToggle = document.getElementById('mobile-actions-toggle');
+        const mobileActionsBar = document.getElementById('mobile-actions-bar');
+        
+        mobileActionsToggle.addEventListener('click', () => {
+            mobileActionsBar.classList.toggle('opacity-0');
+            mobileActionsBar.classList.toggle('pointer-events-none');
+        });
+        
+        // Close all modals when clicking outside
+        window.addEventListener('click', (e) => {
+            // Product detail modal
+            if (e.target === productDetailModal) {
+                productDetailModal.classList.add('hidden');
+            }
+            
+            // Add product modal
+            if (e.target === addProductModal) {
+                addProductModal.classList.add('hidden');
+            }
+            
+            // Messages modal
+            if (e.target === messagesModal) {
+                messagesModal.classList.add('hidden');
+            }
+            
+            // Orders modal
+            if (e.target === ordersModal) {
+                ordersModal.classList.add('hidden');
+            }
+            
+            // Notifications modal
+            if (e.target === notificationsModal) {
+                notificationsModal.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
