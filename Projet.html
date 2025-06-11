@@ -928,48 +928,6 @@
     </div>
 </div>
 
-<script>
-// Gestion de l'affichage responsive des messages
-document.querySelectorAll('.conversation-item').forEach(item => {
-    item.addEventListener('click', function() {
-        // Sur mobile, on cache la liste et on montre le chat
-        if (window.innerWidth < 1024) {
-            document.getElementById('conversations-list').classList.add('hidden');
-            document.getElementById('chat-area').classList.remove('hidden');
-        }
-        
-        // Ici vous pourriez charger les messages de la conversation sélectionnée
-        // via AJAX ou en affichant des messages prédéfinis
-    });
-});
-
-// Bouton retour pour mobile
-document.getElementById('back-to-conversations').addEventListener('click', function() {
-    document.getElementById('conversations-list').classList.remove('hidden');
-    document.getElementById('chat-area').classList.add('hidden');
-});
-
-// Au chargement, on adapte l'affichage selon la taille de l'écran
-function handleMessagesLayout() {
-    if (window.innerWidth >= 1024) {
-        document.getElementById('conversations-list').classList.remove('hidden');
-        document.getElementById('chat-area').classList.remove('hidden');
-    } else {
-        document.getElementById('chat-area').classList.add('hidden');
-    }
-}
-
-// Écouter les changements de taille de fenêtre
-window.addEventListener('resize', handleMessagesLayout);
-
-// Appeler la fonction au chargement initial
-handleMessagesLayout();
-
-// Gestion de la fermeture du modal
-document.getElementById('close-messages').addEventListener('click', function() {
-    document.getElementById('messages-modal').classList.add('hidden');
-});
-</script>
 
     <!-- ORDERS MODAL -->
     <div id="orders-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 overflow-y-auto">
@@ -1607,6 +1565,13 @@ handleMessagesLayout();
                 notificationsModal.classList.add('hidden');
             }
         });
-    </script>
+
+
+
+
+
+
+
+</script>
 </body>
 </html>
