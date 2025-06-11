@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdmiSoft Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .product-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .image-zoom {
+            transition: transform 0.3s;
+        }
+        
+        .image-zoom:hover {
+            transform: scale(1.05);
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .category-slant {
+            transform: skewX(-15deg);
+        }
+        
+        .category-content {
+            transform: skewX(15deg);
+        }
+        
+        .chat-bubble {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        
+        /* Animation for notifications */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+        
+        /* Slanted tabs */
+        .slanted-tab {
+            position: relative;
+            margin-right: 15px;
+        }
+        
+        .slanted-tab:after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 0 40px 15px;
+            border-color: transparent transparent #f3f4f6 transparent;
+        }
+        
+        .dark .slanted-tab:after {
+            border-color: transparent transparent #1f2937 transparent;
+        }
+        
+        .slanted-tab.active:after {
+            border-color: transparent transparent #3b82f6 transparent;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#2563eb',
+                            dark: '#1e40af'
+                        },
+                        secondary: {
+                            light: '#1e40af',
+                            dark: '#1e3a8a'
+                        },
+                        accent: '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+    <!-- HEADER NAVBAR -->
+    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center" aria-label="AdmiSoft - Retour à l'accueil">
+                        <button class="flex items-center px-5 py-2 rounded-full bg-gradient-to-tr from-[#051769] to-[#0298e4] shadow-lg hover:scale-105 transition-all duration-200 border-2 border-white dark:border-gray-900 focus:outline-none">
+                            <span class="text-white font-extrabold text-xl tracking-wide drop-shadow">AdmiSoft</span>
+                        </button>
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation Centered -->
+                <nav class="hidden lg:flex flex-1 justify-center items-center space-x-1">
+                    <a href="index.html" class="px-4 py-2 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Accueil</a>
+                    <a href="blog.html" class="px-4 py-2 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Blog</a>
+                    <a href="marketplace.html" class="px-4 py-2 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Marketplace</a>
+                </nav>
+                
+                <!-- Right icons -->
+                <div class="flex items-center space-x-4">
+                    <!-- Search Button (desktop & mobile) -->
+                    <button id="search-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Rechercher">
+                        <i class="fas fa-search text-gray-500"></i>
+                    </button>
+                    
+                    <!-- Theme Toggle (desktop only) -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hidden lg:inline-flex" aria-label="Basculer mode sombre">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    
+                    <!-- Messages -->
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative hidden lg:inline-flex" id="messages-btn" aria-label="Messages">
+                        <i class="fas fa-envelope"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center pulse">3</span>
+                    </a>
+                    
+                    <!-- Notifications -->
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative hidden lg:inline-flex" id="notifications-btn" aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">5</span>
+                    </a>
+                    
+                    <!-- User Account -->
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative hidden lg:inline-flex" id="user-account-btn" aria-label="Mon compte">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-8 h-8 rounded-full">
+                    </a>
+                    
+                    <!-- Mobile: bouton + pour afficher toutes les actions -->
+                    <button id="mobile-actions-toggle" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Menu actions">
+                        <i class="fas fa-plus text-xl"></i>
+                    </button>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Menu principal">
+                        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile search bar fixed just below navbar -->
+        <div id="mobile-search-bar" class="fixed left-0 right-0 top-[64px] z-50 px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center space-x-2 transition-all duration-200 opacity-0 pointer-events-none">
+            <input type="text" id="mobile-search-input" placeholder="Rechercher..." class="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full px-4 py-2 outline-none text-gray-800 dark:text-white" aria-label="Rechercher" />
+            <button id="mobile-search-close" class="ml-2 text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400" aria-label="Fermer la recherche">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile actions bar fixed just below navbar -->
+        <div id="mobile-actions-bar" class="fixed left-0 right-0 top-[64px] z-50 px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-around space-x-4 transition-all duration-200 opacity-0 pointer-events-none">
+            <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900" aria-label="Basculer mode sombre">
+                <i class="fas fa-moon dark:hidden text-xl"></i>
+                <i class="fas fa-sun hidden dark:block text-xl"></i>
+            </button>
+            <button id="mobile-messages-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 relative" aria-label="Messages">
+                <i class="fas fa-envelope text-xl"></i>
+                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center pulse">3</span>
+            </button>
+            <button id="mobile-notifications-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 relative" aria-label="Notifications">
+                <i class="fas fa-bell text-xl"></i>
+                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">5</span>
+            </button>
+            <button id="mobile-user-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900" aria-label="Mon compte">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-8 h-8 rounded-full">
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white dark:bg-gray-800 z-50 hidden transition-all duration-300">
+        <div class="container mx-auto px-4 py-8 h-full flex flex-col">
+            <div class="flex justify-between items-center mb-8">
+                <span class="text-2xl font-extrabold text-[#051769] dark:text-white">Menu</span>
+                <button id="mobile-menu-close" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" aria-label="Fermer le menu">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-6 text-lg flex-1 justify-center items-center">
+                <a href="index.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Accueil</a>
+                <a href="blog.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Blog</a>
+                <a href="marketplace.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Marketplace</a>
+                <a href="login.html" class="block w-full bg-[#051769] hover:bg-[#0298e4] text-white text-center py-3 px-6 rounded font-medium mt-8 max-w-xs transition-colors">Se connecter</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Marketplace Tabs -->
+        <div class="flex overflow-x-auto mb-6 border-b border-gray-200 dark:border-gray-700">
+            <div class="flex space-x-1">
+                <a href="#" class="slanted-tab active px-6 py-3 bg-gray-100 dark:bg-gray-700 text-[#051769] dark:text-white font-medium">
+                    <div class="category-content">Articles</div>
+                </a>
+                <a href="#" class="slanted-tab px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium">
+                    <div class="category-content">Messages</div>
+                </a>
+                <a href="#" class="slanted-tab px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium">
+                    <div class="category-content">Commandes</div>
+                </a>
+                <a href="#" class="slanted-tab px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium">
+                    <div class="category-content">Ventes</div>
+                </a>
+                <a href="#" class="slanted-tab px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium">
+                    <div class="category-content">Favoris</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Add Product Button -->
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold">Marketplace</h1>
+            <button id="add-product-btn" class="bg-[#051769] hover:bg-[#0298e4] text-white px-4 py-2 rounded-lg font-medium flex items-center">
+                <i class="fas fa-plus mr-2"></i> Ajouter un article
+            </button>
+        </div>
+
+        <!-- Categories Slanted -->
+        <section class="py-6 mb-8">
+            <div class="flex overflow-x-auto pb-4">
+                <div class="flex space-x-4">
+                    <div class="category-slant bg-blue-600 text-white px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-blue-700 transition">
+                        <div class="category-content font-medium">Tous les articles</div>
+                    </div>
+                    <div class="category-slant bg-gray-200 dark:bg-gray-700 px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                        <div class="category-content font-medium">Électronique</div>
+                    </div>
+                    <div class="category-slant bg-gray-200 dark:bg-gray-700 px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                        <div class="category-content font-medium">Mode</div>
+                    </div>
+                    <div class="category-slant bg-gray-200 dark:bg-gray-700 px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                        <div class="category-content font-medium">Maison</div>
+                    </div>
+                    <div class="category-slant bg-gray-200 dark:bg-gray-700 px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                        <div class="category-content font-medium">Véhicules</div>
+                    </div>
+                    <div class="category-slant bg-gray-200 dark:bg-gray-700 px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                        <div class="category-content font-medium">Sports</div>
+                    </div>
+                    <div class="category-slant bg-gray-200 dark:bg-gray-700 px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                        <div class="category-content font-medium">Loisirs</div>
+                    </div>
+                    <div class="category-slant bg-gray-200 dark:bg-gray-700 px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                        <div class="category-content font-medium">Services</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Product 1 -->
+            <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro" class="w-full h-48 object-cover image-zoom">
+                    <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">-15%</div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-semibold">MacBook Pro 14" M2</h3>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.8</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Paris, 75015 • Aujourd'hui</p>
+                    
+                    <div class="mt-3 flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-bold">1 799€</span>
+                            <span class="text-gray-400 line-through text-sm ml-2">2 099€</span>
+                        </div>
+                        <button class="text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1567&q=80" alt="iPhone 14 Pro" class="w-full h-48 object-cover image-zoom">
+                    <div class="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">Nouveau</div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-semibold">iPhone 14 Pro 256GB</h3>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">4.9</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Lyon, 69002 • Hier</p>
+                    
+                    <div class="mt-3 flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-bold">1 299€</span>
+                        </div>
+                        <button class="text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class
