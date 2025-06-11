@@ -564,6 +564,79 @@
         </div>
     </footer>
 
+
+<!-- Modifier la structure du modal des messages comme ceci : -->
+<div id="messages-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 overflow-y-auto">
+    <div class="container mx-auto px-4 py-12">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden max-w-4xl mx-auto">
+            <div class="p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-xl font-bold">Messages</h3>
+                <button id="close-messages" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Modifier cette partie pour la rendre responsive -->
+            <div class="flex flex-col lg:flex-row">
+                <!-- Conversations list - Toujours visible mais prend toute la largeur sur mobile -->
+                <div class="w-full lg:w-1/3 border-b lg:border-b-0 lg:border-r border-gray-200 dark:border-gray-700">
+                    <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                        <input type="text" placeholder="Rechercher des messages" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    
+                    <div class="overflow-y-auto" style="max-height: 400px;">
+                        <!-- Vos conversations ici (même contenu qu'avant) -->
+                    </div>
+                </div>
+                
+                <!-- Chat area - Caché initialement sur mobile, visible quand une conversation est sélectionnée -->
+                <div id="chat-area" class="hidden lg:block w-full lg:w-2/3 flex flex-col" style="height: 500px;">
+                    <!-- Chat header -->
+                    <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center">
+                        <button id="back-to-conversations" class="lg:hidden mr-2 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sophie Martin" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h4 class="font-semibold">Sophie Martin</h4>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">En ligne</p>
+                        </div>
+                        <div class="ml-auto flex space-x-2">
+                            <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="fas fa-phone"></i>
+                            </button>
+                            <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="fas fa-video"></i>
+                            </button>
+                            <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Messages -->
+                    <div class="flex-1 p-4 overflow-y-auto">
+                        <!-- Vos messages ici (même contenu qu'avant) -->
+                    </div>
+                    
+                    <!-- Message input -->
+                    <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                        <form class="flex items-center space-x-2">
+                            <button type="button" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="fas fa-paperclip"></i>
+                            </button>
+                            <input type="text" placeholder="Écrire un message..." class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <button type="submit" class="p-2 rounded-full bg-[#051769] text-white hover:bg-[#0298e4]">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
     <!-- ADD PRODUCT MODAL -->
     <div id="add-product-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 overflow-y-auto">
         <div class="container mx-auto px-4 py-12">
