@@ -1374,6 +1374,39 @@
                 }
             }
         });
+
+// Gestion de l'affichage responsive des messages
+document.querySelectorAll('#messages-modal .conversation-item').forEach(item => {
+    item.addEventListener('click', function() {
+        // Sur mobile, on cache la liste et on montre le chat
+        if (window.innerWidth < 1024) {
+            document.querySelector('#messages-modal .conversations-list').classList.add('hidden');
+            document.getElementById('chat-area').classList.remove('hidden');
+        }
+    });
+});
+
+// Bouton retour pour mobile
+document.getElementById('back-to-conversations').addEventListener('click', function() {
+    document.querySelector('#messages-modal .conversations-list').classList.remove('hidden');
+    document.getElementById('chat-area').classList.add('hidden');
+});
+
+// Au chargement, on adapte l'affichage selon la taille de l'écran
+function handleMessagesLayout() {
+    if (window.innerWidth >= 1024) {
+        document.querySelector('#messages-modal .conversations-list').classList.remove('hidden');
+        document.getElementById('chat-area').classList.remove('hidden');
+    } else {
+        document.getElementById('chat-area').classList.add('hidden');
+    }
+}
+
+// Écouter les changements de taille de fenêtre
+window.addEventListener('resize', handleMessagesLayout);
+
+// Appeler la fonction au chargement initial
+handleMessagesLayout();
         
         // Mobile search toggle
         const searchToggle = document.getElementById('search-toggle');
