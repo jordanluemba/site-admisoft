@@ -307,82 +307,101 @@
                     <p class="text-gray-600 dark:text-gray-400">Rejoignez la communauté AdmiSoft</p>
                 </div>
                 
-                <form id="register-form" class="space-y-6">
-                    <div>
-                        <label for="reg-name" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Nom complet</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-user text-gray-400"></i>
-                            </div>
-                            <input type="text" id="reg-name" name="name" required 
-                                   class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
-                                   placeholder="Jean Dupont">
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label for="reg-email" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Adresse email</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-envelope text-gray-400"></i>
-                            </div>
-                            <input type="email" id="reg-email" name="email" required 
-                                   class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
-                                   placeholder="votre@email.com">
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label for="reg-password" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Mot de passe</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-lock text-gray-400"></i>
-                            </div>
-                            <input type="password" id="reg-password" name="password" required 
-                                   class="w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
-                                   placeholder="••••••••">
-                            <button type="button" class="password-toggle absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
-                                <i class="fas fa-eye-slash"></i>
-                            </button>
-                        </div>
-                        <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                            Minimum 8 caractères avec au moins 1 chiffre et 1 majuscule
-                        </p>
-                    </div>
-                    
-                    <div>
-                        <label for="reg-confirm-password" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Confirmer le mot de passe</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-lock text-gray-400"></i>
-                            </div>
-                            <input type="password" id="reg-confirm-password" name="confirm-password" required 
-                                   class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
-                                   placeholder="••••••••">
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start">
-                        <div class="flex items-center h-5">
-                            <input id="terms" name="terms" type="checkbox" 
-                                   class="h-4 w-4 text-[#0298e4] focus:ring-[#0298e4] border-gray-300 dark:border-gray-600 rounded dark:bg-gray-700">
-                        </div>
-                        <label for="terms" class="ml-2 block text-sm text-gray-600 dark:text-gray-400">
-                            J'accepte les <a href="#" class="text-[#0298e4] dark:text-blue-400 hover:underline">conditions d'utilisation</a>
-                        </label>
-                    </div>
-                    
-                    <button type="submit" class="w-full bg-gradient-to-r from-[#051769] to-[#0298e4] text-white py-3 px-4 rounded-lg font-semibold hover:from-[#0298e4] hover:to-[#3b82f6] focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:ring-offset-2 transition-all shadow-lg">
-                        S'inscrire
-                    </button>
-                    
-                    <div class="text-center text-sm text-gray-600 dark:text-gray-400">
-                        Vous avez déjà un compte ? 
-                        <a href="#" id="switch-to-login" class="text-[#0298e4] dark:text-blue-400 font-medium hover:underline transition-colors">
-                            Se connecter
-                        </a>
-                    </div>
-                </form>
+                <!-- ...existing code... -->
+<form id="register-form" class="space-y-6">
+    <div>
+        <label for="reg-firstname" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Prénom</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-user text-gray-400"></i>
+            </div>
+            <input type="text" id="reg-firstname" name="firstname" required
+                   class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                   placeholder="Jean">
+        </div>
+    </div>
+    <div>
+        <label for="reg-lastname" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Nom</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-user text-gray-400"></i>
+            </div>
+            <input type="text" id="reg-lastname" name="lastname" required
+                   class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                   placeholder="Dupont">
+        </div>
+    </div>
+    <div>
+        <label for="reg-email" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Adresse email</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-envelope text-gray-400"></i>
+            </div>
+            <input type="email" id="reg-email" name="email" required
+                   class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                   placeholder="votre@email.com">
+        </div>
+    </div>
+    <div>
+        <label for="reg-phone" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Téléphone</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-phone text-gray-400"></i>
+            </div>
+            <input type="tel" id="reg-phone" name="phone" required
+                   class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                   placeholder="+243 *** *** ***">
+        </div>
+    </div>
+    <div>
+        <label for="reg-password" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Mot de passe</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-lock text-gray-400"></i>
+            </div>
+            <input type="password" id="reg-password" name="password" required
+                   class="w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                   placeholder="••••••••">
+            <button type="button" class="password-toggle absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
+                <i class="fas fa-eye-slash"></i>
+            </button>
+        </div>
+        <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+            Minimum 8 caractères avec au moins 1 chiffre et 1 majuscule
+        </p>
+    </div>
+    <div>
+        <label for="reg-confirm-password" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Confirmer le mot de passe</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-lock text-gray-400"></i>
+            </div>
+            <input type="password" id="reg-confirm-password" name="confirm-password" required
+                   class="w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                   placeholder="••••••••">
+        </div>
+    </div>
+    <!-- Conditions d'utilisation et bouton restent identiques -->
+    <div class="flex items-start">
+        <div class="flex items-center h-5">
+            <input id="terms" name="terms" type="checkbox"
+                   class="h-4 w-4 text-[#0298e4] focus:ring-[#0298e4] border-gray-300 dark:border-gray-600 rounded dark:bg-gray-700">
+        </div>
+        <label for="terms" class="ml-2 block text-sm text-gray-600 dark:text-gray-400">
+            J'accepte les <a href="#" class="text-[#0298e4] dark:text-blue-400 hover:underline">conditions d'utilisation</a>
+        </label>
+    </div>
+    <button type="submit" class="w-full bg-gradient-to-r from-[#051769] to-[#0298e4] text-white py-3 px-4 rounded-lg font-semibold hover:from-[#0298e4] hover:to-[#3b82f6] focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:ring-offset-2 transition-all shadow-lg">
+        S'inscrire
+    </button>
+    <div class="text-center text-sm text-gray-600 dark:text-gray-400">
+        Vous avez déjà un compte ?
+        <a href="#" id="switch-to-login" class="text-[#0298e4] dark:text-blue-400 font-medium hover:underline transition-colors">
+            Se connecter
+        </a>
+    </div>
+</form>
+
                 
                 <div class="mt-8">
                     <div class="divider my-6"></div>
@@ -755,90 +774,14 @@
     </div>
 
     <!-- Cart Sidebar (hidden by default) -->
-    <div id="cart-sidebar" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
-        <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
-            <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-                <h3 class="text-xl font-bold">Votre panier (3)</h3>
-                <button id="close-cart" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer le panier">
-                    <i class="fas fa-times text-2xl"></i>
-                </button>
-            </div>
-            
-            <div class="p-4 space-y-4">
-                <!-- Cart Item 1 -->
-                <div class="flex border-b border-gray-200 dark:border-gray-700 pb-4">
-                    <div class="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro 14 pouces M2" class="w-full h-full object-contain">
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <h4 class="font-medium">MacBook Pro 14" M2</h4>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm">16GB/512GB</p>
-                        <div class="flex justify-between items-center mt-2">
-                            <div class="flex border border-gray-300 dark:border-gray-600 rounded">
-                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">-</button>
-                                <input type="text" value="1" class="w-8 text-center border-x border-gray-300 dark:border-gray-600 dark:bg-gray-700">
-                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">+</button>
-                            </div>
-                            <span class="font-bold">1 799€</span>
-                        </div>
-                    </div>
-                    <button class="text-gray-400 hover:text-red-500 ml-2" aria-label="Supprimer l'article">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-                
-                <!-- Cart Item 2 -->
-                <div class="flex border-b border-gray-200 dark:border-gray-700 pb-4">
-                    <div class="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1629131726692-1accd0bec53c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="AirPods Pro 2ème génération" class="w-full h-full object-contain">
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <h4 class="font-medium">AirPods Pro (2ème génération)</h4>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm">Blanc</p>
-                        <div class="flex justify-between items-center mt-2">
-                            <div class="flex border border-gray-300 dark:border-gray-600 rounded">
-                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">-</button>
-                                <input type="text" value="2" class="w-8 text-center border-x border-gray-300 dark:border-gray-600 dark:bg-gray-700">
-                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">+</button>
-                            </div>
-                            <span class="font-bold">558€</span>
-                        </div>
-                    </div>
-                    <button class="text-gray-400 hover:text-red-500 ml-2" aria-label="Supprimer l'article">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="p-4 border-t border-gray-200 dark:border-gray-700">
-                <div class="flex justify-between mb-2">
-                    <span>Sous-total</span>
-                    <span>2 357€</span>
-                </div>
-                <div class="flex justify-between mb-2">
-                    <span>Livraison</span>
-                    <span class="text-green-500">Gratuite</span>
-                </div>
-                <div class="flex justify-between font-bold text-lg mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                    <span>Total</span>
-                    <span>2 357€</span>
-                </div>
-                
-                <div class="mt-6 space-y-3">
-                    <button id="confirm-order-btn" class="w-full bg-[#051769] text-white py-2 px-4 rounded hover:bg-[#0298e4] font-medium">
-                        <i class="fas fa-credit-card mr-2"></i> Passer la commande
-                    </button>
-                    <a href="#" class="block border border-[#051769] text-[#051769] dark:text-[#0298e4] text-center py-3 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium">
-                        Voir le panier
-                    </a>
-                </div>
-                
-                <div class="mt-6">
-                    <img src="https://via.placeholder.com/300x40?text=PAYMENT+OPTIONS" alt="Modes de paiement acceptés" class="w-full">
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- ... -->
+<div class="p-4 space-y-4" id="cart-items-container">
+    <!-- Les items du panier seront injectés ici -->
+</div>
+<div class="p-4 border-t border-gray-200 dark:border-gray-700" id="cart-totals-container">
+    <!-- Les totaux seront injectés ici -->
+</div>
+<!-- ... -->
 
     <!-- Chat support responsive et amélioré -->
 <div id="chat-support" class="fixed bottom-4 right-4 z-50">
@@ -1187,6 +1130,39 @@
     </div>
 </div>
 
+<!-- Card de vérification d'email (affichée après inscription) -->
+<div id="verify-card" class="auth-card bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-t-4 border-green-500 hidden" data-scroll="fade-in">
+    <div class="text-center mb-8">
+        <h2 class="text-3xl font-extrabold text-[#051769] dark:text-white mb-2">Vérification de l'email</h2>
+        <p class="text-gray-600 dark:text-gray-400">
+            Un email de vérification vient d'être envoyé à <span id="verify-email-display" class="font-semibold"></span>.<br>
+            Veuillez cliquer sur le lien reçu ou saisir le code/token ci-dessous.
+        </p>
+    </div>
+    <form id="verify-form" class="space-y-6">
+        <div>
+            <label for="verify-email" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Adresse email</label>
+            <input type="email" id="verify-email" name="verify-email" required
+                   class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                   placeholder="Votre email">
+        </div>
+        <div>
+            <label for="verify-token" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Code/token de vérification</label>
+            <input type="text" id="verify-token" name="verify-token" required
+                   class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:border-transparent transition"
+                   placeholder="Code reçu par email">
+        </div>
+        <button type="submit" class="w-full bg-gradient-to-r from-[#051769] to-[#0298e4] text-white py-3 px-4 rounded-lg font-semibold hover:from-[#0298e4] hover:to-[#3b82f6] focus:outline-none focus:ring-2 focus:ring-[#0298e4] focus:ring-offset-2 transition-all shadow-lg">
+            Vérifier mon email
+        </button>
+        <div class="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
+            <a href="#" id="back-to-login-from-verify" class="text-[#0298e4] dark:text-blue-400 font-medium hover:underline transition-colors">
+                Retour à la connexion
+            </a>
+        </div>
+    </form>
+</div>
+
     <!-- Lien vers le fichier JavaScript externe -->
     <script src="essai.js"></script>
     
@@ -1280,25 +1256,6 @@
                 // window.location.href = 'dashboard.html';
             });
             
-            document.getElementById('register-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const password = document.getElementById('reg-password').value;
-                const confirmPassword = document.getElementById('reg-confirm-password').value;
-                
-                if (password !== confirmPassword) {
-                    alert('Les mots de passe ne correspondent pas');
-                    return;
-                }
-                
-                if (!document.getElementById('terms').checked) {
-                    alert('Veuillez accepter les conditions d\'utilisation');
-                    return;
-                }
-                
-                // Add registration logic here
-                console.log('Register form submitted');
-                // window.location.href = 'dashboard.html';
-            });
             
             // Forgot password form submission
             document.getElementById('forgot-password-form').addEventListener('submit', function(e) {
@@ -1424,5 +1381,168 @@
             }
         });
     </script>
+    <!-- Ajoute ce script à la fin de login.html -->
+
+<script type="module">
+
+    import { registerUser, loginUser, verifyEmail, forgotPassword } from './api.js';
+
+// Gestion du formulaire d'inscription
+const registerForm = document.getElementById('register-form');
+if (registerForm) {
+    registerForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Récupération et validation des champs
+        const firstname = document.getElementById('reg-firstname').value.trim();
+        const lastname = document.getElementById('reg-lastname').value.trim();
+        const email = document.getElementById('reg-email').value.trim();
+        const phone = document.getElementById('reg-phone').value.trim();
+        const password = document.getElementById('reg-password').value;
+        const confirmPassword = document.getElementById('reg-confirm-password').value;
+        const terms = document.getElementById('terms').checked;
+
+        if (!firstname || !lastname || !email || !phone || !password) {
+            alert("Tous les champs sont obligatoires.");
+            return;
+        }
+        if (password !== confirmPassword) {
+            alert("Les mots de passe ne correspondent pas.");
+            return;
+        }
+        if (!terms) {
+            alert("Vous devez accepter les conditions d'utilisation.");
+            return;
+        }
+
+        const data = { firstname, lastname, email, phone, password };
+
+        try {
+            const result = await registerUser(data);
+
+            // Si inscription réussie (success true), affiche la carte de vérification
+            if (result.success) {
+                document.getElementById('register-card').classList.add('hidden');
+                document.getElementById('verify-card').classList.remove('hidden');
+                document.getElementById('verify-card').classList.add('active');
+                document.getElementById('verify-email').value = email;
+                document.getElementById('verify-email-display').textContent = email;
+                alert(result.message || "Inscription réussie ! Vérifiez votre email.");
+            } else if (result.error) {
+                // Si l'erreur concerne l'envoi du mail mais l'utilisateur est bien créé, affiche quand même la carte de vérification
+                if (result.error.includes("envoie du code de confirmation")) {
+                    document.getElementById('register-card').classList.add('hidden');
+                    document.getElementById('verify-card').classList.remove('hidden');
+                    document.getElementById('verify-card').classList.add('active');
+                    document.getElementById('verify-email').value = email;
+                    document.getElementById('verify-email-display').textContent = email;
+                    alert("Votre compte a été créé, mais l'email de confirmation n'a pas pu être envoyé. Veuillez saisir le code/token manuellement si vous l'avez reçu.");
+                } else {
+                    alert(result.error);
+                }
+            } else {
+                alert("Une erreur inconnue est survenue.");
+            }
+        } catch (err) {
+            alert(err.message);
+        }
+    });
+}
+
+// Gestion du formulaire de vérification d'email
+const verifyForm = document.getElementById('verify-form');
+if (verifyForm) {
+    verifyForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('verify-email').value.trim();
+        const token = document.getElementById('verify-token').value.trim();
+        if (!email || !token) {
+            alert("Veuillez renseigner votre email et le code de vérification.");
+            return;
+        }
+        try {
+            await verifyEmail(email, token);
+            alert("Votre email a été vérifié avec succès !");
+            // Affiche la carte de connexion
+            document.getElementById('verify-card').classList.add('hidden');
+            document.getElementById('login-card').classList.remove('hidden');
+            document.getElementById('login-card').classList.add('active');
+        } catch (err) {
+            alert(err.message);
+        }
+    });
+}
+
+// Retour à la connexion depuis la carte de vérification
+const backToLoginFromVerify = document.getElementById('back-to-login-from-verify');
+if (backToLoginFromVerify) {
+    backToLoginFromVerify.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('verify-card').classList.add('hidden');
+        document.getElementById('login-card').classList.remove('hidden');
+        document.getElementById('login-card').classList.add('active');
+    });
+}
+
+// Gestion du formulaire de connexion
+const loginForm = document.getElementById('login-form');
+if (loginForm) {
+    loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const data = {
+            email: document.getElementById('email').value.trim(),
+            password: document.getElementById('password').value
+        };
+        if (!data.email || !data.password) {
+            alert("Veuillez renseigner votre email et votre mot de passe.");
+            return;
+        }
+        try {
+            const result = await loginUser(data);
+            alert(result.message || "Connexion réussie !");
+            window.location.href = "index.html";
+        } catch (err) {
+            alert(err.message);
+        }
+    });
+}
+
+
+
+// Gestion du formulaire "mot de passe oublié"
+const forgotPasswordForm = document.getElementById('forgot-password-form');
+if (forgotPasswordForm) {
+    forgotPasswordForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('forgot-email').value.trim();
+        if (!email) {
+            alert("Veuillez renseigner votre adresse email.");
+            return;
+        }
+        try {
+            const result = await forgotPassword(email);
+            alert(result.message || "Un mail de réinitialisation a été envoyé.");
+            // Afficher l'email dans la carte de vérification
+            document.getElementById('verification-email').textContent = email;
+            // Démarrer le compte à rebours (si tu utilises cette logique)
+            if (typeof startCountdown === "function") startCountdown();
+            // Passer à la carte de vérification
+            const forgotPasswordCard = document.getElementById('forgot-password-card');
+            const verificationCodeCard = document.getElementById('verification-code-card');
+            if (forgotPasswordCard && verificationCodeCard) {
+                forgotPasswordCard.classList.remove('active');
+                setTimeout(() => {
+                    forgotPasswordCard.classList.add('hidden');
+                    verificationCodeCard.classList.remove('hidden');
+                    setTimeout(() => verificationCodeCard.classList.add('active'), 10);
+                }, 300);
+            }
+        } catch (err) {
+            alert(err.message);
+        }
+    });
+}
+</script>
+
 </body>
 </html>

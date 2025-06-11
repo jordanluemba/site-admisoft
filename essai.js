@@ -1,3 +1,7 @@
+import { getCart } from './api.js';
+
+
+
 // Intersection Observer pour les animations au scroll
 const animateOnScroll = () => {
     const elements = document.querySelectorAll('[data-scroll]');
@@ -235,52 +239,7 @@ const setupProductPage = () => {
     }
 };
 
-// Cart sidebar functionality
-const setupCartSidebar = () => {
-    const cartSidebar = document.getElementById('cart-sidebar');
-    const closeCart = document.getElementById('close-cart');
-    const cartBtn = document.getElementById('cart-btn');
 
-    // Open cart
-    cartBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        cartSidebar.classList.remove('hidden');
-    });
-
-    // Close cart
-    closeCart.addEventListener('click', () => {
-        cartSidebar.classList.add('hidden');
-    });
-    
-    // Close when clicking outside
-    window.addEventListener('click', (e) => {
-        if (e.target === cartSidebar) {
-            cartSidebar.classList.add('hidden');
-        }
-    });
-
-    // Order confirmation
-    const confirmOrderBtn = document.getElementById('confirm-order-btn');
-    const orderConfirmModal = document.getElementById('order-confirm-modal');
-    const closeOrderConfirm = document.getElementById('close-order-confirm');
-
-    confirmOrderBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        cartSidebar.classList.add('hidden');
-        orderConfirmModal.classList.remove('hidden');
-    });
-
-    closeOrderConfirm.addEventListener('click', () => {
-        orderConfirmModal.classList.add('hidden');
-    });
-
-    // Close modal when clicking outside
-    window.addEventListener('click', (e) => {
-        if (e.target === orderConfirmModal) {
-            orderConfirmModal.classList.add('hidden');
-        }
-    });
-};
 
 // User account functionality
 const setupUserAccount = () => {
@@ -635,27 +594,7 @@ const setupLoginPage = () => {
         });
     }
     
-    if (registerForm) {
-        registerForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const password = document.getElementById('reg-password')?.value;
-            const confirmPassword = document.getElementById('reg-confirm-password')?.value;
-            
-            if (password && confirmPassword && password !== confirmPassword) {
-                alert('Les mots de passe ne correspondent pas');
-                return;
-            }
-            
-            if (!document.getElementById('terms')?.checked) {
-                alert('Veuillez accepter les conditions d\'utilisation');
-                return;
-            }
-            
-            // Add registration logic here
-            console.log('Register form submitted');
-            // window.location.href = 'dashboard.html';
-        });
-    }
+  
 };
 
 // Password Reset Functionality
@@ -818,3 +757,112 @@ document.addEventListener('DOMContentLoaded', () => {
     setupLoginPage();
     setupPasswordReset(); // Add this line
 });
+
+
+
+const setupCartSidebar = () => {
+    const cartSidebar = document.getElementById('cart-sidebar');
+    const closeCart = document.getElementById('close-cart');
+    const cartBtnDesktop = document.getElementById('cart-btn-desktop');
+    const cartBtnMobile = document.getElementById('cart-btn-mobile');
+    const cartItemsContainer = document.getElementById('cart-items-container');
+    const cartTotalsContainer = document.getElementById('cart-totals-container');
+
+    if (!cartSidebar || !closeCart || !cartItemsContainer || !cartTotalsContainer) return;
+
+    const openCart = async (e) => {
+        e.preventDefault();
+        cartItemsContainer.innerHTML = '<div class="text-gray-500">Chargement du panier...</div>';
+        cartTotalsContainer.innerHTML = '';
+        try {
+            const response = await fetch('cart.php', { credentials: 'include' });
+            if (response.status === 401) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-red-500">Veuillez vous connecter pour accéder à votre panier.</div>
+                    <a href="login.html" class="mt-4 inline-block bg-[#051769] text-white px-4 py-2 rounded">Se connecter</a>
+                `;
+                cartTotalsContainer.innerHTML = '';
+                cartSidebar.classList.remove('hidden');
+                return;
+            }
+            if (!response.ok) throw new Error('Erreur lors du chargement du panier');
+            const cartData = await response.json();
+
+            // Filtrer les articles (ceux qui ont un id)
+            const items = cartData.filter(item => item.id);
+            cartItemsContainer.innerHTML = '';
+
+            if (!items.length) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-gray-500 text-center py-8">
+                        Votre panier est vide.<br>
+                        <a href="marketplace.html" class="mt-4 inline-block bg-[#051769] text-white px-4 py-2 rounded hover:bg-[#0298e4]">Voir les produits</a>
+                    </div>
+                `;
+                cartTotalsContainer.innerHTML = '';
+                cartSidebar.classList.remove('hidden');
+                return;
+            }
+
+            // Affichage des articles du panier
+            items.forEach(item => {
+                cartItemsContainer.innerHTML += `
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 pb-4">
+                        <div class="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded flex-shrink-0">
+                            <img src="${item.image || 'https://via.placeholder.com/96'}" alt="${item.name}" class="w-full h-full object-contain">
+                        </div>
+                        <div class="ml-4 flex-grow">
+                            <h4 class="font-medium">${item.name}</h4>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm">${item.variant || ''}</p>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="font-bold">${item.price}€</span>
+                                <span>x${item.quantity}</span>
+                            </div>
+                        </div>
+                        <button class="text-gray-400 hover:text-red-500 ml-2" aria-label="Supprimer l'article">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+
+            // Affichage des totaux
+            const totals = cartData.find(i => typeof i.totalPrice !== "undefined");
+            if (totals) {
+                cartTotalsContainer.innerHTML = `
+                    <div class="flex justify-between mb-2">
+                        <span>Sous-total</span>
+                        <span>${totals.totalPrice}€</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span>Livraison</span>
+                        <span class="text-green-500">Gratuite</span>
+                    </div>
+                    <div class="flex justify-between font-bold text-lg mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <span>Total</span>
+                        <span>${totals.totalPrice}€</span>
+                    </div>
+                `;
+            } else {
+                cartTotalsContainer.innerHTML = '';
+            }
+        } catch (err) {
+            cartItemsContainer.innerHTML = '<div class="text-red-500">Erreur lors du chargement du panier.</div>';
+            cartTotalsContainer.innerHTML = '';
+        }
+        cartSidebar.classList.remove('hidden');
+    };
+
+    if (cartBtnDesktop) cartBtnDesktop.addEventListener('click', openCart);
+    if (cartBtnMobile) cartBtnMobile.addEventListener('click', openCart);
+
+    closeCart.addEventListener('click', () => {
+        cartSidebar.classList.add('hidden');
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === cartSidebar) {
+            cartSidebar.classList.add('hidden');
+        }
+    });
+};

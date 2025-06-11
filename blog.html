@@ -704,90 +704,14 @@
     </div>
 
     <!-- Cart Sidebar (hidden by default) -->
-    <div id="cart-sidebar" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
-        <div class="absolute right-0 top-0 bottom-0 bg-white dark:bg-gray-800 w-full max-w-md shadow-xl overflow-y-auto">
-            <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-                <h3 class="text-xl font-bold">Votre panier (3)</h3>
-                <button id="close-cart" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer le panier">
-                    <i class="fas fa-times text-2xl"></i>
-                </button>
-            </div>
-            
-            <div class="p-4 space-y-4">
-                <!-- Cart Item 1 -->
-                <div class="flex border-b border-gray-200 dark:border-gray-700 pb-4">
-                    <div class="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MacBook Pro 14 pouces M2" class="w-full h-full object-contain">
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <h4 class="font-medium">MacBook Pro 14" M2</h4>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm">16GB/512GB</p>
-                        <div class="flex justify-between items-center mt-2">
-                            <div class="flex border border-gray-300 dark:border-gray-600 rounded">
-                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">-</button>
-                                <input type="text" value="1" class="w-8 text-center border-x border-gray-300 dark:border-gray-600 dark:bg-gray-700">
-                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">+</button>
-                            </div>
-                            <span class="font-bold">1 799€</span>
-                        </div>
-                    </div>
-                    <button class="text-gray-400 hover:text-red-500 ml-2" aria-label="Supprimer l'article">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-                
-                <!-- Cart Item 2 -->
-                <div class="flex border-b border-gray-200 dark:border-gray-700 pb-4">
-                    <div class="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1629131726692-1accd0bec53c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="AirPods Pro 2ème génération" class="w-full h-full object-contain">
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <h4 class="font-medium">AirPods Pro (2ème génération)</h4>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm">Blanc</p>
-                        <div class="flex justify-between items-center mt-2">
-                            <div class="flex border border-gray-300 dark:border-gray-600 rounded">
-                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">-</button>
-                                <input type="text" value="2" class="w-8 text-center border-x border-gray-300 dark:border-gray-600 dark:bg-gray-700">
-                                <button class="px-2 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">+</button>
-                            </div>
-                            <span class="font-bold">558€</span>
-                        </div>
-                    </div>
-                    <button class="text-gray-400 hover:text-red-500 ml-2" aria-label="Supprimer l'article">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="p-4 border-t border-gray-200 dark:border-gray-700">
-                <div class="flex justify-between mb-2">
-                    <span>Sous-total</span>
-                    <span>2 357€</span>
-                </div>
-                <div class="flex justify-between mb-2">
-                    <span>Livraison</span>
-                    <span class="text-green-500">Gratuite</span>
-                </div>
-                <div class="flex justify-between font-bold text-lg mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                    <span>Total</span>
-                    <span>2 357€</span>
-                </div>
-                
-                <div class="mt-6 space-y-3">
-                    <button id="confirm-order-btn" class="w-full bg-[#051769] text-white py-2 px-4 rounded hover:bg-[#0298e4] font-medium">
-                        <i class="fas fa-credit-card mr-2"></i> Passer la commande
-                    </button>
-                    <a href="#" class="block border border-[#051769] text-[#051769] dark:text-[#0298e4] text-center py-3 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium">
-                        Voir le panier
-                    </a>
-                </div>
-                
-                <div class="mt-6">
-                    <img src="https://via.placeholder.com/300x40?text=PAYMENT+OPTIONS" alt="Modes de paiement acceptés" class="w-full">
-                </div>
-            </div>
-        </div>
-    </div>
+   <!-- ... -->
+<div class="p-4 space-y-4" id="cart-items-container">
+    <!-- Les items du panier seront injectés ici -->
+</div>
+<div class="p-4 border-t border-gray-200 dark:border-gray-700" id="cart-totals-container">
+    <!-- Les totaux seront injectés ici -->
+</div>
+<!-- ... -->
 
     <!-- Chat support responsive et amélioré -->
 <div id="chat-support" class="fixed bottom-4 right-4 z-50">

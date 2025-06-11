@@ -1929,3 +1929,56 @@
     </script>
 </body>
 </html>
+
+
+<!-- Desktop cart button -->
+<a href="#" class="..." id="cart-btn-desktop" aria-label="Panier">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="...">3</span>
+</a>
+<!-- Mobile cart button -->
+<button id="cart-btn-mobile" class="..." aria-label="Ouvrir le panier">
+    <i class="fas fa-shopping-cart"></i>
+</button>
+
+
+
+const setupCartSidebar = () => {
+    const cartSidebar = document.getElementById('cart-sidebar');
+    const closeCart = document.getElementById('close-cart');
+    const cartBtnDesktop = document.getElementById('cart-btn-desktop');
+    const cartBtnMobile = document.getElementById('cart-btn-mobile');
+    const cartItemsContainer = document.getElementById('cart-items-container');
+    const cartTotalsContainer = document.getElementById('cart-totals-container');
+
+    if (!cartSidebar || !closeCart || !cartItemsContainer || !cartTotalsContainer) return;
+
+    const openCart = async (e) => {
+        e.preventDefault();
+        // ... (le reste du code d'ouverture du panier)
+    };
+
+    if (cartBtnDesktop) cartBtnDesktop.addEventListener('click', openCart);
+    if (cartBtnMobile) cartBtnMobile.addEventListener('click', openCart);
+
+    closeCart.addEventListener('click', () => {
+        cartSidebar.classList.add('hidden');
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === cartSidebar) {
+            cartSidebar.classList.add('hidden');
+        }
+    });
+};
+
+<!-- Desktop cart button -->
+<a href="#" id="cart-btn-desktop" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative hidden lg:inline-flex" aria-label="Panier">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5">3</span>
+</a>
+
+<!-- Mobile cart button -->
+<button id="cart-btn-mobile" class="p-2 rounded-full bg-[#051769] text-white shadow-lg fixed bottom-8 right-8 z-50 lg:hidden" aria-label="Ouvrir le panier">
+    <i class="fas fa-shopping-cart"></i>
+</button>

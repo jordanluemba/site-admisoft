@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin Dashboard</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+    
+    <!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
+    <style>
+        /* Custom styles */
+        .dark .dark\:bg-gray-800 {
+            background-color: #1e293b !important;
+        }
+        
+        .sidebar {
+            transition: all 0.3s ease;
+            transform: translateX(0);
+        }
+        
+        .sidebar-collapsed {
+            transform: translateX(-100%);
+        }
+        
+        .mobile-menu-button {
+            display: none;
+        }
+        
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: fixed;
+                z-index: 50;
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .mobile-menu-button {
+                display: block;
+            }
+            
+            .main-content {
+                margin-left: 0 !important;
+            }
+        }
+        
+        /* Color overrides for dark mode */
+        .dark .dark\:text-white {
+            color: #f8fafc !important;
+        }
+        
+        .dark .dark\:bg-gray-900 {
+            background-color: #0f172a !important;
+        }
+        
+        .dark .dark\:bg-gray-700 {
+            background-color: #334155 !important;
+        }
+        
+        /* Fix for DataTables in dark mode */
+        .dark table.dataTable {
+            color: #f8fafc !important;
+            border-color: #4b5563 !important;
+        }
+        
+        .dark table.dataTable thead th {
+            border-bottom-color: #4b5563 !important;
+        }
+        
+        .dark .dataTables_wrapper .dataTables_filter input {
+            background-color: #1e293b !important;
+            color: white !important;
+            border-color: #4b5563 !important;
+        }
+        
+        .dark .dataTables_wrapper .dataTables_length select {
+            background-color: #1e293b !important;
+            color: white !important;
+            border-color: #4b5563 !important;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        .dark ::-webkit-scrollbar-track {
+            background: #334155;
+        }
+        
+        .dark ::-webkit-scrollbar-thumb {
+            background: #64748b;
+        }
+        
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        /* Animation for notifications */
+        @keyframes ping {
+            75%, 100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        .animate-ping-once {
+            animation: ping 1s cubic-bezier(0, 0, 0.2, 1) 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Mobile menu button -->
+    <button id="mobile-menu-button" class="mobile-menu-button fixed top-4 left-4 z-50 p-2 rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 shadow-md lg:hidden">
+        <i class="fas fa-bars text-xl"></i>
+    </button>
+    
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar h-screen w-64 bg-white dark:bg-gray-800 shadow-lg fixed transition-all duration-300 lg:translate-x-0">
+            <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Super Admin</h1>
+                <p class="text-gray-500 dark:text-gray-400">Tableau de contrôle</p>
+            </div>
+            <nav class="mt-6">
+                <a href="#" class="block py-3 px-4 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded mx-2 transition-colors mb-1">
+                    <i class="fas fa-tachometer-alt mr-3"></i> Tableau de bord
+                </a>
+                <a href="#" class="block py-3 px-4 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded mx-2 transition-colors mb-1 bg-indigo-100 dark:bg-indigo-900">
+                    <i class="fas fa-users-cog mr-3"></i> Gestion Admins
+                </a>
+                <a href="#" class="block py-3 px-4 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded mx-2 transition-colors mb-1">
+                    <i class="fas fa-user-shield mr-3"></i> Rôles & Permissions
+                </a>
+                <a href="#" class="block py-3 px-4 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded mx-2 transition-colors mb-1">
+                    <i class="fas fa-chart-line mr-3"></i> Statistiques
+                </a>
+                <a href="#" class="block py-3 px-4 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded mx-2 transition-colors mb-1">
+                    <i class="fas fa-history mr-3"></i> Journal d'activité
+                </a>
+                <a href="#" class="block py-3 px-4 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded mx-2 transition-colors mb-1">
+                    <i class="fas fa-cog mr-3"></i> Paramètres système
+                </a>
+                <div class="absolute bottom-0 w-full p-4 border-t border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/5.jpg" alt="User" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800 dark:text-white">Jean Dupont</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">Super Admin</p>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content flex-1 ml-0 lg:ml-64 transition-all duration-300">
+            <!-- Header -->
+            <header class="bg-white dark:bg-gray-800 shadow-sm p-4 sticky top-0 z-40">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <h2 class="text-xl font-semibold text-gray-800 dark:text-white">Gestion des Administrateurs</h2>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                            <i class="fas fa-moon dark:hidden"></i>
+                            <i class="fas fa-sun hidden dark:block"></i>
+                        </button>
+                        <div class="relative">
+                            <button id="notifications-btn" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors relative">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute -top-1 -right-1 h-5 w-5 bg-red-500 rounded-full text-xs text-white flex items-center justify-center animate-ping-once">3</span>
+                            </button>
+                            <!-- Notifications dropdown -->
+                            <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-md shadow-lg z-50 border border-gray-200 dark:border-gray-700">
+                                <div class="p-3 border-b border-gray-200 dark:border-gray-700">
+                                    <h3 class="font-medium text-gray-800 dark:text-white">Notifications (3)</h3>
+                                </div>
+                                <div class="max-h-96 overflow-y-auto">
+                                    <a href="#" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 border-b border-gray-100 dark:border-gray-700">
+                                        <div class="flex items-start">
+                                            <div class="bg-indigo-100 dark:bg-indigo-900 p-2 rounded-full mr-3">
+                                                <i class="fas fa-user-plus text-indigo-600 dark:text-indigo-300 text-sm"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-800 dark:text-white">Nouvel admin créé</p>
+                                                <p class="text-xs text-gray-500 dark:text-gray-400">Marie a créé un nouvel admin il y a 5 min</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 border-b border-gray-100 dark:border-gray-700">
+                                        <div class="flex items-start">
+                                            <div class="bg-red-100 dark:bg-red-900 p-2 rounded-full mr-3">
+                                                <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-300 text-sm"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-800 dark:text-white">Tentative de connexion</p>
+                                                <p class="text-xs text-gray-500 dark:text-gray-400">Tentative échouée depuis l'IP 192.168.1.1</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <div class="flex items-start">
+                                            <div class="bg-green-100 dark:bg-green-900 p-2 rounded-full mr-3">
+                                                <i class="fas fa-check-circle text-green-600 dark:text-green-300 text-sm"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-800 dark:text-white">Mise à jour système</p>
+                                                <p class="text-xs text-gray-500 dark:text-gray-400">Version 2.5.0 installée avec succès</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="p-3 text-center border-t border-gray-200 dark:border-gray-700">
+                                    <a href="#" class="text-sm text-indigo-600 dark:text-indigo-400 hover:underline">Voir toutes les notifications</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex items-center">
+                            <img src="https://randomuser.me/api/portraits/men/5.jpg" alt="User" class="w-8 h-8 rounded-full mr-2">
+                            <span class="text-gray-600 dark:text-gray-300 font-medium">Jean Dupont</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-4 md:p-6">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-indigo-100 dark:bg-indigo-900">
+                                <i class="fas fa-users-cog text-indigo-600 dark:text-indigo-300"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-gray-500 dark:text-gray-400 text-sm">Admins</p>
+                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">24</h3>
+                                <p class="text-green-500 text-xs"><i class="fas fa-arrow-up mr-1"></i> 2 nouveaux</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-blue-100 dark:bg-blue-900">
+                                <i class="fas fa-user-plus text-blue-600 dark:text-blue-300"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-gray-500 dark:text-gray-400 text-sm">Créations</p>
+                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">5</h3>
+                                <p class="text-green-500 text-xs"><i class="fas fa-arrow-up mr-1"></i> Cette semaine</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-red-100 dark:bg-red-900">
+                                <i class="fas fa-user-times text-red-600 dark:text-red-300"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-gray-500 dark:text-gray-400 text-sm">Désactivés</p>
+                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">3</h3>
+                                <p class="text-red-500 text-xs"><i class="fas fa-arrow-down mr-1"></i> 1 cette semaine</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-yellow-100 dark:bg-yellow-900">
+                                <i class="fas fa-clock text-yellow-600 dark:text-yellow-300"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-gray-500 dark:text-gray-400 text-sm">En attente</p>
+                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">2</h3>
+                                <p class="text-yellow-500 text-xs"><i class="fas fa-circle mr-1"></i> À valider</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts and Tables -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <!-- Graphique Activités -->
+                    <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Activités Récentes</h3>
+                            <div class="flex space-x-2">
+                                <select class="text-sm bg-gray-100 dark:bg-gray-700 border-none rounded px-2 py-1">
+                                    <option>7 jours</option>
+                                    <option selected>30 jours</option>
+                                    <option>90 jours</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="h-64">
+                            <!-- Placeholder pour un graphique -->
+                            <div class="flex items-center justify-center h-full bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/50 dark:to-blue-900/50 rounded">
+                                <canvas id="chart" class="w-full h-full"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Dernières activités -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Actions Récentes</h3>
+                        <div class="space-y-3 max-h-96 overflow-y-auto">
+                            <div class="flex items-start p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors">
+                                <div class="bg-indigo-100 dark:bg-indigo-900 p-2 rounded-full mr-3">
+                                    <i class="fas fa-user-plus text-indigo-600 dark:text-indigo-300 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800 dark:text-white">Nouvel admin créé</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">Sophie Lambert a été promue admin il y a 5 minutes</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors">
+                                <div class="bg-green-100 dark:bg-green-900 p-2 rounded-full mr-3">
+                                    <i class="fas fa-key text-green-600 dark:text-green-300 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800 dark:text-white">Permissions modifiées</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">Pierre Dubois a mis à jour les permissions il y a 1 heure</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors">
+                                <div class="bg-red-100 dark:bg-red-900 p-2 rounded-full mr-3">
+                                    <i class="fas fa-user-slash text-red-600 dark:text-red-300 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800 dark:text-white">Admin désactivé</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">Thomas Leroy a été désactivé il y a 2 heures</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors">
+                                <div class="bg-purple-100 dark:bg-purple-900 p-2 rounded-full mr-3">
+                                    <i class="fas fa-cog text-purple-600 dark:text-purple-300 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800 dark:text-white">Paramètres mis à jour</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">Marie Martin a modifié les paramètres système</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors">
+                                <div class="bg-blue-100 dark:bg-blue-900 p-2 rounded-full mr-3">
+                                    <i class="fas fa-shield-alt text-blue-600 dark:text-blue-300 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800 dark:text-white">Sécurité renforcée</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">2FA activé pour tous les admins</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DataTable -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Liste des Administrateurs</h3>
+                        <div class="flex space-x-2">
+                            <button id="export-btn" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-3 py-2 rounded text-sm transition-colors">
+                                <i class="fas fa-file-export mr-1"></i> Exporter
+                            </button>
+                            <button id="add-admin-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded text-sm transition-colors">
+                                <i class="fas fa-plus mr-1"></i> Nouvel Admin
+                            </button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table id="admins-table" class="w-full display responsive nowrap">
+                            <thead>
+                                <tr class="bg-gray-100 dark:bg-gray-700">
+                                    <th class="py-2 px-4 text-left text-gray-700 dark:text-gray-300">ID</th>
+                                    <th class="py-2 px-4 text-left text-gray-700 dark:text-gray-300">Nom</th>
+                                    <th class="py-2 px-4 text-left text-gray-700 dark:text-gray-300">Email</th>
+                                    <th class="py-2 px-4 text-left text-gray-700 dark:text-gray-300">Rôle</th>
+                                    <th class="py-2 px-4 text-left text-gray-700 dark:text-gray-300">Statut</th>
+                                    <th class="py-2 px-4 text-left text-gray-700 dark:text-gray-300">Dernière activité</th>
+                                    <th class="py-2 px-4 text-left text-gray-700 dark:text-gray-300">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                    <td class="py-3 px-4">1</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex items-center">
+                                            <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="User" class="w-8 h-8 rounded-full mr-2">
+                                            Jean Dupont
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-4">jean.dupont@example.com</td>
+                                    <td class="py-3 px-4"><span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded-full text-xs">Super Admin</span></td>
+                                    <td class="py-3 px-4"><span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded-full text-xs">Actif</span></td>
+                                    <td class="py-3 px-4">Il y a 5 min</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex space-x-1">
+                                            <button class="text-blue-500 hover:text-blue-700 p-1 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" title="Éditer">
+                                                <i class="fas fa-edit text-sm"></i>
+                                            </button>
+                                            <button class="text-yellow-500 hover:text-yellow-700 p-1 rounded-full hover:bg-yellow-100 dark:hover:bg-yellow-900 transition-colors" title="Permissions">
+                                                <i class="fas fa-key text-sm"></i>
+                                            </button>
+                                            <button class="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-100 dark:hover:bg-red-900 transition-colors" title="Désactiver">
+                                                <i class="fas fa-user-slash text-sm"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                    <td class="py-3 px-4">2</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex items-center">
+                                            <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="User" class="w-8 h-8 rounded-full mr-2">
+                                            Marie Martin
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-4">marie.martin@example.com</td>
+                                    <td class="py-3 px-4"><span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-2 py-1 rounded-full text-xs">Admin</span></td>
+                                    <td class="py-3 px-4"><span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded-full text-xs">Actif</span></td>
+                                    <td class="py-3 px-4">Il y a 1 heure</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex space-x-1">
+                                            <button class="text-blue-500 hover:text-blue-700 p-1 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" title="Éditer">
+                                                <i class="fas fa-edit text-sm"></i>
+                                            </button>
+                                            <button class="text-yellow-500 hover:text-yellow-700 p-1 rounded-full hover:bg-yellow-100 dark:hover:bg-yellow-900 transition-colors" title="Permissions">
+                                                <i class="fas fa-key text-sm"></i>
+                                            </button>
+                                            <button class="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-100 dark:hover:bg-red-900 transition-colors" title="Désactiver">
+                                                <i class="fas fa-user-slash text-sm"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                    <td class="py-3 px-4">3</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex items-center">
+                                            <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="User" class="w-8 h-8 rounded-full mr-2">
+                                            Pierre Dubois
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-4">pierre.dubois@example.com</td>
+                                    <td class="py-3 px-4"><span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full text-xs">Modérateur</span></td>
+                                    <td class="py-3 px-4"><span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded-full text-xs">Actif</span></td>
+                                    <td class="py-3 px-4">Il y a 3 heures</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex space-x-1">
+                                            <button class="text-blue-500 hover:text-blue-700 p-1 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" title="Éditer">
+                                                <i class="fas fa-edit text-sm"></i>
+                                            </button>
+                                            <button class="text-yellow-500 hover:text-yellow-700 p-1 rounded-full hover:bg-yellow-100 dark:hover:bg-yellow-900 transition-colors" title="Permissions">
+                                                <i class="fas fa-key text-sm"></i>
+                                            </button>
+                                            <button class="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-100 dark:hover:bg-red-900 transition-colors" title="Désactiver">
+                                                <i class="fas fa-user-slash text-sm"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                    <td class="py-3 px-4">4</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex items-center">
+                                            <img src="https://randomuser.me/api/portraits/women/4.jpg" alt="User" class="w-8 h-8 rounded-full mr-2">
+                                            Sophie Lambert
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-4">sophie.lambert@example.com</td>
+                                    <td class="py-3 px-4"><span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-2 py-1 rounded-full text-xs">Admin</span></td>
+                                    <td class="py-3 px-4"><span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded-full text-xs">En attente</span></td>
+                                    <td class="py-3 px-4">Jamais</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex space-x-1">
+                                            <button class="text-blue-500 hover:text-blue-700 p-1 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" title="Éditer">
+                                                <i class="fas fa-edit text-sm"></i>
+                                            </button>
+                                            <button class="text-green-500 hover:text-green-700 p-1 rounded-full hover:bg-green-100 dark:hover:bg-green-900 transition-colors" title="Activer">
+                                                <i class="fas fa-check-circle text-sm"></i>
+                                            </button>
+                                            <button class="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-100 dark:hover:bg-red-900 transition-colors" title="Refuser">
+                                                <i class="fas fa-times-circle text-sm"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                    <td class="py-3 px-4">5</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex items-center">
+                                            <img src="https://randomuser.me/api/portraits/men/5.jpg" alt="User" class="w-8 h-8 rounded-full mr-2">
+                                            Thomas Leroy
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-4">thomas.leroy@example.com</td>
+                                    <td class="py-3 px-4"><span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full text-xs">Modérateur</span></td>
+                                    <td class="py-3 px-4"><span class="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-2 py-1 rounded-full text-xs">Désactivé</span></td>
+                                    <td class="py-3 px-4">Il y a 2 jours</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex space-x-1">
+                                            <button class="text-blue-500 hover:text-blue-700 p-1 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" title="Éditer">
+                                                <i class="fas fa-edit text-sm"></i>
+                                            </button>
+                                            <button class="text-green-500 hover:text-green-700 p-1 rounded-full hover:bg-green-100 dark:hover:bg-green-900 transition-colors" title="Réactiver">
+                                                <i class="fas fa-user-check text-sm"></i>
+                                            </button>
+                                            <button class="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-100 dark:hover:bg-red-900 transition-colors" title="Supprimer">
+                                                <i class="fas fa-trash-alt text-sm"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    
+    <!-- SweetAlert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        // Thème sombre/light
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        
+        // Vérifie le thème stocké dans localStorage
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+        
+        // Bascule entre les thèmes
+        themeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            localStorage.setItem('theme', htmlElement.classList.contains('dark') ? 'dark' : 'light');
+            updateChartColors();
+        });
+        
+        // Menu mobile
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const sidebar = document.getElementById('sidebar');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+        
+        // Notifications dropdown
+        const notificationsBtn = document.getElementById('notifications-btn');
+        const notificationsDropdown = document.getElementById('notifications-dropdown');
+        
+        notificationsBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            notificationsDropdown.classList.toggle('hidden');
+        });
+        
+        // Ferme le dropdown quand on clique ailleurs
+        document.addEventListener('click', () => {
+            notificationsDropdown.classList.add('hidden');
+        });
+        
+        // Empêche la fermeture quand on clique dans le dropdown
+        notificationsDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+        
+        // Bouton ajouter admin
+        document.getElementById('add-admin-btn').addEventListener('click', () => {
+            Swal.fire({
+                title: 'Créer un nouvel administrateur',
+                html: `
+                    <div class="text-left">
+                        <div class="mb-3">
+                            <label class="block text-gray-700 dark:text-gray-200 mb-1">Nom complet</label>
+                            <input type="text" id="admin-name" class="w-full px-3 py-2 border rounded bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                        </div>
+                        <div class="mb-3">
+                            <label class="block text-gray-700 dark:text-gray-200 mb-1">Email</label>
+                            <input type="email" id="admin-email" class="w-full px-3 py-2 border rounded bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                        </div>
+                        <div class="mb-3">
+                            <label class="block text-gray-700 dark:text-gray-200 mb-1">Rôle</label>
+                            <select id="admin-role" class="w-full px-3 py-2 border rounded bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                                <option value="super-admin">Super Admin</option>
+                                <option value="admin">Admin</option>
+                                <option value="moderator">Modérateur</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="block text-gray-700 dark:text-gray-200 mb-1">Permissions</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600" checked>
+                                    <span class="ml-2 text-gray-700 dark:text-gray-300">Gestion utilisateurs</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600" checked>
+                                    <span class="ml-2 text-gray-700 dark:text-gray-300">Modification contenu</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600">
+                                    <span class="ml-2 text-gray-700 dark:text-gray-300">Paramètres système</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Créer',
+                cancelButtonText: 'Annuler',
+                confirmButtonColor: '#4f46e5',
+                focusConfirm: false,
+                preConfirm: () => {
+                    const name = document.getElementById('admin-name').value;
+                    const email = document.getElementById('admin-email').value;
+                    const role = document.getElementById('admin-role').value;
+                    
+                    if (!name || !email) {
+                        Swal.showValidationMessage('Veuillez remplir tous les champs obligatoires');
+                        return false;
+                    }
+                    
+                    return new Promise((resolve) => {
+                        setTimeout(() => {
+                            resolve({ name, email, role });
+                        }, 1000);
+                    });
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Succès!',
+                        `L'administrateur ${result.value.name} a été créé avec le rôle ${result.value.role}.`,
+                        'success'
+                    );
+                }
+            });
+        });
+        
+        // Bouton exporter
+        document.getElementById('export-btn').addEventListener('click', () => {
+            Swal.fire({
+                title: 'Exporter les données',
+                html: `
+                    <div class="text-left">
+                        <div class="mb-3">
+                            <label class="block text-gray-700 dark:text-gray-200 mb-1">Format</label>
+                            <select class="w-full px-3 py-2 border rounded bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                                <option>CSV</option>
+                                <option>Excel</option>
+                                <option>PDF</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="block text-gray-700 dark:text-gray-200 mb-1">Colonnes à inclure</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600" checked>
+                                    <span class="ml-2 text-gray-700 dark:text-gray-300">Nom</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600" checked>
+                                    <span class="ml-2 text-gray-700 dark:text-gray-300">Email</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600" checked>
+                                    <span class="ml-2 text-gray-700 dark:text-gray-300">Rôle</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600">
+                                    <span class="ml-2 text-gray-700 dark:text-gray-300">Dernière activité</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Exporter',
+                cancelButtonText: 'Annuler',
+                confirmButtonColor: '#4f46e5',
+                focusConfirm: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Export lancé!',
+                        'Votre fichier sera téléchargé sous peu.',
+                        'info'
+                    );
+                }
+            });
+        });
+        
+        // Initialisation de DataTable
+        $(document).ready(function() {
+            $('#admins-table').DataTable({
+                responsive: true,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json'
+                },
+                columnDefs: [
+                    { responsivePriority: 1, targets: 1 }, // Nom
+                    { responsivePriority: 2, targets: 6 }, // Actions
+                    { responsivePriority: 3, targets: 2 }, // Email
+                    { responsivePriority: 4, targets: 3 }, // Rôle
+                    { responsivePriority: 5, targets: 4 }, // Statut
+                    { responsivePriority: 6, targets: 5 }, // Dernière activité
+                    { responsivePriority: 7, targets: 0 }  // ID
+                ]
+            });
+        });
+        
+        // Création d'un graphique avec Chart.js
+        let chart;
+        
+        function initChart() {
+            const ctx = document.getElementById('chart').getContext('2d');
+            const isDarkMode = htmlElement.classList.contains('dark');
+            
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
+                    datasets: [
+                        {
+                            label: 'Créations',
+                            data: [3, 5, 2, 6, 4, 1, 0],
+                            backgroundColor: '#6366f1',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Connexions',
+                            data: [12, 15, 10, 18, 14, 8, 5],
+                            backgroundColor: '#10b981',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Actions',
+                            data: [24, 30, 22, 35, 28, 15, 10],
+                            backgroundColor: '#f59e0b',
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: isDarkMode ? '#f8fafc' : '#64748b'
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+                            },
+                            ticks: {
+                                color: isDarkMode ? '#f8fafc' : '#64748b'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+                            },
+                            ticks: {
+                                color: isDarkMode ? '#f8fafc' : '#64748b'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updateChartColors() {
+            const isDarkMode = htmlElement.classList.contains('dark');
+            
+            chart.options.plugins.legend.labels.color = isDarkMode ? '#f8fafc' : '#64748b';
+            chart.options.scales.y.grid.color = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+            chart.options.scales.y.ticks.color = isDarkMode ? '#f8fafc' : '#64748b';
+            chart.options.scales.x.grid.color = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+            chart.options.scales.x.ticks.color = isDarkMode ? '#f8fafc' : '#64748b';
+            
+            chart.update();
+        }
+        
+        // Initialisation du graphique
+        initChart();
+        
+        // Gestion des boutons d'action dans le tableau
+        $(document).on('click', '.fa-edit', function() {
+            Swal.fire({
+                title: 'Modifier l\'administrateur',
+                text: 'Fonctionnalité de modification en cours de développement',
+                icon: 'info'
+            });
+        });
+        
+        $(document).on('click', '.fa-key', function() {
+            Swal.fire({
+                title: 'Gérer les permissions',
+                text: 'Fonctionnalité de gestion des permissions en cours de développement',
+                icon: 'info'
+            });
+        });
+        
+        $(document).on('click', '.fa-user-slash', function() {
+            Swal.fire({
+                title: 'Désactiver cet administrateur?',
+                text: "L'administrateur ne pourra plus se connecter mais ses données seront conservées.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Oui, désactiver',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Désactivé!',
+                        'L\'administrateur a été désactivé.',
+                        'success'
+                    );
+                }
+            });
+        });
+        
+        $(document).on('click', '.fa-user-check', function() {
+            Swal.fire({
+                title: 'Réactiver cet administrateur?',
+                text: "L'administrateur pourra à nouveau se connecter au système.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#10b981',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui, réactiver',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Réactivé!',
+                        'L\'administrateur a été réactivé.',
+                        'success'
+                    );
+                }
+            });
+        });
+        
+        $(document).on('click', '.fa-trash-alt', function() {
+            Swal.fire({
+                title: 'Supprimer définitivement cet administrateur?',
+                text: "Cette action est irréversible et supprimera toutes les données associées!",
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Oui, supprimer',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Supprimé!',
+                        'L\'administrateur a été supprimé définitivement.',
+                        'success'
+                    );
+                }
+            });
+        });
+    </script>
+</body>
+</html>
