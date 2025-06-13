@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdmiSoft Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .product-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-zoom {
+            transition: transform 0.3s;
+        }
+
+        .image-zoom:hover {
+            transform: scale(1.05);
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .category-slant {
+            transform: skewX(-15deg);
+        }
+
+        .category-content {
+            transform: skewX(15deg);
+        }
+
+        .chat-bubble {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+
+        /* Animation for notifications */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Slanted tabs */
+        .slanted-tab {
+            position: relative;
+            margin-right: 15px;
+        }
+
+        .slanted-tab:after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 0 40px 15px;
+            border-color: transparent transparent #f3f4f6 transparent;
+        }
+
+        .dark .slanted-tab:after {
+            border-color: transparent transparent #1f2937 transparent;
+        }
+
+        .slanted-tab.active:after {
+            border-color: transparent transparent #3b82f6 transparent;
+        }
+
+        /* Chat styles */
+        .message-received {
+            background-color: #f3f4f6;
+            border-radius: 0 1rem 1rem 1rem;
+        }
+
+        .dark .message-received {
+            background-color: #374151;
+        }
+
+        .message-sent {
+            background-color: #3b82f6;
+            color: white;
+            border-radius: 1rem 0 1rem 1rem;
+        }
+
+        /* Smooth transitions */
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .dark ::-webkit-scrollbar-track {
+            background: #374151;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: #6b7280;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .category-slant {
+                transform: none;
+            }
+            
+            .category-content {
+                transform: none;
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#2563eb',
+                            dark: '#1e40af'
+                        },
+                        secondary: {
+                            light: '#1e40af',
+                            dark: '#1e3a8a'
+                        },
+                        accent: '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+    <!-- HEADER NAVBAR -->
+    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center" aria-label="AdmiSoft - Retour à l'accueil">
+                        <button class="flex items-center px-5 py-2 rounded-full bg-gradient-to-tr from-[#051769] to-[#0298e4] shadow-lg hover:scale-105 transition-all duration-200 border-2 border-white dark:border-gray-900 focus:outline-none">
+                            <span class="text-white font-extrabold text-xl tracking-wide drop-shadow">AdmiSoft</span>
+                        </button>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation Centered -->
+                <nav class="hidden lg:flex flex-1 justify-center items-center space-x-1">
+                    <a href="index.html" class="px-4 py-2 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Accueil</a>
+                    <a href="blog.html" class="px-4 py-2 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Blog</a>
+                    <a href="marketplace.html" class="px-4 py-2 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Marketplace</a>
+                </nav>
+
+                <!-- Right icons -->
+                <div class="flex items-center space-x-4">
+                    <!-- Search Button (desktop & mobile) -->
+                    <button id="search-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Rechercher">
+                        <i class="fas fa-search text-gray-500"></i>
+                    </button>
+
+                    <!-- Theme Toggle (desktop only) -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hidden lg:inline-flex" aria-label="Basculer mode sombre">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+
+                    <!-- Messages -->
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative hidden lg:inline-flex" id="messages-btn" aria-label="Messages">
+                        <i class="fas fa-envelope"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center pulse">3</span>
+                    </a>
+
+                    <!-- Notifications -->
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative hidden lg:inline-flex" id="notifications-btn" aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">5</span>
+                    </a>
+
+                    <!-- User Account -->
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative hidden lg:inline-flex" id="user-account-btn" aria-label="Mon compte">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-8 h-8 rounded-full">
+                    </a>
+
+                    <!-- Mobile: bouton + pour afficher toutes les actions -->
+                    <button id="mobile-actions-toggle" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Menu actions">
+                        <i class="fas fa-plus text-xl"></i>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none" aria-label="Menu principal">
+                        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile search bar fixed just below navbar -->
+        <div id="mobile-search-bar" class="fixed left-0 right-0 top-[64px] z-50 px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center space-x-2 transition-all duration-200 opacity-0 pointer-events-none">
+            <input type="text" id="mobile-search-input" placeholder="Rechercher..." class="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full px-4 py-2 outline-none text-gray-800 dark:text-white" aria-label="Rechercher" />
+            <button id="mobile-search-close" class="ml-2 text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400" aria-label="Fermer la recherche">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Mobile actions bar fixed just below navbar -->
+        <div id="mobile-actions-bar" class="fixed left-0 right-0 top-[64px] z-50 px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-around space-x-4 transition-all duration-200 opacity-0 pointer-events-none">
+            <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900" aria-label="Basculer mode sombre">
+                <i class="fas fa-moon dark:hidden text-xl"></i>
+                <i class="fas fa-sun hidden dark:block text-xl"></i>
+            </button>
+            <button id="mobile-messages-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 relative" aria-label="Messages">
+                <i class="fas fa-envelope text-xl"></i>
+                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center pulse">3</span>
+            </button>
+            <button id="mobile-notifications-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 relative" aria-label="Notifications">
+                <i class="fas fa-bell text-xl"></i>
+                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">5</span>
+            </button>
+            <button id="mobile-user-toggle" class="p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900" aria-label="Mon compte">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-8 h-8 rounded-full">
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white dark:bg-gray-800 z-50 hidden transition-all duration-300">
+        <div class="container mx-auto px-4 py-8 h-full flex flex-col">
+            <div class="flex justify-between items-center mb-8">
+                <span class="text-2xl font-extrabold text-[#051769] dark:text-white">Menu</span>
+                <button id="mobile-menu-close" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" aria-label="Fermer le menu">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-6 text-lg flex-1 justify-center items-center">
+                <a href="index.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Accueil</a>
+                <a href="blog.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Blog</a>
+                <a href="marketplace.html" class="px-6 py-3 font-medium hover:text-[#0298e4] dark:hover:text-blue-400 transition-colors">Marketplace</a>
+                <a href="login.html" class="block w-full bg-[#051769] hover:bg-[#0298e4] text-white text-center py-3 px-6 rounded font-medium mt-8 max-w-xs transition-colors">Se connecter</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Marketplace Tabs -->
+        <div class="flex overflow-x-auto mb-6 border-b border-gray-200 dark:border-gray-700">
+            <div class="flex space-x-1">
+                <a href="#" class="slanted-tab active px-6 py-3 bg-gray-100 dark:bg-gray-700 text-[#051769] dark:text-white font-medium" data-tab="products">
+                    <div class="category-content">Articles</div>
+                </a>
+                <a href="#" class="slanted-tab px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium" data-tab="messages">
+                    <div class="category-content">Messages</div>
+                </a>
+                <a href="#" class="slanted-tab px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium" data-tab="orders">
+                    <div class="category-content">Commandes</div>
+                </a>
+                <a href="#" class="slanted-tab px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium" data-tab="sales">
+                    <div class="category-content">Ventes</div>
+                </a>
+                <a href="#" class="slanted-tab px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium" data-tab="favorites">
+                    <div class="category-content">Favoris</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Products Section -->
+        <section id="products-section" class="tab-content active">
+            <!-- Add Product Button -->
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold">Marketplace</h1>
+                <button id="add-product-btn" class="bg-[#051769] hover:bg-[#0298e4] text-white px-4 py-2 rounded-lg font-medium flex items-center">
+                    <i class="fas fa-plus mr-2"></i> Ajouter un article
+                </button>
+            </div>
+
+            <!-- Categories Slanted -->
+            <section class="py-6 mb-8">
+                <div class="flex overflow-x-auto pb-4">
+                    <div class="flex space-x-4" id="categories-container">
+                        <!-- Categories will be added here by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="products-container">
+                <!-- Products will be added here by JavaScript -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center mt-8">
+                <nav class="flex items-center space-x-2">
+                    <a href="#" class="px-3 py-1 rounded border border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">&laquo;</a>
+                    <a href="#" class="px-3 py-1 rounded bg-[#051769] text-white">1</a>
+                    <a href="#" class="px-3 py-1 rounded border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">2</a>
+                    <a href="#" class="px-3 py-1 rounded border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">3</a>
+                    <span class="px-2 text-gray-500">...</span>
+                    <a href="#" class="px-3 py-1 rounded border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">10</a>
+                    <a href="#" class="px-3 py-1 rounded border border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">&raquo;</a>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Messages Section -->
+        <section id="messages-section" class="tab-content hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                    <h2 class="text-xl font-bold">Messages</h2>
+                </div>
+                <div class="flex flex-col lg:flex-row">
+                    <!-- Conversations List -->
+                    <div class="w-full lg:w-1/3 border-b lg:border-b-0 lg:border-r border-gray-200 dark:border-gray-700">
+                        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                            <input type="text" placeholder="Rechercher des messages" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="overflow-y-auto max-h-[500px]" id="conversations-list">
+                            <!-- Conversations will be added here by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Area -->
+                    <div class="w-full lg:w-2/3 flex flex-col" style="height: 500px;" id="chat-area">
+                        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center">
+                            <button id="back-to-conversations" class="lg:hidden mr-2 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                            <div class="flex-1 text-center">
+                                <p class="text-gray-500 dark:text-gray-400">Sélectionnez une conversation</p>
+                            </div>
+                        </div>
+                        <div class="flex-1 p-4 overflow-y-auto hidden" id="chat-messages-container">
+                            <!-- Messages will be added here when a conversation is selected -->
+                        </div>
+                        <div class="p-4 border-t border-gray-200 dark:border-gray-700 hidden" id="chat-input-container">
+                            <form class="flex items-center space-x-2">
+                                <button type="button" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                                <input type="text" placeholder="Écrire un message..." class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" id="message-input">
+                                <button type="submit" class="p-2 rounded-full bg-[#051769] text-white hover:bg-[#0298e4]">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Orders Section -->
+        <section id="orders-section" class="tab-content hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                    <h2 class="text-xl font-bold">Mes commandes</h2>
+                </div>
+                <div class="p-4">
+                    <!-- Order Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 mb-6">
+                        <button class="px-4 py-2 font-medium border-b-2 border-[#0298e4] text-[#051769] dark:text-[#0298e4]">Toutes</button>
+                        <button class="px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">En attente</button>
+                        <button class="px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Expédiées</button>
+                        <button class="px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Livrées</button>
+                        <button class="px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Annulées</button>
+                    </div>
+
+                    <!-- Order List -->
+                    <div class="space-y-6" id="orders-list">
+                        <!-- Orders will be added here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sales Section -->
+        <section id="sales-section" class="tab-content hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                    <h2 class="text-xl font-bold">Mes ventes</h2>
+                </div>
+                <div class="p-4">
+                    <!-- Sales Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 mb-6">
+                        <button class="px-4 py-2 font-medium border-b-2 border-[#0298e4] text-[#051769] dark:text-[#0298e4]">Toutes</button>
+                        <button class="px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">En attente</button>
+                        <button class="px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Expédiées</button>
+                        <button class="px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Livrées</button>
+                        <button class="px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Annulées</button>
+                    </div>
+
+                    <!-- Sales List -->
+                    <div class="space-y-6" id="sales-list">
+                        <!-- Sales will be added here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Favorites Section -->
+        <section id="favorites-section" class="tab-content hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                    <h2 class="text-xl font-bold">Mes favoris</h2>
+                </div>
+                <div class="p-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="favorites-container">
+                        <!-- Favorites will be added here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gradient-to-tr from-[#051769] via-[#0298e4] to-[#3b82f6] text-white pt-12 pb-6 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-8 mb-8">
+                <!-- Logo & Slogan -->
+                <div>
+                    <div class="flex items-center mb-2">
+                        <span class="text-2xl font-extrabold tracking-tight">AdmiSoft</span>
+                    </div>
+                    <p class="text-blue-100 text-base">L'innovation digitale, simplement.</p>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="w-full md:w-auto">
+                    <h4 class="font-semibold mb-2 text-lg">Recevez nos actus</h4>
+                    <form class="flex flex-col bg-white rounded-lg overflow-hidden shadow-lg max-w-md p-2">
+                        <input type="email" placeholder="Votre email" class="flex-grow px-4 py-2 text-gray-800 focus:outline-none text-base rounded mb-2" required>
+                        <button class="bg-[#051769] hover:bg-[#0298e4] text-white px-6 py-2 font-semibold transition text-base rounded">S'abonner</button>
+                    </form>
+                    <p class="text-sm text-blue-100 mt-2">Pas de spam, juste l'essentiel.</p>
+                </div>
+
+                <!-- Liens rapides -->
+                <div class="flex flex-col space-y-2 text-base">
+                    <a href="index.html" class="hover:underline">Accueil</a>
+                    <a href="blog.html" class="hover:underline">Blog</a>
+                    <a href="marketplace.html" class="hover:underline">Marketplace</a>
+                    <a href="index.html#contact" class="hover:underline">Contact</a>
+                </div>
+            </div>
+
+            <div class="border-t border-blue-300/30 pt-6 flex flex-col md:flex-row justify-between items-center text-blue-100 text-base gap-2">
+                <span>&copy; 2023 AdmiSoft. Tous droits réservés.</span>
+                <div class="flex space-x-4 text-lg">
+                    <a href="#" class="hover:text-white" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-white" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-white" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="hover:text-white" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ADD PRODUCT MODAL -->
+    <div id="add-product-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 overflow-y-auto">
+        <div class="container mx-auto px-4 py-12">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden max-w-3xl mx-auto">
+                <div class="p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
+                    <h3 class="text-xl font-bold">Ajouter un article</h3>
+                    <button id="close-add-product" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+
+                <div class="p-6">
+                    <form id="product-form">
+                        <!-- Photos -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Photos de l'article</label>
+                            <div class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 text-center">
+                                <div class="grid grid-cols-3 gap-4 mb-4" id="product-images-preview">
+                                    <!-- Les prévisualisations d'images seront ajoutées ici -->
+                                </div>
+                                <label class="cursor-pointer inline-block bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 px-4 py-2 rounded-lg">
+                                    <i class="fas fa-camera mr-2"></i> Ajouter des photos
+                                    <input type="file" id="product-images" class="hidden" accept="image/*" multiple>
+                                </label>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Ajoutez jusqu'à 10 photos. La première photo sera la photo principale.</p>
+                            </div>
+                        </div>
+
+                        <!-- Titre -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Titre de l'article</label>
+                            <input type="text" id="product-title" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: MacBook Pro 14\" M2 en excellent état" required>
+                        </div>
+
+                        <!-- Catégorie -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Catégorie</label>
+                            <select id="product-category" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Sélectionnez une catégorie</option>
+                                <!-- Les catégories seront ajoutées dynamiquement -->
+                            </select>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Description</label>
+                            <textarea id="product-description" rows="4" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Décrivez votre article en détail..." required></textarea>
+                        </div>
+
+                        <!-- Prix -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Prix (€)</label>
+                            <input type="number" id="product-price" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: 799" required>
+                        </div>
+
+                        <!-- Quantité -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Quantité disponible</label>
+                            <input type="number" id="product-quantity" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: 5" required>
+                        </div>
+
+                        <!-- Localisation -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Localisation</label>
+                            <input type="text" id="product-location" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: Paris, 75015" required>
+                        </div>
+
+                        <!-- Options -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Options</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="product-negotiable" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                                    <span class="ml-2">Prix négociable</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="product-swap" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                                    <span class="ml-2">Ouvert aux échanges</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Boutons -->
+                        <div class="flex justify-end space-x-4 pt-4">
+                            <button type="button" id="cancel-add-product" class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
+                                Annuler
+                            </button>
+                            <button type="submit" class="px-4 py-2 bg-[#051769] text-white rounded hover:bg-[#0298e4]">
+                                Publier l'article
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="product-detail-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 overflow-y-auto">
+        <div class="container mx-auto px-4 py-12">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden max-w-6xl mx-auto">
+                <div class="p-4 flex justify-end">
+                    <button id="close-product-detail" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Fermer">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
+                    <!-- Product Images -->
+                    <div>
+                        <div class="mb-4 rounded-lg overflow-hidden">
+                            <img id="main-product-image" src="" alt="" class="w-full h-auto rounded-lg cursor-zoom-in" onclick="zoomImage(this)">
+                        </div>
+
+                        <div class="grid grid-cols-4 gap-2" id="product-thumbnails">
+                            <!-- Thumbnails will be added here -->
+                        </div>
+                    </div>
+
+                    <!-- Product Details -->
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h1 class="text-3xl font-bold mb-2" id="product-detail-name"></h1>
+                                <div class="flex items-center">
+                                    <div class="flex text-yellow-400 mr-2" id="product-rating">
+                                        <!-- Rating stars will be added here -->
+                                    </div>
+                                    <span class="text-gray-600 dark:text-gray-400" id="product-review-count"></span>
+                                    <span class="mx-2 text-gray-400">|</span>
+                                    <span class="text-green-500" id="product-availability"><i class="fas fa-check-circle mr-1"></i> En stock</span>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-red-500" id="favorite-btn">
+                                <i class="far fa-heart text-2xl"></i>
+                            </button>
+                        </div>
+
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold" id="product-price"></span>
+                            <span class="text-gray-400 line-through ml-2" id="product-old-price"></span>
+                            <span class="bg-red-500 text-white text-sm px-2 py-1 rounded ml-2" id="product-discount"></span>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="flex items-center text-gray-500 dark:text-gray-400 mb-2">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                <span id="product-location-date"></span>
+                            </div>
+                            <div class="flex items-center text-gray-500 dark:text-gray-400">
+                                <i class="fas fa-user mr-2"></i>
+                                <span>Vendu par <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline" id="product-seller"></a></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <h3 class="font-semibold mb-2">Description</h3>
+                            <p class="text-gray-600 dark:text-gray-400" id="product-description"></p>
+                        </div>
+
+                        <div class="mb-6">
+                            <h3 class="font-semibold mb-2">Options d'achat</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block mb-1">Livraison</label>
+                                    <select class="border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded px-3 py-2 w-full">
+                                        <option>Retrait en main propre</option>
+                                        <option>Livraison Colissimo (+9,99€)</option>
+                                        <option>Livraison Chronopost Express (+19,99€)</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block mb-1">Quantité</label>
+                                    <div class="flex border border-gray-300 dark:border-gray-600 rounded w-32">
+                                        <button class="px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">-</button>
+                                        <input type="text" value="1" class="w-12 text-center border-x border-gray-300 dark:border-gray-600 dark:bg-gray-700">
+                                        <button class="px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-4">
+                            <button class="flex-grow border border-[#051769] text-[#051769] dark:text-[#0298e4] py-3 px-4 rounded hover:bg-blue-50 dark:hover:bg-gray-700 font-medium">
+                                <i class="fas fa-comment-dots mr-2"></i> Contacter
+                            </button>
+                            <button class="flex-grow bg-[#051769] text-white py-3 px-4 rounded hover:bg-[#0298e4] font-medium">
+                                <i class="fas fa-shopping-cart mr-2"></i> Acheter maintenant
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Tabs -->
+                <div class="border-t border-gray-200 dark:border-gray-700">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700">
+                        <button class="tab-btn px-6 py-4 font-medium border-b-2 border-[#0298e4] text-[#051769] dark:text-[#0298e4]">Description</button>
+                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Spécifications</button>
+                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">Avis</button>
+                        <button class="tab-btn px-6 py-4 font-medium text-gray-500 dark:text-gray-400 hover:text-[#0298e4] dark:hover:text-[#0298e4]">FAQ</button>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="tab-content active">
+                            <h3 class="font-semibold text-lg mb-3">Description détaillée</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4" id="product-full-description"></p>
+                        </div>
+
+                        <div class="tab-content hidden">
+                            <h3 class="font-semibold text-lg mb-3">Spécifications techniques</h3>
+                            <div id="product-specifications">
+                                <!-- Specifications will be added here -->
+                            </div>
+                        </div>
+
+                        <div class="tab-content hidden">
+                            <h3 class="font-semibold text-lg mb-3">Avis clients</h3>
+                            <div id="product-reviews">
+                                <!-- Reviews will be added here -->
+                            </div>
+                        </div>
+
+                        <div class="tab-content hidden">
+                            <h3 class="font-semibold text-lg mb-3">Questions fréquentes</h3>
+                            <div id="product-faq">
+                                <!-- FAQ will be added here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Products -->
+                <div class="p-8 border-t border-gray-200 dark:border-gray-700">
+                    <h3 class="text-xl font-bold mb-6">Articles similaires</h3>
+
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="related-products">
+                        <!-- Related products will be added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Base URL for API endpoints
+        const API_BASE_URL = 'http://localhost/admisoft/';
+        
+        // API endpoints
+        const API_ENDPOINTS = {
+            products: 'product.php?action=getAll',
+            product: 'product.php?action=get',
+            productCategory: 'product.php?action=getByCategory',
+            categories: 'category.php?action=getAll',
+            addProduct: 'product.php?action=add',
+            editProduct: 'product.php?action=edit',
+            deleteProduct: 'product.php?action=delete'
+        };
+
+        // Global variables
+        let categories = [];
+        let currentProducts = [];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', async function() {
+            categories = await fetchCategories();
+            renderCategories(categories);
+            await fetchProducts();
+            setupEventListeners();
+            populateCategoryDropdown();
+        });
+
+        // Fetch categories from API
+        async function fetchCategories() {
+            try {
+                const response = await fetch(API_BASE_URL + API_ENDPOINTS.categories);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const categoriesData = await response.json();
+                // Format categories for UI
+                const formattedCategories = [
+                    { id: "all", name: "Tous les articles", active: true }
+                ];
+                
+                if (Array.isArray(categoriesData)) {
+                    categoriesData.forEach(cat => {
+                        formattedCategories.push({
+                            id: cat.cat_id,
+                            name: cat.cat_name,
+                            active: false
+                        });
+                    });
+                }
+                
+                return formattedCategories;
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+                // Fallback categories
+                return [
+                    { id: "all", name: "Tous les articles", active: true },
+                    { id: 1, name: "Électronique", active: false },
+                    { id: 2, name: "Mode", active: false },
+                    { id: 3, name: "Maison", active: false }
+                ];
+            }
+        }
+
+        // Populate category dropdown in add product modal
+        function populateCategoryDropdown() {
+            const dropdown = document.getElementById('product-category');
+            dropdown.innerHTML = '<option value="">Sélectionnez une catégorie</option>';
+            
+            categories.forEach(cat => {
+                if (cat.id !== "all") {
+                    const option = document.createElement('option');
+                    option.value = cat.id;
+                    option.textContent = cat.name;
+                    dropdown.appendChild(option);
+                }
+            });
+        }
+
+        // Fetch products from API
+        async function fetchProducts(categoryId = null) {
+            try {
+                let url = API_BASE_URL + API_ENDPOINTS.products;
+                if (categoryId && categoryId !== 'all') {
+                    url = `${API_BASE_URL}${API_ENDPOINTS.productCategory}&id=${categoryId}`;
+                }
+                
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const responseData = await response.json();
+                currentProducts = Array.isArray(responseData) ? responseData : [];
+                renderProducts(currentProducts);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                currentProducts = [];
+                renderProducts(currentProducts);
+            }
+        }
+
+        // Fetch single product details
+        async function fetchProductDetails(productId) {
+            try {
+                const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.product}&id=${productId}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const product = await response.json();
+                if (product) {
+                    openProductDetail({
+                        id: product.p_id,
+                        name: product.p_name,
+                        price: product.p_price,
+                        description: product.p_description,
+                        image_url: product.p_image,
+                        category: product.cat_name,
+                        created_at: product.created_at,
+                        rating: product.average_rating || 4.5,
+                        stock: product.p_qty,
+                        features: product.p_feature
+                    });
+                } else {
+                    throw new Error('Product not found');
+                }
+            } catch (error) {
+                console.error('Error fetching product details:', error);
+                alert('Impossible de charger les détails du produit');
+            }
+        }
+
+        // Render categories
+        function renderCategories(categories) {
+            const container = document.getElementById('categories-container');
+            container.innerHTML = '';
+
+            categories.forEach(category => {
+                const activeClass = category.active ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600';
+                
+                const categoryElement = document.createElement('div');
+                categoryElement.className = `category-slant ${activeClass} px-6 py-3 rounded-lg flex-shrink-0 cursor-pointer transition`;
+                categoryElement.innerHTML = `
+                    <div class="category-content font-medium">${category.name}</div>
+                `;
+                categoryElement.dataset.category = category.id;
+                categoryElement.addEventListener('click', () => filterProductsByCategory(category.id));
+                
+                container.appendChild(categoryElement);
+            });
+        }
+
+        // Render products
+        function renderProducts(products) {
+            const container = document.getElementById('products-container');
+            container.innerHTML = '';
+
+            if (products.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <i class="fas fa-box-open text-4xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-500 dark:text-gray-400">Aucun produit trouvé</p>
+                    </div>
+                `;
+                return;
+            }
+
+            products.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300 cursor-pointer';
+                productElement.addEventListener('click', () => fetchProductDetails(product.p_id || product.id));
+
+                const stockBadge = product.p_qty < 1 || product.stock < 1 ? 
+                    '<div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">Rupture</div>' : 
+                    '';
+
+                productElement.innerHTML = `
+                    <div class="relative">
+                        <img src="${product.p_image || product.image || 'https://via.placeholder.com/300'}" 
+                             alt="${product.p_name || product.name}" 
+                             class="w-full h-48 object-cover image-zoom">
+                        ${stockBadge}
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-semibold">${product.p_name || product.name}</h3>
+                            <div class="flex items-center text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <span class="text-gray-600 dark:text-gray-300 text-sm ml-1">${product.average_rating || '4.5'}</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">${product.cat_name || product.category || 'Non catégorisé'} • ${formatDate(product.created_at)}</p>
+
+                        <div class="mt-3 flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold">${product.p_price || product.price}€</span>
+                            </div>
+                            <button class="text-gray-400 hover:text-[#0298e4] dark:hover:text-blue-400">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(productElement);
+            });
+        }
+
+        // Open product detail modal
+        function openProductDetail(product) {
+            const modal = document.getElementById('product-detail-modal');
+            
+            // Update main product image
+            const mainImage = document.getElementById('main-product-image');
+            mainImage.src = product.image_url || 'https://via.placeholder.com/600';
+            mainImage.alt = product.name;
+            
+            // Update product name
+            document.getElementById('product-detail-name').textContent = product.name;
+            
+            // Update rating
+            const ratingContainer = document.getElementById('product-rating');
+            ratingContainer.innerHTML = '';
+            const rating = product.rating || 4.5;
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            
+            for (let i = 0; i < fullStars; i++) {
+                ratingContainer.innerHTML += '<i class="fas fa-star"></i>';
+            }
+            
+            if (hasHalfStar) {
+                ratingContainer.innerHTML += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            // Update review count
+            document.getElementById('product-review-count').textContent = `${rating.toFixed(1)} (${product.review_count || 0} avis)`;
+            
+            // Update price and stock
+            document.getElementById('product-price').textContent = `${product.price}€`;
+            document.getElementById('product-availability').innerHTML = product.stock > 0 ? 
+                `<i class="fas fa-check-circle mr-1"></i> En stock (${product.stock} disponible${product.stock > 1 ? 's' : ''})` : 
+                `<i class="fas fa-times-circle mr-1"></i> Rupture de stock`;
+            
+            // Update location and date
+            document.getElementById('product-location-date').textContent = `${product.location || 'Paris'} • ${formatDate(product.created_at)}`;
+            
+            // Update seller
+            document.getElementById('product-seller').textContent = product.seller_name || 'AdmiSoft';
+            
+            // Update descriptions
+            document.getElementById('product-description').textContent = product.description || 'Aucune description disponible';
+            document.getElementById('product-full-description').textContent = product.description || 'Aucune description détaillée disponible';
+            
+            // Update specifications if available
+            if (product.features) {
+                const specsContainer = document.getElementById('product-specifications');
+                specsContainer.innerHTML = '';
+                
+                try {
+                    const features = JSON.parse(product.features);
+                    for (const [key, value] of Object.entries(features)) {
+                        const specItem = document.createElement('div');
+                        specItem.className = 'mb-2';
+                        specItem.innerHTML = `<span class="font-medium">${key}:</span> ${value}`;
+                        specsContainer.appendChild(specItem);
+                    }
+                } catch (e) {
+                    specsContainer.innerHTML = product.features;
+                }
+            }
+            
+            // Show the modal
+            modal.classList.remove('hidden');
+        }
+
+        // Filter products by category
+        function filterProductsByCategory(categoryId) {
+            // Update active category
+            categories.forEach(cat => cat.active = cat.id === categoryId);
+            renderCategories(categories);
+            
+            // Fetch and render products for this category
+            if (categoryId === 'all') {
+                fetchProducts();
+            } else {
+                fetchProducts(categoryId);
+            }
+        }
+
+        // Handle form submission for adding a product
+        async function handleAddProduct(e) {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            formData.append('cat_id', document.getElementById('product-category').value);
+            formData.append('name', document.getElementById('product-title').value);
+            formData.append('price', document.getElementById('product-price').value);
+            formData.append('quantity', document.getElementById('product-quantity').value);
+            formData.append('description', document.getElementById('product-description').value);
+            formData.append('seller_id', 1); // À remplacer par l'ID réel du vendeur
+            
+            // Ajout des images
+            const imageInput = document.getElementById('product-images');
+            if (imageInput.files.length > 0) {
+                for (let i = 0; i < imageInput.files.length; i++) {
+                    formData.append('images[]', imageInput.files[i]);
+                }
+            }
+            
+            try {
+                const response = await fetch(API_BASE_URL + API_ENDPOINTS.addProduct, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Erreur lors de l\'ajout du produit');
+                }
+                
+                const result = await response.json();
+                if (result.success) {
+                    alert('Produit ajouté avec succès');
+                    document.getElementById('add-product-modal').classList.add('hidden');
+                    fetchProducts(); // Rafraîchir la liste
+                } else {
+                    throw new Error(result.message || 'Erreur inconnue');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Erreur lors de l\'ajout du produit: ' + error.message);
+            }
+        }
+
+        // Helper function to format date
+        function formatDate(dateString) {
+            if (!dateString) return 'Date inconnue';
+            
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return dateString;
+            
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            return date.toLocaleDateString('fr-FR', options);
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Dark mode toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+
+            themeToggle.addEventListener('click', () => {
+                html.classList.toggle('dark');
+                localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+            });
+
+            // Check for saved user preference or system preference
+            if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                html.classList.add('dark');
+            }
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                }
+            });
+
+            // Tab switching
+            document.querySelectorAll('[data-tab]').forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Update active tab
+                    document.querySelectorAll('[data-tab]').forEach(t => {
+                        t.classList.remove('active', 'bg-gray-100', 'dark:bg-gray-700', 'text-[#051769]', 'dark:text-white');
+                        t.classList.add('text-gray-600', 'dark:text-gray-300');
+                    });
+                    
+                    this.classList.add('active', 'bg-gray-100', 'dark:bg-gray-700', 'text-[#051769]', 'dark:text-white');
+                    this.classList.remove('text-gray-600', 'dark:text-gray-300');
+                    
+                    // Show corresponding section
+                    const tabId = this.dataset.tab;
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.add('hidden');
+                    });
+                    
+                    const section = document.getElementById(`${tabId}-section`);
+                    section.classList.remove('hidden');
+                });
+            });
+
+            // Product detail modal toggle
+            const productDetailModal = document.getElementById('product-detail-modal');
+            const closeProductDetail = document.getElementById('close-product-detail');
+
+            closeProductDetail.addEventListener('click', () => {
+                productDetailModal.classList.add('hidden');
+            });
+
+            // Add product modal toggle
+            const addProductModal = document.getElementById('add-product-modal');
+            const addProductBtn = document.getElementById('add-product-btn');
+            const closeAddProduct = document.getElementById('close-add-product');
+            const cancelAddProduct = document.getElementById('cancel-add-product');
+
+            addProductBtn.addEventListener('click', () => {
+                addProductModal.classList.remove('hidden');
+            });
+
+            closeAddProduct.addEventListener('click', () => {
+                addProductModal.classList.add('hidden');
+            });
+
+            cancelAddProduct.addEventListener('click', () => {
+                addProductModal.classList.add('hidden');
+            });
+
+            // Form submission
+            document.getElementById('product-form').addEventListener('submit', handleAddProduct);
+
+            // Image preview for product upload
+            document.getElementById('product-images').addEventListener('change', function() {
+                const preview = document.getElementById('product-images-preview');
+                preview.innerHTML = '';
+
+                if (this.files && this.files.length > 0) {
+                    for (let i = 0; i < Math.min(this.files.length, 10); i++) {
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            const div = document.createElement('div');
+                            div.className = 'relative';
+
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.className = 'w-full h-32 object-cover rounded';
+
+                            const removeBtn = document.createElement('button');
+                            removeBtn.className = 'absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs';
+                            removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                            removeBtn.onclick = function() {
+                                div.remove();
+                            };
+
+                            div.appendChild(img);
+                            div.appendChild(removeBtn);
+                            preview.appendChild(div);
+                        }
+
+                        reader.readAsDataURL(this.files[i]);
+                    }
+                }
+            });
+
+            // Product image zoom
+            function zoomImage(img) {
+                if (img.style.transform === 'scale(2)') {
+                    img.style.transform = 'scale(1)';
+                    img.style.cursor = 'zoom-in';
+                } else {
+                    img.style.transform = 'scale(2)';
+                    img.style.cursor = 'zoom-out';
+                }
+            }
+
+            // Product tabs in detail modal
+            document.querySelectorAll('#product-detail-modal .tab-btn').forEach((btn, index) => {
+                btn.addEventListener('click', () => {
+                    // Update active tab
+                    document.querySelectorAll('#product-detail-modal .tab-btn').forEach(b => {
+                        b.classList.remove('border-[#0298e4]', 'text-[#051769]', 'dark:text-[#0298e4]');
+                        b.classList.add('text-gray-500', 'dark:text-gray-400');
+                    });
+                    
+                    btn.classList.add('border-[#0298e4]', 'text-[#051769]', 'dark:text-[#0298e4]');
+                    btn.classList.remove('text-gray-500', 'dark:text-gray-400');
+                    
+                    // Show corresponding content
+                    document.querySelectorAll('#product-detail-modal .tab-content').forEach(content => {
+                        content.classList.add('hidden');
+                    });
+                    
+                    document.querySelectorAll('#product-detail-modal .tab-content')[index].classList.remove('hidden');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
